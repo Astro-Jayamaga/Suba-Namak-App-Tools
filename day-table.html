@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>දිනයට සුබ අක්ෂර</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700&family=Noto+Serif+Sinhala&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 10px;
+            background-color: #FDF5E6; /* Cream background */
+            color: #7F0000; /* Maroon text */
+            font-family: 'Noto Serif Sinhala', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #7F0000; /* Maroon */
+            margin-bottom: 25px;
+            font-size: 3.5rem;
+            font-family: 'Gemunu Libre', sans-serif;
+            font-weight: 700;
+            padding: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .table-container {
+            max-width: 600px;
+            margin-bottom: 5rem;
+            overflow-x: auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            background: white;
+            border: 2px solid #FFA500; /* Orange border */
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 350px;
+        }
+        
+        thead tr {
+            background-color: #FFA500 !important; /* Orange header - always visible */
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: white; /* White text for header by default */
+            transition: color 0.3s ease; /* Smooth transition for text color */
+            background-color: #FFA500 !important; /* Ensure orange background */
+        }
+        
+        thead tr:hover th {
+            color: black; /* Black text when hovering over header */
+            background-color: #FFA500 !important; /* Keep orange background on hover */
+        }
+        
+        td {
+            font-size: 1.2rem;
+            color: #000000; /* Black text for table content */
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background-color: #fff;
+        }
+        
+        tbody tr:hover {
+            background-color: #FFE4B5; /* Light orange on hover for table rows only */
+        }
+        
+        .zodiac-name {
+            font-weight: bold;
+            color: #000000; /* Black for day names */
+            white-space: nowrap;
+        }
+        
+        @media (max-width: 768px) {
+            th, td {
+                padding: 12px 8px;
+                font-size: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            th, td {
+                padding: 10px 5px;
+                font-size: 0.9rem;
+            }
+            
+            .table-container {
+                border-radius: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>දිනයට සුබ අක්ෂර</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>දිනය</th>
+                    <th>අක්ෂර</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="zodiac-name">සඳුදා</td>
+                    <td>ය ර ල ව ශ ෂ ස හ ළ</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">අඟහරුවාදා</td>
+                    <td>ක බ ග ඝ ඞ</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">බදාදා</td>
+                    <td>ට ඨ ඩ ඪ ණ</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">බ්‍රහස්පතින්දා</td>
+                    <td>ත ථ ද ධ න</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">සිකුරාදා</td>
+                    <td>ච ඡ ජ ඣ ඤ</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">සෙනසුරාදා</td>
+                    <td>ප ඵ බ භ ම</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">ඉරිදා</td>
+                    <td>අ ඉ උ එ ඔ</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

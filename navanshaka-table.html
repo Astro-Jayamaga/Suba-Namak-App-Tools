@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>නවාංශකයට සුබ අක්ෂර</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700&family=Noto+Serif+Sinhala&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 10px;
+            background-color: #FDF5E6; /* Cream background */
+            color: #7F0000; /* Maroon text */
+            font-family: 'Noto Serif Sinhala', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #7F0000; /* Maroon */
+            margin-bottom: 25px;
+            font-size: 3.5rem;
+            font-family: 'Gemunu Libre', sans-serif;
+            font-weight: 700;
+            padding: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .table-container {
+            max-width: 600px;
+            margin-bottom: 5rem;
+            overflow-x: auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            background: white;
+            border: 2px solid #FFA500; /* Orange border */
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 350px;
+        }
+        
+        thead tr {
+            background-color: #FFA500 !important; /* Orange header - always visible */
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: white; /* White text for header by default */
+            transition: color 0.3s ease; /* Smooth transition for text color */
+            background-color: #FFA500 !important; /* Ensure orange background */
+        }
+        
+        thead tr:hover th {
+            color: black; /* Black text when hovering over header */
+            background-color: #FFA500 !important; /* Keep orange background on hover */
+        }
+        
+        td {
+            font-size: 1.2rem;
+            color: #000000; /* Black text for table content */
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background-color: #fff;
+        }
+        
+        tbody tr:hover {
+            background-color: #FFE4B5; /* Light orange on hover for table rows only */
+        }
+        
+        .zodiac-name {
+            font-weight: bold;
+            color: #000000; /* Black for day names */
+            white-space: nowrap;
+        }
+        
+        @media (max-width: 768px) {
+            th, td {
+                padding: 12px 8px;
+                font-size: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            th, td {
+                padding: 10px 5px;
+                font-size: 0.9rem;
+            }
+            
+            .table-container {
+                border-radius: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>නවාංශකයට සුබ අක්ෂර</h1>
+    
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>නවාංශකය</th>
+                    <th>අක්ෂර</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="zodiac-name">මේෂ නවාංශකය</td>
+                    <td>චු චෙ චො ල ලි ලු ලෙ ලො අ</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">වෘෂභ නවාංශකය</td>
+                    <td>ඉ උ එ ඔ ව වි වු වෙ වො</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">මිථුන නවාංශකය</td>
+                    <td>ක කි කු ඝ ඞ ජ කෙ කො හ</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">කටක නවාංශකය</td>
+                    <td>හි හු හෙ හො ඩ ඩි ඩු ඩෙ ඩො</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">සිංහ නවාංශකය</td>
+                    <td>ම මි මු මෙ මො ට ටි ටු ටෙ ටො</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">කන්‍යා නවාංශකය</td>
+                    <td>ප පි පු පෙ පො ෂ ඨ</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">තුලා නවාංශකය</td>
+                    <td>ර රි රු රෙ රො ත ති තෙ</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">වෘශ්චික නවාංශකය</td>
+                    <td>තො න නි නු නෙ නො ව වි යු</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">ධනු නවාංශකය</td>
+                    <td>යෙ යො භ භි භු භෙ ධ ඵ ඪ</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">මකර නවාංශකය</td>
+                    <td>භො ජ ජි ජු ජෙ ජො ඛ ඛි ඛු ඛෙ ඛො ග ගි</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">කුම්භ නවාංශකය</td>
+                    <td>ගු ගෙ ගො ස සි සු සෙ සො ද</td>
+                </tr>
+                <tr>
+                    <td class="zodiac-name">මීන නවාංශකය</td>
+                    <td>දි දෙ දො ථ ඣ ඤ ච චි</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

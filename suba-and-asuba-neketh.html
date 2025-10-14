@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ජන්ම නැකතට සුබ හා අසුබ නැකැත්</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@400;700&family=Noto+Serif+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7F0000;
+            --secondary: #FFA500;
+            --background: #FDF5E6;
+            --good-bg: #e8f5e9;
+            --bad-bg: #ffebee;
+            --good-text: #2e7d32;
+            --bad-text: #c62828;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Serif Sinhala', serif;
+            background-color: var(--background);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            margin-bottom: 3rem;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-family: 'Gemunu Libre', sans-serif;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 3px;
+        }
+        
+        .select-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        select {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Noto Serif Sinhala', serif;
+            font-size: 1rem;
+            color: #333;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        
+        select:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2);
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-family: 'Noto Serif Sinhala', serif;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background-color: #600;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .results {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .result-category {
+            margin-bottom: 25px;
+            border-radius: 5px;
+            padding: 15px;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .good-category {
+            background-color: var(--good-bg);
+            border-left: 4px solid var(--good-text);
+        }
+        
+        .bad-category {
+            background-color: var(--bad-bg);
+            border-left: 4px solid var(--bad-text);
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .result-category h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .good-category h3 {
+            color: var(--good-text);
+        }
+        
+        .bad-category h3 {
+            color: var(--bad-text);
+        }
+        
+        .result-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .result-item {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .good-category .result-item {
+            border: 1px solid var(--good-text);
+        }
+        
+        .bad-category .result-item {
+            border: 1px solid var(--bad-text);
+        }
+        
+        .result-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+        }
+        
+        .note {
+            margin-top: 40px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ජන්ම නැකතට සුබ හා අසුබ නැකැත්</h1>
+        
+        <div class="select-group">
+            <select id="nakatha">
+                <option value="" selected disabled>ජන්ම නැකත තෝරන්න</option>
+                <option value="අස්විද">අස්විද</option>
+                <option value="බෙරණ">බෙරණ</option>
+                <option value="කැති">කැති</option>
+                <option value="රෙහෙණ">රෙහෙණ</option>
+                <option value="මුවසිරස">මුවසිරස</option>
+                <option value="අද">අද</option>
+                <option value="පුනාවස">පුනාවස</option>
+                <option value="පුෂ">පුෂ</option>
+                <option value="අස්ලිස">අස්ලිස</option>
+                <option value="මා">මා</option>
+                <option value="පුවපල්">පුවපල්</option>
+                <option value="උත්‍රපල්">උත්‍රපල්</option>
+                <option value="හත">හත</option>
+                <option value="සිත">සිත</option>
+                <option value="සා">සා</option>
+                <option value="විසා">විසා</option>
+                <option value="අනුර">අනුර</option>
+                <option value="දෙට">දෙට</option>
+                <option value="මුල">මුල</option>
+                <option value="පුවසල">පුවසල</option>
+                <option value="උත්‍රසල">උත්‍රසල</option>
+                <option value="සුවණ">සුවණ</option>
+                <option value="දෙනට">දෙනට</option>
+                <option value="සියාවස">සියාවස</option>
+                <option value="පුවපුටුප">පුවපුටුප</option>
+                <option value="උත්‍රපුටුප">උත්‍රපුටුප</option>
+                <option value="රේවතී">රේවතී</option>
+            </select>
+        </div>
+        
+        <button class="btn" id="findBtn">සොයන්න</button>
+        
+        <div class="results" id="results">
+            <!-- Results will be inserted here by JavaScript -->
+        </div>
+        
+        <div class="note">
+            <p><strong>සටහන:</strong> මෙහිදී ජන්ම නැකතට අදාළව  සම්පත්, ක්ෂේම, සාධක, මෛත්‍රී හා පරම මෛත්‍රී ලෙස සඳහන් වන නැකැත් සුබ නැකැත් වේ. විපත්, ප්‍රත්‍යාරී හා වධ යටතේ ඇති නැකැත් ජන්ම නැකතට අසුබ වේ.</p>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; <span id="year"></span> Suba Namak | Astro Jayamaga</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year
+            document.getElementById('year').textContent = new Date().getFullYear();
+            
+            // Find button click handler
+            document.getElementById('findBtn').addEventListener('click', function() {
+                const nakatha = document.getElementById('nakatha').value;
+                
+                if (!nakatha) {
+                    alert('කරුණාකර ඔබගේ ජන්ම නැකත තෝරන්න!');
+                    return;
+                }
+                
+                showResults(nakatha);
+            });
+            
+            function showResults(selectedNakatha) {
+                const allNakatha = [
+                    "අස්විද", "මා", "මුල", "බෙරණ", "පුවපල්", "පුවසල", "කැති", 
+                    "උත්‍රපල්", "උත්‍රසල", "රෙහෙණ", "හත", "සුවණ", "මුවසිරස", 
+                    "සිත", "දෙනට", "අද", "සා", "සියාවස", "පුනාවස", "විසා", 
+                    "පුවපුටුප", "පුෂ", "අනුර", "උත්‍රපුටුප", "අස්ලිස", "දෙට", "රේවතී"
+                ];
+                
+                const categories = [
+                    { name: "සම්පත්", type: "good" },
+                    { name: "විපත්", type: "bad" },
+                    { name: "ක්ෂේම", type: "good" },
+                    { name: "ප්‍රත්‍යාරී", type: "bad" },
+                    { name: "සාධක", type: "good" },
+                    { name: "වධ", type: "bad" },
+                    { name: "මෛත්‍රී", type: "good" },
+                    { name: "පරම මෛත්‍රී", type: "good" }
+                ];
+                
+                // Determine which group the selected nakatha belongs to
+                let groupStartIndex = 0;
+                
+                if (["අස්විද", "මා", "මුල"].includes(selectedNakatha)) {
+                    groupStartIndex = 3; // First group
+                } else if (["බෙරණ", "පුවපල්", "පුවසල"].includes(selectedNakatha)) {
+                    groupStartIndex = 6; // Second group
+                } else if (["කැති", "උත්‍රපල්", "උත්‍රසල"].includes(selectedNakatha)) {
+                    groupStartIndex = 9; // Third group
+                } else if (["රෙහෙණ", "හත", "සුවණ"].includes(selectedNakatha)) {
+                    groupStartIndex = 12; // Fourth group
+                } else if (["මුවසිරස", "සිත", "දෙනට"].includes(selectedNakatha)) {
+                    groupStartIndex = 15; // Fifth group
+                } else if (["අද", "සා", "සියාවස"].includes(selectedNakatha)) {
+                    groupStartIndex = 18; // Sixth group
+                } else if (["පුනාවස", "විසා", "පුවපුටුප"].includes(selectedNakatha)) {
+                    groupStartIndex = 21; // Seventh group
+                } else if (["පුෂ", "අනුර", "උත්‍රපුටුප"].includes(selectedNakatha)) {
+                    groupStartIndex = 24; // Eighth group
+                } else {
+                    groupStartIndex = 0; // Last group (අස්ලිස, දෙට, රේවතී)
+                }
+                
+                // Prepare the results HTML
+                let resultsHTML = '';
+                
+                // For each category, get 3 nakatha in order
+                for (let i = 0; i < categories.length; i++) {
+                    const category = categories[i];
+                    const items = [];
+                    
+                    // Get 3 items for this category
+                    for (let j = 0; j < 3; j++) {
+                        const index = (groupStartIndex + i*3 + j) % allNakatha.length;
+                        items.push(allNakatha[index]);
+                    }
+                    
+                    // Add icon based on category type
+                    const icon = category.type === "good" ? "✅" : "⭕";
+                    
+                    // Add to results HTML
+                    resultsHTML += `
+                        <div class="result-category ${category.type}-category" style="animation-delay: ${i*0.1}s">
+                            <h3>${icon} ${category.name}</h3>
+                            <div class="result-items">
+                                ${items.map(item => `<div class="result-item">${item}</div>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Show the results
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = resultsHTML;
+                resultsDiv.style.display = 'block';
+                
+                // Scroll to results
+                resultsDiv.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>
