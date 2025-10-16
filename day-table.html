@@ -3,166 +3,639 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>දිනයට සුබ අක්ෂර</title>
-    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700&family=Noto+Serif+Sinhala&display=swap" rel="stylesheet">
+    <title>ස්වර වේධ ගැළපීම</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700&family=Noto+Serif+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #7F0000;
+            --secondary-color: #FDF5E6;
+            --highlight-color: #FFA500;
+            --border-color: #d4a373;
+            --font-gemunu: 'Gemunu Libre', sans-serif;
+            --font-noto: 'Noto Serif Sinhala', serif;
+            --success-color: #4CAF50;
+            --warning-color: #FFC107;
+            --danger-color: #F44336;
+            --text-color: #333;
+            --text-light: #666;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        
+
         body {
-            margin: 0;
-            padding: 10px;
-            background-color: #FDF5E6; /* Cream background */
-            color: #7F0000; /* Maroon text */
-            font-family: 'Noto Serif Sinhala', serif;
-            min-height: 100vh;
+            font-family: var(--font-noto);
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        
-        h1 {
-            text-align: center;
-            color: #7F0000; /* Maroon */
-            margin-bottom: 25px;
-            font-size: 3.5rem;
-            font-family: 'Gemunu Libre', sans-serif;
-            font-weight: 700;
-            padding: 20px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-        }
-        
-        .table-container {
-            max-width: 600px;
-            margin-bottom: 5rem;
-            overflow-x: auto;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            border-radius: 10px;
-            background: white;
-            border: 2px solid #FFA500; /* Orange border */
-        }
-        
-        table {
+
+        .container, .converter-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
             width: 100%;
-            border-collapse: collapse;
-            min-width: 350px;
+            max-width: 700px;
+            text-align: center;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
         }
-        
-        thead tr {
-            background-color: #FFA500 !important; /* Orange header - always visible */
+
+        h1 {
+            font-family: var(--font-gemunu);
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
         }
-        
-        th, td {
-            padding: 15px;
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--highlight-color);
+            border-radius: 3px;
+        }
+
+        h2 {
+            font-family: var(--font-noto);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: var(--highlight-color);
+        }
+
+        .input-group {
+            margin-bottom: 25px;
             text-align: left;
-            border-bottom: 1px solid #e0e0e0;
         }
         
-        th {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: white; /* White text for header by default */
-            transition: color 0.3s ease; /* Smooth transition for text color */
-            background-color: #FFA500 !important; /* Ensure orange background */
+        .label-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
         }
-        
-        thead tr:hover th {
-            color: black; /* Black text when hovering over header */
-            background-color: #FFA500 !important; /* Keep orange background on hover */
-        }
-        
-        td {
-            font-size: 1.2rem;
-            color: #000000; /* Black text for table content */
-        }
-        
-        tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-        
-        tbody tr:nth-child(odd) {
-            background-color: #fff;
-        }
-        
-        tbody tr:hover {
-            background-color: #FFE4B5; /* Light orange on hover for table rows only */
-        }
-        
-        .zodiac-name {
+
+        label {
             font-weight: bold;
-            color: #000000; /* Black for day names */
-            white-space: nowrap;
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        .info-icon {
+            margin-left: 8px;
+            cursor: pointer;
+            color: var(--highlight-color);
+            transition: transform 0.2s;
+        }
+
+        .info-icon:hover {
+            transform: scale(1.1);
         }
         
-        @media (max-width: 768px) {
-            th, td {
-                padding: 12px 8px;
-                font-size: 1rem;
-            }
-            
-            h1 {
-                font-size: 2.5rem;
-            }
+        .tooltip-text {
+            visibility: hidden;
+            width: 250px;
+            background-color: var(--text-color);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            top: 25px;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+            font-weight: normal;
+            box-shadow: var(--shadow);
+        }
+
+        .info-icon:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: var(--font-noto);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            color: var(--text-color);
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: var(--highlight-color);
+            box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2);
         }
         
-        @media (max-width: 480px) {
-            th, td {
-                padding: 10px 5px;
-                font-size: 0.9rem;
-            }
-            
-            .table-container {
-                border-radius: 5px;
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .cta-button, .converter-btn {
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-noto);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+            font-weight: 600;
+            box-shadow: 0 4px 0 rgba(127, 0, 0, 0.2);
+        }
+
+        .cta-button:hover, .converter-btn:hover {
+            background-color: #e69500;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 rgba(127, 0, 0, 0.2);
+        }
+
+        .cta-button:active, .converter-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 0 rgba(127, 0, 0, 0.2);
+        }
+        
+        #clear-btn { 
+            background-color: var(--danger-color); 
+        }
+        #clear-btn:hover { 
+            background-color: #d32f2f; 
+        }
+        
+        #copy-btn { 
+            background-color: var(--success-color); 
+        }
+        #copy-btn:hover { 
+            background-color: #388e3c; 
+        }
+        
+        .converter-btn:disabled {
+            background-color: #a5d6a7;
+            cursor: not-allowed;
+            transform: translateY(0);
+            box-shadow: 0 4px 0 rgba(127, 0, 0, 0.2);
+        }
+
+        .result {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            min-height: 50px;
+            text-align: left;
+            border: 2px solid transparent;
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            display: none;
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        .result.visible {
+            display: block;
+        }
+
+        .result.compatible { 
+            background-color: rgba(76, 175, 80, 0.1); 
+            border-color: var(--success-color); 
+        }
+        .result.incompatible { 
+            background-color: rgba(244, 67, 54, 0.1); 
+            border-color: var(--danger-color); 
+        }
+        .result.neutral { 
+            background-color: rgba(255, 193, 7, 0.1); 
+            border-color: var(--warning-color); 
+        }
+
+        #guide-text {
+            text-align: center;
+            color: #721c24;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .note {
+            margin-top: 30px;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            background-color: rgba(253, 245, 230, 0.5);
+            text-align: left;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-color);
+        }
+
+        footer {
+            margin-top: 20px;
+            margin-bottom: 3rem;
+            font-size: 0.8em;
+            color: var(--text-light);
+            text-align: center;
+        }
+        
+        #sinhala-output {
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            min-height: 120px;
+            text-align: left;
+            margin-top: 10px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            background-color: rgba(253, 245, 230, 0.5);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.3rem; }
+            .container, .converter-container { padding: 20px; }
+            .tooltip-text {
+                width: 200px;
+                left: 0;
+                margin-left: 0;
             }
         }
     </style>
 </head>
 <body>
-    <h1>දිනයට සුබ අක්ෂර</h1>
-    
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>දිනය</th>
-                    <th>අක්ෂර</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="zodiac-name">සඳුදා</td>
-                    <td>ය ර ල ව ශ ෂ ස හ ළ</td>
-                </tr>
-                <tr>
-                    <td class="zodiac-name">අඟහරුවාදා</td>
-                    <td>ක බ ග ඝ ඞ</td>
-                </tr>
-                <tr>
-                    <td class="zodiac-name">බදාදා</td>
-                    <td>ට ඨ ඩ ඪ ණ</td>
-                </tr>
-                <tr>
-                    <td class="zodiac-name">බ්‍රහස්පතින්දා</td>
-                    <td>ත ථ ද ධ න</td>
-                </tr>
-                <tr>
-                    <td class="zodiac-name">සිකුරාදා</td>
-                    <td>ච ඡ ජ ඣ ඤ</td>
-                </tr>
-                <tr>
-                    <td class="zodiac-name">සෙනසුරාදා</td>
-                    <td>ප ඵ බ භ ම</td>
-                </tr>
-                <tr>
-                    <td class="zodiac-name">ඉරිදා</td>
-                    <td>අ ඉ උ එ ඔ</td>
-                </tr>
-            </tbody>
-        </table>
+
+    <div class="container">
+        <h1>ස්වර වේධ ගැළපීම</h1>
+
+        <div class="input-group">
+            <div class="label-group">
+                 <label for="name1">මව්පියන්, සහෝදරයන්ගේ නම්</label>
+                 <div class="info-icon">
+                     <i class="fas fa-info-circle"></i>
+                     <span class="tooltip-text">එක් වරකට එක් නමක් පමණක් ඇතුළත් කර පරීක්ෂා කරන්න.</span>
+                 </div>
+            </div>
+            <input type="text" id="name1" placeholder="නම ඇතුළත් කරන්න..."
+            autofocus autocapitalize="none" autocorrect="off" spellcheck="false">
+        </div>
+
+        <div class="input-group">
+            <label for="name2">ජන්මයාගේ නම</label>
+            <input type="text" id="name2" placeholder="නම ඇතුළත් කරන්න..."
+            autofocus autocapitalize="none" autocorrect="off" spellcheck="false">
+        </div>
+
+        <button class="cta-button" onclick="checkCompatibility()">
+            <i class="fas fa-search" style="margin-right: 8px;"></i>සොයන්න
+        </button>
+
+        <div id="guide-text"></div>
+        <div id="result" class="result"></div>
+
+        <div class="note">
+            <p><strong>සටහන:</strong> මෙම මෙවලම මගින් ඔබ ලබා දෙන නම් දෙකෙහි මුල් අක්ෂරවලට අදාළ ස්වර ශබ්ද විශ්ලේෂණය කර, ස්වර වේධ ක්‍රමවේදයට අනුව ඒවායේ ගැළපීම හෝ නොගැළපීම පෙන්වයි. මෙය ජ්‍යොතිෂයේ එක් කුඩා කොටසක් පමණක් වන අතර සම්පූර්ණ නාම ගැළපීම් පරීක්ෂාවක් සඳහා සුදුසුකම් ලත් ජ්‍යොතිෂවේදියෙකු හමුවන්න.</p>
+        </div>
     </div>
+    
+    <div class="converter-container">
+        <h2>යුනිකෝඩ් පරිවර්තකය</h2>
+        <p>සිංහල නාමය ඉංග්‍රීසි අකුරු (Singlish) යොදා ටයිප් කරන්න.</p>
+        
+        <div class="input-group">
+            <textarea id="singlish-input" placeholder="Type in Singlish here..."></textarea>
+        </div>
+        
+        <div class="input-group">
+            <label for="sinhala-output">සිංහල ප්‍රතිඵලය</label>
+            <div id="sinhala-output">සිංහල අකුරෙන් මෙතැන පෙන්වනු ලැබේ</div>
+        </div>
+        
+        <div>
+            <button id="copy-btn" class="converter-btn">
+                <i class="far fa-copy" style="margin-right: 5px;"></i>Copy
+            </button>
+            <button id="clear-btn" class="converter-btn">
+                <i class="fas fa-eraser" style="margin-right: 5px;"></i>Clear
+            </button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Suba Namak | Astro Jayamaga. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // --- Custom Alert/Guide Message Function ---
+        const guideDiv = document.getElementById('guide-text');
+        let guideTimeout;
+
+        function showGuide(message, duration = 4000) {
+            clearTimeout(guideTimeout); 
+            guideDiv.innerHTML = message;
+            guideDiv.style.display = 'block';
+            document.getElementById('result').style.display = 'none'; // Hide main result when showing guide
+            
+            guideTimeout = setTimeout(() => {
+                guideDiv.style.display = 'none';
+            }, duration);
+        }
+
+        // --- Main Tool Logic ---
+        const opposition = {
+            'අ': 'උ', 'උ': 'අ',
+            'ආ': 'ඌ', 'ඌ': 'ආ',
+            'ඉ': ['එ', 'ඒ'], 'ඊ': ['ඔ', 'ඕ'],
+            'එ': 'ඉ', 'ඒ': 'ඉ',
+            'ඔ': 'ඊ', 'ඕ': 'ඊ',
+        };
+
+        const vowelGroups = {
+            'එ': 'එ, ඒ', 'ඒ': 'එ, ඒ',
+            'ඔ': 'ඔ, ඕ', 'ඕ': 'ඔ, ඕ'
+        };
+
+        function getVowelSound(name) {
+            const trimmedName = name.trim();
+            if (!trimmedName) return null;
+
+            const standaloneVowels = ['අ', 'ආ', 'ඇ', 'ඈ', 'ඉ', 'ඊ', 'උ', 'ඌ', 'එ', 'ඒ', 'ඔ', 'ඕ', 'ඓ', 'ඖ'];
+            const piliMap = {
+                'ා': 'ආ', 'ැ': 'ඇ', 'ෑ': 'ඈ', 'ි': 'ඉ', 'ී': 'ඊ',
+                'ු': 'උ', 'ූ': 'ඌ', 'ෙ': 'එ', 'ේ': 'ඒ', 'ො': 'ඔ', 'ෝ': 'ඕ',
+                'ෛ': 'ඓ', 'ෞ': 'ඖ',
+                'ෘ': 'උ', 'ෲ': 'ඌ'
+            };
+
+            const char1 = trimmedName.charAt(0);
+            if (standaloneVowels.includes(char1)) {
+                return char1;
+            }
+
+            const allConsonants = "කඛගඝඞඟචඡජඣඤඥඦටඨඩඪඬණතථදධඳනඹපඵබභමයරලවශෂසහළෆ";
+            if (!allConsonants.includes(char1)) {
+                return null;
+            }
+
+            let hasSeenHal = false;
+            for (let i = 1; i < trimmedName.length; i++) {
+                const char = trimmedName.charAt(i);
+                if (piliMap[char]) {
+                    return piliMap[char];
+                } else if (char === '්') {
+                    hasSeenHal = true;
+                    continue;
+                } else if (char === '\u200D') { // ZWJ
+                    continue;
+                } else if (allConsonants.includes(char)) {
+                    if (!hasSeenHal) {
+                        return 'අ';
+                    }
+                    hasSeenHal = false;
+                } else {
+                    continue;
+                }
+            }
+            return 'අ';
+        }
+
+        function checkCompatibility() {
+            const name1Input = document.getElementById('name1');
+            const name2Input = document.getElementById('name2');
+            const resultDiv = document.getElementById('result');
+            const name1 = name1Input.value;
+            const name2 = name2Input.value;
+            
+            // --- VALIDATION ---
+            const sinhalaPattern = /[\u0D80-\u0DFF]/;
+            if (!name1 || !name2) {
+                showGuide("කරුණාකර නම් දෙකම ඇතුළත් කරන්න.");
+                return;
+            }
+            if (!sinhalaPattern.test(name1) || !sinhalaPattern.test(name2)) {
+                showGuide("කරුණාකර සිංහල අකුරු පමණක් භාවිතා කරන්න. අවශ්‍ය නම් පහත ඇති යුනිකෝඩ් පරිවර්තකය භාවිතා කරන්න.");
+                return;
+            }
+            if (name1.trim().split(/\s+/).length > 1 || name2.trim().split(/\s+/).length > 1) {
+                showGuide("එක් වරකට එක් නමක් පමණක් ඇතුළත් කර පරීක්ෂා කරන්න.");
+                return;
+            }
+            
+            guideDiv.style.display = 'none'; // Hide guide text on successful check
+
+            // --- LOGIC ---
+            const vowel1 = getVowelSound(name1);
+            const vowel2 = getVowelSound(name2);
+            
+            let message = '';
+            let resultClass = '';
+
+            const relevantVowels = ['අ', 'ආ', 'ඉ', 'ඊ', 'උ', 'ඌ', 'එ', 'ඒ', 'ඔ', 'ඕ'];
+            
+            if (!vowel1 || !vowel2 || !relevantVowels.includes(vowel1) || !relevantVowels.includes(vowel2)) {
+                message = "මෙම නාමයන් යුගල ස්වර වේධ ක්‍රමවේදයට අනුව බලපෑමක් නොමැති බැවින් ගැළපේ. ✅";
+                resultClass = 'neutral';
+            } else if (
+                (Array.isArray(opposition[vowel1]) && opposition[vowel1].includes(vowel2)) ||
+                (Array.isArray(opposition[vowel2]) && opposition[vowel2].includes(vowel1)) ||
+                (opposition[vowel1] === vowel2)
+            ) {
+                message = `මෙම නාමයන් අයත් වන [${vowel1}] ස්වරය හා [${vowel2}] ස්වරය ස්වර වේධ වන බැවින් නොගැළපේ. ⭕`;
+                resultClass = 'incompatible';
+            } else if (vowel1 === vowel2 || 
+                       (vowelGroups[vowel1] && vowelGroups[vowel1] === vowelGroups[vowel2])) {
+                const displayVowel = vowelGroups[vowel1] || vowel1;
+                message = `මෙම නාමයන් යුගල අයත් ස්වරය වන [${displayVowel}] ස්වර වේධ ක්‍රමවේදයට අනුව ගැළපේ. ✅`;
+                resultClass = 'compatible';
+            } else {
+                 message = `මෙම නාමයන් යුගල අයත් ස්වර වන [${vowel1} | ${vowel2}] ස්වර වේධ ක්‍රමවේදයට අනුව ගැළපේ. ✅`;
+                 resultClass = 'compatible';
+            }
+
+            resultDiv.innerHTML = message;
+            resultDiv.className = 'result ' + resultClass + ' visible';
+        }
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // --- Unicode Converter Logic ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const singlishInput = document.getElementById('singlish-input');
+            const sinhalaOutput = document.getElementById('sinhala-output');
+            const copyBtn = document.getElementById('copy-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            
+            function buildFullMap() {
+             const baseConsonants = {
+                     'k': 'ක', 'kh': 'ඛ', 'g': 'ග', 'gh': 'ඝ',
+                     'ch': 'ච', 'chh': 'ඡ', 'j': 'ජ',
+                     'th': 'ත', 'thh': 'ථ',
+                     'd': 'ඩ', 'dh': 'ද', 'q': 'ද', 'dhh': 'ධ',
+                     'n': 'න', 'N': 'ණ',
+                     'p': 'ප', 'ph': 'ඵ',
+                     'b': 'බ', 'bh': 'භ', 'B': 'ඹ',
+                     'm': 'ම', 'y': 'ය', 'r': 'ර', 'l': 'ල', 'L': 'ළ',
+                     'v': 'ව', 'w': 'ව', 's': 'ස', 'sh': 'ශ', 'Sh': 'ෂ', 'S': 'ෂ',
+                     'h': 'හ', 'f': 'ෆ', 't': 'ට', 'c': 'ස', 'D': 'ඪ',
+                     'T': 'ඨ', 'C': 'ස', 'F': 'ෆ', 'G': 'ඝ', 'H': 'හ',
+                     'J': 'ජ', 'K': 'ඛ', 'M': 'ම', 'P': 'ඵ', 'Q': 'ධ',
+                     'V': 'ව', 'W': 'ව', 'Y': 'ය',
+                     'zga': 'ඟ', 'zja': 'ඦ', 'zda': 'ඬ', 'zdha': 'ඳ', 'zqa': 'ඳ',
+                     'zk': 'ඤ', 'zh': 'ඥ', 'X': 'ඞ'
+              };
+
+              const pillaChars = {
+                   'a': '', 'aa': 'ා', 'A': 'ැ', 'Aa': 'ෑ', 'AA': 'ෑ',
+                   'i': 'ි', 'ii': 'ී', 'u': 'ු', 'uu': 'ූ', 'R': 'ෘ', 'Ru': 'ෲ',
+                   'e': 'ෙ', 'ee': 'ේ', 'ai': 'ෛ', 'o': 'ො', 'oo': 'ෝ',
+                   'au': 'ෞ', 'ou': 'ෞ', 'H': 'ඃ'
+              };
+
+              const baseVowels = {
+                     'a': 'අ', 'aa': 'ආ', 'A': 'ඇ', 'Aa': 'ඈ', 'AA': 'ඈ',
+                     'i': 'ඉ', 'ii': 'ඊ', 'u': 'උ', 'U': 'උ', 'uu': 'ඌ', 'R': 'ඍ', 'Ru': 'ඎ',
+                     'e': 'එ', 'E': 'එ', 'ee': 'ඒ', 'ai': 'ඓ', 'I': 'ඓ', 'o': 'ඔ', 
+                     'O': 'ඔ', 'oo': 'ඕ', 'au': 'ඖ', 'ou': 'ඖ'
+              };
+               
+                let consonantBlocks = { ...baseConsonants };
+                const doubles = { 'tt': 'ට්ට', 'dd': 'ඩ්ඩ', 'nn': 'න්න', 'mm': 'ම්ම', 'll': 'ල්ල', 'pp': 'ප්ප' };
+                Object.assign(consonantBlocks, doubles);
+                const yansaya = '්‍ය';
+                const rakāransaya = '්‍ර';
+                for (const key in baseConsonants) {
+                    if (key !== 'y') consonantBlocks[key + 'y'] = baseConsonants[key] + yansaya;
+                    if (key !== 'r') consonantBlocks[key + 'r'] = baseConsonants[key] + rakāransaya;
+                }
+                let fullMap = { ...baseVowels, 'Lu': 'ළු', '.': '෴' };
+                for (const blockKey in consonantBlocks) {
+                    const blockValue = consonantBlocks[blockKey];
+                    fullMap[blockKey] = blockValue + '්';
+                    for (const pillaKey in pillaChars) {
+                        const pillaValue = pillaChars[pillaKey];
+                        if (pillaKey === 'a') {
+                            fullMap[blockKey + 'a'] = blockValue;
+                        } else {
+                            fullMap[blockKey + pillaKey] = blockValue + pillaValue;
+                        }
+                    }
+                }
+                fullMap['x'] = 'ං';
+                fullMap['kazn'] = 'කං';
+                fullMap['z'] = '';
+                return fullMap;
+            }
+
+            const conversionMap = buildFullMap();
+            const sortedKeys = Object.keys(conversionMap).sort((a, b) => b.length - a.length);
+
+            function convertSinglishToSinhala(text) {
+                const words = text.split(' ');
+                const convertedWords = words.map(word => {
+                    if (word.length === 0) return '';
+                    let converted = '';
+                    let i = 0;
+                    while (i < word.length) {
+                        let matchFound = false;
+                        for (const key of sortedKeys) {
+                            if (word.substring(i, i + key.length) === key) {
+                                converted += conversionMap[key];
+                                i += key.length;
+                                matchFound = true;
+                                break;
+                            }
+                        }
+                        if (!matchFound) {
+                            converted += word[i];
+                            i++;
+                        }
+                    }
+                    return converted;
+                });
+                return convertedWords.join(' ');
+            }
+
+            function performConversion() {
+                const inputText = singlishInput.value;
+                const outputText = convertSinglishToSinhala(inputText);
+                sinhalaOutput.textContent = outputText || "සිංහල අකුරෙන් මෙතැන පෙන්වනු ලැබේ";
+            }
+            
+            function clearText() {
+                singlishInput.value = '';
+                performConversion(); 
+            }
+
+            function copyText() {
+                const textToCopy = sinhalaOutput.textContent;
+                if (textToCopy && textToCopy !== 'සිංහල අකුරෙන් මෙතැන පෙන්වනු ලැබේ') {
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        const originalHTML = copyBtn.innerHTML;
+                        copyBtn.innerHTML = `<i class="fas fa-check" style="margin-right: 5px;"></i>Copied`;
+                        copyBtn.disabled = true;
+                        
+                        setTimeout(() => {
+                           copyBtn.innerHTML = originalHTML;
+                           copyBtn.disabled = false;
+                        }, 2000);
+
+                    }, (err) => {
+                        console.error('Failed to copy: ', err);
+                        showGuide('පිටපත් කිරීමට නොහැකි විය. කරුණාකර නැවත උත්සාහ කරන්න.');
+                    });
+                }
+            }
+            
+            clearBtn.addEventListener('click', clearText);
+            copyBtn.addEventListener('click', copyText);
+            singlishInput.addEventListener('input', performConversion);
+            
+            performConversion();
+        });
+    </script>
 </body>
 </html>
