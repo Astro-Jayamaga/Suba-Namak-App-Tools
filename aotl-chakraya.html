@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>අෂ්ට යෝනි පරීක්ෂාව</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700&family=Noto+Serif+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #7F0000;
+            --secondary-color: #FDF5E6;
+            --highlight-color: #FFA500;
+            --border-color: #d4a373;
+            --font-gemunu: 'Gemunu Libre', sans-serif;
+            --font-noto: 'Noto Serif Sinhala', serif;
+            --success-color: #4CAF50;
+            --warning-color: #FFC107;
+            --danger-color: #F44336;
+            --text-color: #333;
+            --text-light: #666;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --success-bg: #e8f5e9;
+            --danger-bg: #ffebee;
+            --neutral-bg: #fffde7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-noto);
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container, .converter-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-family: var(--font-gemunu);
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--highlight-color);
+            border-radius: 3px;
+        }
+        
+        h2 {
+            font-family: var(--font-gemunu);
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        label {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .info-icon {
+            margin-left: 8px;
+            cursor: pointer;
+            color: var(--highlight-color);
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .info-icon:hover { transform: scale(1.1); }
+        
+        .tooltip-text {
+            visibility: hidden;
+            width: 250px;
+            background-color: var(--text-color);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+            font-weight: normal;
+        }
+
+        .info-icon:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: var(--font-noto);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        textarea { resize: vertical; min-height: 120px; }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: var(--highlight-color);
+            box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2);
+        }
+
+        .cta-button, .converter-btn {
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-noto);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 0 rgba(127, 0, 0, 0.2);
+        }
+        .cta-button { width: 100%; }
+        .converter-btn { margin: 5px; }
+
+        .cta-button:hover, .converter-btn:hover {
+            background-color: #e69500;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 rgba(127, 0, 0, 0.2);
+        }
+
+        .cta-button:active, .converter-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 0 rgba(127, 0, 0, 0.2);
+        }
+
+        #result {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-width: 2px;
+            border-style: solid;
+        }
+        
+        .result-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .result-yoni {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .result-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        #result.success { border-color: var(--success-color); background-color: var(--success-bg); }
+        #result.error { border-color: var(--danger-color); background-color: var(--danger-bg); }
+        #result.neutral { border-color: var(--warning-color); background-color: var(--neutral-bg); }
+
+        #guide-text, #converter-guide-text {
+            text-align: center;
+            color: #721c24;
+            padding: 10px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            display: none;
+            margin-top: 20px;
+        }
+        #converter-guide-text { margin-top: 0; margin-bottom: 20px; }
+
+        .note {
+            margin-top: 30px;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            background-color: rgba(253, 245, 230, 0.5);
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            margin-top: 20px;
+            margin-bottom: 3rem;
+            font-size: 0.8em;
+            color: var(--text-light);
+        }
+
+        #sinhala-output {
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            min-height: 120px;
+            text-align: left;
+            font-size: 1.1rem;
+            background-color: rgba(253, 245, 230, 0.5);
+        }
+
+        #clear-btn { background-color: var(--danger-color); }
+        #clear-btn:hover { background-color: #d32f2f; }
+        #copy-btn { background-color: var(--success-color); }
+        #copy-btn:hover { background-color: #388e3c; }
+        .converter-btn:disabled { background-color: #a5d6a7; cursor: not-allowed; transform: translateY(0); }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            .container, .converter-container { padding: 20px; }
+            .tooltip-text { width: 200px; left: 0; margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>අෂ්ට යෝනි පරීක්ෂාව</h1>
+
+        <div class="input-group">
+            <label for="name1">මව්පියන්, සහෝදරයන්ගේ නම්
+                <div class="info-icon">
+                    <i class="fas fa-info-circle"></i>
+                    <span class="tooltip-text">එක් වරකට එක් නමක් පමණක් ඇතුළත් කර පරීක්ෂා කරන්න.</span>
+                </div>
+            </label>
+            <input type="text" id="name1" placeholder="නම ඇතුළත් කරන්න">
+        </div>
+
+        <div class="input-group">
+            <label for="name2">ජන්මයාගේ නම</label>
+            <input type="text" id="name2" placeholder="නම ඇතුළත් කරන්න">
+        </div>
+
+        <button class="cta-button" onclick="checkCompatibility()">සොයන්න</button>
+        <div id="guide-text"></div>
+        <div id="result"></div>
+
+        <div class="note">
+            මෙය අෂ්ට යෝනි චක්‍රය හෙවත් අඔතල චක්‍රය පාදක කරගෙන නිර්මාණය කර ඇත. මෙහිදී ජන්මයාගේ නම සමඟ දෙමාපියන්ගේ නම්, වැඩිමහල් සහෝදරයන් සිටී නම් ඔවුන්ගේ නිතර භාවිතා වන නම් වෙන වෙනම පරීක්ෂා කොට එම නාමයන් අයත් වන යෝනි කාණ්ඩය අනුව මහා වෛරී යෝනි අතහැර නම් තැබීම සිදු කළ යුතුයි. <b>තවද ජන්මයාගේ පළමු නාමය හා දෙවන නාමය මෙම කොටු වලට වෙන වෙනම ඇතුළත් කොට මහා වෛරී යෝනි අතහැර නම් තැබීම සිදු කළ යුතුයි.</b>
+        </div>
+    </div>
+
+    <div class="converter-container">
+        <h2>යුනිකෝඩ් පරිවර්තකය</h2>
+        <div class="input-group">
+            <textarea id="singlish-input" placeholder="Type in Singlish here..."
+            autocapitalize="none" autocorrect="off" spellcheck="false"></textarea>
+        </div>
+        <div class="input-group">
+            <label for="sinhala-output">සිංහල ප්‍රතිඵලය</label>
+            <div id="sinhala-output">සිංහල අකුරෙන් මෙතැන පෙන්වනු ලැබේ</div>
+        </div>
+        <div id="converter-guide-text"></div>
+        <div>
+            <button id="copy-btn" class="converter-btn">
+                <i class="far fa-copy" style="margin-right: 5px;"></i>Copy
+            </button>
+            <button id="clear-btn" class="converter-btn">
+                <i class="fas fa-eraser" style="margin-right: 5px;"></i>Clear
+            </button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Suba Namak | Astro Jayamaga. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // --- Custom Alert/Guide Message Functions ---
+        const guideDiv = document.getElementById('guide-text');
+        const converterGuideDiv = document.getElementById('converter-guide-text');
+        let guideTimeout;
+        let converterGuideTimeout;
+
+        function showGuide(message, duration = 4000) {
+            clearTimeout(guideTimeout); 
+            guideDiv.innerHTML = message;
+            guideDiv.style.display = 'block';
+            
+            guideTimeout = setTimeout(() => {
+                guideDiv.style.display = 'none';
+            }, duration);
+        }
+        
+        function showConverterGuide(message, duration = 4000) {
+            clearTimeout(converterGuideTimeout);
+            converterGuideDiv.innerHTML = message;
+            converterGuideDiv.style.display = 'block';
+
+            converterGuideTimeout = setTimeout(() => {
+                converterGuideDiv.style.display = 'none';
+            }, duration);
+        }
+
+        // --- Main Tool Logic ---
+        const categories = {
+            1: { name: "මුගටි", letters: ["අ", "ඔ", "ත", "ල"] }, 2: { name: "මහීෂ", letters: ["ආ", "ඕ", "ද", "ව"] }, 3: { name: "බකමුහුණු", letters: ["ස", "න", "ක", "ඉ"] }, 4: { name: "ව්‍යාඝ්‍ර", letters: ["හ", "ප", "ග", "ඊ"] }, 5: { name: "සර්ප", letters: ["උ", "ජ", "බ", "ළ"] }, 6: { name: "තුරඟ", letters: ["අං", "ම", "ට", "ඌ"] }, 7: { name: "කාක", letters: ["එ", "ඩ", "ය"] }, 8: { name: "මුව", letters: ["ඒ", "ණ", "ර"] }
+        };
+        const opposites = { 1: 5, 5: 1, 2: 6, 6: 2, 3: 7, 7: 3, 4: 8, 8: 4 };
+        const matching = { 1: 4, 4: 1, 2: 5, 5: 2, 3: 6, 6: 3, 4: 7, 7: 4 };
+        const letterVariations = {
+             'අ': ['අ', 'ඇ', 'ඓ', 'ඖ', 'අඃ'],'ආ': ['ආ', 'ඈ'],'ඉ': ['ඉ'],'ඊ': ['ඊ'],'උ': ['උ'],'ඌ': ['ඌ', 'ඐ'],'එ': ['එ'],'ඒ': ['ඒ'],'ඔ': ['ඔ'],'ඕ': ['ඕ'],'ක': ['ක', 'ක්', 'කා', 'කැ', 'කෑ', 'කි', 'කී', 'කු', 'කූ', 'කෘ', 'කෲ', 'කෙ', 'කේ', 'කෛ', 'කො', 'කෝ', 'කෞ', 'කඃ', 'කං', 'කඞ', 'ක්‍ය', 'ක්‍ර', 'ඛ'],'ග': ['ග', 'ග්', 'ගා', 'ගැ', 'ගෑ', 'ගි', 'ගී', 'ගු', 'ගූ', 'ගෘ', 'ගෲ', 'ගෙ', 'ගේ', 'ගෛ', 'ගො', 'ගෝ', 'ගෞ', 'ගඃ', 'ගං', 'ගඞ', 'ග්‍ය', 'ග්‍ර', 'ඝ', 'ඟ'],'ජ': ['ජ', 'ජ්', 'ජා', 'ජැ', 'ජෑ', 'ජි', 'ජී', 'ජු', 'ජූ', 'ජෘ', 'ජෲ', 'ජෙ', 'ජේ', 'ජෛ', 'ජො', 'ජෝ', 'ජෞ', 'ජඃ', 'ජං', 'ජඣ', 'ජ්‍ය', 'ජ්‍ර', 'ඡ', 'ඦ', 'ඤ', 'ඥ'],'ඩ': ['ඩ', 'ඩ්', 'ඩා', 'ඩැ', 'ඩෑ', 'ඩි', 'ඩී', 'ඩු', 'ඩූ', 'ඩෘ', 'ඩෲ', 'ඩෙ', 'ඩේ', 'ඩෛ', 'ඩො', 'ඩෝ', 'ඩෞ', 'ඩඃ', 'ඩං', 'ඩඞ', 'ඩ්‍ය', 'ඩ්‍ර', 'ඪ', 'ඬ'],'ණ': ['ණ', 'ණ්', 'ණා', 'ණැ', 'ණෑ', 'ණි', 'ණී', 'ණු', 'ණූ', 'ණෘ', 'ණෲ', 'ණෙ', 'ණේ', 'ණෛ', 'ණො', 'ණෝ', 'ණෞ', 'ණඃ', 'ණං', 'ණඞ', 'ණ්‍ය', 'ණ්‍ර'],'ත': ['ත', 'ත්', 'තා', 'තැ', 'තෑ', 'ති', 'තී', 'තු', 'තූ', 'තෘ', 'තෲ', 'තෙ', 'තේ', 'තෛ', 'තො', 'තෝ', 'තෞ', 'තඃ', 'තං', 'තඞ', 'ත්‍ය', 'ත්‍ර', 'ථ'],'ද': ['ද', 'ද්', 'දා', 'දැ', 'දෑ', 'දි', 'දී', 'දු', 'දූ', 'දෘ', 'දෲ', 'දෙ', 'දේ', 'දෛ', 'දො', 'දෝ', 'දෞ', 'දඃ', 'දං', 'දඞ', 'ද්‍ය', 'ද්‍ර', 'ධ', 'ඳ'],'න': ['න', 'න්', 'නා', 'නැ', 'නෑ', 'නි', 'නී', 'නු', 'නූ', 'නෘ', 'නෲ', 'නෙ', 'නේ', 'නෛ', 'නො', 'නෝ', 'නෞ', 'නඃ', 'නං', 'නඞ', 'න්‍ය', 'න්‍ර'],'ප': ['ප', 'ප්', 'පා', 'පැ', 'පෑ', 'පි', 'පී', 'පු', 'පූ', 'පෘ', 'පෲ', 'පෙ', 'පේ', 'පෛ', 'පො', 'පෝ', 'පෞ', 'පඃ', 'පං', 'පඞ', 'ප්‍ය', 'ප්‍ර', 'ඵ'],'බ': ['බ', 'බ්', 'බා', 'බැ', 'බෑ', 'බි', 'බී', 'බු', 'බූ', 'බෘ', 'බෲ', 'බෙ', 'බේ', 'බෛ', 'බො', 'බෝ', 'බෞ', 'බඃ', 'බං', 'බඞ', 'බ්‍ය', 'බ්‍ර', 'භ', 'ඹ'],'ම': ['ම', 'ම්', 'මා', 'මැ', 'මෑ', 'මි', 'මී', 'මු', 'මූ', 'මෘ', 'මෲ', 'මෙ', 'මේ', 'මෛ', 'මො', 'මෝ', 'මෞ', 'මඃ', 'මං', 'මඞ', 'ම්‍ය', 'ම්‍ර'],'ය': ['ය', 'ය්', 'යා', 'යැ', 'යෑ', 'යි', 'යී', 'යු', 'යූ', 'යෘ', 'යෲ', 'යෙ', 'යේ', 'යෛ', 'යො', 'යෝ', 'යෞ', 'යඃ', 'යං', 'යඞ', 'ය්‍ය', 'ය්‍ර'],'ර': ['ර', 'ර්', 'රා', 'රැ', 'රෑ', 'රි', 'රී', 'රු', 'රූ', 'රෘ', 'රෲ', 'රෙ', 'රේ', 'රෛ', 'රො', 'රෝ', 'රෞ', 'රඃ', 'රං', 'රඞ', 'ර්‍ය', 'ර්‍ර', 'ඍ', 'ඎ'],'ල': ['ල', 'ල්', 'ලා', 'ලැ', 'ලෑ', 'ලි', 'ලී', 'ලු', 'ලූ', 'ලෘ', 'ලෲ', 'ලෙ', 'ලේ', 'ලෛ', 'ලො', 'ලෝ', 'ලෞ', 'ලඃ', 'ලං', 'ලඞ', 'ල්‍ය', 'ල්‍ර', 'ඏ', 'ළු'],'ව': ['ව', 'ව්', 'වා', 'වැ', 'වෑ', 'වි', 'වී', 'වු', 'වූ', 'වෘ', 'වෲ', 'වෙ', 'වේ', 'වෛ', 'වො', 'වෝ', 'වෞ', 'වඃ', 'වං', 'වඞ', 'ව්‍ය', 'ව්‍ර'],'ස': ['ස', 'ස්', 'සා', 'සැ', 'සෑ', 'සි', 'සී', 'සු', 'සූ', 'සෘ', 'සෲ', 'සෙ', 'සේ', 'සෛ', 'සො', 'සෝ', 'සෞ', 'සඃ', 'සං', 'සඞ', 'ස්‍ය', 'ස්‍ර', 'ශ', 'ෂ'],'හ': ['හ', 'හ්', 'හා', 'හැ', 'හෑ', 'හි', 'හී', 'හු', 'හූ', 'හෘ', 'හෲ', 'හෙ', 'හේ', 'හෛ', 'හො', 'හෝ', 'හෞ', 'හඃ', 'හං', 'හඞ', 'හ්‍ය', 'හ්‍ර'],'ළ': ['ළ', 'ළ්', 'ළා', 'ළැ', 'ළෑ', 'ළි', 'ළී', 'ළු', 'ළූ', 'ළෘ', 'ළෲ', 'ළෙ', 'ළේ', 'ළෛ', 'ළො', 'ළෝ', 'ළෞ', 'ළඃ', 'ළං', 'ළඞ', 'ළ්‍ය', 'ළ්‍ර'],'ට': ['ට', 'ට්', 'ටා', 'ටැ', 'ටෑ', 'ටි', 'ටී', 'ටු', 'ටූ', 'ටෘ', 'ටෲ', 'ටෙ', 'ටේ', 'ටෛ', 'ටො', 'ටෝ', 'ටෞ', 'ටඃ', 'ටං', 'ටඞ', 'ට්‍ය', 'ට්‍ර', 'ඨ'],'අං': ['අං']
+        };
+
+        function getBaseLetter(letter) {
+            for (const base in letterVariations) {
+                if (letterVariations[base].includes(letter)) return base;
+            }
+            return letter;
+        }
+
+        function getCategory(letter) {
+            const baseLetter = getBaseLetter(letter);
+            for (const id in categories) {
+                if (categories[id].letters.includes(baseLetter)) {
+                    return { id: parseInt(id), name: categories[id].name };
+                }
+            }
+            return null;
+        }
+
+        function checkCompatibility() {
+            const name1 = document.getElementById('name1').value.trim();
+            const name2 = document.getElementById('name2').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            guideDiv.style.display = 'none';
+            resultDiv.style.display = 'none';
+            
+            if (!name1 || !name2) {
+                showGuide("කරුණාකර නම් දෙකම ඇතුළත් කරන්න.");
+                return;
+            }
+             if (name1.split(/\s+/).length > 1 || name2.split(/\s+/).length > 1) {
+                showGuide("එක් වරකට එක් නමක් පමණක් ඇතුළත් කර පරීක්ෂා කරන්න.");
+                return;
+            }
+
+
+            const firstLetter1 = name1.charAt(0);
+            const firstLetter2 = name2.charAt(0);
+            const cat1 = getCategory(firstLetter1);
+            const cat2 = getCategory(firstLetter2);
+
+            let resultHTML = '';
+            let resultClass = 'neutral';
+            
+            if (!cat1 || !cat2) {
+                resultHTML = `
+                    <div class="result-title">✅ ගැළපේ</div>
+                    <div class="result-description">අෂ්ට යෝනි චක්‍රයට අනුව බලපෑමක් නැති බැවින් නාමයන් ගැළපේ.</div>`;
+                resultClass = 'success';
+            } else if (cat1.id === cat2.id) {
+                resultHTML = `
+                    <div class="result-title">⭐ ඉතා හොඳින් ගැළපේ</div>
+                    <div class="result-yoni">එකම යෝනිය: <b>${cat1.name}</b> යෝනිය</div>
+                    <div class="result-description">මෙම නාමයන් එකම යෝනියට අයත් වන බැවින් ඉතා හොඳින් ගැළපේ.</div>`;
+                resultClass = 'success';
+            } else if (opposites[cat1.id] === cat2.id) {
+                resultHTML = `
+                    <div class="result-title">⭕ නොගැළපේ</div>
+                    <div class="result-yoni">සතුරු යෝනි: <b>${cat1.name}</b> යෝනිය සහ <b>${cat2.name}</b> යෝනිය</div>
+                    <div class="result-description">මෙම නාමයන් අයත් වන යෝනි සතුරු වන බැවින් නොගැළපේ.</div>`;
+                resultClass = 'error';
+            } else if (matching[cat1.id] === cat2.id) {
+                 resultHTML = `
+                    <div class="result-title">⭐ ඉතා හොඳින් ගැළපේ</div>
+                    <div class="result-yoni">මිතුරු යෝනි: <b>${cat1.name}</b> යෝනිය සහ <b>${cat2.name}</b> යෝනිය</div>
+                    <div class="result-description">මෙම නාමයන් අයත් වන යෝනි මිතුරු වන බැවින් ඉතා හොඳින් ගැළපේ.</div>`;
+                resultClass = 'success';
+            } else {
+                resultHTML = `
+                    <div class="result-title">✅ ගැළපේ</div>
+                    <div class="result-yoni">උදාසීන යෝනි: <b>${cat1.name}</b> යෝනිය සහ <b>${cat2.name}</b> යෝනිය</div>
+                    <div class="result-description">මෙම නාමයන් අයත් වන යෝනි උදාසීන වන බැවින් ගැළපේ.</div>`;
+                resultClass = 'neutral';
+            }
+
+            resultDiv.innerHTML = resultHTML;
+            resultDiv.className = 'result ' + resultClass;
+            resultDiv.style.display = 'block';
+        }
+
+        // --- Unicode Converter Script ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const singlishInput = document.getElementById('singlish-input');
+            const sinhalaOutput = document.getElementById('sinhala-output');
+            const copyBtn = document.getElementById('copy-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            
+            function buildFullMap() {
+                 const baseConsonants = { 'k': 'ක', 'kh': 'ඛ', 'g': 'ග', 'gh': 'ඝ', 'ch': 'ච', 'chh': 'ඡ', 'j': 'ජ', 'th': 'ත', 'thh': 'ථ', 'd': 'ඩ', 'dh': 'ද', 'q': 'ද', 'dhh': 'ධ', 'n': 'න', 'N': 'ණ', 'p': 'ප', 'ph': 'ඵ', 'b': 'බ', 'bh': 'භ', 'B': 'ඹ', 'm': 'ම', 'y': 'ය', 'r': 'ර', 'l': 'ල', 'L': 'ළ', 'v': 'ව', 'w': 'ව', 's': 'ස', 'sh': 'ශ', 'Sh': 'ෂ', 'S': 'ෂ', 'h': 'හ', 'f': 'ෆ', 't': 'ට', 'c': 'ස', 'D': 'ඪ', 'T': 'ඨ', 'C': 'ස', 'F': 'ෆ', 'G': 'ඝ', 'H': 'හ', 'J': 'ජ', 'K': 'ඛ', 'M': 'ම', 'P': 'ඵ', 'Q': 'ධ', 'V': 'ව', 'W': 'ව', 'Y': 'ය', 'zga': 'ඟ', 'zja': 'ඦ', 'zda': 'ඬ', 'zdha': 'ඳ', 'zqa': 'ඳ', 'zk': 'ඤ', 'zh': 'ඥ', 'X': 'ඞ' };
+                 const pillaChars = { 'a': '', 'aa': 'ා', 'A': 'ැ', 'Aa': 'ෑ', 'AA': 'ෑ', 'i': 'ි', 'ii': 'ී', 'u': 'ු', 'uu': 'ූ', 'R': 'ෘ', 'Ru': 'ෲ', 'e': 'ෙ', 'ee': 'ේ', 'ai': 'ෛ', 'o': 'ො', 'oo': 'ෝ', 'au': 'ෞ', 'ou': 'ෞ', 'H': 'ඃ' };
+                 const baseVowels = { 'a': 'අ', 'aa': 'ආ', 'A': 'ඇ', 'Aa': 'ඈ', 'AA': 'ඈ', 'i': 'ඉ', 'ii': 'ඊ', 'u': 'උ', 'U': 'උ', 'uu': 'ඌ', 'R': 'ඍ', 'Ru': 'ඎ', 'e': 'එ', 'E': 'එ', 'ee': 'ඒ', 'ai': 'ඓ', 'I': 'ඓ', 'o': 'ඔ', 'O': 'ඔ', 'oo': 'ඕ', 'au': 'ඖ', 'ou': 'ඖ' };
+                 let consonantBlocks = { ...baseConsonants };
+                 const doubles = { 'tt': 'ට්ට', 'dd': 'ඩ්ඩ', 'nn': 'න්න', 'mm': 'ම්ම', 'll': 'ල්ල', 'pp': 'ප්ප' };
+                 Object.assign(consonantBlocks, doubles);
+                 const yansaya = '්‍ය';
+                 const rakāransaya = '්‍ර';
+                 for (const key in baseConsonants) {
+                     if (key !== 'y') consonantBlocks[key + 'y'] = baseConsonants[key] + yansaya;
+                     if (key !== 'r') consonantBlocks[key + 'r'] = baseConsonants[key] + rakāransaya;
+                 }
+                 let fullMap = { ...baseVowels, 'Lu': 'ළු', '.': '෴' };
+                 for (const blockKey in consonantBlocks) {
+                     const blockValue = consonantBlocks[blockKey];
+                     fullMap[blockKey] = blockValue + '්';
+                     for (const pillaKey in pillaChars) {
+                         const pillaValue = pillaChars[pillaKey];
+                         if (pillaKey === 'a') {
+                             fullMap[blockKey + 'a'] = blockValue;
+                         } else {
+                             fullMap[blockKey + pillaKey] = blockValue + pillaValue;
+                         }
+                     }
+                 }
+                 fullMap['x'] = 'ං';
+                 fullMap['kazn'] = 'කං';
+                 fullMap['z'] = '';
+                 return fullMap;
+            }
+
+            const conversionMap = buildFullMap();
+            const sortedKeys = Object.keys(conversionMap).sort((a, b) => b.length - a.length);
+
+            function convertSinglishToSinhala(text) {
+                const words = text.split(' ');
+                return words.map(word => {
+                    if (word.length === 0) return '';
+                    let converted = '';
+                    let i = 0;
+                    while (i < word.length) {
+                        let matchFound = false;
+                        for (const key of sortedKeys) {
+                            if (word.substring(i, i + key.length) === key) {
+                                converted += conversionMap[key];
+                                i += key.length;
+                                matchFound = true;
+                                break;
+                            }
+                        }
+                        if (!matchFound) {
+                            converted += word[i];
+                            i++;
+                        }
+                    }
+                    return converted;
+                }).join(' ');
+            }
+
+            function performConversion() {
+                const inputText = singlishInput.value;
+                const outputText = convertSinglishToSinhala(inputText);
+                sinhalaOutput.textContent = outputText || "සිංහල අකුරෙන් මෙතැන පෙන්වනු ලැබේ";
+            }
+            
+            function clearText() {
+                singlishInput.value = '';
+                performConversion(); 
+            }
+            
+            function showCopySuccessFeedback() {
+                const originalHTML = copyBtn.innerHTML;
+                copyBtn.innerHTML = `<i class="fas fa-check" style="margin-right: 5px;"></i>Copied`;
+                copyBtn.disabled = true;
+                setTimeout(() => {
+                   copyBtn.innerHTML = originalHTML;
+                   copyBtn.disabled = false;
+                }, 2000);
+            }
+
+            function fallbackCopyTextToClipboard(text) {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.top = '-9999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    if (document.execCommand('copy')) {
+                        showCopySuccessFeedback();
+                    } else {
+                         showConverterGuide('පිටපත් කිරීමට නොහැකි විය.');
+                    }
+                } catch (err) {
+                    showConverterGuide('පිටපත් කිරීමට නොහැකි විය.');
+                }
+                document.body.removeChild(textArea);
+            }
+
+            function copyText() {
+                const textToCopy = sinhalaOutput.textContent;
+                if (!textToCopy || textToCopy === 'සිංහල අකුරෙන් මෙතැන පෙන්වනු ලැබේ') {
+                    showConverterGuide('පිටපත් කිරීමට අකුරු නොමැත.');
+                    return;
+                }
+                
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(textToCopy).then(showCopySuccessFeedback).catch(err => {
+                        fallbackCopyTextToClipboard(textToCopy);
+                    });
+                } else {
+                    fallbackCopyTextToClipboard(textToCopy);
+                }
+            }
+            
+            clearBtn.addEventListener('click', clearText);
+            copyBtn.addEventListener('click', copyText);
+            singlishInput.addEventListener('input', performConversion);
+            performConversion();
+        });
+    </script>
+
+</body>
+</html>

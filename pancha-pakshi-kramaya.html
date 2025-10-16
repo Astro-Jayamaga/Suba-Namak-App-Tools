@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>පංච පක්ෂි ක්‍රමය</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700&family=Noto+Serif+Sinhala&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7F0000;
+            --secondary: #FFA500;
+            --cream: #FDF5E6;
+            --friend: #e6f7e6;
+            --enemy: #ffebeb;
+            --neutral: #f9f9f9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Serif Sinhala', serif;
+            background-color: var(--cream);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-family: 'Gemunu Libre', sans-serif;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: slideUp 0.5s ease-out;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .dropdown-container {
+            margin-bottom: 20px;
+        }
+        
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--primary);
+            border-radius: 5px;
+            font-family: 'Noto Serif Sinhala', serif;
+            font-size: 1rem;
+            color: #333;
+            background-color: white;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237F0000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2);
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-family: 'Noto Serif Sinhala', serif;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .result-container {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .result-image {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .result-image img {
+            max-width: 200px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .result-title {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        
+        .result-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        tr.friend {
+            background-color: var(--friend);
+        }
+        
+        tr.enemy {
+            background-color: var(--enemy);
+        }
+        
+        tr.neutral {
+            background-color: var(--neutral);
+        }
+        
+        .note {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>පංච පක්ෂි ක්‍රමය</h1>
+        
+        <div class="dropdown-container">
+            <select id="birdSelect">
+                <option value="" disabled selected>පක්ෂියා තෝරන්න</option>
+                <option value="අස්විද">අස්විද</option>
+                <option value="මා">මා</option>
+                <option value="මුල">මුල</option>
+                <option value="බෙරණ">බෙරණ</option>
+                <option value="පුවපල්">පුවපල්</option>
+                <option value="පුවසල">පුවසල</option>
+                <option value="කැති">කැති</option>
+                <option value="උත්‍රපල්">උත්‍රපල්</option>
+                <option value="උත්‍රසල">උත්‍රසල</option>
+                <option value="රෙහෙණ">රෙහෙණ</option>
+                <option value="හත">හත</option>
+                <option value="සුවණ">සුවණ</option>
+                <option value="මුවසිරස">මුවසිරස</option>
+                <option value="සිත">සිත</option>
+                <option value="දෙනට">දෙනට</option>
+                <option value="අද">අද</option>
+                <option value="සා">සා</option>
+                <option value="සියාවස">සියාවස</option>
+                <option value="පුනාවස">පුනාවස</option>
+                <option value="විසා">විසා</option>
+                <option value="පුවපුටුප">පුවපුටුප</option>
+                <option value="පුෂ">පුෂ</option>
+                <option value="අනුර">අනුර</option>
+                <option value="උත්‍රපුටුප">උත්‍රපුටුප</option>
+                <option value="අස්ලිස">අස්ලිස</option>
+                <option value="දෙට">දෙට</option>
+                <option value="රේවතී">රේවතී</option>
+            </select>
+        </div>
+        
+        <button id="findBtn" class="btn">සොයන්න</button>
+        
+        <div id="resultContainer" class="result-container">
+            <div class="result-image">
+                <img id="resultImage" src="" alt="පක්ෂියා">
+            </div>
+            <h2 id="resultTitle" class="result-title"></h2>
+            <p id="resultSubtitle" class="result-subtitle"></p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>පක්ෂියා</th>
+                        <th>සම්බන්ධය</th>
+                        <th>ස්වරය</th>
+                    </tr>
+                </thead>
+                <tbody id="resultTable">
+                    <!-- Table content will be generated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="note">
+            <p>පංච පක්ෂි ක්‍රමයට අනුව ජන්මයාගේ උපන් නැකත අනුව තමාගේ පක්ෂියාට අයත් ස්වරාක්ෂරයකින් හෝ මිතුරු පක්ෂියාට අයත් ස්වරාක්ෂරයකින් නාමයන් ආරම්භ කිරීම සුබදායී වේ. සතුරු පක්ෂියාට හිමි ස්වරාක්ෂරයකින් නාමයන් ආරම්භ කිරීම අසුබදායී වේ.</p>
+        </div>
+        
+        <div class="copyright">
+            &copy; <span id="year"></span> Suba Namak | Astro Jayamaga
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year
+            document.getElementById('year').textContent = new Date().getFullYear();
+            
+            // Find button click event
+            document.getElementById('findBtn').addEventListener('click', function() {
+                const selectedBird = document.getElementById('birdSelect').value;
+                
+                if (!selectedBird) {
+                    alert('කරුණාකර පක්ෂියා එකක් තෝරන්න!');
+                    return;
+                }
+                
+                showResult(selectedBird);
+            });
+            
+            function showResult(bird) {
+                const resultContainer = document.getElementById('resultContainer');
+                const resultImage = document.getElementById('resultImage');
+                const resultTitle = document.getElementById('resultTitle');
+                const resultSubtitle = document.getElementById('resultSubtitle');
+                const resultTable = document.getElementById('resultTable');
+                
+                // Hide result container initially
+                resultContainer.style.display = 'none';
+                
+                // Group 1: අස්විද, බෙරණ, කැති, රෙහෙණ, මුවසිරස
+                const group1 = ['අස්විද', 'බෙරණ', 'කැති', 'රෙහෙණ', 'මුවසිරස'];
+                
+                // Group 2: අද, පුනාවස, පුෂ, අස්ලිස, මා, පුවපල්
+                const group2 = ['අද', 'පුනාවස', 'පුෂ', 'අස්ලිස', 'මා', 'පුවපල්'];
+                
+                // Group 3: උත්‍රපල්, හත, සිත, සා, විසා
+                const group3 = ['උත්‍රපල්', 'හත', 'සිත', 'සා', 'විසා'];
+                
+                // Group 4: අනුර, දෙට, මුල, පුවසල, උත්‍රසල, සුවණ
+                const group4 = ['අනුර', 'දෙට', 'මුල', 'පුවසල', 'උත්‍රසල', 'සුවණ'];
+                
+                // Group 5: දෙනට, සියාවස, පුවපුටුප, උත්‍රපුටුප, රේවතී
+                const group5 = ['දෙනට', 'සියාවස', 'පුවපුටුප', 'උත්‍රපුටුප', 'රේවතී'];
+                
+                if (group1.includes(bird)) {
+                    resultImage.src = 'https://imgur.com/xU12DUX.gif';
+                    resultTitle.textContent = 'භේරුණ්ඩ පක්ෂියා';
+                    resultSubtitle.textContent = '"අ, ආ" ස්වරය | පඨවි භූතය';
+                    
+                    resultTable.innerHTML = `
+                        <tr class="friend">
+                            <td>පිංගල පක්ෂියා</td>
+                            <td><span class="emoji">✅</span> මිතුරු වේ.</td>
+                            <td>ඉ, ඊ ස්වර</td>
+                        </tr>
+                        <tr class="enemy">
+                            <td>කාක පක්ෂියා</td>
+                            <td><span class="emoji">⭕</span> සතුරු වේ.</td>
+                            <td>උ, ඌ ස්වර</td>
+                        </tr>
+                        <tr class="neutral">
+                            <td>කුක්කුට පක්ෂියා</td>
+                            <td><span class="emoji">➡️</span> උදාසීන වේ.</td>
+                            <td>එ, ඒ ස්වර</td>
+                        </tr>
+                        <tr class="neutral">
+                            <td>මයුර පක්ෂියා</td>
+                            <td><span class="emoji">➡️</span> උදාසීන වේ.</td>
+                            <td>ඔ, ඕ ස්වර</td>
+                        </tr>
+                    `;
+                } 
+                else if (group2.includes(bird)) {
+                    resultImage.src = 'https://imgur.com/90AuKXR.gif';
+                    resultTitle.textContent = 'පිංගල පක්ෂියා';
+                    resultSubtitle.textContent = '"ඉ, ඊ" ස්වරය | ආපෝ භූතය';
+                    
+                    resultTable.innerHTML = `
+                        <tr class="friend">
+                            <td>භේරුණ්ඩ පක්ෂියා</td>
+                            <td><span class="emoji">✅</span> මිතුරු වේ.</td>
+                            <td>අ, ආ ස්වර</td>
+                        </tr>
+                        <tr class="neutral">
+                            <td>කාක පක්ෂියා</td>
+                            <td><span class="emoji">➡️</span> උදාසීන වේ.</td>
+                            <td>උ, ඌ ස්වර</td>
+                        </tr>
+                        <tr class="enemy">
+                            <td>කුක්කුට පක්ෂියා</td>
+                            <td><span class="emoji">⭕</span> සතුරු වේ.</td>
+                            <td>එ, ඒ ස්වර</td>
+                        </tr>
+                        <tr class="neutral">
+                            <td>මයුර පක්ෂියා</td>
+                            <td><span class="emoji">➡️</span> උදාසීන වේ.</td>
+                            <td>ඔ, ඕ ස්වර</td>
+                        </tr>
+                    `;
+                } 
+                else if (group3.includes(bird)) {
+                    resultImage.src = 'https://imgur.com/CIwJaBv.gif';
+                    resultTitle.textContent = 'කාක පක්ෂියා';
+                    resultSubtitle.textContent = '"උ, ඌ" ස්වරය | තේජෝ භූතය';
+                    
+                    resultTable.innerHTML = `
+                        <tr class="enemy">
+                            <td>භේරුණ්ඩ පක්ෂියා</td>
+                            <td><span class="emoji">⭕</span> සතුරු වේ.</td>
+                            <td>අ, ආ ස්වර</td>
+                        </tr>
+                        <tr class="neutral">
+                            <td>පිංගල පක්ෂියා</td>
+                            <td><span class="emoji">➡️</span> උදාසීන වේ.</td>
+                            <td>ඉ, ඊ ස්වර</td>
+                        </tr>
+                        <tr class="friend">
+                            <td>කුක්කුට පක්ෂියා</td>
+                            <td><span class="emoji">✅</span> මිතුරු වේ.</td>
+                            <td>එ, ඒ ස්වර</td>
+                        </tr>
+                        <tr class="neutral">
+                            <td>මයුර පක්ෂියා</td>
+                            <td><span class="emoji">➡️</span> උදාසීන වේ.</td>
+                            <td>ඔ, ඕ ස්වර</td>
+                        </tr>
+                    `;
+                } 
+                else if (group4.includes(bird)) {
+                    resultImage.src = 'https://imgur.com/QpxLDJ7.gif';
+                    resultTitle.textContent = 'කුක්කුට පක්ෂියා';
+                    resultSubtitle.textContent = '"එ, ඒ" ස්වරය | වායෝ භූතය';
+                    
+                    resultTable.innerHTML = `
+                        <tr class="neutral">
+                            <td>භේරුණ්ඩ පක්ෂියා</td>
+                            <td><span class="emoji">➡️</span> උදාසීන වේ.</td>
+                            <td>අ, ආ ස්වර</td>
+                        </tr>
+                        <tr class="enemy">
+                            <td>පිංගල පක්ෂියා</td>
+                            <td><span class="emoji">⭕</span> සතුරු වේ.</td>
+                            <td>ඉ, ඊ ස්වර</td>
+                        </tr>
+                        <tr class="friend">
+                            <td>කාක පක්ෂියා</td>
+                            <td><span class="emoji">✅</span> මිතුරු වේ.</td>
+                            <td>උ, ඌ ස්වර</td>
+                        </tr>
+                        <tr class="neutral">
+                            <td>මයුර පක්ෂියා</td>
+                            <td><span class="emoji">➡️</span> උදාසීන වේ.</td>
+                            <td>ඔ, ඕ ස්වර</td>
+                        </tr>
+                    `;
+                } 
+                else if (group5.includes(bird)) {
+                    resultImage.src = 'https://imgur.com/zbVvvGW.gif';
+                    resultTitle.textContent = 'මයුර පක්ෂියා';
+                    resultSubtitle.textContent = '"ඔ, ඕ" ස්වරය | ආකාශ භූතය';
+                    
+                    resultTable.innerHTML = `
+                        <tr class="friend">
+                            <td>භේරුණ්ඩ පක්ෂියා</td>
+                            <td><span class="emoji">✅</span> මිතුරු වේ.</td>
+                            <td>අ, ආ ස්වර</td>
+                        </tr>
+                        <tr class="friend">
+                            <td>පිංගල පක්ෂියා</td>
+                            <td><span class="emoji">✅</span> මිතුරු වේ.</td>
+                            <td>ඉ, ඊ ස්වර</td>
+                        </tr>
+                        <tr class="friend">
+                            <td>කාක පක්ෂියා</td>
+                            <td><span class="emoji">✅</span> මිතුරු වේ.</td>
+                            <td>උ, ඌ ස්වර</td>
+                        </tr>
+                        <tr class="friend">
+                            <td>කුක්කුට පක්ෂියා</td>
+                            <td><span class="emoji">✅</span> මිතුරු වේ.</td>
+                            <td>එ, ඒ ස්වර</td>
+                        </tr>
+                    `;
+                }
+                
+                // Show the result with animation
+                resultContainer.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
