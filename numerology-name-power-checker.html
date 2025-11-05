@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>අංක විද්‍යාත්මකව නමේ බලය සෙවීම</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@800&family=Noto+Serif+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* -------------------
+           1. මූලික සැකසුම්
+           ------------------- */
+        :root {
+            --brand-orange: #FF6B35;
+            --brand-maroon: #7F0000;
+            --brand-cream: #FDF5E6;
+            
+            --theme-blue: #1976d2;
+            --theme-blue-light: #e3f2fd;
+            --theme-blue-border: #90caf9;
+            --theme-blue-dark: #0d47a1;
+            
+            --theme-rose: #d81b60;
+            --theme-rose-light: #fddde6;
+            --theme-rose-border: #f48fb1;
+            --theme-rose-dark: #880e4f;
+            
+            --color-green: #4CAF50;
+            --color-green-light: #E8F5E9;
+            --color-yellow: #FFC107;
+            --color-yellow-light: #FFF9C4;
+            --color-orange: #FF9800;
+            --color-orange-light: #FFE0B2;
+            --color-red: #F44336;
+            --color-red-light: #FFCDD2;
+            --color-text: #333;
+            --color-text-light: #666;
+            --color-bg-light: #f8f9fa;
+            --color-border: #e0e0e0;
+            
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 8px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 25px rgba(0,0,0,0.1);
+            --shadow-xl: 0 10px 40px rgba(0,0,0,0.12);
+            
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 16px;
+            --border-radius-xl: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Serif Sinhala', serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--color-text);
+            line-height: 1.7;
+            transition: all 0.3s ease;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: var(--border-radius-xl);
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--brand-orange), var(--brand-maroon));
+            z-index: 1;
+        }
+
+        /* -------------------
+           2. ශීර්ෂය (Title)
+           ------------------- */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Gemunu Libre', sans-serif;
+            font-size: 3rem;
+            color: var(--brand-maroon);
+            margin-bottom: 10px;
+            font-weight: 800;
+            line-height: 1.2;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--color-text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* -------------------
+           3. ස්ත්‍රී/පුරුෂ Toggle
+           ------------------- */
+        .gender-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-radius: 50px;
+            overflow: hidden;
+            border: 2px solid var(--color-border);
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .gender-toggle input[type="radio"] {
+            display: none;
+        }
+
+        .gender-toggle label {
+            padding: 12px 35px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gender-toggle label i {
+            font-size: 1.2rem;
+        }
+
+        /* Default (Male) Theme */
+        #gender-male:checked + label {
+            background: linear-gradient(135deg, var(--theme-blue), var(--theme-blue-dark));
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Female Theme */
+        #gender-female:checked + label {
+            background: linear-gradient(135deg, var(--theme-rose), var(--theme-rose-dark));
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* -------------------
+           4. ආදාන ක්ෂේත්‍රය (Input Area)
+           ------------------- */
+        .input-card {
+            background-color: var(--color-bg-light);
+            border-radius: var(--border-radius-lg);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--color-border);
+        }
+
+        .input-area {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        #nameInput {
+            flex-grow: 1;
+            padding: 16px 20px;
+            font-size: 1.1rem;
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            font-family: 'Noto Serif Sinhala', serif;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+
+        #nameInput:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
+        }
+
+        #calculateButton {
+            padding: 0 30px;
+            font-family: 'Noto Serif Sinhala', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            border: none;
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow-md);
+        }
+
+        #calculateButton:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        #calculateButton:active {
+            transform: translateY(0);
+        }
+
+        /* -------------------
+           5. තේමා වර්ණ (Dynamic Themes)
+           ------------------- */
+
+        /* Blue Theme (Default - Male) */
+        body.theme-blue #nameInput {
+            border-color: var(--theme-blue-border);
+            background-color: var(--theme-blue-light);
+        }
+        body.theme-blue #nameInput:focus {
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
+            border-color: var(--theme-blue);
+        }
+        body.theme-blue #calculateButton {
+            background: linear-gradient(135deg, var(--theme-blue), var(--theme-blue-dark));
+        }
+
+        /* Rose Theme (Female) */
+        body.theme-rose #nameInput {
+            border-color: var(--theme-rose-border);
+            background-color: var(--theme-rose-light);
+        }
+        body.theme-rose #nameInput:focus {
+            box-shadow: 0 0 0 3px rgba(216, 27, 96, 0.2);
+            border-color: var(--theme-rose);
+        }
+        body.theme-rose #calculateButton {
+            background: linear-gradient(135deg, var(--theme-rose), var(--theme-rose-dark));
+        }
+
+        /* -------------------
+           6. දෝෂ පණිවිඩ (Error Message)
+           ------------------- */
+        #error-message {
+            color: var(--color-red);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+            min-height: 1.5em;
+            padding: 12px;
+            border-radius: var(--border-radius-sm);
+            background-color: var(--color-red-light);
+            display: none;
+        }
+
+        #error-message.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* -------------------
+           7. ප්‍රතිඵල (Results)
+           ------------------- */
+        #results-container {
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .result-card {
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .result-header {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: background-color 0.2s;
+            position: relative;
+        }
+        
+        .result-header::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .result-header.active::after {
+            transform: rotate(180deg);
+        }
+
+        .result-name {
+            font-size: 1.2rem;
+            word-break: break-all;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .result-name i {
+            font-size: 1.4rem;
+        }
+
+        .result-value {
+            font-size: 1.1rem;
+            white-space: nowrap;
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .result-description {
+            padding: 0 25px;
+            background-color: #fafafa;
+            border-top: 1px solid #eee;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .result-description.active {
+            padding: 20px 25px;
+            max-height: 500px;
+        }
+
+        /* Result background colors */
+        .bg-green { 
+            background: linear-gradient(135deg, var(--color-green-light), #c8e6c9);
+            color: #2e7d32;
+        }
+        .bg-yellow { 
+            background: linear-gradient(135deg, var(--color-yellow-light), #fff176);
+            color: #f57f17;
+        }
+        .bg-orange { 
+            background: linear-gradient(135deg, var(--color-orange-light), #ffcc80);
+            color: #e65100;
+        }
+        .bg-red { 
+            background: linear-gradient(135deg, var(--color-red-light), #ffab91);
+            color: #c62828;
+        }
+
+        /* -------------------
+           8. සටහන (Note)
+           ------------------- */
+        .note {
+            border: 1px solid var(--brand-orange);
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: var(--border-radius-md);
+            background: linear-gradient(135deg, #FFFBEF, #fff5e6);
+            font-size: 0.95rem;
+            color: #555;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .note::before {
+            content: '\f05a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 0 10px;
+            color: var(--brand-orange);
+            font-size: 1.2rem;
+        }
+
+        /* -------------------
+           9. ප්‍රකාශන අයිතිය (Copyright)
+           ------------------- */
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #777;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .copyright i {
+            color: var(--brand-orange);
+        }
+
+        /* -------------------
+           10. Animation
+           ------------------- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* -------------------
+           11. Responsive Design
+           ------------------- */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                border-radius: var(--border-radius-lg);
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .input-area {
+                flex-direction: column;
+            }
+            
+            #calculateButton {
+                justify-content: center;
+                padding: 15px;
+            }
+            
+            .gender-toggle label {
+                padding: 10px 25px;
+            }
+            
+            .result-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .result-value {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .gender-toggle {
+                flex-direction: column;
+                width: 100%;
+                border-radius: var(--border-radius-md);
+            }
+            
+            .input-card {
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body class="theme-blue">
+    <div class="container fade-in">
+        
+        <div class="header">
+            <h1>අංක විද්‍යාත්මකව නමේ බලය සෙවීම</h1>
+        </div>
+
+        <div class="gender-toggle">
+            <input type="radio" id="gender-female" name="gender" value="female">
+            <label for="gender-female"><i class="fas fa-venus"></i> ස්ත්‍රී</label>
+            
+            <input type="radio" id="gender-male" name="gender" value="male" checked>
+            <label for="gender-male"><i class="fas fa-mars"></i> පුරුෂ</label>
+        </div>
+
+        <div class="input-card">
+            <div class="input-area">
+                <input type="text" id="nameInput" placeholder="Type here in English..." aria-label="English Name Input">
+                <button id="calculateButton">
+                    <i class="fas fa-calculator"></i> සොයන්න
+                </button>
+            </div>
+
+            <div id="error-message"></div>
+        </div>
+
+        <div id="results-container">
+            <!-- Results will be inserted here -->
+        </div>
+
+        <div class="note">
+            මෙය චෝල්ඩියානු අංක විද්‍යාව මත පදනම් වී ඇත. ජන්මයාගේ දෛව අංක හා පුද්ගලික අංක දුර්වල වේ නම් අංක විද්‍යාත්මකව බලවත් නමක් තැබීම පිළිබඳ වඩාත් සැලකිලිමත් වන්න.
+        </div>
+
+        <div class="copyright">
+            &copy; <span id="year"></span> Suba Namak | Astro Jayamaga
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // -------------------
+            // 1. දත්ත (Data)
+            // -------------------
+
+            const letterValues = {
+                'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 8, 'G': 3, 'H': 5, 
+                'I': 1, 'J': 1, 'K': 2, 'L': 3, 'M': 4, 'N': 5, 'O': 7, 'P': 8, 
+                'Q': 1, 'R': 2, 'S': 3, 'T': 4, 'U': 6, 'V': 6, 'W': 6, 'X': 5, 
+                'Y': 1, 'Z': 7
+            };
+
+            const resultTypes = {
+                'G': { text: "සුභයි ✅", class: "bg-green", icon: "fas fa-check-circle" },
+                'P': { text: "ඉතා සුභයි ✅", class: "bg-green", icon: "fas fa-check-double" },
+                'M': { text: "මධ්‍යමයි ➡️", class: "bg-yellow", icon: "fas fa-minus-circle" },
+                'B': { text: "අසුභයි ⭕", class: "bg-orange", icon: "fas fa-exclamation-circle" },
+                'W': { text: "ඉතා අසුභයි ⭕", class: "bg-red", icon: "fas fa-times-circle" }
+            };
+
+            // ප්‍රාථමික විස්තර (Primary Descriptions: 1-32)
+            const descriptions = {
+                1: { text: "ඉදිරියට යාමට හැකියාව පවතී. නායකත්වයක් දරයි.", type: "G" },
+                2: { text: "සංවේදී චරිතයක් වේ. චංචල ස්වභාවයෙන් යුක්තයි.", type: "M" },
+                3: { text: "සූක්ෂම බුද්ධිමතෙක් වේ. තෝරා ගත් ගමන් මාර්ගයක ඉදිරියට ගමන් කරයි. අවසාන අරමුණ වෙනුවෙන් ගමන් කරයි.", type: "G" },
+                4: { text: "පෙරළිකාර චරිතයක් වේ. වෙනසක් වෙනුවෙන් නිතරම පෙනී සිටියි.", type: "B" },
+                5: { text: "බුද්ධිමත් හා නම්‍යශීලි චරිතයක් වේ. කඩිසර ගති සහිතයි.", type: "G" },
+                6: { text: "ආකර්ෂණීයයි. ආදරණීය චරිත වේ.", type: "G" },
+                7: { text: "ආධ්‍යාත්මික ශක්තියක් ඇත. ලෞකික තත්ත්වයෙන් තරමක් ඈත් වේ.", type: "M" },
+                8: { text: "ගුප්ත ස්වභාවයක් ගනී. තමන් යා යුතු දිශානතිය තෝරා ගැනීම අපහසු කරවයි.", type: "B" },
+                9: { text: "අධිෂ්ඨානශීලී වේ. නිර්භය හා ජව සම්පන්න වේ.", type: "G" },
+                10: { text: "ආකර්ෂණීය හා වාසනාවන්ත වේ. ප්‍රසිද්ධ චරිත බිහිවේ.", type: "G" },
+                11: { text: "තර්ජන හා පාඩුවලට ලක්වේ. සැඟවුණු අනතුරු ඇතිවිය හැක.", type: "B" },
+                12: { text: "කැප කිරීම් කිරීමට සිදුවේ. බලාපොරොත්තු කඩවීම් වලට ලක්වේ.", type: "B" },
+                13: { text: "සමාජයේ වෙනසක් වෙනුවෙන් කටයුතු කරයි.", type: "M" },
+                14: { text: "එකිනෙකට වෙනස් (හොඳ හා නරක) යුග ද්විත්වයක් පෙන්නුම් කරයි.", type: "M" },
+                15: { text: "මැජික්කරුවන්ගේ අංකයයි. බොහෝ අයගේ ආකර්ෂණය ඇතිවන ජනප්‍රිය චරිත බිහිවේ.", type: "G" },
+                16: { text: "දුෂ්කර ගමනකින්, කටුක අත්දැකීම් වලින් පසු නිසි ප්‍රතිඵල අත්කර ගැනීමට නොහැකි වේ.", type: "W" },
+                17: { text: "ආධ්‍යාත්මික ශක්තියක් පවතී. නැතිනම් අන්තවාදී චරිත විය හැක.", type: "M" },
+                18: { text: "තීරණ ගැනීමේ ක්‍රියාවලිය අපහසු කරවයි. උභතෝකෝටික සිතුවිලි ඇති කරවයි.", type: "B" },
+                19: { text: "ඉතා වාසනාවන්ත චරිත වේ. වැඩ කටයුතු නිරවුල්ව සිදු කළ හැක.", type: "P" },
+                20: { text: "විප්ලවකාරී චරිත වේ. පරිවර්තනයක් වෙනුවෙන් කටයුතු කරයි.", type: "M" },
+                21: { text: "ඉතා ආකර්ෂණීය වේ. අධිෂ්ඨානශීලී භාවයෙන් යුක්ත වේ. ක්‍රමානුකූල වර්ධනයෙන් සාර්ථකත්වයට පත්වේ.", type: "G" },
+                22: { text: "යහපත් චරිතයකි. තමන් ඇසුරු කරන අය නිසා පීඩාවට පත්විය හැක.", type: "B" },
+                23: { text: "තේජාන්විත චරිතයකි. බොහෝ ආකර්ෂණීය හා හොඳ ඉදිරි ගමනක් ඇත.", type: "G" },
+                24: { text: "ආකර්ෂණීය වේ. බොහෝ විට විරුද්ධ ලිංගික පාර්ශ්වයන්ගේ ආකර්ෂණය හිමිවේ. අනපේක්ෂිත ජයග්‍රහණ හිමිවේ.", type: "G" },
+                25: { text: "හොඳ නිරීක්ෂණ ශක්තියක් ඇත. තමා වටා ඇති දේ, තම අවට පිරිස ගැන හොඳ අවබෝධයක් පවතී.", type: "G" },
+                26: { text: "ප්‍රබල කරදර, නොසිතූ ව්‍යවසන වලට ලක්විය හැක. අදෘශ්‍යමාන බලවේගවල ග්‍රහණයට ලක්විය හැක.", type: "W" },
+                27: { text: "නායකත්වය හිමිවේ. බුද්ධිමත් බව හා නිර්මාණශීලී වේ.", type: "G" },
+                28: { text: "සාර්ථකත්වය සඳහා පවතින අවස්ථා නැතිවී යා හැක. ජීවිතයේ පරස්පරතා පවතී.", type: "B" },
+                29: { text: "ජීවිතයේ අවිනිශ්චිතතා හට ගනී. වංචනික හෝ වංචා සහගත ක්‍රියාවලියන්ට හසුවිය හැක.", type: "B" },
+                30: { text: "තම සිතුවිලි අනුව මනෝ ලෝකයක ජීවත් වේ.", type: "M" },
+                31: { text: "ජයග්‍රහණ හිමිවන නමුත් හුදෙකලා වීම් වලට ලක්වේ. තමන්ගේම අදහස් ක්‍රියාවට නැංවීම වඩා සුබදායී වේ.", type: "M" },
+                32: { text: "ආකර්ෂණීය හා ජනප්‍රිය චරිත වේ. තමා වටා පිරිස එක්වේ.", type: "G" }
+            };
+
+            // විශේෂ විස්තර (Special Descriptions)
+            const specialDescriptions = {
+                37: { text: "විරුද්ධ ලිංගිකයන්ගේ ආකර්ෂණය හිමිවේ. ආදරය, ගෞරවය හිමිවේ.", type: "G" },
+                43: { text: "තරමක් අසුබ වේ. තමාට විරුද්ධව යම් යම් බලවේග ඇතිවිය හැක.", type: "B" },
+                51: { text: "ඉතා ප්‍රබල බලයක් හිමිවේ. ජයග්‍රහණ හිමිවන නමුත් අවදානමක් පවතී.", type: "G" }
+            };
+
+            // -------------------
+            // 2. DOM මූලාශ්‍ර (DOM Elements)
+            // -------------------
+
+            const nameInput = document.getElementById('nameInput');
+            const calculateButton = document.getElementById('calculateButton');
+            const resultsContainer = document.getElementById('results-container');
+            const errorMessage = document.getElementById('error-message');
+            const genderToggles = document.querySelectorAll('input[name="gender"]');
+
+            // -------------------
+            // 3. ප්‍රධාන කාර්යයන් (Core Functions)
+            // -------------------
+
+            /**
+             * අගය සඳහා විස්තරය සහ වර්ගය ලබා ගනී
+             * Gets the description and type for a given value
+             */
+            function getResultDetails(value) {
+                let finalValue = value;
+                let descriptionData;
+
+                // 1. විශේෂ අගයන් පරීක්ෂා කිරීම (Check special values first)
+                if (specialDescriptions[value]) {
+                    descriptionData = specialDescriptions[value];
+                }
+                // 2. 32 ට වැඩි අගයන් අඩු කිරීම (Reduce values over 32)
+                else if (value > 32) {
+                    while (finalValue > 32) {
+                        finalValue -= 9;
+                    }
+                    descriptionData = descriptions[finalValue];
+                }
+                // 3. ප්‍රාථමික අගයන් (Primary values)
+                else {
+                    descriptionData = descriptions[value];
+                }
+
+                if (!descriptionData) {
+                    // Fallback in case something goes wrong
+                    return {
+                        text: "මෙම අගය සඳහා දත්ත නොමැත.",
+                        typeInfo: resultTypes['M'] // Default to Medium
+                    };
+                }
+
+                return {
+                    text: descriptionData.text,
+                    typeInfo: resultTypes[descriptionData.type]
+                };
+            }
+
+            /**
+             * තනි වචනයක් ගණනය කිරීම
+             * Calculates a single word
+             */
+            function processWord(word, gender) {
+                let calculationWord = word;
+                
+                // ස්ත්‍රී ලිංගික විශේෂ තර්කනය (Special female logic)
+                if (gender === 'female' && word.length > 2 && word.toLowerCase().endsWith('a')) {
+                    calculationWord += 'a';
+                }
+
+                let value = 0;
+                calculationWord.toUpperCase().split('').forEach(char => {
+                    if (letterValues[char]) {
+                        value += letterValues[char];
+                    }
+                });
+
+                return value;
+            }
+
+            /**
+             * ප්‍රධාන ගණනය කිරීමේ ක්‍රියාවලිය
+             * Main calculation process
+             */
+            function calculateName() {
+                clearError();
+                resultsContainer.innerHTML = '';
+
+                const gender = document.querySelector('input[name="gender"]:checked').value;
+                const rawName = nameInput.value;
+                
+                // වලංගු කිරීම 1: ඉංග්‍රීසි අකුරු සහ හිස්තැන් පමණක්
+                // Validation 1: Only allow English letters and spaces
+                const cleanName = rawName.trim().replace(/[^a-zA-Z\s]/g, '');
+                
+                // යතුරුපුවරුවේ වෙනස්කම් ආදාන ක්ෂේත්‍රයට යාවත්කාලීන කිරීම
+                if (rawName !== nameInput.value) {
+                     nameInput.value = cleanName; // Update input field if invalid chars were stripped
+                }
+               
+                const words = cleanName.split(' ').filter(w => w.length > 0);
+
+                // වලංගු කිරීම 2: වචන ගණන
+                // Validation 2: Word count
+                if (words.length === 0) {
+                    showError("කරුණාකර නමක් ඇතුළත් කරන්න.");
+                    return;
+                }
+                if (words.length > 3) {
+                    showError("වචන තුනකට වඩා දිගු නම් ඇතුළත් නොකරන්න.");
+                    return;
+                }
+
+                let results = [];
+                let totalValue = 0;
+
+                // 1. තනි වචන ගණනය කිරීම (Calculate individual words)
+                words.forEach(word => {
+                    const value = processWord(word, gender);
+                    const details = getResultDetails(value);
+                    results.push({
+                        name: word,
+                        value: value,
+                        details: details
+                    });
+                    totalValue += value;
+                });
+
+                // 2. සම්පූර්ණ නම ගණනය කිරීම (Calculate full name if more than one word)
+                if (words.length > 1) {
+                    const fullDetails = getResultDetails(totalValue);
+                    results.push({
+                        name: cleanName,
+                        value: totalValue,
+                        details: fullDetails
+                    });
+                }
+
+                // 3. ප්‍රතිඵල පෙන්වීම (Render results)
+                renderResults(results);
+            }
+
+            /**
+             * ප්‍රතිඵල HTML ලෙස පෙන්වීම
+             * Renders the results as HTML
+             */
+            function renderResults(results) {
+                let html = '';
+                results.forEach((res, index) => {
+                    const isActive = index === 0 ? 'active' : ''; // Open first item
+                    const typeInfo = res.details.typeInfo;
+                    
+                    html += `
+                        <div class="result-card fade-in">
+                            <div class="result-header ${typeInfo.class} ${isActive}">
+                                <span class="result-name">
+                                    <i class="${typeInfo.icon}"></i>
+                                    ${res.name}
+                                </span>
+                                <span class="result-value">${res.value} (${typeInfo.text})</span>
+                            </div>
+                            <div class="result-description ${isActive}">
+                                ${res.details.text}
+                            </div>
+                        </div>
+                    `;
+                });
+                resultsContainer.innerHTML = html;
+            }
+
+            // -------------------
+            // 4. සහායක කාර්යයන් (Helper Functions)
+            // -------------------
+
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.classList.add('show');
+            }
+
+            function clearError() {
+                errorMessage.textContent = '';
+                errorMessage.classList.remove('show');
+            }
+
+            /**
+             * තේමාව වෙනස් කිරීම (ස්ත්‍රී/පුරුෂ)
+             * Changes the theme (Female/Male)
+             */
+            function updateTheme() {
+                const gender = document.querySelector('input[name="gender"]:checked').value;
+                if (gender === 'female') {
+                    document.body.classList.add('theme-rose');
+                    document.body.classList.remove('theme-blue');
+                } else {
+                    document.body.classList.add('theme-blue');
+                    document.body.classList.remove('theme-rose');
+                }
+            }
+
+            /**
+             * ආදාන ක්ෂේත්‍රය සජීවීව වලංගු කිරීම
+             * Live validation for the input field
+             */
+            function validateInput(e) {
+                // ඉංග්‍රීසි අකුරු සහ හිස්තැන් වලට පමණක් සීමා කිරීම
+                e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+                clearError(); // Clear errors while typing
+            }
+            
+            /**
+             * ප්‍රතිඵල Accordion ක්‍රියාකාරිත්වය
+             * Result Accordion functionality
+             */
+            function toggleAccordion(e) {
+                const header = e.target.closest('.result-header');
+                if (header) {
+                    const card = header.closest('.result-card');
+                    const description = card.querySelector('.result-description');
+                    const isActive = header.classList.contains('active');
+                    
+                    // Close all other accordions
+                    document.querySelectorAll('.result-header.active').forEach(activeHeader => {
+                        if (activeHeader !== header) {
+                            activeHeader.classList.remove('active');
+                            activeHeader.nextElementSibling.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current accordion
+                    header.classList.toggle('active');
+                    description.classList.toggle('active');
+                }
+            }
+            
+            /**
+             * ප්‍රකාශන අයිතිය වර්ෂය සැකසීම
+             * Set Copyright Year
+             */
+            function setCopyrightYear() {
+                document.getElementById('year').textContent = new Date().getFullYear();
+            }
+
+            // -------------------
+            // 5. සිදුවීම් සවන්දෙන්නන් (Event Listeners)
+            // -------------------
+
+            calculateButton.addEventListener('click', calculateName);
+            
+            // Enter යතුර එබූ විට ගණනය කිරීම
+            nameInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    calculateName();
+                }
+            });
+
+            // සජීවී වලංගු කිරීම
+            nameInput.addEventListener('input', validateInput);
+            
+            // තේමා වෙනස් කිරීම
+            genderToggles.forEach(toggle => {
+                toggle.addEventListener('change', updateTheme);
+            });
+            
+            // Accordion සඳහා Event Delegation
+            resultsContainer.addEventListener('click', toggleAccordion);
+            
+            // ආරම්භක සැකසුම් (Initial Setup)
+            setCopyrightYear();
+            updateTheme(); // Set default theme on load
+        });
+    </script>
+
+</body>
+</html>
