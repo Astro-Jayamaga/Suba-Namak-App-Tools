@@ -284,7 +284,7 @@
             margin-top: 10px;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 15px;
         }
 
         .result-card {
@@ -302,13 +302,13 @@
         }
 
         .result-header {
-            padding: 20px 25px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: background-color 0.2s;
             position: relative;
         }
@@ -326,39 +326,39 @@
         }
 
         .result-name {
-            font-size: 1.2rem;
-            word-break: break-all;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .result-name i {
-            font-size: 1.4rem;
-        }
-
-        .result-value {
             font-size: 1.1rem;
-            white-space: nowrap;
-            margin-left: 15px;
+            word-break: break-all;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
+        .result-name i {
+            font-size: 1.2rem;
+        }
+
+        .result-value {
+            font-size: 1rem;
+            white-space: nowrap;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .result-description {
-            padding: 0 25px;
+            padding: 0 20px;
             background-color: #fafafa;
             border-top: 1px solid #eee;
             max-height: 0;
             overflow: hidden;
             transition: all 0.4s ease;
-            font-size: 1rem;
-            line-height: 1.8;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         .result-description.active {
-            padding: 20px 25px;
+            padding: 15px 20px;
             max-height: 500px;
         }
 
@@ -386,7 +386,7 @@
         .note {
             border: 1px solid var(--brand-orange);
             padding: 20px;
-            margin-top: 30px;
+            margin-top: 25px;
             border-radius: var(--border-radius-md);
             background: linear-gradient(135deg, #FFFBEF, #fff5e6);
             font-size: 0.95rem;
@@ -424,6 +424,7 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
+            margin-bottom: 3rem; /* Added 3rem space at bottom */
         }
 
         .copyright i {
@@ -455,6 +456,11 @@
                 font-size: 2.2rem;
             }
             
+            .input-card {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            
             .input-area {
                 flex-direction: column;
             }
@@ -464,18 +470,45 @@
                 padding: 15px;
             }
             
+            .gender-toggle {
+                flex-direction: row;
+                width: 100%;
+                border-radius: var(--border-radius-md);
+            }
+            
             .gender-toggle label {
-                padding: 10px 25px;
+                padding: 10px 20px;
+                flex: 1;
+                justify-content: center;
             }
             
             .result-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 10px;
+                gap: 8px;
+                padding: 12px 15px;
             }
             
             .result-value {
                 margin-left: 0;
+            }
+            
+            .result-name {
+                font-size: 1rem;
+            }
+            
+            .result-description {
+                padding: 0 15px;
+                font-size: 0.9rem;
+            }
+            
+            .result-description.active {
+                padding: 12px 15px;
+            }
+            
+            .note {
+                padding: 15px;
+                margin-top: 20px;
             }
         }
 
@@ -499,7 +532,17 @@
             }
             
             .input-card {
-                padding: 20px;
+                padding: 15px;
+            }
+            
+            #nameInput {
+                padding: 14px 16px;
+                font-size: 1rem;
+            }
+            
+            #calculateButton {
+                padding: 12px;
+                font-size: 1rem;
             }
         }
 
@@ -560,7 +603,7 @@
 
             const resultTypes = {
                 'G': { text: "සුභයි ✅", class: "bg-green", icon: "fas fa-check-circle" },
-                'P': { text: "ඉතා සුභයි ✅", class: "bg-green", icon: "fas fa-check-double" },
+                'P': { text: "ඉතා සුභයි ✅", class: "bg-green", icon: "fas fa-star" },
                 'M': { text: "මධ්‍යමයි ➡️", class: "bg-yellow", icon: "fas fa-minus-circle" },
                 'B': { text: "අසුභයි ⭕", class: "bg-orange", icon: "fas fa-exclamation-circle" },
                 'W': { text: "ඉතා අසුභයි ⭕", class: "bg-red", icon: "fas fa-times-circle" }
