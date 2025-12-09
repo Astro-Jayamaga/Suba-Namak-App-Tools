@@ -6,7 +6,7 @@
     <title>සුබ ගණ පිහිටුවීම</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700&family=Noto+Sans+Sinhala:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700&family=Noto+Sans+Sinhala:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #7F0000;
@@ -55,9 +55,10 @@
             font-size: 3rem;
             text-align: center;
             letter-spacing: 1px;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
+        /* --- Input Styles --- */
         .input-area {
             margin-bottom: 20px;
             border: 1px solid var(--border-color);
@@ -65,8 +66,8 @@
             transition: border-color 0.3s, box-shadow 0.3s;
         }
         .input-area:focus-within {
-             border-color: var(--primary-color);
-             box-shadow: 0 0 0 3px rgba(0, 90, 141, 0.2);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 90, 141, 0.2);
         }
 
         .name-input {
@@ -94,12 +95,45 @@
             min-height: 28px;
             background-color: #f0f6ff;
             border-top: 1px solid var(--border-color);
+            border-radius: 0 0 8px 8px;
         }
 
+        /* --- Select Styles --- */
+        .select-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Noto Sans Sinhala', sans-serif;
+            font-size: 1.1rem;
+            color: #444;
+            background-color: #fff;
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            text-align: center;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px top 50%;
+            background-size: 12px auto;
+        }
+
+        select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 90, 141, 0.2);
+        }
+
+        /* --- Button Styles --- */
         .find-button {
             display: block;
             width: 100%;
-            margin-top: 30px;
+            margin-top: 10px;
             padding: 12px;
             font-size: 1.2rem;
             font-weight: 500;
@@ -111,16 +145,16 @@
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s;
         }
+
+        .find-button:hover:not(:disabled) {
+            background-color: #FFA500;
+            transform: translateY(-2px);
+        }
         
         .find-button:disabled {
             background-color: #cccccc;
             cursor: not-allowed;
             transform: none;
-        }
-
-        .find-button:hover:not(:disabled) {
-            background-color: #FFA500;
-            transform: translateY(-2px);
         }
 
         /* --- LOADER STYLES --- */
@@ -157,7 +191,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* --- RESULT STYLES --- */
+        /* --- Result Styles --- */
         #result-container {
             margin-top: 30px;
             padding: 20px;
@@ -181,8 +215,8 @@
         }
 
         .result-title {
-            font-weight: 500;
-            font-size: 1.3rem;
+            font-weight: 700;
+            font-size: 1.4rem;
             margin-bottom: 15px;
             padding-bottom: 10px;
         }
@@ -195,11 +229,12 @@
         .result-details-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
-            gap: 10px;
+            gap: 12px;
+            align-items: baseline;
         }
         
         .result-details-grid dt {
-            font-weight: 500;
+            font-weight: 600;
             color: #555;
         }
         
@@ -212,11 +247,22 @@
             font-family: monospace;
             font-size: 1.1rem;
             letter-spacing: 2px;
-            background-color: #e9ecef;
-            padding: 5px 10px;
-            border-radius: 5px;
+            background-color: rgba(255,255,255,0.6);
+            padding: 2px 8px;
+            border-radius: 4px;
             display: inline-block;
         }
+
+        /* --- Match Result Special Styles --- */
+        .match-result-highlight {
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: rgba(255,255,255,0.7);
+        }
+        .match-text-green { color: var(--success-color); }
+        .match-text-red { color: var(--error-color); }
 
         #guide-text {
             text-align: center;
@@ -238,7 +284,10 @@
         @media (max-width: 600px) {
             body { padding: 10px; }
             .container { padding: 20px; }
-            .title { font-size: 2.5rem; }
+            .title { font-size: 2.2rem; }
+            .result-details-grid { grid-template-columns: 1fr; gap: 5px; }
+            .result-details-grid dt { margin-top: 10px; }
+            .result-details-grid dt:first-child { margin-top: 0; }
         }
     </style>
 </head>
@@ -246,12 +295,46 @@
 
     <div class="container">
         <h1 class="title">සුබ ගණ පිහිටුවීම</h1>
+        
         <div class="input-area">
             <input type="text" id="name-input" class="name-input" placeholder="මෙහි නම ඇතුළත් කරන්න"
             autofocus autocapitalize="none" autocorrect="off" spellcheck="false">
              <div id="sinhala-name-display">සිංහල නම මෙතැනින් දිස්වේ >></div>
         </div>
         
+        <div class="select-group">
+            <select id="nakatha">
+              <option value="" selected disabled>උපන් නැකත තෝරන්න</option>
+              <option value="අස්විද">අස්විද</option>
+              <option value="බෙරණ">බෙරණ</option>
+              <option value="කැති">කැති</option>
+              <option value="රෙහෙණ">රෙහෙණ</option>
+              <option value="මුවසිරස">මුවසිරස</option>
+              <option value="අද">අද</option>
+              <option value="පුනාවස">පුනාවස</option>
+              <option value="පුෂ">පුෂ</option>
+              <option value="අස්ලිස">අස්ලිස</option>
+              <option value="මා">මා</option>
+              <option value="පුවපල්">පුවපල්</option>
+              <option value="උත්‍රපල්">උත්‍රපල්</option>
+              <option value="හත">හත</option>
+              <option value="සිත">සිත</option>
+              <option value="සා">සා</option>
+              <option value="විසා">විසා</option>
+              <option value="අනුර">අනුර</option>
+              <option value="දෙට">දෙට</option>
+              <option value="මුල">මුල</option>
+              <option value="පුවසල">පුවසල</option>
+              <option value="උත්‍රසල">උත්‍රසල</option>
+              <option value="සුවණ">සුවණ</option>
+              <option value="දෙනට">දෙනට</option>
+              <option value="සියාවස">සියාවස</option>
+              <option value="පුවපුටුප">පුවපුටුප</option>
+              <option value="උත්‍රපුටුප">උත්‍රපුටුප</option>
+              <option value="රේවතී">රේවතී</option>
+            </select>
+        </div>
+
         <button id="find-btn" class="find-button" onclick="initiateCalculation()">ගණය සොයන්න</button>
 
         <div id="loader-container">
@@ -268,235 +351,274 @@
     </div>
 
     <script>
-    // ============================================================
-    // CONFIGURATION
-    // ============================================================
-    // TODO: Paste your Web App URL here (from Deploy > Test Deploy or Manage Deployments)
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbztpsn7yvRWtdsCsim13yS9q5JBtw7ueVx3haNWgo_7eA6AfA_L30zf_ErmLfHlY5KL/exec"; 
-    // ============================================================
+        // ============================================================
+        // CONFIGURATION
+        // ============================================================
+        // TODO: Paste your Web App URL here
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbztpsn7yvRWtdsCsim13yS9q5JBtw7ueVx3haNWgo_7eA6AfA_L30zf_ErmLfHlY5KL/exec"; 
+        // ============================================================
 
-
-    // --- CLIENT SIDE: SINGLISH TO SINHALA (Kept on client for speed) ---
-    function buildFullMap() {
-            const baseConsonants = {
-                'k': 'ක', 'kh': 'ඛ', 'g': 'ග', 'gh': 'ඝ', 'ch': 'ච', 'chh': 'ඡ', 'j': 'ජ',
-                'th': 'ත', 'thh': 'ථ', 'd': 'ඩ', 'dh': 'ද', 'q': 'ද', 'dhh': 'ධ',
-                'n': 'න', 'N': 'ණ', 'p': 'ප', 'ph': 'ඵ', 'b': 'බ', 'bh': 'භ', 'B': 'ඹ',
-                'm': 'ම', 'y': 'ය', 'r': 'ර', 'l': 'ල', 'L': 'ළ',
-                'v': 'ව', 'w': 'ව', 's': 'ස', 'sh': 'ශ', 'Sh': 'ෂ', 'S': 'ෂ',
-                'h': 'හ', 'f': 'ෆ', 't': 'ට', 'c': 'ස', 'D': 'ඪ',
-                'T': 'ඨ', 'C': 'ස', 'F': 'ෆ', 'G': 'ඝ', 'H': 'හ',
-                'J': 'ජ', 'K': 'ඛ', 'M': 'ම', 'P': 'ඵ', 'Q': 'ධ',
-                'V': 'ව', 'W': 'ව', 'Y': 'ය',
-                'zga': 'ඟ', 'zja': 'ඦ', 'zda': 'ඬ', 'zdha': 'ඳ', 'zqa': 'ඳ',
-                'zk': 'ඤ', 'zh': 'ඥ', 'X': 'ඞ'
-            };
-            const pillaChars = {
-                'a': '', 'aa': 'ා', 'A': 'ැ', 'Aa': 'ෑ', 'AA': 'ෑ',
-                'i': 'ි', 'ii': 'ී', 'u': 'ු', 'uu': 'ූ', 'R': 'ෘ', 'Ru': 'ෲ',
-                'e': 'ෙ', 'ee': 'ේ', 'ai': 'ෛ', 'o': 'ො', 'oo': 'ෝ',
-                'au': 'ෞ', 'ou': 'ෞ', 'H': 'ඃ'
-            };
-            const baseVowels = {
-                'a': 'අ', 'aa': 'ආ', 'A': 'ඇ', 'Aa': 'ඈ', 'AA': 'ඈ',
-                'i': 'ඉ', 'ii': 'ඊ', 'u': 'උ', 'U': 'උ', 'uu': 'ඌ', 'R': 'ඍ', 'Ru': 'ඎ',
-                'e': 'එ', 'E': 'එ', 'ee': 'ඒ', 'ai': 'ඓ', 'I': 'ඓ', 'o': 'ඔ', 
-                'O': 'ඔ', 'oo': 'ඕ', 'au': 'ඖ', 'ou': 'ඖ'
-            };
-            let consonantBlocks = { ...baseConsonants };
-            const doubles = { 'tt': 'ට්ට', 'dd': 'ඩ්ඩ', 'nn': 'න්න', 'mm': 'ම්ම', 'll': 'ල්ල', 'pp': 'ප්ප' };
-            Object.assign(consonantBlocks, doubles);
-            const yansaya = '්‍ය';
-            const rakāransaya = '්‍ර';
-            for (const key in baseConsonants) {
-                if (key !== 'y') consonantBlocks[key + 'y'] = baseConsonants[key] + yansaya;
-                if (key !== 'r') consonantBlocks[key + 'r'] = baseConsonants[key] + rakāransaya;
-            }
-            let fullMap = { ...baseVowels, 'Lu': 'ළු', '.': '෴' };
-            for (const blockKey in consonantBlocks) {
-                const blockValue = consonantBlocks[blockKey];
-                fullMap[blockKey] = blockValue + '්';
-                for (const pillaKey in pillaChars) {
-                    const pillaValue = pillaChars[pillaKey];
-                    if (pillaKey === 'a') {
-                        fullMap[blockKey + 'a'] = blockValue;
-                    } else {
-                        fullMap[blockKey + pillaKey] = blockValue + pillaValue;
-                    }
-                }
-            }
-            fullMap['x'] = 'ං';
-            fullMap['z'] = '';
-            return fullMap;
-        }
-
-        const conversionMap = buildFullMap();
-        const sortedKeys = Object.keys(conversionMap).sort((a, b) => b.length - a.length);
-
-        function convertSinglishToSinhala(text) {
-            const words = text.split(' ');
-            const convertedWords = words.map(word => {
-                if (word.length === 0) return '';
-                let converted = '';
-                let i = 0;
-                while (i < word.length) {
-                    let matchFound = false;
-                    for (const key of sortedKeys) {
-                        if (word.substring(i, i + key.length) === key) {
-                            converted += conversionMap[key];
-                            i += key.length;
-                            matchFound = true;
-                            break;
-                        }
-                    }
-                    if (!matchFound) {
-                        converted += word[i];
-                        i++;
-                    }
-                }
-                return converted;
-            });
-            return convertedWords.join(' ');
-        }
-
-    // --- CLIENT SIDE: LOGIC HANDLER ---
-
-    function initiateCalculation() {
-        const sinhalaNameDisplay = document.getElementById('sinhala-name-display');
-        const guideText = document.getElementById('guide-text');
-        const resultContainer = document.getElementById('result-container');
-        const loaderContainer = document.getElementById('loader-container');
-        const findBtn = document.getElementById('find-btn');
-
-        let name = sinhalaNameDisplay.textContent;
-
-        // Reset UI
-        guideText.style.display = 'none';
-        resultContainer.style.display = 'none';
-        resultContainer.className = ''; 
-
-        // Basic Validation
-        if (!name || name === "සිංහල නම මෙතැනින් දිස්වේ >>" || !/[\u0D80-\u0DFF]/.test(name)) {
-            showError("කරුණාකර සිංහල නමක් ඇතුළත් කරන්න. ඔබට අවශ්‍ය නම් ඉංග්‍රීසි අකුරු (Singlish) භාවිතා කළ හැක.");
-            return;
-        }
+        // --- START: SINGLISH TO SINHALA CONVERSION SCRIPT ---
         
-        // Check for very short names
-        const cleanName = name.replace(/\s+/g, '');
-        if (cleanName.length < 2) {
-            showError("ගණය සෙවීමට නොහැක. කරුණාකර අක්ෂර දෙකක් හෝ වැඩි ගණනක් ඇතුළත් කරන්න.");
-            return;
-        }
+        function buildFullMap() {
+             const baseConsonants = {
+                    'k': 'ක', 'kh': 'ඛ', 'g': 'ග', 'gh': 'ඝ',
+                    'ch': 'ච', 'chh': 'ඡ', 'j': 'ජ',
+                    'th': 'ත', 'thh': 'ථ',
+                    'd': 'ඩ', 'dh': 'ද', 'q': 'ද', 'dhh': 'ධ',
+                    'n': 'න', 'N': 'ණ',
+                    'p': 'ප', 'ph': 'ඵ',
+                    'b': 'බ', 'bh': 'භ', 'B': 'ඹ',
+                    'm': 'ම', 'y': 'ය', 'r': 'ර', 'l': 'ල', 'L': 'ළ',
+                    'v': 'ව', 'w': 'ව', 's': 'ස', 'sh': 'ශ', 'Sh': 'ෂ', 'S': 'ෂ',
+                    'h': 'හ', 'f': 'ෆ', 't': 'ට', 'c': 'ස', 'D': 'ඪ',
+                    'T': 'ඨ', 'C': 'ස', 'F': 'ෆ', 'G': 'ඝ', 'H': 'හ',
+                    'J': 'ජ', 'K': 'ඛ', 'M': 'ම', 'P': 'ඵ', 'Q': 'ධ',
+                    'V': 'ව', 'W': 'ව', 'Y': 'ය',
+                    'zga': 'ඟ', 'zja': 'ඦ', 'zda': 'ඬ', 'zdha': 'ඳ', 'zqa': 'ඳ',
+                    'zk': 'ඤ', 'zh': 'ඥ', 'X': 'ඞ'
+             };
 
-        // --- LIMIT VALIDATION (CLIENT SIDE) ---
-        const words = name.trim().split(/\s+/);
-        
-        // Limit 1: Max 3 words
-        if (words.length > 3) {
-            showError("නම සඳහා උපරිම වචන 3ක් පමණක් භාවිතා කරන්න.");
-            return;
-        }
+             const pillaChars = {
+                 'a': '', 'aa': 'ා', 'A': 'ැ', 'Aa': 'ෑ', 'AA': 'ෑ',
+                 'i': 'ි', 'ii': 'ී', 'u': 'ු', 'uu': 'ූ', 'R': 'ෘ', 'Ru': 'ෲ',
+                 'e': 'ෙ', 'ee': 'ේ', 'ai': 'ෛ', 'o': 'ො', 'oo': 'ෝ',
+                 'au': 'ෞ', 'ou': 'ෞ', 'H': 'ඃ'
+             };
 
-        // Limit 2: Max 15 letters per word
-        for (let i = 0; i < words.length; i++) {
-            if (words[i].length > 15) {
-                showError("එක් වචනයක් සඳහා උපරිම අකුරු 15ක් පමණක් තිබිය හැක.");
+             const baseVowels = {
+                    'a': 'අ', 'aa': 'ආ', 'A': 'ඇ', 'Aa': 'ඈ', 'AA': 'ඈ',
+                    'i': 'ඉ', 'ii': 'ඊ', 'u': 'උ', 'U': 'උ', 'uu': 'ඌ', 'R': 'ඍ', 'Ru': 'ඎ',
+                    'e': 'එ', 'E': 'එ', 'ee': 'ඒ', 'ai': 'ඓ', 'I': 'ඓ', 'o': 'ඔ', 
+                    'O': 'ඔ', 'oo': 'ඕ', 'au': 'ඖ', 'ou': 'ඖ'
+             };
+
+             let consonantBlocks = { ...baseConsonants };
+
+             const doubles = { 'tt': 'ට්ට', 'dd': 'ඩ්ඩ', 'nn': 'න්න', 'mm': 'ම්ම', 'll': 'ල්ල', 'pp': 'ප්ප' };
+             Object.assign(consonantBlocks, doubles);
+
+             const yansaya = '්‍ය';
+             const rakāransaya = '්‍ර';
+             for (const key in baseConsonants) {
+                 if (key !== 'y') consonantBlocks[key + 'y'] = baseConsonants[key] + yansaya;
+                 if (key !== 'r') consonantBlocks[key + 'r'] = baseConsonants[key] + rakāransaya;
+             }
+
+             let fullMap = { ...baseVowels, 'Lu': 'ළු', '.': '෴' };
+            
+             for (const blockKey in consonantBlocks) {
+                 const blockValue = consonantBlocks[blockKey];
+                 fullMap[blockKey] = blockValue + '්';
+                
+                 for (const pillaKey in pillaChars) {
+                     const pillaValue = pillaChars[pillaKey];
+                     if (pillaKey === 'a') {
+                         fullMap[blockKey + 'a'] = blockValue;
+                     } else {
+                         fullMap[blockKey + pillaKey] = blockValue + pillaValue;
+                     }
+                 }
+             }
+            
+             fullMap['x'] = 'ං';
+             fullMap['z'] = '';
+
+             return fullMap;
+         }
+
+         const conversionMap = buildFullMap();
+         const sortedKeys = Object.keys(conversionMap).sort((a, b) => b.length - a.length);
+
+         function convertSinglishToSinhala(text) {
+             const words = text.split(' ');
+             const convertedWords = words.map(word => {
+                 if (word.length === 0) return '';
+                
+                 let converted = '';
+                 let i = 0;
+                 while (i < word.length) {
+                     let matchFound = false;
+                     for (const key of sortedKeys) {
+                         if (word.substring(i, i + key.length) === key) {
+                             converted += conversionMap[key];
+                             i += key.length;
+                             matchFound = true;
+                             break;
+                         }
+                     }
+                     if (!matchFound) {
+                         converted += word[i];
+                         i++;
+                     }
+                 }
+                 return converted;
+             });
+             return convertedWords.join(' ');
+         }
+        // --- END: SINGLISH TO SINHALA CONVERSION SCRIPT ---
+
+        // --- CLIENT SIDE: LOGIC HANDLER ---
+
+        function initiateCalculation() {
+            const sinhalaNameDisplay = document.getElementById('sinhala-name-display');
+            const guideText = document.getElementById('guide-text');
+            const resultContainer = document.getElementById('result-container');
+            const loaderContainer = document.getElementById('loader-container');
+            const nakathaSelect = document.getElementById('nakatha');
+            const findBtn = document.getElementById('find-btn');
+            
+            const selectedNakatha = nakathaSelect.value;
+            let name = sinhalaNameDisplay.textContent;
+
+            // Reset UI State
+            guideText.style.display = 'none';
+            resultContainer.style.display = 'none';
+            resultContainer.className = ''; 
+            
+            // --- CLIENT-SIDE VALIDATION ---
+            
+            if (!name || name === "සිංහල නම මෙතැනින් දිස්වේ >>" || !/[\u0D80-\u0DFF]/.test(name)) {
+                showError("කරුණාකර සිංහල නමක් ඇතුළත් කරන්න. ඔබට අවශ්‍ය නම් ඉංග්‍රීසි අකුරු (Singlish) භාවිතා කළ හැක.");
                 return;
             }
+
+            const cleanNameForCheck = name.trim();
+            const words = cleanNameForCheck.split(/\s+/);
+
+            // Limit 1: Max 3 words
+            if (words.length > 3) {
+                showError("නම සඳහා වචන 3කට වඩා ඇතුළත් කළ නොහැක.");
+                return;
+            }
+
+            // Limit 2: Max 15 letters per word
+            for (let i = 0; i < words.length; i++) {
+                if (words[i].length > 15) {
+                    showError("එක් වචනයක් සඳහා අකුරු 15කට වඩා ඇතුළත් කළ නොහැක.");
+                    return;
+                }
+            }
+            
+            const cleanName = name.replace(/\s+/g, '');
+            if (cleanName.length < 2) {
+                 showError("ගණය සෙවීමට නොහැක. කරුණාකර අක්ෂර දෙකක් හෝ වැඩි ගණනක් ඇතුළත් කරන්න.");
+                 return;
+            }
+
+            // --- FETCH DATA FROM SERVER ---
+
+            loaderContainer.style.display = 'block';
+            findBtn.disabled = true;
+
+            // Prepare URL: ?tool=gana_calc & name=... & nakatha=...
+            let apiUrl = `${SCRIPT_URL}?tool=gana_calc&name=${encodeURIComponent(name)}`;
+            if (selectedNakatha) {
+                apiUrl += `&nakatha=${encodeURIComponent(selectedNakatha)}`;
+            }
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    onServerSuccess(data);
+                })
+                .catch(error => {
+                    onServerFailure(error);
+                });
         }
 
-        // --- SHOW LOADER & CALL API ---
-        loaderContainer.style.display = 'block';
-        findBtn.disabled = true; 
+        function onServerSuccess(response) {
+            const loaderContainer = document.getElementById('loader-container');
+            const findBtn = document.getElementById('find-btn');
+            
+            loaderContainer.style.display = 'none';
+            findBtn.disabled = false;
 
-        // We use FETCH instead of google.script.run
-        // We pass the tool name and the name parameter
-        const apiUrl = `${SCRIPT_URL}?tool=gana_calc&name=${encodeURIComponent(name)}`;
-
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                onServerSuccess(data);
-            })
-            .catch(error => {
-                onServerFailure(error);
-            });
-    }
-
-    function onServerSuccess(response) {
-        const loaderContainer = document.getElementById('loader-container');
-        const findBtn = document.getElementById('find-btn');
-        
-        loaderContainer.style.display = 'none';
-        findBtn.disabled = false;
-
-        if (response.error) {
-            showError(response.message);
-        } else {
-            displayResult(response);
+            if (response.error) {
+                showError(response.message);
+            } else {
+                displayResult(response);
+            }
         }
-    }
 
-    function onServerFailure(error) {
-        const loaderContainer = document.getElementById('loader-container');
-        const findBtn = document.getElementById('find-btn');
-        
-        loaderContainer.style.display = 'none';
-        findBtn.disabled = false;
-        showError("සර්වර් දෝෂයක්. කරුණාකර නැවත උත්සාහ කරන්න.");
-        console.error('API Error:', error);
-    }
-
-    function showError(msg) {
-        const guideText = document.getElementById('guide-text');
-        guideText.innerText = msg;
-        guideText.style.display = 'block';
-    }
-
-    function displayResult(data) {
-        const resultContainer = document.getElementById('result-container');
-        const isAsubha = data.ganaStatus.includes("අසුභයි");
-        
-        // Apply color class
-        resultContainer.classList.add(isAsubha ? 'result-asubha' : 'result-subha');
-        
-        const firstThreeSyllables = data.syllables.slice(0, 3).join(' | ');
-
-        resultContainer.innerHTML = `
-            <h2 class="result-title ${isAsubha ? 'asubha-text' : 'subha-text'}">
-                ගණය: ${data.ganaStatus}
-            </h2>
-            <dl class="result-details-grid">
-                <dt>ගණය</dt> <dd>${data.ganaName}</dd>
-                <dt>අක්ෂර විස්තර</dt>
-                <dd>
-                    <strong>${firstThreeSyllables}</strong> <br>
-                    <span class="akshara-visthara">${data.pattern.split('').join(' ')}</span>
-                </dd>
-                <dt>අධිපති</dt> <dd>${data.adhipathi}</dd>
-                <dt>හිමි නැකත</dt> <dd>${data.nakatha}</dd>
-                <dt>ප්‍රතිඵල</dt> <dd>${data.prathiphala}</dd>
-            </dl>
-        `;
-        resultContainer.style.display = 'block';
-    }
-
-    // --- Event Listeners ---
-    document.getElementById('year').textContent = new Date().getFullYear();
-    
-    const nameInput = document.getElementById('name-input');
-    const sinhalaNameDisplay = document.getElementById('sinhala-name-display');
-
-    nameInput.addEventListener('input', () => {
-        const sinhalaText = convertSinglishToSinhala(nameInput.value);
-        sinhalaNameDisplay.textContent = sinhalaText || "සිංහල නම මෙතැනින් දිස්වේ >>";
-    });
-
-    nameInput.addEventListener('keyup', function(event) {
-        if (event.key === 'Enter') {
-            initiateCalculation();
+        function onServerFailure(error) {
+            const loaderContainer = document.getElementById('loader-container');
+            const findBtn = document.getElementById('find-btn');
+            
+            loaderContainer.style.display = 'none';
+            findBtn.disabled = false;
+            showError("සර්වර් දෝෂයක්. කරුණාකර නැවත උත්සාහ කරන්න.");
+            console.error(error);
         }
-    });
-</script>
+
+        function showError(msg) {
+            const guideText = document.getElementById('guide-text');
+            guideText.innerText = msg;
+            guideText.style.display = 'block';
+        }
+
+        function displayResult(resultData) {
+            const resultContainer = document.getElementById('result-container');
+            const isAsubha = resultData.ganaStatus.includes("අසුභයි");
+            
+            // Apply color class
+            resultContainer.classList.add(isAsubha ? 'result-asubha' : 'result-subha');
+            
+            const firstThreeSyllables = resultData.syllables.slice(0, 3).join(' | ');
+
+            // Compatibility Check Logic (Data now comes from server in resultData.matchData)
+            let matchHtml = '';
+            if (resultData.matchData) {
+                const matchData = resultData.matchData;
+                
+                const isMatchBad = (matchData.type === 'bad');
+                const textColorClass = isMatchBad ? 'match-text-red' : 'match-text-green';
+                
+                matchHtml = `
+                <div class="match-result-highlight ${textColorClass}">
+                    ජන්මයාගේ උපන් නැකතට: &nbsp; ${matchData.name} (${matchData.status})
+                </div>
+                `;
+            }
+
+            resultContainer.innerHTML = `
+                <h2 class="result-title ${isAsubha ? 'asubha-text' : 'subha-text'}">
+                    ගණය: ${resultData.ganaStatus}
+                </h2>
+                <dl class="result-details-grid">
+                    <dt>ගණය</dt> <dd>${resultData.ganaName}</dd>
+                    <dt>අක්ෂර සටහන</dt>
+                    <dd>
+                        <strong>${firstThreeSyllables}</strong> <br>
+                        <span class="akshara-visthara">${resultData.pattern.split('').join(' ')}</span>
+                    </dd>
+                    <dt>අධිපති</dt> <dd>${resultData.adhipathi}</dd>
+                    <dt>හිමි නැකත</dt> <dd>${resultData.nakatha}</dd>
+                    <dt>ප්‍රතිඵල</dt> <dd>${resultData.prathiphala}</dd>
+                </dl>
+                ${matchHtml ? '<hr style="margin: 15px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">' : ''}
+                ${matchHtml}
+            `;
+            resultContainer.style.display = 'block';
+        }
+
+        // --- Event Listeners and Initializers ---
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        const nameInput = document.getElementById('name-input');
+        const sinhalaNameDisplay = document.getElementById('sinhala-name-display');
+
+        nameInput.addEventListener('input', () => {
+            const sinhalaText = convertSinglishToSinhala(nameInput.value);
+            sinhalaNameDisplay.textContent = sinhalaText || "සිංහල නම මෙතැනින් දිස්වේ >>";
+        });
+
+        nameInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                initiateCalculation();
+            }
+        });
+    </script>
 </body>
 </html>
