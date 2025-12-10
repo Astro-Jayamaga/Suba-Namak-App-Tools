@@ -470,71 +470,81 @@ function _0x5472() {
 } 
 
         function buildFullMap() {
-             const baseConsonants = {
-                    'k': 'ක', 'kh': 'ඛ', 'g': 'ග', 'gh': 'ඝ',
-                    'ch': 'ච', 'chh': 'ඡ', 'j': 'ජ',
-                    'th': 'ත', 'thh': 'ථ',
-                    'd': 'ඩ', 'dh': 'ද', 'q': 'ද', 'dhh': 'ධ',
-                    'n': 'න', 'N': 'ණ',
-                    'p': 'ප', 'ph': 'ඵ',
-                    'b': 'බ', 'bh': 'භ', 'B': 'ඹ',
-                    'm': 'ම', 'y': 'ය', 'r': 'ර', 'l': 'ල', 'L': 'ළ',
-                    'v': 'ව', 'w': 'ව', 's': 'ස', 'sh': 'ශ', 'Sh': 'ෂ', 'S': 'ෂ',
-                    'h': 'හ', 'f': 'ෆ', 't': 'ට', 'c': 'ස', 'D': 'ඪ',
-                    'T': 'ඨ', 'C': 'ස', 'F': 'ෆ', 'G': 'ඝ', 'H': 'හ',
-                    'J': 'ජ', 'K': 'ඛ', 'M': 'ම', 'P': 'ඵ', 'Q': 'ධ',
-                    'V': 'ව', 'W': 'ව', 'Y': 'ය',
-                    'zga': 'ඟ', 'zja': 'ඦ', 'zda': 'ඬ', 'zdha': 'ඳ', 'zqa': 'ඳ',
-                    'zk': 'ඤ', 'zh': 'ඥ', 'X': 'ඞ'
-             };
 
-             const pillaChars = {
-                 'a': '', 'aa': 'ා', 'A': 'ැ', 'Aa': 'ෑ', 'AA': 'ෑ',
-                 'i': 'ි', 'ii': 'ී', 'u': 'ු', 'uu': 'ූ', 'R': 'ෘ', 'Ru': 'ෲ',
-                 'e': 'ෙ', 'ee': 'ේ', 'ai': 'ෛ', 'o': 'ො', 'oo': 'ෝ',
-                 'au': 'ෞ', 'ou': 'ෞ', 'H': 'ඃ'
-             };
+    const _0xBaseC = {
+        'k': '\u0D9A', 'kh': '\u0D9B', 'g': '\u0D9C', 'gh': '\u0D9D',
+        'ch': '\u0DA2', 'chh': '\u0DA3', 'j': '\u0DA7',
+        'th': '\u0DAD', 'thh': '\u0DAE',
+        'd': '\u0DA9', 'dh': '\u0DAF', 'q': '\u0DAF', 'dhh': '\u0DB0',
+        'n': '\u0DB1', 'N': '\u0DAB',
+        'p': '\u0DB4', 'ph': '\u0DB5',
+        'b': '\u0DB6', 'bh': '\u0DB7', 'B': '\u0DB9',
+        'm': '\u0DB8', 'y': '\u0DBA', 'r': '\u0DBB', 'l': '\u0DBD', 'L': '\u0DC5',
+        'v': '\u0DC0', 'w': '\u0DC0', 's': '\u0DC3', 'sh': '\u0DC1', 'Sh': '\u0DC2', 'S': '\u0DC2',
+        'h': '\u0DC4', 'f': '\u0DC6', 't': '\u0DA7', 'c': '\u0DC3', 'D': '\u0DA9',
+        'T': '\u0DA8', 'C': '\u0DC3', 'F': '\u0DC6', 'G': '\u0D9D', 'H': '\u0DC4',
+        'J': '\u0DA7', 'K': '\u0D9B', 'M': '\u0DB8', 'P': '\u0DB5', 'Q': '\u0DB0',
+        'V': '\u0DC0', 'W': '\u0DC0', 'Y': '\u0DBA',
+        'zga': '\u0DAF\u0DCA\u200D\u0DB0', 'zja': '\u0DA2\u0DCA\u200D\u0DA7', 
+        'zda': '\u0DA9\u0DCA\u200D\u0DA9', 'zdha': '\u0DAF\u0DCA\u200D\u0DB0', 
+        'zqa': '\u0DAF\u0DCA\u200D\u0DB0',
+        'zk': '\u0DA4', 'zh': '\u0DA5', 'X': '\u0D9E'
+    };
 
-             const baseVowels = {
-                    'a': 'අ', 'aa': 'ආ', 'A': 'ඇ', 'Aa': 'ඈ', 'AA': 'ඈ',
-                    'i': 'ඉ', 'ii': 'ඊ', 'u': 'උ', 'U': 'උ', 'uu': 'ඌ', 'R': 'ඍ', 'Ru': 'ඎ',
-                    'e': 'එ', 'E': 'එ', 'ee': 'ඒ', 'ai': 'ඓ', 'I': 'ඓ', 'o': 'ඔ', 
-                    'O': 'ඔ', 'oo': 'ඕ', 'au': 'ඖ', 'ou': 'ඖ'
-             };
+    const _0xPilla = {
+        'a': '', 'aa': '\u0DCF', 'A': '\u0DD0', 'Aa': '\u0DD1', 'AA': '\u0DD1',
+        'i': '\u0DD2', 'ii': '\u0DD3', 'u': '\u0DD4', 'uu': '\u0DD6', 'R': '\u0DD8', 'Ru': '\u0DF2',
+        'e': '\u0DD9', 'ee': '\u0DDA', 'ai': '\u0DDB', 'o': '\u0DDC', 'oo': '\u0DDD',
+        'au': '\u0DDE', 'ou': '\u0DDE', 'H': '\u0D83'
+    };
 
-             let consonantBlocks = { ...baseConsonants };
+    const _0xBaseV = {
+        'a': '\u0D85', 'aa': '\u0D86', 'A': '\u0D87', 'Aa': '\u0D88', 'AA': '\u0D88',
+        'i': '\u0D89', 'ii': '\u0D8A', 'u': '\u0D8B', 'U': '\u0D8B', 'uu': '\u0D8C', 'R': '\u0D8D', 'Ru': '\u0D8E',
+        'e': '\u0D91', 'E': '\u0D91', 'ee': '\u0D92', 'ai': '\u0D93', 'I': '\u0D93', 'o': '\u0D94',
+        'O': '\u0D94', 'oo': '\u0D95', 'au': '\u0D96', 'ou': '\u0D96'
+    };
 
-             const doubles = { 'tt': 'ට්ට', 'dd': 'ඩ්ඩ', 'nn': 'න්න', 'mm': 'ම්ම', 'll': 'ල්ල', 'pp': 'ප්ප' };
-             Object.assign(consonantBlocks, doubles);
+    let _0xBlocks = { ..._0xBaseC };
 
-             const yansaya = '්‍ය';
-             const rakāransaya = '්‍ර';
-             for (const key in baseConsonants) {
-                 if (key !== 'y') consonantBlocks[key + 'y'] = baseConsonants[key] + yansaya;
-                 if (key !== 'r') consonantBlocks[key + 'r'] = baseConsonants[key] + rakāransaya;
-             }
+    const _0xDoubles = { 
+        'tt': '\u0DA8\u0DCA\u0DA8', 'dd': '\u0DA9\u0DCA\u0DA9', 
+        'nn': '\u0DB1\u0DCA\u0DB1', 'mm': '\u0DB8\u0DCA\u0DB8', 
+        'll': '\u0DBD\u0DCA\u0DBD', 'pp': '\u0DB4\u0DCA\u0DB4' 
+    };
 
-             let fullMap = { ...baseVowels, 'Lu': 'ළු', '.': '෴' };
+    Object.assign(_0xBlocks, _0xDoubles);
 
-             for (const blockKey in consonantBlocks) {
-                 const blockValue = consonantBlocks[blockKey];
-                 fullMap[blockKey] = blockValue + '්';
+    const _0xYansaya = '\u0DCA\u200D\u0DBA';
+    const _0xRakaransaya = '\u0DCA\u200D\u0DBB';
 
-                 for (const pillaKey in pillaChars) {
-                     const pillaValue = pillaChars[pillaKey];
-                     if (pillaKey === 'a') {
-                         fullMap[blockKey + 'a'] = blockValue;
-                     } else {
-                         fullMap[blockKey + pillaKey] = blockValue + pillaValue;
-                     }
-                 }
-             }
+    for (const _0xKey in _0xBaseC) {
+        if (_0xKey !== 'y') _0xBlocks[_0xKey + 'y'] = _0xBaseC[_0xKey] + _0xYansaya;
+        if (_0xKey !== 'r') _0xBlocks[_0xKey + 'r'] = _0xBaseC[_0xKey] + _0xRakaransaya;
+    }
 
-             fullMap['x'] = 'ං';
-             fullMap['z'] = '';
+    let _0xFinalMap = { ..._0xBaseV, 'Lu': '\u0DC5\u0DD4', '.': '\u0DF4' };
 
-             return fullMap;
-         }
+    for (const _0xBlockKey in _0xBlocks) {
+        const _0xBlockVal = _0xBlocks[_0xBlockKey];
+
+        _0xFinalMap[_0xBlockKey] = _0xBlockVal + '\u0DCA';
+
+        for (const _0xPillaKey in _0xPilla) {
+            const _0xPillaVal = _0xPilla[_0xPillaKey];
+            if (_0xPillaKey === 'a') {
+                _0xFinalMap[_0xBlockKey + 'a'] = _0xBlockVal;
+            } else {
+                _0xFinalMap[_0xBlockKey + _0xPillaKey] = _0xBlockVal + _0xPillaVal;
+            }
+        }
+    }
+
+    _0xFinalMap['x'] = '\u0D82';
+    _0xFinalMap['z'] = '';
+
+    return _0xFinalMap;
+}
 
          const conversionMap = buildFullMap();
          const sortedKeys = Object.keys(conversionMap).sort((a, b) => b.length - a.length);
@@ -924,4 +934,5 @@ function _0x3b3d() {
     </script>
 </body>
 </html>
+
 
