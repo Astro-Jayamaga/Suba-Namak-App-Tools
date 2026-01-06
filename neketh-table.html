@@ -4,16 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>උපන් නැකතට සුබ අකුරු</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@400;700&family=Noto+Serif+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@400;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;700&display=swap');
-
         :root {
             --primary: #7F0000;
             --secondary: #FFA500;
-            --light: #f3f4f6;
-            --dark: #1f2937;
-            --bg: #FDF5E6;
+            --bg-color: #FDF5E6;
+            --text-dark: #1f2937;
+            
+            /* Theme Colors */
+            --green-theme-bg: #e8f5e9;
+            --green-theme-border: #a5d6a7;
+            --green-theme-text: #1b5e20;
+            
+            --red-theme-bg: #ffebee;
+            --red-theme-border: #ef9a9a;
+            --red-theme-text: #b71c1c;
+            
+            --blue-theme-bg: #e3f2fd;
+            --blue-theme-border: #90caf9;
+            --blue-theme-text: #0d47a1;
+
+            --error-bg: #fff3e0;
+            --error-text: #e65100;
+            
+            /* Modern colors for birth details */
+            --modern-blue: #1e88e5;
+            --modern-blue-light: #e3f2fd;
+            --modern-blue-dark: #1565c0;
+            --modern-gray: #f8fafc;
+            --modern-border: #e2e8f0;
         }
 
         * {
@@ -23,9 +43,9 @@
         }
 
         body {
-            font-family: 'Noto Serif Sinhala', sans-serif;
-            background-color: var(--bg);
-            color: var(--dark);
+            font-family: 'Noto Serif Sinhala', serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
             line-height: 1.6;
             padding: 15px;
         }
@@ -35,14 +55,15 @@
             margin: 0 auto;
             margin-bottom: 3rem;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            animation: fadeIn 0.5s ease-out;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            animation: fadeIn 0.6s ease-out;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -50,10 +71,10 @@
             font-family: 'Gemunu Libre', sans-serif;
             color: var(--primary);
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-size: 1.8rem;
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
         }
 
         h1::after {
@@ -63,229 +84,389 @@
             left: 50%;
             transform: translateX(-50%);
             width: 80px;
-            height: 3px;
+            height: 4px;
             background: var(--secondary);
             border-radius: 2px;
         }
 
+        /* Input Styles */
         .input-group {
-            margin-bottom: 20px;
-            animation: slideUp 0.3s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            margin-bottom: 25px;
         }
 
         label {
             display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            color: var(--dark);
-            font-size: 0.95rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 1rem;
         }
 
         select {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #e5e7eb;
-            border-radius: 6px;
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
             font-family: 'Noto Serif Sinhala', sans-serif;
-            font-size: 15px;
-            transition: all 0.2s;
+            font-size: 16px;
             background-color: white;
+            transition: all 0.3s;
+            cursor: pointer;
             appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237F0000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
-            background-position: right 8px center;
-            background-size: 1em;
+            background-position: right 15px center;
+            background-size: 1.2em;
         }
 
         select:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(127, 0, 0, 0.1);
+            box-shadow: 0 0 0 3px rgba(127, 0, 0, 0.1);
         }
 
         .btn {
             display: block;
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 10px;
             font-family: 'Noto Serif Sinhala', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
-            margin-top: 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(127, 0, 0, 0.15);
         }
 
         .btn:hover {
-            background-color: #6a0000;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            background-color: #600000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
 
         .btn:active {
             transform: translateY(0);
         }
 
+        /* Inline Error Message */
+        .error-inline {
+            background-color: var(--error-bg);
+            color: var(--error-text);
+            padding: 14px;
+            border-radius: 8px;
+            border-left: 4px solid var(--error-text);
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Results Container */
         .result-container {
             margin-top: 25px;
-            animation: fadeIn 0.4s ease-out;
             display: none;
         }
 
-        .result-title {
-            color: var(--primary);
-            margin-bottom: 15px;
+        /* Sub-heading for birth details */
+        .birth-details-heading {
+            font-family: 'Noto Serif Sinhala', sans-serif;
+            color: var(--modern-blue-dark);
             text-align: center;
-            font-size: 1.3rem;
+            margin: 25px 0 20px 0;
+            font-size: 1.4rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .birth-details-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--modern-blue), transparent);
+            border-radius: 2px;
+        }
+
+        /* Modern Birth Details Card */
+        .modern-birth-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(30, 136, 229, 0.1);
+            border: 1px solid var(--modern-border);
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .modern-birth-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .modern-birth-header {
+            background: linear-gradient(135deg, var(--modern-blue), var(--modern-blue-dark));
+            padding: 18px 20px;
             font-weight: 700;
-        }
-
-        .result-section {
-            margin-bottom: 20px;
-            background: #f9fafb;
-            border-radius: 6px;
-            padding: 15px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-
-        .result-section-title {
-            color: var(--secondary);
-            margin-bottom: 12px;
-            font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            color: white;
             display: flex;
             align-items: center;
+            gap: 12px;
         }
 
-        .pada-container {
+        .modern-birth-header i {
+            font-size: 1.3rem;
+        }
+
+        .modern-birth-body {
+            padding: 25px;
+            background: var(--modern-gray);
+        }
+
+        .pada-grid-modern {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-            text-align: center;
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
-        .pada-item {
+        @media (max-width: 600px) {
+            .pada-grid-modern {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .pada-item-modern {
             background: white;
-            border-radius: 6px;
-            padding: 10px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            padding: 18px 10px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid var(--modern-blue-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(30, 136, 229, 0.08);
         }
 
-        .pada-number {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 5px;
+        .pada-item-modern:hover {
+            border-color: var(--modern-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(30, 136, 229, 0.12);
+        }
+
+        .pada-label-modern {
             font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
-        .pada-letter {
-            font-size: 1.2rem;
+        .pada-letter-modern {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--modern-blue-dark);
+            line-height: 1.2;
+            font-family: 'Noto Serif Sinhala', sans-serif;
+        }
+
+        .swara-box-modern {
+            background: linear-gradient(135deg, var(--modern-blue-light), #bbdefb);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid var(--modern-blue);
+            font-weight: 600;
+            color: var(--modern-blue-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 3px 8px rgba(30, 136, 229, 0.1);
+        }
+
+        .swara-highlight-modern {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            color: var(--modern-blue-dark);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            font-family: 'Noto Serif Sinhala', sans-serif;
+        }
+
+        /* Section Headers for Good/Bad Results */
+        .section-header {
+            font-size: 1.3rem;
             font-weight: 700;
+            margin: 30px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #eee;
+            color: var(--text-dark);
+            font-family: 'Noto Serif Sinhala', sans-serif;
         }
 
-        .swara-item {
+        .section-header.good-header {
+            color: var(--green-theme-text);
+            border-bottom-color: var(--green-theme-border);
+        }
+
+        .section-header.bad-header {
+            color: var(--red-theme-text);
+            border-bottom-color: var(--red-theme-border);
+        }
+
+        /* Result Cards for Good/Bad */
+        .result-card {
             background: white;
-            border-radius: 6px;
-            padding: 10px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            max-width: 360px;
-            margin: 15px auto 0;
-            border: 3px solid var(--primary);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            animation: slideIn 0.4s ease-out forwards;
+            opacity: 0;
         }
 
-        .letters-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
-            gap: 8px;
-            margin-top: 12px;
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
-        .letter {
-            background: white;
-            border-radius: 4px;
-            padding: 6px;
-            text-align: center;
-            font-weight: 600;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            transition: all 0.2s;
-            font-size: 0.95rem;
+        .card-header {
+            padding: 14px 18px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .letter:hover {
-            transform: scale(1.05);
-            background: var(--primary);
-            color: white;
-        }
-
-        .category {
-            margin-top: 50px;
-        }
-
-        .category-title {
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-        }
-
-        .category-letters {
-            color: var(--dark);
-            font-weight: 500;
-        }
-
-        .note {
-            margin-top: 20px;
+        .card-body {
             padding: 15px;
-            border: 1px solid #e5e7eb;
-            border-radius: 6px;
-            background: #f9fafb;
-            font-size: 0.85rem;
-            line-height: 1.6;
-            animation: fadeIn 0.4s ease-out;
+            background: rgba(255,255,255,0.7);
         }
 
-        .note-title {
+        /* Theme Specifics for Results */
+        .theme-blue {
+            background-color: var(--blue-theme-bg);
+            border-color: var(--blue-theme-border);
+        }
+        .theme-blue .card-header {
+            color: var(--blue-theme-text);
+            background-color: rgba(144, 202, 249, 0.2);
+            border-bottom: 1px solid var(--blue-theme-border);
+        }
+
+        .theme-green {
+            background-color: var(--green-theme-bg);
+            border-color: var(--green-theme-border);
+        }
+        .theme-green .card-header {
+            color: var(--green-theme-text);
+            background-color: rgba(165, 214, 167, 0.2);
+            border-bottom: 1px solid var(--green-theme-border);
+        }
+
+        .theme-red {
+            background-color: var(--red-theme-bg);
+            border-color: var(--red-theme-border);
+        }
+        .theme-red .card-header {
+            color: var(--red-theme-text);
+            background-color: rgba(239, 154, 154, 0.2);
+            border-bottom: 1px solid var(--red-theme-border);
+        }
+
+        /* Letter Rows in Results */
+        .letter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+        }
+
+        .letter-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .letter-badge {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 8px;
             font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 8px;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            flex-grow: 1;
+            text-align: center;
+            max-width: 65px;
+            transition: transform 0.2s;
+        }
+
+        .letter-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-blue .letter-badge { 
+            color: var(--blue-theme-text); 
+            border: 1px solid var(--blue-theme-border);
+        }
+        .theme-green .letter-badge { 
+            color: var(--green-theme-text); 
+            border: 1px solid var(--green-theme-border);
+        }
+        .theme-red .letter-badge { 
+            color: var(--red-theme-text); 
+            border: 1px solid var(--red-theme-border);
         }
 
         .copyright {
             text-align: center;
-            margin-top: 25px;
+            margin-top: 40px;
             color: #6b7280;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
         }
+        
+        body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE10+/Edge */
+    user-select: none;         /* Standard */
+}
+
+input, textarea {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+}
 
         @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 1.5rem;
-            }
-            
-            .pada-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .letters-grid {
-                grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
-                gap: 6px;
-            }
+            .container { padding: 18px; }
+            h1 { font-size: 1.5rem; }
+            .modern-birth-body { padding: 18px; }
+            .pada-letter-modern { font-size: 1.7rem; }
+            .swara-highlight-modern { font-size: 1.5rem; }
+            .section-header { margin-top: 25px; font-size: 1.15rem; }
         }
     </style>
 </head>
@@ -297,66 +478,53 @@
             <label for="nekatha">උපන් නැකත තෝරන්න</label>
             <select id="nekatha">
                 <option value="" disabled selected>නැකත තෝරන්න...</option>
-                <option value="aswida">අස්විද</option>
-                <option value="berana">බෙරණ</option>
-                <option value="kathi">කැති</option>
-                <option value="rehena">රෙහෙණ</option>
-                <option value="muwasirasa">මුවසිරස</option>
-                <option value="ada">අද</option>
-                <option value="punawasa">පුනාවස</option>
-                <option value="pusha">පුෂ</option>
-                <option value="aslisa">අස්ලිස</option>
-                <option value="maa">මා</option>
-                <option value="puwapal">පුවපල්</option>
-                <option value="uthrapal">උත්‍රපල්</option>
-                <option value="hatha">හත</option>
-                <option value="sitha">සිත</option>
-                <option value="saa">සා</option>
-                <option value="visaa">විසා</option>
-                <option value="anura">අනුර</option>
-                <option value="deta">දෙට</option>
-                <option value="mula">මුල</option>
-                <option value="puwasala">පුවසල</option>
-                <option value="uthrasala">උත්‍රසල</option>
-                <option value="suwana">සුවණ</option>
-                <option value="denata">දෙනට</option>
-                <option value="siyawasa">සියාවස</option>
-                <option value="puwaputupa">පුවපුටුප</option>
-                <option value="uthraputupa">උත්‍රපුටුප</option>
-                <option value="rewathi">රේවතී</option>
+                <option value="අස්විද">අස්විද</option>
+                <option value="බෙරණ">බෙරණ</option>
+                <option value="කැති">කැති</option>
+                <option value="රෙහෙණ">රෙහෙණ</option>
+                <option value="මුවසිරස">මුවසිරස</option>
+                <option value="අද">අද</option>
+                <option value="පුනාවස">පුනාවස</option>
+                <option value="පුෂ">පුෂ</option>
+                <option value="අස්ලිස">අස්ලිස</option>
+                <option value="මා">මා</option>
+                <option value="පුවපල්">පුවපල්</option>
+                <option value="උත්‍රපල්">උත්‍රපල්</option>
+                <option value="හත">හත</option>
+                <option value="සිත">සිත</option>
+                <option value="සා">සා</option>
+                <option value="විසා">විසා</option>
+                <option value="අනුර">අනුර</option>
+                <option value="දෙට">දෙට</option>
+                <option value="මුල">මුල</option>
+                <option value="පුවසල">පුවසල</option>
+                <option value="උත්‍රසල">උත්‍රසල</option>
+                <option value="සුවණ">සුවණ</option>
+                <option value="දෙනට">දෙනට</option>
+                <option value="සියාවස">සියාවස</option>
+                <option value="පුවපුටුප">පුවපුටුප</option>
+                <option value="උත්‍රපුටුප">උත්‍රපුටුප</option>
+                <option value="රේවතී">රේවතී</option>
             </select>
-            
-            <button id="findBtn" class="btn">සොයන්න</button>
         </div>
+
+        <div id="errorBox" class="error-inline">
+            කරුණාකර ඔබගේ උපන් නැකත තෝරන්න!
+        </div>
+        
+        <button id="findBtn" class="btn">සොයන්න</button>
         
         <div id="resultContainer" class="result-container">
-            <h2 id="resultTitle" class="result-title"></h2>
-            
-            <div class="result-section">
-                <h3 class="result-section-title">
-                    නැකැත් පාද හිමි අකුරු
-                </h3>
-                <div id="padaLetters" class="pada-container"></div>
-                <div id="swaraLetter" class="swara-item"></div>
-            </div>
-            
-            <div class="result-section">
-                <h3 class="result-section-title">
-                    නැකතට අනුව නම සකස් කිරීමට සුබ අකුරු
-                </h3>
-                <div id="allLetters" class="letters-grid"></div>
-                
-                <div class="category">
-                    <h4 class="category-title">ඒවා ගුණ අනුව වර්ග කළ විට</h4>
-                    <div id="categories" class="categories"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="note">
-            <h4 class="note-title">සටහන</h4>
-            <p>මෙහිදී ඇතුළත් වන අල්පප්‍රාණ අක්ෂර (ක) සමඟ සියලුම දීර්ඝාක්ෂර, මහප්‍රාණ අක්ෂර (ඛ), හල් අකුරු (ක්) හා ස්වරූප (කා, කි, කු, කූ, කෙ, කේ, කො, කෝ, කෞ...)  යෙදේ.  ස, ල, න අක්ෂර සමඟ පිළිවෙළින් ෂ, ළ, ණ අක්ෂර යෙදේ. මෙහිදී නැකතට අදාළව 'අ' අක්ෂරය සඳහන්ව ඇත්නම් 'අ, ඉ, උ, එ, ඔ' ස්වරාක්ෂර පහම නියෝජනය වේ.
-</p>
+            <!-- Birth Details Section -->
+            <h2 id="birthDetailsHeading" class="birth-details-heading"></h2>
+            <div id="birthDetailsContainer"></div>
+
+            <!-- Good and Bad Results -->
+            <h2 id="goodHeader" class="section-header good-header"></h2>
+            <div id="goodResults"></div>
+
+            <h2 id="badHeader" class="section-header bad-header"></h2>
+            <div id="badResults"></div>
         </div>
         
         <div class="copyright">
@@ -365,453 +533,239 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set current year
-            document.getElementById('year').textContent = new Date().getFullYear();
-            
-            // Nekatha data
-            const nekathaData = {
-                'aswida': {
-                    name: 'අස්විද',
-                    pada: ['චු', 'චෙ', 'චො', 'ල'],
-                    swara: 'අ',
-                    letters: ['ල', 'ම', 'ට', 'බ', 'ව', 'ජ', 'ශ', 'ර', 'ස', 'හ', 'න', 'ඩ', 'ය', 'ද', 'ච'],
-                    categories: {
-                        'සම්පත්': ['ල', 'ම', 'ට', 'බ'],
-                        'ක්ෂේම': ['ව', 'ජ', 'ශ'],
-                        'සාධක': ['ර', 'ස'],
-                        'මෛත්‍රී': ['හ', 'න'],
-                        'පරම මෛත්‍රී': ['ඩ', 'ය', 'ද', 'ච']
-                    }
-                },
-                'berana': {
-                    name: 'බෙරණ',
-                    pada: ['ලි', 'ලු', 'ලෙ', 'ලො'],
-                    swara: 'අ',
-                    letters: ['අ', 'ට', 'බ', 'ග', 'ත', 'ඩ', 'ය', 'ම', 'ච', 'ල'],
-                    categories: {
-                        'සම්පත්': ['අ', 'ට', 'බ'],
-                        'ක්ෂේම': ['ග'],
-                        'සාධක': ['ත'],
-                        'මෛත්‍රී': ['ඩ', 'ය'],
-                        'පරම මෛත්‍රී': [ 'ම', 'ච', 'ල']
-                    }
-                },
-                'kathi': {
-                    name: 'කැති',
-                    pada: ['අ', 'ඉ', 'උ', 'එ'],
-                    swara: 'අ',
-                    letters: ['ව', 'ප', 'ජ', 'ශ', 'ර', 'ස', 'හ', 'න', 'ම', 'ච', 'ට', 'බ', 'ල'],
-                    categories: {
-                        'සම්පත්': ['ව', 'ප', 'ජ', 'ශ'],
-                        'ක්ෂේම': ['ර', 'ස'],
-                        'සාධක': ['හ', 'න'],
-                        'මෛත්‍රී': ['ම', 'ච'],
-                        'පරම මෛත්‍රී': ['ට', 'බ', 'ල']
-                    }
-                },
-                'rehena': {
-                    name: 'රෙහෙණ',
-                    pada: ['ඔ', 'ව', 'වි', 'වු'],
-                    swara: 'අ',
-                    letters: ['ව', 'ප', 'ග', 'ත', 'ඩ', 'ය', 'ට', 'බ', 'ල', 'ජ', 'අ'],
-                    categories: {
-                        'සම්පත්': ['ව', 'ප', 'ග'],
-                        'ක්ෂේම': ['ත'],
-                        'සාධක': ['ඩ', 'ය'],
-                        'මෛත්‍රී': ['ට', 'බ', 'ල'],
-                        'පරම මෛත්‍රී': ['ප', 'ජ', 'අ']
-                    }
-                },
-                'muwasirasa': {
-                    name: 'මුවසිරස',
-                    pada: ['වෙ', 'වො', 'ක', 'කි'],
-                    swara: 'අ',
-                    letters: ['ක', 'ර', 'ග', 'ස', 'හ', 'න', 'ම', 'ච', 'අ', 'ප', 'ජ', 'ශ', 'ව'],
-                    categories: {
-                        'සම්පත්': ['ක', 'ර', 'ග', 'ස'],
-                        'ක්ෂේම': ['හ', 'න'],
-                        'සාධක': ['ම', 'ච'],
-                        'මෛත්‍රී': ['අ'],
-                        'පරම මෛත්‍රී': ['ප', 'ජ', 'ශ', 'ව']
-                    }
-                },
-                'ada': {
-                    name: 'අද',
-                    pada: ['කු', 'කු', 'කු', 'කු'],
-                    swara: 'ඉ',
-                    letters: ['ක', 'ත', 'ස', 'ඩ', 'ය', 'ට', 'ල', 'ප', 'ජ', 'ශ', 'ව', 'ර', 'ග'],
-                    categories: {
-                        'සම්පත්': ['ක', 'ත', 'ස'],
-                        'ක්ෂේම': ['ඩ', 'ය'],
-                        'සාධක': ['ට', 'ල'],
-                        'මෛත්‍රී': ['ප', 'ජ', 'ශ', 'ව'],
-                        'පරම මෛත්‍රී': ['ර', 'ග','ක']
-                    }
-                },
-                'punawasa': {
-                    name: 'පුනාවස',
-                    pada: ['කෙ', 'කො', 'හ', 'හි'],
-                    swara: 'ඉ',
-                    letters: ['හ', 'න', 'ම', 'ච', 'අ', 'ග', 'ර', 'ත', 'ස', 'ක'],
-                    categories: {
-                        'සම්පත්': ['හ', 'න'],
-                        'ක්ෂේම': ['ම', 'ච'],
-                        'සාධක': ['අ'],
-                        'මෛත්‍රී': ['ග'],
-                        'පරම මෛත්‍රී': ['ර', 'ත', 'ස', 'ක']
-                    }
-                },
-                'pusha': {
-                    name: 'පුෂ',
-                    pada: ['හු', 'හෙ', 'හො', 'ඩ'],
-                    swara: 'ඉ',
-                    letters: ['ඩ', 'ය', 'ද', 'ට', 'ල', 'ජ', 'ශ', 'ව', 'ර', 'ස', 'ක', 'ත', 'හ'],
-                    categories: {
-                        'සම්පත්': ['ඩ', 'ය', 'ද'],
-                        'ක්ෂේම': ['ට', 'ල'],
-                        'සාධක': ['ජ', 'ශ', 'ව'],
-                        'මෛත්‍රී': ['ර', 'ස', 'ක'],
-                        'පරම මෛත්‍රී': ['ත', 'ද', 'හ']
-                    }
-                },
-                'aslisa': {
-                    name: 'අස්ලිස',
-                    pada: ['ඩි', 'ඩු', 'ඩෙ', 'ඩො'],
-                    swara: 'ඉ',
-                    letters: ['ම', 'ය', 'ච', 'අ', 'ග', 'ත', 'න', 'ද', 'හ', 'ඩ'],
-                    categories: {
-                        'සම්පත්': ['ම', 'ය', 'ච'],
-                        'ක්ෂේම': ['අ'],
-                        'සාධක': ['ග'],
-                        'මෛත්‍රී': ['ත'],
-                        'පරම මෛත්‍රී': ['න', 'ද', 'හ', 'ඩ']
-                    }
-                },
-                'maa': {
-                    name: 'මා',
-                    pada: ['ම', 'මි', 'මු', 'මෙ'],
-                    swara: 'ඉ',
-                    letters: ['ම', 'ට', 'බ', 'ල', 'ජ', 'ශ', 'ව', 'ර', 'ස', 'න', 'ද', 'හ', 'ය', 'ච', 'ඩ'],
-                    categories: {
-                        'සම්පත්': ['ම', 'ට', 'බ', 'ල'],
-                        'ක්ෂේම': ['ජ', 'ශ', 'ව'],
-                        'සාධක': ['ර', 'ස'],
-                        'මෛත්‍රී': ['න', 'ද', 'හ'],
-                        'පරම මෛත්‍රී': ['ය', 'ච', 'ඩ']
-                    }
-                },
-                'puwapal': {
-                    name: 'පුවපල්',
-                    pada: ['මො', 'ට', 'ටි', 'ටු'],
-                    swara: 'ඉ',
-                    letters: ['ට', 'බ', 'අ', 'ග', 'ත', 'ය', 'ඩ', 'ච', 'ල', 'ම'],
-                    categories: {
-                        'සම්පත්': ['ට', 'බ', 'අ'],
-                        'ක්ෂේම': ['ග'],
-                        'සාධක': ['ත'],
-                        'මෛත්‍රී': ['ය', 'ඩ'],
-                        'පරම මෛත්‍රී': ['බ', 'ච', 'ල', 'ම']
-                    }
-                },
-                'uthrapal': {
-                    name: 'උත්‍රපල්',
-                    pada: ['ටෙ', 'ටො', 'ප', 'පි'],
-                    swara: 'උ',
-                    letters: ['ප', 'ජ', 'ශ', 'අ', 'ව', 'ර', 'ස', 'න', 'හ', 'ච', 'ම', 'බ', 'ල', 'ට'],
-                    categories: {
-                        'සම්පත්': ['ප', 'ජ', 'ශ', 'අ', 'ව'],
-                        'ක්ෂේම': ['ර', 'ස'],
-                        'සාධක': ['න', 'හ'],
-                        'මෛත්‍රී': ['ච', 'ම'],
-                        'පරම මෛත්‍රී': ['බ', 'ල', 'ට']
-                    }
-                },
-                'hatha': {
-                    name: 'හත',
-                    pada: ['පු', 'පු', 'පු', 'පු'],
-                    swara: 'උ',
-                    letters: ['ප', 'ග', 'ව', 'ත', 'ය', 'ඩ', 'බ', 'ල', 'ට', 'ජ', 'අ'],
-                    categories: {
-                        'සම්පත්': ['ප', 'ග', 'ව'],
-                        'ක්ෂේම': ['ත'],
-                        'සාධක': ['ය', 'ඩ'],
-                        'මෛත්‍රී': ['බ', 'ල', 'ට'],
-                        'පරම මෛත්‍රී': ['ජ', 'අ', 'ප']
-                    }   
-                },
-                'sitha': {
-                    name: 'සිත',
-                    pada: ['පෙ', 'පො', 'ර', 'රි'],
-                    swara: 'උ',
-                    letters: ['ර', 'ග', 'ස', 'ක', 'න', 'හ', 'ච', 'ම', 'අ', 'ජ', 'ශ', 'ව', 'ප'],
-                    categories: {
-                        'සම්පත්': ['ර', 'ග', 'ස', 'ක'],
-                        'ක්ෂේම': ['න', 'හ'],
-                        'සාධක': ['ච', 'ම'],
-                        'මෛත්‍රී': ['අ'],
-                        'පරම මෛත්‍රී': ['ජ', 'ශ', 'ව', 'ප']
-                    }
-                },
-                'saa': {
-                    name: 'සා',
-                    pada: ['රු', 'රෙ', 'රො', 'ත'],
-                    swara: 'උ',
-                    letters: ['ත', 'ස', 'ක', 'ය', 'ඩ', 'ල', 'ට', 'ජ', 'ශ', 'ව', 'ප', 'ග', 'ර'],
-                    categories: {
-                        'සම්පත්': ['ත', 'ස', 'ක'],
-                        'ක්ෂේම': ['ය', 'ඩ'],
-                        'සාධක': ['ල', 'ට'],
-                        'මෛත්‍රී': ['ජ', 'ශ', 'ව', 'ප'],
-                        'පරම මෛත්‍රී': ['ග', 'ක', 'ර']
-                    }
-                },
-                'visaa': {
-                    name: 'විසා',
-                    pada: ['රු', 'රෙ', 'රො', 'ත'],
-                    swara: 'උ',
-                    letters: ['න', 'ද', 'හ', 'ච', 'ම', 'අ', 'ග', 'ස', 'ක', 'ර', 'ත'],
-                    categories: {
-                        'සම්පත්': ['න', 'ද', 'හ'],
-                        'ක්ෂේම': ['ච', 'ම'],
-                        'සාධක': ['අ'],
-                        'මෛත්‍රී': ['ග'],
-                        'පරම මෛත්‍රී': ['ස', 'ක', 'ර', 'ත']
-                    }
-                },
-                'anura': {
-                    name: 'අනුර',
-                    pada: ['න', 'නි', 'නු', 'නෙ'],
-                    swara: 'එ',
-                    letters: ['න', 'ය', 'ද', 'ඩ', 'ල', 'ට', 'ජ', 'ශ', 'ව', 'ස', 'ක', 'ර', 'හ', 'ත'],
-                    categories: {
-                        'සම්පත්': ['න', 'ය', 'ද', 'ඩ'],
-                        'ක්ෂේම': ['ල', 'ට'],
-                        'සාධක': ['ජ', 'ශ', 'ව'],
-                        'මෛත්‍රී': ['ස', 'ක', 'ර'],
-                        'පරම මෛත්‍රී': ['ද', 'හ', 'ත']
-                    }
-                 },
-                'deta': {
-                    name: 'දෙට',
-                    pada: ['නො', 'ය', 'යි', 'යු'],
-                    swara: 'එ',
-                    letters: ['ය', 'ච', 'ම', 'අ', 'ග', 'ත', 'ද', 'හ', 'ඩ', 'න'],
-                    categories: {
-                        'සම්පත්': ['ය', 'ච', 'ම'],
-                        'ක්ෂේම': ['අ'],
-                        'සාධක': ['ග'],
-                        'මෛත්‍රී': ['ත'],
-                        'පරම මෛත්‍රී': ['ද', 'හ', 'ඩ', 'න']
-                    }
-                 },
-                'mula': {
-                    name: 'මුල',
-                    pada: ['යෙ', 'යො', 'බ', 'බි'],
-                    swara: 'එ',
-                    letters: ['බ', 'ල', 'ම', 'ට', 'ජ', 'ශ', 'ව', 'ස', 'ර', 'ද', 'හ', 'න', 'ච', 'ඩ', 'ය'],
-                    categories: {
-                        'සම්පත්': ['බ', 'ල', 'ම', 'ට'],
-                        'ක්ෂේම': ['ජ', 'ශ', 'ව'],
-                        'සාධක': ['ස', 'ර'],
-                        'මෛත්‍රී': ['ද', 'හ', 'න'],
-                        'පරම මෛත්‍රී': ['ච', 'ඩ', 'ය']
-                    }
-                 },
-                'puwasala': {
-                    name: 'පුවසල',
-                    pada: ['බු', 'බු', 'බු', 'බු'],
-                    swara: 'එ',
-                    letters: ['බ', 'අ', 'ට', 'ග', 'ත', 'ඩ', 'ය', 'ච', 'ල', 'ම'],
-                    categories: {
-                        'සම්පත්': ['බ', 'අ', 'ට'],
-                        'ක්ෂේම': ['ග'],
-                        'සාධක': ['ත'],
-                        'මෛත්‍රී': ['ඩ', 'ය'],
-                        'පරම මෛත්‍රී': ['ච', 'ල', 'ම', 'බ']
-                    }
-                },
-                'uthrasala': {
-                    name: 'උත්‍රසල',
-                    pada: ['බෙ', 'බො', 'ජ', 'ජි'],
-                    swara: 'එ',
-                    letters: ['ජ', 'ශ', 'අ', 'ව', 'ස', 'ර', 'හ', 'න', 'ච', 'ම', 'ල', 'ට', 'බ'],
-                    categories: {
-                        'සම්පත්': ['ජ', 'ශ', 'අ', 'ව'],
-                        'ක්ෂේම': ['ස', 'ර'],
-                        'සාධක': ['හ', 'න'],
-                        'මෛත්‍රී': ['ච', 'ම'],
-                        'පරම මෛත්‍රී': ['ල', 'ට', 'බ']
-                    }
-                },
-                'suwana': {
-                    name: 'සුවණ',
-                    pada: ['ජු', 'ජෙ', 'ජො', 'ශ'],
-                    swara: 'එ',
-                    letters: ['ග', 'ව', 'ප', 'ත', 'ඩ', 'ය', 'ල', 'ට', 'බ', 'අ', 'ජ'],
-                    categories: {
-                        'සම්පත්': ['ග', 'ව', 'ප'],
-                        'ක්ෂේම': ['ත'],
-                        'සාධක': ['ඩ', 'ය'],
-                        'මෛත්‍රී': ['ල', 'ට', 'බ'],
-                        'පරම මෛත්‍රී': ['අ', 'ප', 'ජ']
-                    }
-                },
-                'denata': {
-                    name: 'දෙනට',
-                    pada: ['ග', 'ගි', 'ගු', 'ගෙ'],
-                    swara: 'ඔ',
-                    letters: ['ග', 'ස', 'ක', 'ර', 'හ', 'න', 'ච', 'ම', 'අ', 'ව', 'ප', 'ජ', 'ශ'],
-                    categories: {
-                        'සම්පත්': ['ග', 'ස', 'ක', 'ර'],
-                        'ක්ෂේම': ['හ', 'න'],
-                        'සාධක': ['ච', 'ම'],
-                        'මෛත්‍රී': ['අ'],
-                        'පරම මෛත්‍රී': ['ව', 'ප', 'ජ', 'ශ']
-                    }
-               },
-                'siyawasa': {
-                    name: 'සියාවස',
-                    pada: ['ගො', 'ස', 'සි', 'සු'],
-                    swara: 'ඔ',
-                    letters: ['ස', 'ක', 'ත', 'ඩ', 'ය', 'ල', 'ට', 'ව', 'ප', 'ජ', 'ශ', 'ර', 'ග'],
-                    categories: {
-                        'සම්පත්': ['ස', 'ක', 'ත'],
-                        'ක්ෂේම': ['ඩ', 'ය'],
-                        'සාධක': ['ල', 'ට'],
-                        'මෛත්‍රී': ['ව', 'ප', 'ජ', 'ශ'],
-                        'පරම මෛත්‍රී': ['ක', 'ර', 'ග']
-                    }
-               },
-                'puwaputupa': {
-                    name: 'පුවපුටුප',
-                    pada: ['සෙ', 'සො', 'ද', 'දි'],
-                    swara: 'ඔ',
-                    letters: ['ද', 'හ', 'න', 'ච', 'ම', 'අ', 'ග', 'ක', 'ර', 'ත', 'ස'],
-                    categories: {
-                        'සම්පත්': ['ද', 'හ', 'න'],
-                        'ක්ෂේම': ['ච', 'ම'],
-                        'සාධක': ['අ'],
-                        'මෛත්‍රී': ['ග'],
-                        'පරම මෛත්‍රී': ['ක', 'ර', 'ත', 'ස']
-                    } 
-              },
-                'uthraputupa': {
-                    name: 'උත්‍රපුටුප',
-                    pada: ['දු', 'දු', 'දු', 'දු'],
-                    swara: 'ඔ',
-                    letters: ['ද', 'ඩ', 'ය', 'ල', 'ට', 'ව', 'ජ', 'ශ', 'ක', 'ර', 'ස', 'හ', 'ත'],
-                    categories: {
-                        'සම්පත්': ['ද', 'ඩ', 'ය'],
-                        'ක්ෂේම': ['ල', 'ට'],
-                        'සාධක': ['ව', 'ජ', 'ශ'],
-                        'මෛත්‍රී': ['ක', 'ර', 'ස'],
-                        'පරම මෛත්‍රී': ['හ', 'ත', 'ද']
-                    }   
-             },
-                'rewathi': {
-                    name: 'රේවතී',
-                    pada: ['දෙ', 'දො', 'ච', 'චි'],
-                    swara: 'ඔ',
-                    letters: ['ච', 'ම', 'ය', 'අ', 'ග', 'ත', 'හ', 'ඩ', 'න', 'ද'],
-                    categories: {
-                        'සම්පත්': ['ච', 'ම', 'ය'],
-                        'ක්ෂේම': ['අ'],
-                        'සාධක': ['ග'],
-                        'මෛත්‍රී': ['ත'],
-                        'පරම මෛත්‍රී': ['හ', 'ඩ', 'න', 'ද']
-                    } }
-            };
-            
-            // Find button click handler
-            document.getElementById('findBtn').addEventListener('click', function() {
-                const selectedNekatha = document.getElementById('nekatha').value;
-                
-                if (!selectedNekatha) {
-                    alert('කරුණාකර ඔබගේ උපන් නැකත තෝරන්න!');
-                    return;
-                }
-                
-                const data = nekathaData[selectedNekatha];
-                showResults(data);
+        const _0x2016bc=_0x3b3f;function _0x1507(){const _0xcc9d6b=['includes','odern\x22>','addEventLi','</span>\x0a\x20\x20','PvXdS','fNvxN','ILXnA','QjYHH','er-modern\x22','MiJNE','innerHTML','scrollInto','length','GaONQ','fAJzj','\x20class=\x22pa','පුවපුටුප','සියාවස','\x20\x20\x20\x20</div>','pan\x20class=','සාධක','odern\x22>1\x20ප','Ukowk','JXxvZ','PmxZU','nekatha','උත්‍රසල','4jzPxHt','පුවසල','s=\x22swara-h','liEWH','DOMContent','lErdk','ighlight-m','div\x20class=','resultCont','n\x20class=\x22p','getFullYea','asMcN','d\x20theme-','result-car','span>☑️</sp','ainer','a-grid-mod','ZRsjd','\x20\x20\x20\x20\x20\x20</di','\x20\x20\x20\x20\x20\x20\x20','smooth','\x20නැකැත්\x20පා','StcaC','\x20\x20\x20\x20\x20\x20\x20\x20\x20<','VOJMR','10SBwjbX','24245342nyJWsy','display','stener','GMnNm','change','260iqpPRE','EOTDB','swara','textConten','පුවපල්','422600cIpgLT','goodResult','LIhAm','ජන්ම','7yDZwAR','පරම\x20මෛත්‍රී','block','\x20අකුරු','</div>\x0a\x20\x20\x20','getElement','KBaOo','ි\x20අකුරු','\x20\x20\x20\x20\x20\x20\x20</d','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20','class=\x22mod','v\x20class=\x22m','UVtag','badResults','eUrch','KDQDS','iliwg','click','lNdpT','ිමි\x20ස්වරය:','modern\x22>3\x20','-modern\x22>\x0a','\x20\x20<span>','BiJum','AhScY','\x20<div\x20clas','ern\x22>\x0a\x20\x20\x20\x20','Qywug','jiSXt','ent','createElem','DWEmx','v>\x0a\x20\x20\x20\x20\x20\x20\x20','appendChil','pDjGv','<div\x20class','lXeYq','පුෂ','uthrW','pcamr','UrvjM','eYszz','\x20\x20\x20\x20\x20</div','දෙට','lsHeading','OZLAp','උත්‍රපල්','fYQzf','hosWD','pcsxs','an\x20class=\x22','විසා','Tuaqd','ada-label-','pada-item-','\x20\x20\x20\x20\x20\x20<spa','අස්ලිස','style','rEfsV','උත්‍රපුටුප','\x22pada-lett','MTZzb','da-label-m','KwUOz','blue','goodHeader','vkDdP','\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20','රෙහෙණ','OdqtN','රේවතී','IVSue','=\x22swara-bo','zJSgl','name','සුවණ','bLXSp','div','birth-card','className','h-header\x22>','Bybly','\x20\x20\x20\x20\x20\x20\x20\x20<s','ද\x20හිමි\x20අකු','සම්පත්','HZjks','zVNba','s=\x22modern-','span','year','Fcigk','RRflH','padas','15520MfAWQf','ක්ෂේම','RKABq','class=\x22pad','start','\x20නැකතට\x20අසු','hnJsl','PfQzZ','KRhMJ','type','\x20\x20\x20\x20\x20\x20\x20\x20<d','good','කැති','vXYNm','HPrge','elay','forEach','modern\x22>\x0a\x20','පාදය</span','මුවසිරස','modern\x22>2\x20','letter-row','Loaded','modern\x22>4\x20','KmoKh','ප්‍රත්‍යාරී','value','body\x22>\x0a\x20\x20\x20','\x22pada-item','x-modern\x22>','මුල','EYLBP','CcEqN','7803680fulQyJ','animationD','card-heade','ById','PbzPl','none','\x20\x20\x20\x20\x20<span','badHeader','විපත්','card-body','group','බෙරණ','බ\x20අකුරු','TfEuV','dTWue','errorBox','SnIdM','DicbY','brzPn','birthDetai','yduBm','3750978nZaKEi','odern-birt','මෛත්‍රී','imUoX','ාදය</span>','\x20\x20\x20\x20\x20<div\x20','cpDdQ','View','findBtn','\x20නැකතට\x20හිම','RebCp','\x20\x20\x20\x20\x20\x20\x20<sp','පුනාවස','අනුර','INMGO','>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','දෙනට','XNyDZ','අස්විද','රු</span>\x0a','සිත','an>\x0a\x20\x20\x20\x20\x20\x20','mtlYD','<span\x20clas','\x20නැකතට\x20සුබ','letter-bad','pada-lette','TBGxN','lsContaine','286689UskkZF','pASMO','vzlmi','\x20\x20\x20<span>හ','iv\x20class=\x22','bad','r-modern\x22>','qkWMV','red','zNhLG','iv>\x0a\x20\x20\x20\x20\x20\x20','\x20\x20\x20\x20\x20\x20\x20<di','1596006TtwLvW','green','nXYtJ','okwIj','ern-birth-','oLsbo'];_0x1507=function(){return _0xcc9d6b;};return _0x1507();}function _0x3b3f(_0x349b05,_0x1ae6da){_0x349b05=_0x349b05-(-0x23dc+-0xa*0x326+0x43f0);const _0xc29a3=_0x1507();let _0x47a233=_0xc29a3[_0x349b05];return _0x47a233;}(function(_0x18c980,_0x5ad45a){const _0x2b8493=_0x3b3f,_0xab8d19=_0x18c980();while(!![]){try{const _0x165b5c=parseInt(_0x2b8493(0x11a))/(0x2*-0xea8+-0x2*-0x5d5+-0x1*-0x11a7)+-parseInt(_0x2b8493(0xf6))/(0x1*0xd77+0x1dc*0x14+-0x32a5)*(parseInt(_0x2b8493(0xc9))/(-0x11bc+0x1e5+-0x7ed*-0x2))+-parseInt(_0x2b8493(0x115))/(0x228f+-0x1fa3+-0x6*0x7c)*(parseInt(_0x2b8493(0x17c))/(-0x734+0x1f3c*-0x1+0x2675))+parseInt(_0x2b8493(0xac))/(0x1c8f+-0x1*0x3a+-0x1c4f*0x1)*(-parseInt(_0x2b8493(0x11e))/(0x1182*0x1+0x1943+-0x2abe))+-parseInt(_0x2b8493(0x19d))/(0x305+0x4*0x42b+-0x13a9)+parseInt(_0x2b8493(0xd5))/(0x4d*0x61+-0x1a*0x35+-0xbe1*0x2)*(parseInt(_0x2b8493(0x10f))/(-0x1df*0x14+0x271*-0xe+0x4*0x11e9))+parseInt(_0x2b8493(0x110))/(0x1b04+-0xc*-0x99+-0x2225);if(_0x165b5c===_0x5ad45a)break;else _0xab8d19['push'](_0xab8d19['shift']());}catch(_0xf2047f){_0xab8d19['push'](_0xab8d19['shift']());}}}(_0x1507,-0x3*0x2a5db+0x880c2+0xbcf02),document[_0x2016bc(0xdd)+_0x2016bc(0x112)](_0x2016bc(0xfa)+_0x2016bc(0x192),function(){const _0x1972a5=_0x2016bc,_0x268a96={'eUrch':_0x1972a5(0x9c),'zVNba':_0x1972a5(0x120),'MiJNE':function(_0x4b6db2,_0x314056){return _0x4b6db2(_0x314056);},'DicbY':_0x1972a5(0x177),'jiSXt':_0x1972a5(0xc5)+'ge','Tuaqd':_0x1972a5(0x16c),'mtlYD':function(_0x2dd984,_0x471fd9){return _0x2dd984*_0x471fd9;},'PmxZU':function(_0x42c79e,_0x3b7e7d){return _0x42c79e===_0x3b7e7d;},'pcamr':_0x1972a5(0x15e),'OdqtN':_0x1972a5(0xd6),'asMcN':_0x1972a5(0x99)+'r','Bybly':_0x1972a5(0xa0),'ZRsjd':function(_0x2d0bef,_0x490182){return _0x2d0bef<_0x490182;},'RRflH':function(_0x85935d,_0x19f5f9){return _0x85935d%_0x19f5f9;},'vzlmi':function(_0x922d19,_0x594162){return _0x922d19+_0x594162;},'GMnNm':function(_0x8e93ee,_0x15aca7){return _0x8e93ee*_0x15aca7;},'KBaOo':_0x1972a5(0x191),'pASMO':_0x1972a5(0x187),'lXeYq':_0x1972a5(0xbe),'rEfsV':_0x1972a5(0x19a),'zNhLG':_0x1972a5(0xa2),'qkWMV':_0x1972a5(0x119),'TfEuV':_0x1972a5(0xf7),'LIhAm':_0x1972a5(0x188),'MTZzb':_0x1972a5(0x14c),'SnIdM':_0x1972a5(0xf5),'cpDdQ':_0x1972a5(0x163),'lErdk':_0x1972a5(0x16a),'AhScY':_0x1972a5(0x18f),'BiJum':_0x1972a5(0xc0),'zJSgl':_0x1972a5(0xbc),'UrvjM':_0x1972a5(0xec),'KwUOz':_0x1972a5(0xb8),'vXYNm':_0x1972a5(0x151),'dTWue':_0x1972a5(0xeb),'HZjks':_0x1972a5(0x143),'okwIj':_0x1972a5(0xb9),'nXYtJ':_0x1972a5(0x159),'hosWD':_0x1972a5(0x10a),'fAJzj':_0x1972a5(0x180),'PvXdS':_0x1972a5(0x178),'EYLBP':_0x1972a5(0xf4),'yduBm':_0x1972a5(0xb4),'PbzPl':_0x1972a5(0xfe)+_0x1972a5(0x105),'bLXSp':_0x1972a5(0xaa)+_0x1972a5(0x14a),'pcsxs':_0x1972a5(0xaa)+_0x1972a5(0xc8)+'r','vkDdP':_0x1972a5(0x15f),'XNyDZ':_0x1972a5(0x9e),'KRhMJ':_0x1972a5(0x11b)+'s','uthrW':_0x1972a5(0x12b),'fYQzf':_0x1972a5(0xa6),'ILXnA':_0x1972a5(0x156),'Qywug':_0x1972a5(0x149),'OZLAp':_0x1972a5(0x165),'VOJMR':_0x1972a5(0x11d),'StcaC':_0x1972a5(0x173),'oLsbo':_0x1972a5(0x9f),'Fcigk':_0x1972a5(0xd1),'liEWH':_0x1972a5(0xce),'pDjGv':_0x1972a5(0x17d),'hnJsl':_0x1972a5(0x195),'iliwg':_0x1972a5(0xef),'eYszz':_0x1972a5(0xae),'PfQzZ':_0x1972a5(0x11f),'lNdpT':_0x1972a5(0x114),'imUoX':_0x1972a5(0x12f)};document[_0x1972a5(0x123)+_0x1972a5(0x9a)](_0x268a96[_0x1972a5(0xdf)])[_0x1972a5(0x118)+'t']=new Date()[_0x1972a5(0x100)+'r']();const _0x105745=document[_0x1972a5(0x123)+_0x1972a5(0x9a)](_0x268a96[_0x1972a5(0x19b)]),_0x2e863c=document[_0x1972a5(0x123)+_0x1972a5(0x9a)](_0x268a96[_0x1972a5(0xab)]),_0x5f0bef=document[_0x1972a5(0x123)+_0x1972a5(0x9a)](_0x268a96[_0x1972a5(0x9b)]),_0x4e1806=document[_0x1972a5(0x123)+_0x1972a5(0x9a)](_0x268a96[_0x1972a5(0x16b)]),_0x30d11a=document[_0x1972a5(0x123)+_0x1972a5(0x9a)](_0x268a96[_0x1972a5(0x14f)]),_0x5d9c65=document[_0x1972a5(0x123)+_0x1972a5(0x9a)](_0x268a96[_0x1972a5(0x160)]),_0x3be056=document[_0x1972a5(0x123)+_0x1972a5(0x9a)](_0x268a96[_0x1972a5(0xbd)]),_0x18e8ca=document[_0x1972a5(0x123)+_0x1972a5(0x9a)](_0x268a96[_0x1972a5(0x184)]),_0x231b0f=document[_0x1972a5(0x123)+_0x1972a5(0x9a)](_0x268a96[_0x1972a5(0x144)]),_0xd4e464=document[_0x1972a5(0x123)+_0x1972a5(0x9a)](_0x268a96[_0x1972a5(0x14d)]),_0x5f59e0={'අස්විද':{'padas':['චු','චෙ','චො','ල'],'swara':'අ'},'බෙරණ':{'padas':['ලි','ලු','ලෙ','ලො'],'swara':'අ'},'කැති':{'padas':['අ','ඉ','උ','එ'],'swara':'අ'},'රෙහෙණ':{'padas':['ඔ','ව','වි','වු'],'swara':'අ'},'මුවසිරස':{'padas':['වෙ','වො','ක','කි'],'swara':'අ'},'අද':{'padas':['කු','ඝ','ඞ','ඡ'],'swara':'ඉ'},'පුනාවස':{'padas':['කෙ','කො','හ','හි'],'swara':'ඉ'},'පුෂ':{'padas':['හු','හෙ','හො','ඩ'],'swara':'ඉ'},'අස්ලිස':{'padas':['ඩි','ඩු','ඩෙ','ඩො'],'swara':'ඉ'},'මා':{'padas':['මා','මි','මු','මෙ'],'swara':'ඉ'},'පුවපල්':{'padas':['මො','ට','ටි','ටු'],'swara':'ඉ'},'උත්‍රපල්':{'padas':['ටෙ','ටො','ප','පි'],'swara':'උ'},'හත':{'padas':['පු','ෂ','ණ','ඨ'],'swara':'උ'},'සිත':{'padas':['පෙ','පො','ර','රි'],'swara':'උ'},'සා':{'padas':['රු','රෙ','රො','ත'],'swara':'උ'},'විසා':{'padas':['ති','තු','තෙ','තො'],'swara':'උ'},'අනුර':{'padas':['න','නි','නු','නෙ'],'swara':'එ'},'දෙට':{'padas':['නො','ය','යි','යු'],'swara':'එ'},'මුල':{'padas':['යෙ','යො','බ','බි'],'swara':'එ'},'පුවසල':{'padas':['බු','ධ','එ','ඪ'],'swara':'එ'},'උත්‍රසල':{'padas':['බෙ','බො','ජ','ජි'],'swara':'එ'},'සුවණ':{'padas':['ජු','ජෙ','ජො','ශ'],'swara':'එ'},'දෙනට':{'padas':['ග','ගි','ගු','ගෙ'],'swara':'ඔ'},'සියාවස':{'padas':['ගො','ස','සි','සු'],'swara':'ඔ'},'පුවපුටුප':{'padas':['සෙ','සො','ද','දි'],'swara':'ඔ'},'උත්‍රපුටුප':{'padas':['දු','ථ','ඣ','ඤ'],'swara':'ඔ'},'රේවතී':{'padas':['දෙ','දො','ච','චි'],'swara':'ඔ'}},_0x1bde21=[_0x268a96[_0x1972a5(0x142)],'මා',_0x268a96[_0x1972a5(0x158)],_0x268a96[_0x1972a5(0xd2)],_0x268a96[_0x1972a5(0xd0)],_0x268a96[_0x1972a5(0xa4)],_0x268a96[_0x1972a5(0x11c)],_0x268a96[_0x1972a5(0x15b)],_0x268a96[_0x1972a5(0xa7)],_0x268a96[_0x1972a5(0xb2)],'හත',_0x268a96[_0x1972a5(0xfb)],_0x268a96[_0x1972a5(0x136)],_0x268a96[_0x1972a5(0x135)],_0x268a96[_0x1972a5(0x168)],'අද','සා',_0x268a96[_0x1972a5(0x146)],_0x268a96[_0x1972a5(0x15d)],_0x268a96[_0x1972a5(0x189)],_0x268a96[_0x1972a5(0xa5)],_0x268a96[_0x1972a5(0x174)],_0x268a96[_0x1972a5(0xd8)],_0x268a96[_0x1972a5(0xd7)],_0x268a96[_0x1972a5(0xe1)],_0x268a96[_0x1972a5(0x139)],_0x268a96[_0x1972a5(0x14b)]],_0x4c58d3=[{'name':_0x268a96[_0x1972a5(0x10e)],'type':_0x268a96[_0x1972a5(0x145)],'group':_0x268a96[_0x1972a5(0xca)]},{'name':_0x268a96[_0x1972a5(0x10c)],'type':_0x268a96[_0x1972a5(0x164)],'group':_0x268a96[_0x1972a5(0xca)]},{'name':_0x268a96[_0x1972a5(0xda)],'type':_0x268a96[_0x1972a5(0x179)],'group':_0x268a96[_0x1972a5(0xf9)]},{'name':_0x268a96[_0x1972a5(0x140)],'type':_0x268a96[_0x1972a5(0x164)],'group':_0x268a96[_0x1972a5(0xca)]},{'name':_0x268a96[_0x1972a5(0x182)],'type':_0x268a96[_0x1972a5(0x179)],'group':_0x268a96[_0x1972a5(0xf9)]},{'name':_0x268a96[_0x1972a5(0x12e)],'type':_0x268a96[_0x1972a5(0x164)],'group':_0x268a96[_0x1972a5(0xca)]},{'name':'වධ','type':_0x268a96[_0x1972a5(0x179)],'group':_0x268a96[_0x1972a5(0xf9)]},{'name':_0x268a96[_0x1972a5(0x147)],'type':_0x268a96[_0x1972a5(0x164)],'group':_0x268a96[_0x1972a5(0xca)]},{'name':_0x268a96[_0x1972a5(0x183)],'type':_0x268a96[_0x1972a5(0x164)],'group':_0x268a96[_0x1972a5(0xca)]}];_0x105745[_0x1972a5(0xdd)+_0x1972a5(0x112)](_0x268a96[_0x1972a5(0x130)],function(){const _0x25bcf4=_0x1972a5;this[_0x25bcf4(0x196)]&&(_0xd4e464[_0x25bcf4(0x157)][_0x25bcf4(0x111)]=_0x268a96[_0x25bcf4(0x12c)]);}),_0x2e863c[_0x1972a5(0xdd)+_0x1972a5(0x112)](_0x268a96[_0x1972a5(0xaf)],function(){const _0x2a2d4a=_0x1972a5,_0x25a487=_0x105745[_0x2a2d4a(0x196)];if(!_0x25a487){_0xd4e464[_0x2a2d4a(0x157)][_0x2a2d4a(0x111)]=_0x268a96[_0x2a2d4a(0x175)],_0x5f0bef[_0x2a2d4a(0x157)][_0x2a2d4a(0x111)]=_0x268a96[_0x2a2d4a(0x12c)];return;}_0xd4e464[_0x2a2d4a(0x157)][_0x2a2d4a(0x111)]=_0x268a96[_0x2a2d4a(0x12c)],_0x268a96[_0x2a2d4a(0xe4)](_0x2b41fc,_0x25a487);});function _0x2b41fc(_0x14aa34){const _0x25eea9=_0x1972a5,_0x2c047a={'JXxvZ':_0x268a96[_0x25eea9(0xa8)],'KmoKh':_0x268a96[_0x25eea9(0x13a)],'RKABq':_0x268a96[_0x25eea9(0x152)],'IVSue':function(_0x4a8fc1,_0x22cb17){const _0x20af2c=_0x25eea9;return _0x268a96[_0x20af2c(0xc2)](_0x4a8fc1,_0x22cb17);},'CcEqN':function(_0x4485fc,_0x1136ce){const _0x5c852e=_0x25eea9;return _0x268a96[_0x5c852e(0xf3)](_0x4485fc,_0x1136ce);},'KDQDS':_0x268a96[_0x25eea9(0x145)],'brzPn':function(_0x454210,_0xa7e9b2){const _0x36c52f=_0x25eea9;return _0x268a96[_0x36c52f(0xf3)](_0x454210,_0xa7e9b2);},'fNvxN':_0x268a96[_0x25eea9(0x164)],'TBGxN':_0x268a96[_0x25eea9(0x101)],'QjYHH':_0x268a96[_0x25eea9(0x170)],'GaONQ':function(_0x4c122e,_0x2aaed3){const _0x2a308e=_0x25eea9;return _0x268a96[_0x2a308e(0x107)](_0x4c122e,_0x2aaed3);},'UVtag':function(_0x4ae57b,_0x23b30a){const _0x412d92=_0x25eea9;return _0x268a96[_0x412d92(0x17a)](_0x4ae57b,_0x23b30a);},'RebCp':function(_0x1a8e31,_0x2458b1){const _0x508251=_0x25eea9;return _0x268a96[_0x508251(0xcb)](_0x1a8e31,_0x2458b1);},'INMGO':function(_0xe87e53,_0x57de84){const _0x249c1e=_0x25eea9;return _0x268a96[_0x249c1e(0x113)](_0xe87e53,_0x57de84);},'DWEmx':_0x268a96[_0x25eea9(0x124)],'EOTDB':_0x268a96[_0x25eea9(0xca)]},_0x4ce532=_0x5f59e0[_0x14aa34];_0x4e1806[_0x25eea9(0x118)+'t']=_0x14aa34+(_0x25eea9(0xb5)+_0x25eea9(0x125));let _0x5d1182=_0x25eea9(0x127)+_0x25eea9(0x161)+_0x25eea9(0x137)+_0x25eea9(0x176)+_0x25eea9(0x16d)+_0x25eea9(0x162)+_0x25eea9(0x161)+_0x25eea9(0xd4)+_0x25eea9(0x129)+_0x25eea9(0xad)+_0x25eea9(0x16f)+_0x25eea9(0x127)+_0x25eea9(0x161)+_0x25eea9(0x10d)+_0x25eea9(0x104)+_0x25eea9(0xc1)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x134)+_0x14aa34+(_0x25eea9(0x10b)+_0x25eea9(0x172)+_0x25eea9(0xbf)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0xed)+_0x25eea9(0x127)+_0x25eea9(0x161)+_0x25eea9(0xb1)+_0x25eea9(0x128)+_0x25eea9(0xd9)+_0x25eea9(0x197)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0xb1)+_0x25eea9(0x17f)+_0x25eea9(0x106)+_0x25eea9(0x138)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x186)+_0x25eea9(0xcd)+_0x25eea9(0x154)+_0x25eea9(0x18d)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x9d)+_0x25eea9(0xea)+_0x25eea9(0x15c)+_0x25eea9(0xf0)+_0x25eea9(0xb0)+_0x25eea9(0x127)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0xb7)+_0x25eea9(0x150)+_0x25eea9(0xc6)+_0x25eea9(0xcf))+_0x4ce532[_0x25eea9(0x17b)][0x1321+0x7cf*-0x2+-0x383]+(_0x25eea9(0xde)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x122)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x10d)+_0x25eea9(0xfd)+_0x25eea9(0x198)+_0x25eea9(0x133)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x155)+_0x25eea9(0xff)+_0x25eea9(0x153)+_0x25eea9(0x190)+_0x25eea9(0x18e)+_0x25eea9(0xbb)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x171)+_0x25eea9(0xee)+_0x25eea9(0x15a)+_0x25eea9(0xe3)+'>')+_0x4ce532[_0x25eea9(0x17b)][-0x1b83*-0x1+-0x26*-0x61+-0x4a8*0x9]+(_0x25eea9(0xde)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x122)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x10d)+_0x25eea9(0xfd)+_0x25eea9(0x198)+_0x25eea9(0x133)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x155)+_0x25eea9(0xff)+_0x25eea9(0x153)+_0x25eea9(0x132)+_0x25eea9(0x18e)+_0x25eea9(0xbb)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x171)+_0x25eea9(0xee)+_0x25eea9(0x15a)+_0x25eea9(0xe3)+'>')+_0x4ce532[_0x25eea9(0x17b)][0x2*0x1202+-0x1*0x182d+0xbd5*-0x1]+(_0x25eea9(0xde)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x122)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x10d)+_0x25eea9(0xfd)+_0x25eea9(0x198)+_0x25eea9(0x133)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x155)+_0x25eea9(0xff)+_0x25eea9(0x153)+_0x25eea9(0x193)+_0x25eea9(0x18e)+_0x25eea9(0xbb)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x171)+_0x25eea9(0xee)+_0x25eea9(0x15a)+_0x25eea9(0xe3)+'>')+_0x4ce532[_0x25eea9(0x17b)][0x65*0x1a+-0x337*0x1+-0x708]+(_0x25eea9(0xde)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x122)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x148)+_0x25eea9(0xbb)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x141)+_0x25eea9(0x167)+_0x25eea9(0x199)+_0x25eea9(0x127)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0xcc)+_0x25eea9(0x131)+_0x25eea9(0xde)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0xc3)+_0x25eea9(0xf8)+_0x25eea9(0xfc)+_0x25eea9(0xdc))+_0x4ce532[_0x25eea9(0x117)]+(_0x25eea9(0xde)+_0x25eea9(0x161)+_0x25eea9(0x161)+_0x25eea9(0x108)+_0x25eea9(0x13e)+_0x25eea9(0x161)+_0x25eea9(0x126)+_0x25eea9(0xd3)+_0x25eea9(0x161)+_0x25eea9(0xed)+_0x25eea9(0x127)+_0x25eea9(0x109));_0x30d11a[_0x25eea9(0xe5)]=_0x5d1182;let _0x13bb86=-0x24db+0x116f+0x2c*0x71;if([_0x268a96[_0x25eea9(0x142)],'මා',_0x268a96[_0x25eea9(0x158)]][_0x25eea9(0xdb)](_0x14aa34))_0x13bb86=-0x8*0x166+-0x2640+0x3170;else{if([_0x268a96[_0x25eea9(0xd2)],_0x268a96[_0x25eea9(0xd0)],_0x268a96[_0x25eea9(0xa4)]][_0x25eea9(0xdb)](_0x14aa34))_0x13bb86=0x114f+-0x3a4+-0xda8;else{if([_0x268a96[_0x25eea9(0x11c)],_0x268a96[_0x25eea9(0x15b)],_0x268a96[_0x25eea9(0xa7)]][_0x25eea9(0xdb)](_0x14aa34))_0x13bb86=0x187f*-0x1+0x1530+0x355;else{if([_0x268a96[_0x25eea9(0xb2)],'හත',_0x268a96[_0x25eea9(0xfb)]][_0x25eea9(0xdb)](_0x14aa34))_0x13bb86=0x7*0x1f8+-0x10f1*-0x2+0x89*-0x59;else{if([_0x268a96[_0x25eea9(0x136)],_0x268a96[_0x25eea9(0x135)],_0x268a96[_0x25eea9(0x168)]][_0x25eea9(0xdb)](_0x14aa34))_0x13bb86=0x10f7+-0x2591+0x14a6;else{if(['අද','සා',_0x268a96[_0x25eea9(0x146)]][_0x25eea9(0xdb)](_0x14aa34))_0x13bb86=-0x27a+0x2*-0xe82+0x1f8d;else{if([_0x268a96[_0x25eea9(0x15d)],_0x268a96[_0x25eea9(0x189)],_0x268a96[_0x25eea9(0xa5)]][_0x25eea9(0xdb)](_0x14aa34))_0x13bb86=0x1a*0x130+-0x7a0+-0x172e;else{if([_0x268a96[_0x25eea9(0x174)],_0x268a96[_0x25eea9(0xd8)],_0x268a96[_0x25eea9(0xd7)]][_0x25eea9(0xdb)](_0x14aa34))_0x13bb86=0x188b+0x682+0x3df*-0x8;else _0x13bb86=0x20b6+0x25c1+-0x3*0x1775;}}}}}}}_0x5d9c65[_0x25eea9(0x118)+'t']=_0x14aa34+(_0x25eea9(0xc4)+_0x25eea9(0x121)),_0x3be056[_0x25eea9(0x118)+'t']=_0x14aa34+(_0x25eea9(0x181)+_0x25eea9(0xa3)),_0x18e8ca[_0x25eea9(0xe5)]='',_0x231b0f[_0x25eea9(0xe5)]='',_0x4c58d3[_0x25eea9(0x18c)]((_0x1dbb57,_0x6ea30d)=>{const _0x17ccc8=_0x25eea9,_0x19dc0b={'HPrge':_0x2c047a[_0x17ccc8(0xf2)],'Ukowk':_0x2c047a[_0x17ccc8(0x194)]},_0x4e1ca6=document[_0x17ccc8(0x13c)+_0x17ccc8(0x13b)](_0x2c047a[_0x17ccc8(0x17e)]);_0x4e1ca6[_0x17ccc8(0x16e)]=_0x17ccc8(0x103)+_0x17ccc8(0x102)+_0x1dbb57[_0x17ccc8(0x185)],_0x4e1ca6[_0x17ccc8(0x157)][_0x17ccc8(0x98)+_0x17ccc8(0x18b)]=_0x2c047a[_0x17ccc8(0x166)](_0x6ea30d,0x25*-0xc0+-0x9f7*0x1+0x25b7+0.1)+'s';let _0x25cfb7='';if(_0x2c047a[_0x17ccc8(0x19c)](_0x1dbb57[_0x17ccc8(0x185)],_0x2c047a[_0x17ccc8(0x12d)]))_0x25cfb7='☑️';else{if(_0x2c047a[_0x17ccc8(0xa9)](_0x1dbb57[_0x17ccc8(0x185)],_0x2c047a[_0x17ccc8(0xe0)]))_0x25cfb7='✅';else _0x25cfb7='⭕';}const _0x376c6b=document[_0x17ccc8(0x13c)+_0x17ccc8(0x13b)](_0x2c047a[_0x17ccc8(0x17e)]);_0x376c6b[_0x17ccc8(0x16e)]=_0x2c047a[_0x17ccc8(0xc7)],_0x376c6b[_0x17ccc8(0xe5)]=_0x25cfb7+'\x20'+_0x1dbb57[_0x17ccc8(0x169)],_0x4e1ca6[_0x17ccc8(0x13f)+'d'](_0x376c6b);const _0x1e601e=document[_0x17ccc8(0x13c)+_0x17ccc8(0x13b)](_0x2c047a[_0x17ccc8(0x17e)]);_0x1e601e[_0x17ccc8(0x16e)]=_0x2c047a[_0x17ccc8(0xe2)];for(let _0x5f35bf=-0x2cd*-0x5+0x3e*-0x21+-0x603;_0x2c047a[_0x17ccc8(0xe8)](_0x5f35bf,-0x46f*0x6+0x3*0xa07+-0x2*0x1bc);_0x5f35bf++){const _0x474e58=_0x2c047a[_0x17ccc8(0x12a)](_0x2c047a[_0x17ccc8(0xb6)](_0x2c047a[_0x17ccc8(0xb6)](_0x13bb86,_0x2c047a[_0x17ccc8(0xba)](_0x6ea30d,-0x23ff+-0x494*0x8+0x48a2)),_0x5f35bf),_0x1bde21[_0x17ccc8(0xe7)]),_0x92bf18=_0x1bde21[_0x474e58],_0x3670ed=_0x5f59e0[_0x92bf18][_0x17ccc8(0x17b)],_0x357878=document[_0x17ccc8(0x13c)+_0x17ccc8(0x13b)](_0x2c047a[_0x17ccc8(0x17e)]);_0x357878[_0x17ccc8(0x16e)]=_0x2c047a[_0x17ccc8(0x13d)],_0x3670ed[_0x17ccc8(0x18c)](_0x5e4a28=>{const _0x3fbea0=_0x17ccc8,_0x27ce5a=document[_0x3fbea0(0x13c)+_0x3fbea0(0x13b)](_0x19dc0b[_0x3fbea0(0x18a)]);_0x27ce5a[_0x3fbea0(0x16e)]=_0x19dc0b[_0x3fbea0(0xf1)],_0x27ce5a[_0x3fbea0(0x118)+'t']=_0x5e4a28,_0x357878[_0x3fbea0(0x13f)+'d'](_0x27ce5a);}),_0x1e601e[_0x17ccc8(0x13f)+'d'](_0x357878);}_0x4e1ca6[_0x17ccc8(0x13f)+'d'](_0x1e601e),_0x2c047a[_0x17ccc8(0x19c)](_0x1dbb57[_0x17ccc8(0xa1)],_0x2c047a[_0x17ccc8(0x116)])?_0x18e8ca[_0x17ccc8(0x13f)+'d'](_0x4e1ca6):_0x231b0f[_0x17ccc8(0x13f)+'d'](_0x4e1ca6);}),_0x5f0bef[_0x25eea9(0x157)][_0x25eea9(0x111)]=_0x268a96[_0x25eea9(0x175)],_0x5f0bef[_0x25eea9(0xe6)+_0x25eea9(0xb3)]({'behavior':_0x268a96[_0x25eea9(0x14e)],'block':_0x268a96[_0x25eea9(0xe9)]});}}));
+        function _0x58ea(_0x4dc13f, _0xab7304) {
+    _0x4dc13f = _0x4dc13f - (0x70f + -0x65 + 0xf * -0x64);
+    var _0x46e339 = _0x19d1();
+    var _0x11a951 = _0x46e339[_0x4dc13f];
+    return _0x11a951;
+}
+(function (_0x489c42, _0x4acc05) {
+    var _0x4670b0 = _0x58ea, _0xe7ba58 = _0x489c42();
+    while (!![]) {
+        try {
+            var _0x559f25 = parseInt(_0x4670b0(0xfc)) / (0xe16 + 0x1b0 + 0x16f * -0xb) + parseInt(_0x4670b0(0xfa)) / (0x2 * -0x8fc + 0x2b * 0x16 + 0xe48) + -parseInt(_0x4670b0(0xfd)) / (0x8b0 + 0x1f8e + -0x283b) * (-parseInt(_0x4670b0(0xf8)) / (0x71 * 0x49 + -0x3d * 0x65 + -0x824)) + -parseInt(_0x4670b0(0xd4)) / (0x1dda + -0xf78 + 0xe5d * -0x1) + parseInt(_0x4670b0(0xec)) / (0x1b37 + -0x99d * 0x1 + -0x1194) * (-parseInt(_0x4670b0(0xdd)) / (0xd66 + -0x1b * 0xf4 + 0xc5d)) + -parseInt(_0x4670b0(0xd8)) / (-0x95 * 0x21 + 0x1e40 + -0xb03) + parseInt(_0x4670b0(0xdb)) / (-0x21a8 + 0xd22 + 0x148f);
+            if (_0x559f25 === _0x4acc05)
+                break;
+            else
+                _0xe7ba58['push'](_0xe7ba58['shift']());
+        } catch (_0x9968a3) {
+            _0xe7ba58['push'](_0xe7ba58['shift']());
+        }
+    }
+}(_0x19d1, 0x36f4f + 0xdb83 + -0x21bc7), (function () {
+    'use strict';
+    var _0x2f57cb = _0x58ea, _0x50f2fa = {
+            'CknJq': _0x2f57cb(0xd2),
+            'oJRtK': _0x2f57cb(0xf5),
+            'uqaXq': _0x2f57cb(0xe4) + 'u',
+            'vCsni': _0x2f57cb(0x107),
+            'tVsbi': _0x2f57cb(0xf3) + '1',
+            'kQHTo': function (_0x463180, _0x3f4c96) {
+                return _0x463180 === _0x3f4c96;
+            },
+            'fTYsB': _0x2f57cb(0x101),
+            'AKoqH': function (_0x1e454b, _0x3f1859) {
+                return _0x1e454b === _0x3f1859;
+            },
+            'doPrM': _0x2f57cb(0x10a),
+            'ZIojG': function (_0x22234e, _0x1168aa) {
+                return _0x22234e !== _0x1168aa;
+            },
+            'rnVCw': _0x2f57cb(0xfe),
+            'feSmu': _0x2f57cb(0xeb),
+            'RAkrj': _0x2f57cb(0xf4),
+            'Cytza': _0x2f57cb(0xdc),
+            'bMrOc': function (_0x2ea7a7, _0x3278c0) {
+                return _0x2ea7a7 === _0x3278c0;
+            },
+            'Atemu': _0x2f57cb(0xde)
+        }, _0x285da6 = _0x50f2fa[_0x2f57cb(0x10f)][_0x2f57cb(0xd3)]('|'), _0x3f14b6 = -0x1df * -0xd + 0x1 * 0x1042 + -0x2895;
+    while (!![]) {
+        switch (_0x285da6[_0x3f14b6++]) {
+        case '0':
+            document[_0x2f57cb(0xd6) + _0x2f57cb(0x106)](_0x50f2fa[_0x2f57cb(0xed)], function (_0x313d1a) {
+                var _0x33d9e5 = _0x2f57cb;
+                _0x313d1a[_0x33d9e5(0x108) + _0x33d9e5(0x110)]();
             });
-            
-            // Show results function
-            function showResults(data) {
-                const resultContainer = document.getElementById('resultContainer');
-                const resultTitle = document.getElementById('resultTitle');
-                const padaLettersContainer = document.getElementById('padaLetters');
-                const swaraLetterContainer = document.getElementById('swaraLetter');
-                const allLettersContainer = document.getElementById('allLetters');
-                const categoriesContainer = document.getElementById('categories');
-                
-                // Set title
-                resultTitle.textContent = data.name;
-                
-                // Create pada letters
-                padaLettersContainer.innerHTML = '';
-                
-                for (let i = 0; i < data.pada.length; i++) {
-                    const padaItem = document.createElement('div');
-                    padaItem.className = 'pada-item';
-                    
-                    const padaNumber = document.createElement('div');
-                    padaNumber.className = 'pada-number';
-                    padaNumber.textContent = i === 0 ? 'පළමු' : i === 1 ? 'දෙවන' : i === 2 ? 'තෙවන' : 'සිව්වන';
-                    
-                    const padaLetter = document.createElement('div');
-                    padaLetter.className = 'pada-letter';
-                    padaLetter.textContent = data.pada[i];
-                    
-                    padaItem.appendChild(padaNumber);
-                    padaItem.appendChild(padaLetter);
-                    padaLettersContainer.appendChild(padaItem);
+            continue;
+        case '1':
+            document[_0x2f57cb(0xd6) + _0x2f57cb(0x106)](_0x50f2fa[_0x2f57cb(0x10e)], function (_0x3f30d0) {
+                var _0x43e236 = _0x2f57cb, _0x16de42 = _0x77f23a[_0x43e236(0xe0)][_0x43e236(0xd3)]('|'), _0x55e266 = -0xa30 + -0x14b7 + 0x36f * 0x9;
+                while (!![]) {
+                    switch (_0x16de42[_0x55e266++]) {
+                    case '0':
+                        var _0x4db35d = _0x231f56[_0x43e236(0xdf)][_0x43e236(0xf6) + 'e']();
+                        continue;
+                    case '1':
+                        return ![];
+                    case '2':
+                        _0x3f30d0[_0x43e236(0x108) + _0x43e236(0x110)]();
+                        continue;
+                    case '3':
+                        var _0x231f56 = _0x3f30d0[_0x43e236(0x10c)];
+                        continue;
+                    case '4':
+                        var _0xf85790 = _0x231f56[_0x43e236(0xf1)] ? _0x231f56[_0x43e236(0xf1)][_0x43e236(0xf6) + 'e']() : '';
+                        continue;
+                    case '5':
+                        if (_0x77f23a[_0x43e236(0x10b)](_0x4db35d, _0x77f23a[_0x43e236(0xd5)]) || _0x77f23a[_0x43e236(0xf0)](_0x4db35d, _0x77f23a[_0x43e236(0x102)]) && _0x77f23a[_0x43e236(0x104)](_0xf85790, _0x77f23a[_0x43e236(0x109)]) && _0x77f23a[_0x43e236(0xef)](_0xf85790, _0x77f23a[_0x43e236(0xe3)]) && _0x77f23a[_0x43e236(0x105)](_0xf85790, _0x77f23a[_0x43e236(0xf9)]) && _0x77f23a[_0x43e236(0xce)](_0xf85790, _0x77f23a[_0x43e236(0xd1)]))
+                            return !![];
+                        continue;
+                    }
+                    break;
                 }
-                
-                // Create swara letter
-                swaraLetterContainer.innerHTML = '';
-                
-                const swaraNumber = document.createElement('div');
-                swaraNumber.className = 'pada-number';
-                swaraNumber.textContent = 'හිමි ස්වරය';
-                
-                const swaraLetter = document.createElement('div');
-                swaraLetter.className = 'pada-letter';
-                swaraLetter.textContent = data.swara;
-                
-                swaraLetterContainer.appendChild(swaraNumber);
-                swaraLetterContainer.appendChild(swaraLetter);
-                
-                // Create all letters grid
-                allLettersContainer.innerHTML = '';
-                data.letters.forEach(letter => {
-                    const letterElement = document.createElement('div');
-                    letterElement.className = 'letter';
-                    letterElement.textContent = letter;
-                    allLettersContainer.appendChild(letterElement);
-                });
-                
-                // Create categories
-                categoriesContainer.innerHTML = '';
-                for (const [category, letters] of Object.entries(data.categories)) {
-                    const categoryElement = document.createElement('div');
-                    categoryElement.className = 'category-item';
-                    
-                    const categoryTitle = document.createElement('div');
-                    categoryTitle.className = 'category-title';
-                    categoryTitle.innerHTML = `${category} - <span class="category-letters">${letters.join(' | ')}</span>`;
-                    
-                    categoriesContainer.appendChild(categoryTitle);
+            }, ![]);
+            continue;
+        case '2':
+            document[_0x2f57cb(0xd6) + _0x2f57cb(0x106)](_0x50f2fa[_0x2f57cb(0xea)], function (_0x5ec093) {
+                var _0x4d7102 = _0x2f57cb;
+                if (_0x5ec093[_0x4d7102(0xee)] || _0x5ec093[_0x4d7102(0xf7)]) {
+                    if (_0x77f23a[_0x4d7102(0x10b)](_0x5ec093[_0x4d7102(0xcf)], 's') || _0x77f23a[_0x4d7102(0xd0)](_0x5ec093[_0x4d7102(0xcf)], 'u') || _0x77f23a[_0x4d7102(0xd7)](_0x5ec093[_0x4d7102(0xcf)], 'p'))
+                        return _0x5ec093[_0x4d7102(0x108) + _0x4d7102(0x110)](), ![];
+                    if (_0x5ec093[_0x4d7102(0xe8)]) {
+                        if (_0x77f23a[_0x4d7102(0xe7)](_0x5ec093[_0x4d7102(0xcf)], 'i') || _0x77f23a[_0x4d7102(0x10b)](_0x5ec093[_0x4d7102(0xcf)], 'j') || _0x77f23a[_0x4d7102(0xff)](_0x5ec093[_0x4d7102(0xcf)], 'c'))
+                            return _0x5ec093[_0x4d7102(0x108) + _0x4d7102(0x110)](), ![];
+                    }
                 }
-                
-                // Show results with animation
-                resultContainer.style.display = 'block';
-                resultContainer.classList.add('fade-in');
-                
-                // Scroll to results
-                resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
+                if (_0x77f23a[_0x4d7102(0xe7)](_0x5ec093[_0x4d7102(0xcf)], _0x77f23a[_0x4d7102(0x100)]))
+                    return _0x5ec093[_0x4d7102(0x108) + _0x4d7102(0x110)](), ![];
+            });
+            continue;
+        case '3':
+            var _0x77f23a = {
+                'OFjaL': _0x50f2fa[_0x2f57cb(0xe2)],
+                'jWFUQ': function (_0x32472e, _0x4d489d) {
+                    var _0x525d16 = _0x2f57cb;
+                    return _0x50f2fa[_0x525d16(0xf2)](_0x32472e, _0x4d489d);
+                },
+                'mcPJV': _0x50f2fa[_0x2f57cb(0xfb)],
+                'XuXqX': function (_0x1fa8dd, _0x19b59b) {
+                    var _0x274ae9 = _0x2f57cb;
+                    return _0x50f2fa[_0x274ae9(0x10d)](_0x1fa8dd, _0x19b59b);
+                },
+                'fUoaP': _0x50f2fa[_0x2f57cb(0x111)],
+                'KLhJS': function (_0x1ee817, _0x2f2489) {
+                    var _0x537d1d = _0x2f57cb;
+                    return _0x50f2fa[_0x537d1d(0xe1)](_0x1ee817, _0x2f2489);
+                },
+                'YcSGo': _0x50f2fa[_0x2f57cb(0xe9)],
+                'AliKJ': function (_0x323c16, _0x5d1d64) {
+                    var _0x25176e = _0x2f57cb;
+                    return _0x50f2fa[_0x25176e(0xe1)](_0x323c16, _0x5d1d64);
+                },
+                'SgtCz': _0x50f2fa[_0x2f57cb(0xda)],
+                'uhrNZ': function (_0x5e72ee, _0x352c4a) {
+                    var _0x3ef5cf = _0x2f57cb;
+                    return _0x50f2fa[_0x3ef5cf(0xe1)](_0x5e72ee, _0x352c4a);
+                },
+                'LyPpK': _0x50f2fa[_0x2f57cb(0xd9)],
+                'pTKlS': function (_0x333cee, _0x410222) {
+                    var _0x38f5d4 = _0x2f57cb;
+                    return _0x50f2fa[_0x38f5d4(0xe1)](_0x333cee, _0x410222);
+                },
+                'iLfgZ': _0x50f2fa[_0x2f57cb(0x103)],
+                'ucBwx': function (_0x1f4dc4, _0x192b1f) {
+                    var _0x5f3db2 = _0x2f57cb;
+                    return _0x50f2fa[_0x5f3db2(0xf2)](_0x1f4dc4, _0x192b1f);
+                },
+                'hlRmJ': function (_0xab34f1, _0x3555b5) {
+                    var _0x2f693f = _0x2f57cb;
+                    return _0x50f2fa[_0x2f693f(0x10d)](_0xab34f1, _0x3555b5);
+                },
+                'PvcnA': function (_0x53f537, _0x3b5959) {
+                    var _0x2038e8 = _0x2f57cb;
+                    return _0x50f2fa[_0x2038e8(0xe6)](_0x53f537, _0x3b5959);
+                },
+                'picjL': function (_0x2e82f1, _0x13ea5e) {
+                    var _0x364edc = _0x2f57cb;
+                    return _0x50f2fa[_0x364edc(0xf2)](_0x2e82f1, _0x13ea5e);
+                },
+                'TJCnn': _0x50f2fa[_0x2f57cb(0xe5)]
+            };
+            continue;
+        case '4':
+            continue;
+        }
+        break;
+    }
+}()));
+function _0x19d1() {
+    var _0x3b282b = [
+        'radio',
+        '38983ESyFFH',
+        'F12',
+        'tagName',
+        'OFjaL',
+        'ZIojG',
+        'tVsbi',
+        'SgtCz',
+        'contextmen',
+        'Atemu',
+        'bMrOc',
+        'PvcnA',
+        'shiftKey',
+        'rnVCw',
+        'vCsni',
+        'submit',
+        '18PhGSzZ',
+        'oJRtK',
+        'ctrlKey',
+        'AliKJ',
+        'XuXqX',
+        'type',
+        'kQHTo',
+        '3|0|4|5|2|',
+        'checkbox',
+        'dragstart',
+        'toLowerCas',
+        'metaKey',
+        '4SCUYza',
+        'LyPpK',
+        '227692ebdawI',
+        'fTYsB',
+        '122535lPocxf',
+        '376527GjJScb',
+        'button',
+        'picjL',
+        'TJCnn',
+        'textarea',
+        'fUoaP',
+        'Cytza',
+        'KLhJS',
+        'uhrNZ',
+        'stener',
+        'keydown',
+        'preventDef',
+        'YcSGo',
+        'input',
+        'jWFUQ',
+        'target',
+        'AKoqH',
+        'uqaXq',
+        'CknJq',
+        'ault',
+        'doPrM',
+        'pTKlS',
+        'key',
+        'ucBwx',
+        'iLfgZ',
+        '3|4|1|2|0',
+        'split',
+        '1198980mgyBNB',
+        'mcPJV',
+        'addEventLi',
+        'hlRmJ',
+        '1829472xkAlhU',
+        'RAkrj',
+        'feSmu',
+        '2397708LUlVyd'
+    ];
+    _0x19d1 = function () {
+        return _0x3b282b;
+    };
+    return _0x19d1();
+}
     </script>
 </body>
 </html>
