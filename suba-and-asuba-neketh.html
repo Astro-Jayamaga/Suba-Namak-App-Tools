@@ -1,369 +1,634 @@
 <!DOCTYPE html>
 <html lang="si">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ජන්ම නැකතට සුබ හා අසුබ නැකැත්</title>
-    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@400;700&family=Noto+Serif+Sinhala:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #7F0000;
-            --secondary: #FFA500;
-            --background: #FDF5E6;
-            --good-bg: #e8f5e9;
-            --bad-bg: #ffebee;
-            --good-text: #2e7d32;
-            --bad-text: #c62828;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Noto Serif Sinhala', serif;
-            background-color: var(--background);
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            margin-bottom: 3rem;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 0.5s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1 {
-            font-family: 'Gemunu Libre', sans-serif;
-            color: var(--primary);
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.2rem;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--secondary);
-            border-radius: 3px;
-        }
-        
-        .select-group {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        select {
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-family: 'Noto Serif Sinhala', serif;
-            font-size: 1rem;
-            color: #333;
-            background-color: white;
-            transition: all 0.3s ease;
-        }
-        
-        select:focus {
-            border-color: var(--secondary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2);
-        }
-        
-        .btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-family: 'Noto Serif Sinhala', serif;
-            font-size: 1.1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: block;
-            margin: 0 auto;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn:hover {
-            background-color: #600;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-        
-        .btn:active {
-            transform: translateY(0);
-        }
-        
-        .results {
-            display: none;
-            margin-top: 30px;
-            animation: fadeIn 0.5s ease-out;
-        }
-        
-        .result-category {
-            margin-bottom: 25px;
-            border-radius: 5px;
-            padding: 15px;
-            animation: slideIn 0.5s ease-out;
-        }
-        
-        .good-category {
-            background-color: var(--good-bg);
-            border-left: 4px solid var(--good-text);
-        }
-        
-        .bad-category {
-            background-color: var(--bad-bg);
-            border-left: 4px solid var(--bad-text);
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        .result-category h3 {
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .good-category h3 {
-            color: var(--good-text);
-        }
-        
-        .bad-category h3 {
-            color: var(--bad-text);
-        }
-        
-        .result-items {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .result-item {
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-        }
-        
-        .good-category .result-item {
-            border: 1px solid var(--good-text);
-        }
-        
-        .bad-category .result-item {
-            border: 1px solid var(--bad-text);
-        }
-        
-        .result-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
-        }
-        
-        .note {
-            margin-top: 40px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-        }
-        
-        .copyright {
-            text-align: center;
-            margin-top: 40px;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ජන්ම නැකතට සුබ හා අසුබ නැකැත්</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@400;700&family=Noto+Serif+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7F0000;
+      --secondary: #FFA500;
+      --background: #FDF5E6;
+      
+      /* Result Category Colors */
+      --good-bg: #e8f5e9;
+      --good-text: #2e7d32;
+      --good-border: #a5d6a7;
+      
+      --bad-bg: #ffebee;
+      --bad-text: #c62828;
+      --bad-border: #ef9a9a;
+      
+      /* CHANGED: Janma Theme to Blue */
+      --birth-bg: #e3f2fd; 
+      --birth-text: #0d47a1; 
+      --birth-border: #90caf9;
+
+      /* Error Colors */
+      --error-bg: #fff3e0;
+      --error-text: #e65100;
+      --error-border: #ffb74d;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Serif Sinhala', serif;
+      background-color: var(--background);
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      margin-bottom: 3rem;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    h1 {
+      font-family: 'Gemunu Libre', sans-serif;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2.2rem;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: var(--secondary);
+      border-radius: 3px;
+    }
+    
+    .select-group {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    select {
+      padding: 12px 15px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      font-family: 'Noto Serif Sinhala', serif;
+      font-size: 1rem;
+      color: #333;
+      background-color: white;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    select:focus {
+      border-color: var(--secondary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2);
+    }
+    
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-family: 'Noto Serif Sinhala', serif;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn:hover {
+      background-color: #600;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .btn:active {
+      transform: translateY(0);
+    }
+    
+    .error-message {
+      display: none;
+      background-color: var(--error-bg);
+      color: var(--error-text);
+      border: 1px solid var(--error-border);
+      border-left: 5px solid var(--error-text);
+      border-radius: 5px;
+      padding: 15px;
+      margin: 20px 0;
+      font-size: 1rem;
+      animation: slideIn 0.3s ease-out;
+    }
+    
+    .error-message.show {
+      display: block;
+    }
+    
+    .results {
+      display: none;
+      margin-top: 30px;
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    .result-category {
+      margin-bottom: 25px;
+      border-radius: 8px;
+      padding: 15px;
+      animation: slideIn 0.5s ease-out;
+      border: 1px solid transparent;
+    }
+    
+    .good-category {
+      background-color: var(--good-bg);
+      border-left: 5px solid var(--good-text);
+      border-color: var(--good-border);
+    }
+    
+    .bad-category {
+      background-color: var(--bad-bg);
+      border-left: 5px solid var(--bad-text);
+      border-color: var(--bad-border);
+    }
+
+    .birth-category {
+      background-color: var(--birth-bg);
+      border-left: 5px solid var(--birth-text);
+      border-color: var(--birth-border);
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    .result-category h3 {
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .good-category h3 { color: var(--good-text); }
+    .bad-category h3 { color: var(--bad-text); }
+    .birth-category h3 { color: var(--birth-text); }
+    
+    .result-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .result-item {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      border-width: 2px;
+      border-style: solid;
+    }
+    
+    .good-category .result-item {
+      border-color: var(--good-border);
+      color: var(--good-text);
+    }
+    
+    .bad-category .result-item {
+      border-color: var(--bad-border);
+      color: var(--bad-text);
+    }
+
+    .birth-category .result-item {
+      border-color: var(--birth-border);
+      color: var(--birth-text);
+    }
+    
+    .result-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Active State for selected Nekatha */
+    .good-category .result-item.active {
+      background-color: var(--good-text);
+      color: white;
+    }
+    .bad-category .result-item.active {
+      background-color: var(--bad-text);
+      color: white;
+    }
+    .birth-category .result-item.active {
+      background-color: var(--birth-text);
+      color: white;
+    }
+    
+    /* Letters Row Styling */
+    .letters-row {
+      background-color: rgba(255, 255, 255, 0.6);
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 0.95rem;
+    }
+
+    .letters-label {
+      font-weight: bold;
+      opacity: 0.8;
+      min-width: 80px;
+    }
+
+    .letters-container {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .letter-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background-color: white;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      font-weight: bold;
+    }
+    
+    .note {
+      margin-top: 40px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.8);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .note p {
+      margin-bottom: 8px;
+    }
+
+    .note p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .copyright {
+      text-align: center;
+      margin-top: 40px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE10+/Edge */
+    user-select: none;         /* Standard */
+}
+
+input, textarea {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+}
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .result-items {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>ජන්ම නැකතට සුබ හා අසුබ නැකැත්</h1>
-        
-        <div class="select-group">
-            <select id="nakatha">
-                <option value="" selected disabled>ජන්ම නැකත තෝරන්න</option>
-                <option value="අස්විද">අස්විද</option>
-                <option value="බෙරණ">බෙරණ</option>
-                <option value="කැති">කැති</option>
-                <option value="රෙහෙණ">රෙහෙණ</option>
-                <option value="මුවසිරස">මුවසිරස</option>
-                <option value="අද">අද</option>
-                <option value="පුනාවස">පුනාවස</option>
-                <option value="පුෂ">පුෂ</option>
-                <option value="අස්ලිස">අස්ලිස</option>
-                <option value="මා">මා</option>
-                <option value="පුවපල්">පුවපල්</option>
-                <option value="උත්‍රපල්">උත්‍රපල්</option>
-                <option value="හත">හත</option>
-                <option value="සිත">සිත</option>
-                <option value="සා">සා</option>
-                <option value="විසා">විසා</option>
-                <option value="අනුර">අනුර</option>
-                <option value="දෙට">දෙට</option>
-                <option value="මුල">මුල</option>
-                <option value="පුවසල">පුවසල</option>
-                <option value="උත්‍රසල">උත්‍රසල</option>
-                <option value="සුවණ">සුවණ</option>
-                <option value="දෙනට">දෙනට</option>
-                <option value="සියාවස">සියාවස</option>
-                <option value="පුවපුටුප">පුවපුටුප</option>
-                <option value="උත්‍රපුටුප">උත්‍රපුටුප</option>
-                <option value="රේවතී">රේවතී</option>
-            </select>
-        </div>
-        
-        <button class="btn" id="findBtn">සොයන්න</button>
-        
-        <div class="results" id="results">
-            <!-- Results will be inserted here by JavaScript -->
-        </div>
-        
-        <div class="note">
+  <div class="container">
+    <h1>ජන්ම නැකතට සුබ හා අසුබ නැකැත්</h1>
+    
+    <div class="select-group">
+      <select id="nakatha">
+        <option value="" selected disabled>උපන් නැකත තෝරන්න</option>
+        <option value="අස්විද">අස්විද</option>
+        <option value="බෙරණ">බෙරණ</option>
+        <option value="කැති">කැති</option>
+        <option value="රෙහෙණ">රෙහෙණ</option>
+        <option value="මුවසිරස">මුවසිරස</option>
+        <option value="අද">අද</option>
+        <option value="පුනාවස">පුනාවස</option>
+        <option value="පුෂ">පුෂ</option>
+        <option value="අස්ලිස">අස්ලිස</option>
+        <option value="මා">මා</option>
+        <option value="පුවපල්">පුවපල්</option>
+        <option value="උත්‍රපල්">උත්‍රපල්</option>
+        <option value="හත">හත</option>
+        <option value="සිත">සිත</option>
+        <option value="සා">සා</option>
+        <option value="විසා">විසා</option>
+        <option value="අනුර">අනුර</option>
+        <option value="දෙට">දෙට</option>
+        <option value="මුල">මුල</option>
+        <option value="පුවසල">පුවසල</option>
+        <option value="උත්‍රසල">උත්‍රසල</option>
+        <option value="සුවණ">සුවණ</option>
+        <option value="දෙනට">දෙනට</option>
+        <option value="සියාවස">සියාවස</option>
+        <option value="පුවපුටුප">පුවපුටුප</option>
+        <option value="උත්‍රපුටුප">උත්‍රපුටුප</option>
+        <option value="රේවතී">රේවතී</option>
+      </select>
+    </div>
+    
+    <div class="error-message" id="errorMessage">
+      කරුණාකර ඔබගේ උපන් නැකත තෝරන්න!
+    </div>
+    
+    <button class="btn" id="findBtn">සොයන්න</button>
+    
+    <div class="results" id="results">
+      </div>
+ 
+    <div class="note">
             <p><strong>සටහන:</strong> මෙහිදී ජන්ම නැකතට අදාළව  සම්පත්, ක්ෂේම, සාධක, මෛත්‍රී හා පරම මෛත්‍රී ලෙස සඳහන් වන නැකැත් සුබ නැකැත් වේ. විපත්, ප්‍රත්‍යාරී හා වධ යටතේ ඇති නැකැත් ජන්ම නැකතට අසුබ වේ.</p>
         </div>
-        
-        <div class="copyright">
-            <p>&copy; <span id="year"></span> Suba Namak | Astro Jayamaga</p>
-        </div>
+    
+    <div class="copyright">
+      <p>&copy; <span id="year"></span> Suba Namak | Astro Jayamaga</p>
     </div>
+  </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set current year
-            document.getElementById('year').textContent = new Date().getFullYear();
-            
-            // Find button click handler
-            document.getElementById('findBtn').addEventListener('click', function() {
-                const nakatha = document.getElementById('nakatha').value;
-                
-                if (!nakatha) {
-                    alert('කරුණාකර ඔබගේ ජන්ම නැකත තෝරන්න!');
-                    return;
-                }
-                
-                showResults(nakatha);
+  <script>
+    function _0x5874(_0x59fc48,_0xe51068){_0x59fc48=_0x59fc48-(-0x3cd+0x14*0x137+-0x1357);const _0x13e654=_0xbd01();let _0x30a4e6=_0x13e654[_0x59fc48];return _0x30a4e6;}const _0x216eec=_0x5874;(function(_0x4c9451,_0x10e223){const _0x121b56=_0x5874,_0x5a1ff0=_0x4c9451();while(!![]){try{const _0x30d1ec=parseInt(_0x121b56(0x1d1))/(0x1*0x2534+-0x18e*0x5+0x5d*-0x51)+-parseInt(_0x121b56(0x19e))/(-0x3*-0x753+0xe59*0x1+0x10*-0x245)*(-parseInt(_0x121b56(0x163))/(-0x1575+0x22f1*-0x1+0x1*0x3869))+parseInt(_0x121b56(0x185))/(-0x135d+0x3ec+0xf75)+-parseInt(_0x121b56(0x1c8))/(0x26f6+0x955+-0x3046)+-parseInt(_0x121b56(0x19a))/(-0x5*-0x5e0+-0x1*-0xa55+-0x27af*0x1)+-parseInt(_0x121b56(0x1d0))/(0xc63*0x2+0x1ac7+-0x3386)+-parseInt(_0x121b56(0x12a))/(-0x2a6+0xf89+-0xcdb)*(-parseInt(_0x121b56(0x1ce))/(0x120e+-0x14ee+0x2e9*0x1));if(_0x30d1ec===_0x10e223)break;else _0x5a1ff0['push'](_0x5a1ff0['shift']());}catch(_0x2bbedf){_0x5a1ff0['push'](_0x5a1ff0['shift']());}}}(_0xbd01,0xff*-0x385+-0x180de+-0x15*-0xd73d),document[_0x216eec(0x16d)+_0x216eec(0x133)](_0x216eec(0x1cb)+_0x216eec(0x17e),function(){const _0x1cde20=_0x216eec,_0x4f28c0={'rMjeP':_0x1cde20(0x136),'FMPxR':_0x1cde20(0x15f),'XkVFT':_0x1cde20(0x12e),'dWazV':_0x1cde20(0x1a1),'nSupY':_0x1cde20(0x18e),'wWVEq':function(_0xdbc548,_0x3ce1d9){return _0xdbc548(_0x3ce1d9);},'frzPK':function(_0x38ee13,_0x3a072e){return _0x38ee13===_0x3a072e;},'IkYHl':_0x1cde20(0x1a0),'ZJIpg':_0x1cde20(0x171),'DdzbW':_0x1cde20(0x1df)+'m','zNlcl':_0x1cde20(0x176),'ZXPsd':_0x1cde20(0x188),'oOyaE':_0x1cde20(0x143)+'em','JjmKx':function(_0x520bea,_0x1a73ed){return _0x520bea(_0x1a73ed);},'bTazW':_0x1cde20(0x13f),'yWars':_0x1cde20(0x1b5),'yILuB':_0x1cde20(0x1ca),'QdGaT':_0x1cde20(0x1de),'acHFV':_0x1cde20(0x18f),'FYdyt':_0x1cde20(0x137),'UPtvV':_0x1cde20(0x1a2),'MMDad':_0x1cde20(0x170),'ktwKI':_0x1cde20(0x1ac),'DNxdm':_0x1cde20(0x144),'ZAjXa':_0x1cde20(0x132),'WJwJb':_0x1cde20(0x177),'PzRLW':_0x1cde20(0x128),'hzhCg':_0x1cde20(0x16e),'AFMdk':_0x1cde20(0x1ab),'RuhaE':_0x1cde20(0x1b8),'eMykG':_0x1cde20(0x1db),'tlVLx':_0x1cde20(0x160),'RUTIU':_0x1cde20(0x197),'FvWdL':_0x1cde20(0x1a8),'KptiV':_0x1cde20(0x1b9),'PRurL':_0x1cde20(0x1c7),'CPtrj':_0x1cde20(0x1b7),'awVMn':_0x1cde20(0x15d),'qcSWk':_0x1cde20(0x16f),'sxrUz':_0x1cde20(0x1ba),'TenMZ':_0x1cde20(0x1be),'zqPqf':_0x1cde20(0x169),'PUkyA':_0x1cde20(0x1dd),'jRbkI':_0x1cde20(0x17c),'unDgr':_0x1cde20(0x1aa),'MPnAB':_0x1cde20(0x1d9),'Hwkxn':_0x1cde20(0x1b3),'yrlGy':_0x1cde20(0x15a),'PNgYq':function(_0x15d6b4,_0x1ffb25){return _0x15d6b4<_0x1ffb25;},'lymGq':function(_0x2179ce,_0x32871d){return _0x2179ce<_0x32871d;},'mEmlF':function(_0x4d6f1c,_0x2ecb53){return _0x4d6f1c%_0x2ecb53;},'YLJRl':function(_0x5339b5,_0x159747){return _0x5339b5+_0x159747;},'klBSo':function(_0x3dc073,_0x1ea634){return _0x3dc073+_0x1ea634;},'apTbZ':function(_0x45d86c,_0x1adff2){return _0x45d86c*_0x1adff2;},'EACWz':function(_0x210dfe,_0x21f0e7){return _0x210dfe*_0x21f0e7;},'rCQBz':_0x1cde20(0x1df)+'ms','BWmLz':_0x1cde20(0x1a5)+'w','ZUASE':function(_0x589fe5,_0x3d18db){return _0x589fe5(_0x3d18db);},'qGQOl':_0x1cde20(0x138),'TsnsL':_0x1cde20(0x184),'PbQKm':_0x1cde20(0x187),'tsvIo':_0x1cde20(0x1d6),'vXnLk':_0x1cde20(0x14c)+'ge','XaoDJ':_0x1cde20(0x161),'vdaQR':_0x1cde20(0x199),'cGXfC':_0x1cde20(0x181)};document[_0x1cde20(0x13e)+_0x1cde20(0x149)](_0x4f28c0[_0x1cde20(0x153)])[_0x1cde20(0x18d)+'t']=new Date()[_0x1cde20(0x1d3)+'r']();const _0x3a4510=document[_0x1cde20(0x13e)+_0x1cde20(0x149)](_0x4f28c0[_0x1cde20(0x166)]),_0x267ade=document[_0x1cde20(0x13e)+_0x1cde20(0x149)](_0x4f28c0[_0x1cde20(0x1e0)]),_0x326530=document[_0x1cde20(0x13e)+_0x1cde20(0x149)](_0x4f28c0[_0x1cde20(0x129)]),_0x8c3f=document[_0x1cde20(0x13e)+_0x1cde20(0x149)](_0x4f28c0[_0x1cde20(0x13c)]),_0x206a62={'අස්විද':['චු','චෙ','චො','ල'],'බෙරණ':['ලි','ලු','ලෙ','ලො'],'කැති':['අ','ඉ','උ','එ'],'රෙහෙණ':['ඔ','ව','වි','වු'],'මුවසිරස':['වෙ','වො','ක','කි'],'අද':['කු','ඝ','ඞ','ඡ'],'පුනාවස':['කෙ','කො','හ','හි'],'පුෂ':['හු','හෙ','හො','ඩ'],'අස්ලිස':['ඩි','ඩු','ඩෙ','ඩො'],'මා':['මා','මි','මු','මෙ'],'පුවපල්':['මො','ට','ටි','ටු'],'උත්‍රපල්':['ටෙ','ටො','ප','පි'],'හත':['පු','ෂ','ණ','ඨ'],'සිත':['පෙ','පො','ර','රි'],'සා':['රු','රෙ','රො','ත'],'විසා':['ති','තු','තෙ','තො'],'අනුර':['න','නි','නු','නෙ'],'දෙට':['නො','ය','යි','යු'],'මුල':['යෙ','යො','බ','බි'],'පුවසල':['බු','ධ','එ','ඪ'],'උත්‍රසල':['බෙ','බො','ජ','ජි'],'සුවණ':['ජු','ජෙ','ජො','ශ'],'දෙනට':['ග','ගි','ගු','ගෙ'],'සියාවස':['ගො','ස','සි','සු'],'පුවපුටුප':['සෙ','සො','ද','දි'],'උත්‍රපුටුප':['දු','ථ','ඣ','ඤ'],'රේවතී':['දෙ','දො','ච','චි']};_0x267ade[_0x1cde20(0x16d)+_0x1cde20(0x133)](_0x4f28c0[_0x1cde20(0x146)],function(){const _0x4b25e4=_0x1cde20;this[_0x4b25e4(0x1d2)]&&_0x326530[_0x4b25e4(0x15e)][_0x4b25e4(0x173)](_0x4f28c0[_0x4b25e4(0x162)]);}),_0x3a4510[_0x1cde20(0x16d)+_0x1cde20(0x133)](_0x4f28c0[_0x1cde20(0x17a)],function(){const _0x4e1f06=_0x1cde20,_0x52c41e=_0x267ade[_0x4e1f06(0x1d2)];if(!_0x52c41e){const _0x35e32e=_0x4f28c0[_0x4e1f06(0x130)][_0x4e1f06(0x1d4)]('|');let _0x253e26=-0x191*0x4+-0x2*0xb4e+0x58*0x54;while(!![]){switch(_0x35e32e[_0x253e26++]){case'0':_0x267ade[_0x4e1f06(0x13b)]();continue;case'1':_0x326530[_0x4e1f06(0x1a3)+_0x4e1f06(0x13a)]({'behavior':_0x4f28c0[_0x4e1f06(0x1da)],'block':_0x4f28c0[_0x4e1f06(0x1a7)]});continue;case'2':_0x8c3f[_0x4e1f06(0x1b6)][_0x4e1f06(0x1d8)]=_0x4f28c0[_0x4e1f06(0x155)];continue;case'3':_0x326530[_0x4e1f06(0x15e)][_0x4e1f06(0x1a4)](_0x4f28c0[_0x4e1f06(0x162)]);continue;case'4':return;}break;}}_0x326530[_0x4e1f06(0x15e)][_0x4e1f06(0x173)](_0x4f28c0[_0x4e1f06(0x162)]),_0x4f28c0[_0x4e1f06(0x1dc)](_0x10aded,_0x52c41e);}),_0x267ade[_0x1cde20(0x16d)+_0x1cde20(0x133)](_0x4f28c0[_0x1cde20(0x1bc)],function(_0xf96dae){const _0x1b42b2=_0x1cde20;_0x4f28c0[_0x1b42b2(0x1af)](_0xf96dae[_0x1b42b2(0x14d)],_0x4f28c0[_0x1b42b2(0x1c9)])&&_0x3a4510[_0x1b42b2(0x188)]();});function _0x10aded(_0x399a0a){const _0xa82fd8=_0x1cde20,_0x2e0fbe={'jhrFb':_0x4f28c0[_0xa82fd8(0x179)],'uCEvS':_0x4f28c0[_0xa82fd8(0x165)],'qEdHQ':function(_0x4bb7d5,_0x510db5){const _0x4f410e=_0xa82fd8;return _0x4f28c0[_0x4f410e(0x180)](_0x4bb7d5,_0x510db5);}},_0x53e459=[_0x4f28c0[_0xa82fd8(0x12d)],'මා',_0x4f28c0[_0xa82fd8(0x194)],_0x4f28c0[_0xa82fd8(0x1c4)],_0x4f28c0[_0xa82fd8(0x1a6)],_0x4f28c0[_0xa82fd8(0x134)],_0x4f28c0[_0xa82fd8(0x18b)],_0x4f28c0[_0xa82fd8(0x196)],_0x4f28c0[_0xa82fd8(0x182)],_0x4f28c0[_0xa82fd8(0x164)],'හත',_0x4f28c0[_0xa82fd8(0x145)],_0x4f28c0[_0xa82fd8(0x1e2)],_0x4f28c0[_0xa82fd8(0x156)],_0x4f28c0[_0xa82fd8(0x1b4)],'අද','සා',_0x4f28c0[_0xa82fd8(0x12f)],_0x4f28c0[_0xa82fd8(0x198)],_0x4f28c0[_0xa82fd8(0x1bb)],_0x4f28c0[_0xa82fd8(0x15b)],_0x4f28c0[_0xa82fd8(0x175)],_0x4f28c0[_0xa82fd8(0x154)],_0x4f28c0[_0xa82fd8(0x1b0)],_0x4f28c0[_0xa82fd8(0x193)],_0x4f28c0[_0xa82fd8(0x159)],_0x4f28c0[_0xa82fd8(0x1a9)]],_0x109db9=[{'name':_0x4f28c0[_0xa82fd8(0x13d)],'type':_0x4f28c0[_0xa82fd8(0x15c)]},{'name':_0x4f28c0[_0xa82fd8(0x12b)],'type':_0x4f28c0[_0xa82fd8(0x174)]},{'name':_0x4f28c0[_0xa82fd8(0x1bd)],'type':_0x4f28c0[_0xa82fd8(0x190)]},{'name':_0x4f28c0[_0xa82fd8(0x1d5)],'type':_0x4f28c0[_0xa82fd8(0x174)]},{'name':_0x4f28c0[_0xa82fd8(0x178)],'type':_0x4f28c0[_0xa82fd8(0x190)]},{'name':_0x4f28c0[_0xa82fd8(0x168)],'type':_0x4f28c0[_0xa82fd8(0x174)]},{'name':'වධ','type':_0x4f28c0[_0xa82fd8(0x190)]},{'name':_0x4f28c0[_0xa82fd8(0x191)],'type':_0x4f28c0[_0xa82fd8(0x174)]},{'name':_0x4f28c0[_0xa82fd8(0x1ae)],'type':_0x4f28c0[_0xa82fd8(0x174)]}];let _0x91b57=-0x1a5*0xb+0x17b9*-0x1+0x29d0;if([_0x4f28c0[_0xa82fd8(0x12d)],'මා',_0x4f28c0[_0xa82fd8(0x194)]][_0xa82fd8(0x1c1)](_0x399a0a))_0x91b57=0x5f*0x36+0x1*-0x1327+-0xe3*0x1;else{if([_0x4f28c0[_0xa82fd8(0x1c4)],_0x4f28c0[_0xa82fd8(0x1a6)],_0x4f28c0[_0xa82fd8(0x134)]][_0xa82fd8(0x1c1)](_0x399a0a))_0x91b57=0x1928+0x1*0x5da+-0x5*0x633;else{if([_0x4f28c0[_0xa82fd8(0x18b)],_0x4f28c0[_0xa82fd8(0x196)],_0x4f28c0[_0xa82fd8(0x182)]][_0xa82fd8(0x1c1)](_0x399a0a))_0x91b57=0x267a+-0x54e*-0x7+-0x4b96;else{if([_0x4f28c0[_0xa82fd8(0x164)],'හත',_0x4f28c0[_0xa82fd8(0x145)]][_0xa82fd8(0x1c1)](_0x399a0a))_0x91b57=-0x184a*0x1+0x132d*0x1+0x526;else{if([_0x4f28c0[_0xa82fd8(0x1e2)],_0x4f28c0[_0xa82fd8(0x156)],_0x4f28c0[_0xa82fd8(0x1b4)]][_0xa82fd8(0x1c1)](_0x399a0a))_0x91b57=0x5*-0x166+-0x2210+0x291a;else{if(['අද','සා',_0x4f28c0[_0xa82fd8(0x12f)]][_0xa82fd8(0x1c1)](_0x399a0a))_0x91b57=0x6*0x425+-0xaeb+-0xde4;else{if([_0x4f28c0[_0xa82fd8(0x198)],_0x4f28c0[_0xa82fd8(0x1bb)],_0x4f28c0[_0xa82fd8(0x15b)]][_0xa82fd8(0x1c1)](_0x399a0a))_0x91b57=-0x1*-0x2513+0x250+0x37*-0xb7;else[_0x4f28c0[_0xa82fd8(0x175)],_0x4f28c0[_0xa82fd8(0x154)],_0x4f28c0[_0xa82fd8(0x1b0)]][_0xa82fd8(0x1c1)](_0x399a0a)?_0x91b57=0xc3*0x32+-0x7*-0x1d3+-0x32c6*0x1:_0x91b57=-0x1968+0xada+-0x2ee*-0x5;}}}}}}_0x8c3f[_0xa82fd8(0x151)]='';for(let _0x1c0845=-0xa97*0x1+-0xfaf+0xb1*0x26;_0x4f28c0[_0xa82fd8(0x1b2)](_0x1c0845,_0x109db9[_0xa82fd8(0x139)]);_0x1c0845++){const _0x520953=_0x109db9[_0x1c0845],_0x39ca3f=[];for(let _0x482451=-0x67f+-0x105*-0x6+0x1*0x61;_0x4f28c0[_0xa82fd8(0x141)](_0x482451,-0x42d*-0x4+-0x3*0x4ed+-0x1ea);_0x482451++){const _0x248c05=_0x4f28c0[_0xa82fd8(0x1cf)](_0x4f28c0[_0xa82fd8(0x142)](_0x4f28c0[_0xa82fd8(0x1cd)](_0x91b57,_0x4f28c0[_0xa82fd8(0x147)](_0x1c0845,0x12*0x1a+-0xa39*0x1+0x434*0x2)),_0x482451),_0x53e459[_0xa82fd8(0x139)]);_0x39ca3f[_0xa82fd8(0x16b)](_0x53e459[_0x248c05]);}let _0xf4672e='';if(_0x4f28c0[_0xa82fd8(0x1af)](_0x520953[_0xa82fd8(0x192)],_0x4f28c0[_0xa82fd8(0x174)]))_0xf4672e='✅';else _0x4f28c0[_0xa82fd8(0x1af)](_0x520953[_0xa82fd8(0x192)],_0x4f28c0[_0xa82fd8(0x190)])?_0xf4672e='⭕':_0xf4672e='☑️';const _0x14fbe8=document[_0xa82fd8(0x14e)+_0xa82fd8(0x1b1)](_0x4f28c0[_0xa82fd8(0x1e1)]);_0x14fbe8[_0xa82fd8(0x1c3)]=_0xa82fd8(0x1c5)+_0xa82fd8(0x19f)+_0x520953[_0xa82fd8(0x192)]+_0xa82fd8(0x12c),_0x14fbe8[_0xa82fd8(0x1b6)][_0xa82fd8(0x14b)+_0xa82fd8(0x18c)]=_0x4f28c0[_0xa82fd8(0x19c)](_0x1c0845,-0xf*-0x206+-0x1*0x1ac5+-0x395*0x1+0.1)+'s';const _0x3940ec=document[_0xa82fd8(0x14e)+_0xa82fd8(0x1b1)]('h3');_0x3940ec[_0xa82fd8(0x151)]=_0xf4672e+'\x20'+_0x520953[_0xa82fd8(0x140)],_0x14fbe8[_0xa82fd8(0x152)+'d'](_0x3940ec);const _0x2d6ec5=document[_0xa82fd8(0x14e)+_0xa82fd8(0x1b1)](_0x4f28c0[_0xa82fd8(0x1e1)]);_0x2d6ec5[_0xa82fd8(0x1c3)]=_0x4f28c0[_0xa82fd8(0x195)];const _0x999db1=document[_0xa82fd8(0x14e)+_0xa82fd8(0x1b1)](_0x4f28c0[_0xa82fd8(0x1e1)]);_0x999db1[_0xa82fd8(0x1c3)]=_0x4f28c0[_0xa82fd8(0x186)];function _0x4c1e49(_0x547aa1){const _0x4f6a64=_0xa82fd8,_0x3ba1e5=_0x206a62[_0x547aa1];if(_0x3ba1e5){const _0x2df0eb=_0x3ba1e5[_0x4f6a64(0x19d)](_0x3bc89c=>_0x4f6a64(0x189)+_0x4f6a64(0x1c0)+_0x4f6a64(0x183)+_0x3bc89c+_0x4f6a64(0x16c))[_0x4f6a64(0x17d)]('');_0x999db1[_0x4f6a64(0x151)]=_0x4f6a64(0x148)+_0x4f6a64(0x1c6)+_0x4f6a64(0x157)+_0x4f6a64(0x167)+_0x4f6a64(0x158)+_0x4f6a64(0x17f)+_0x4f6a64(0x19b)+_0x4f6a64(0x135)+_0x4f6a64(0x1d7)+_0x4f6a64(0x16a)+_0x4f6a64(0x1bf)+_0x2df0eb+(_0x4f6a64(0x17b)+_0x4f6a64(0x19b)+'\x20\x20');}}_0x39ca3f[_0xa82fd8(0x1ad)]((_0x36cd57,_0x575c66)=>{const _0x5e400d=_0xa82fd8,_0x196c1c=document[_0x5e400d(0x14e)+_0x5e400d(0x1b1)](_0x4f28c0[_0x5e400d(0x1e1)]);_0x196c1c[_0x5e400d(0x1c3)]=_0x4f28c0[_0x5e400d(0x14a)],_0x196c1c[_0x5e400d(0x18d)+'t']=_0x36cd57,_0x4f28c0[_0x5e400d(0x1af)](_0x575c66,-0x13*-0x127+-0x1d98+0x7b3)&&_0x196c1c[_0x5e400d(0x15e)][_0x5e400d(0x1a4)](_0x4f28c0[_0x5e400d(0x165)]),_0x196c1c[_0x5e400d(0x16d)+_0x5e400d(0x133)](_0x4f28c0[_0x5e400d(0x17a)],function(){const _0xac2d5a=_0x5e400d;_0x2d6ec5[_0xac2d5a(0x1c2)+_0xac2d5a(0x1cc)](_0x2e0fbe[_0xac2d5a(0x131)])[_0xac2d5a(0x1ad)](_0xb397eb=>_0xb397eb[_0xac2d5a(0x15e)][_0xac2d5a(0x173)](_0xac2d5a(0x176))),this[_0xac2d5a(0x15e)][_0xac2d5a(0x1a4)](_0x2e0fbe[_0xac2d5a(0x18a)]),_0x2e0fbe[_0xac2d5a(0x150)](_0x4c1e49,_0x36cd57);}),_0x2d6ec5[_0x5e400d(0x152)+'d'](_0x196c1c);}),_0x14fbe8[_0xa82fd8(0x152)+'d'](_0x2d6ec5),_0x14fbe8[_0xa82fd8(0x152)+'d'](_0x999db1),_0x4f28c0[_0xa82fd8(0x14f)](_0x4c1e49,_0x39ca3f[0xacd+0xe21+-0x18ee]),_0x8c3f[_0xa82fd8(0x152)+'d'](_0x14fbe8);}_0x8c3f[_0xa82fd8(0x1b6)][_0xa82fd8(0x1d8)]=_0x4f28c0[_0xa82fd8(0x172)],_0x8c3f[_0xa82fd8(0x1a3)+_0xa82fd8(0x13a)]({'behavior':_0x4f28c0[_0xa82fd8(0x1da)]});}}));function _0xbd01(){const _0x466ac8=['length','View','focus','XaoDJ','awVMn','getElement','අස්විද','name','lymGq','YLJRl','.result-it','සුවණ','DNxdm','vdaQR','apTbZ','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20','ById','DdzbW','animationD','errorMessa','key','createElem','ZUASE','qEdHQ','innerHTML','appendChil','TsnsL','RUTIU','nSupY','WJwJb','iv\x20class=\x22','bel\x22>අක්ෂර','PRurL','පරම\x20මෛත්‍රී','eMykG','qcSWk','ජන්ම','classList','3|2|1|0|4','පුෂ','results','rMjeP','1687359qJtkcF','ktwKI','zNlcl','PbQKm','letters-la','MPnAB','විපත්','ters-conta','push','</span>','addEventLi','සියාවස','birth','උත්‍රසල','div','qGQOl','remove','TenMZ','tlVLx','active','සිත','unDgr','oOyaE','ZXPsd','</div>\x0a\x20\x20\x20','ක්ෂේම','join','Loaded',':</div>\x0a\x20\x20','JjmKx','keypress','MMDad','badge\x22>','year','1357228KLWjSe','BWmLz','findBtn','click','<span\x20clas','uCEvS','FYdyt','elay','textConten','none','පුවසල','PUkyA','Hwkxn','type','KptiV','yWars','rCQBz','UPtvV','අනුර','AFMdk','change','9266310MHAEWp','\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','EACWz','map','4gYqJVB','egory\x20','Enter','center','උත්‍රපල්','scrollInto','add','letters-ro','QdGaT','dWazV','උත්‍රපුටුප','CPtrj','ප්‍රත්‍යාරී','පුනාවස','රෙහෙණ','forEach','yrlGy','frzPK','FvWdL','ent','PNgYq','මෛත්‍රී','PzRLW','මුල','style','රේවතී','විසා','අස්ලිස','සම්පත්','RuhaE','cGXfC','zqPqf','good','iner\x22>','s=\x22letter-','includes','querySelec','className','yILuB','result-cat','\x20\x20\x20\x20\x20\x20\x20\x20<d','දෙට','2004055tLIufC','IkYHl','බෙරණ','DOMContent','torAll','klBSo','6309ZkEbjQ','mEmlF','1491742njFOCq','159484GIasOy','value','getFullYea','split','jRbkI','nakatha','class=\x22let','display','සාධක','XkVFT','පුවපුටුප','wWVEq','bad','පුවපල්','result-ite','tsvIo','ZJIpg','ZAjXa','දෙනට','vXnLk','15560GICeMB','sxrUz','-category','bTazW','smooth','hzhCg','FMPxR','jhrFb','මුවසිරස','stener','acHFV','\x20\x20\x20\x20\x20<div\x20','show','කැති','block'];_0xbd01=function(){return _0x466ac8;};return _0xbd01();}
+    function _0x58ea(_0x4dc13f, _0xab7304) {
+    _0x4dc13f = _0x4dc13f - (0x70f + -0x65 + 0xf * -0x64);
+    var _0x46e339 = _0x19d1();
+    var _0x11a951 = _0x46e339[_0x4dc13f];
+    return _0x11a951;
+}
+(function (_0x489c42, _0x4acc05) {
+    var _0x4670b0 = _0x58ea, _0xe7ba58 = _0x489c42();
+    while (!![]) {
+        try {
+            var _0x559f25 = parseInt(_0x4670b0(0xfc)) / (0xe16 + 0x1b0 + 0x16f * -0xb) + parseInt(_0x4670b0(0xfa)) / (0x2 * -0x8fc + 0x2b * 0x16 + 0xe48) + -parseInt(_0x4670b0(0xfd)) / (0x8b0 + 0x1f8e + -0x283b) * (-parseInt(_0x4670b0(0xf8)) / (0x71 * 0x49 + -0x3d * 0x65 + -0x824)) + -parseInt(_0x4670b0(0xd4)) / (0x1dda + -0xf78 + 0xe5d * -0x1) + parseInt(_0x4670b0(0xec)) / (0x1b37 + -0x99d * 0x1 + -0x1194) * (-parseInt(_0x4670b0(0xdd)) / (0xd66 + -0x1b * 0xf4 + 0xc5d)) + -parseInt(_0x4670b0(0xd8)) / (-0x95 * 0x21 + 0x1e40 + -0xb03) + parseInt(_0x4670b0(0xdb)) / (-0x21a8 + 0xd22 + 0x148f);
+            if (_0x559f25 === _0x4acc05)
+                break;
+            else
+                _0xe7ba58['push'](_0xe7ba58['shift']());
+        } catch (_0x9968a3) {
+            _0xe7ba58['push'](_0xe7ba58['shift']());
+        }
+    }
+}(_0x19d1, 0x36f4f + 0xdb83 + -0x21bc7), (function () {
+    'use strict';
+    var _0x2f57cb = _0x58ea, _0x50f2fa = {
+            'CknJq': _0x2f57cb(0xd2),
+            'oJRtK': _0x2f57cb(0xf5),
+            'uqaXq': _0x2f57cb(0xe4) + 'u',
+            'vCsni': _0x2f57cb(0x107),
+            'tVsbi': _0x2f57cb(0xf3) + '1',
+            'kQHTo': function (_0x463180, _0x3f4c96) {
+                return _0x463180 === _0x3f4c96;
+            },
+            'fTYsB': _0x2f57cb(0x101),
+            'AKoqH': function (_0x1e454b, _0x3f1859) {
+                return _0x1e454b === _0x3f1859;
+            },
+            'doPrM': _0x2f57cb(0x10a),
+            'ZIojG': function (_0x22234e, _0x1168aa) {
+                return _0x22234e !== _0x1168aa;
+            },
+            'rnVCw': _0x2f57cb(0xfe),
+            'feSmu': _0x2f57cb(0xeb),
+            'RAkrj': _0x2f57cb(0xf4),
+            'Cytza': _0x2f57cb(0xdc),
+            'bMrOc': function (_0x2ea7a7, _0x3278c0) {
+                return _0x2ea7a7 === _0x3278c0;
+            },
+            'Atemu': _0x2f57cb(0xde)
+        }, _0x285da6 = _0x50f2fa[_0x2f57cb(0x10f)][_0x2f57cb(0xd3)]('|'), _0x3f14b6 = -0x1df * -0xd + 0x1 * 0x1042 + -0x2895;
+    while (!![]) {
+        switch (_0x285da6[_0x3f14b6++]) {
+        case '0':
+            document[_0x2f57cb(0xd6) + _0x2f57cb(0x106)](_0x50f2fa[_0x2f57cb(0xed)], function (_0x313d1a) {
+                var _0x33d9e5 = _0x2f57cb;
+                _0x313d1a[_0x33d9e5(0x108) + _0x33d9e5(0x110)]();
             });
-            
-            function showResults(selectedNakatha) {
-                const allNakatha = [
-                    "අස්විද", "මා", "මුල", "බෙරණ", "පුවපල්", "පුවසල", "කැති", 
-                    "උත්‍රපල්", "උත්‍රසල", "රෙහෙණ", "හත", "සුවණ", "මුවසිරස", 
-                    "සිත", "දෙනට", "අද", "සා", "සියාවස", "පුනාවස", "විසා", 
-                    "පුවපුටුප", "පුෂ", "අනුර", "උත්‍රපුටුප", "අස්ලිස", "දෙට", "රේවතී"
-                ];
-                
-                const categories = [
-                    { name: "සම්පත්", type: "good" },
-                    { name: "විපත්", type: "bad" },
-                    { name: "ක්ෂේම", type: "good" },
-                    { name: "ප්‍රත්‍යාරී", type: "bad" },
-                    { name: "සාධක", type: "good" },
-                    { name: "වධ", type: "bad" },
-                    { name: "මෛත්‍රී", type: "good" },
-                    { name: "පරම මෛත්‍රී", type: "good" }
-                ];
-                
-                // Determine which group the selected nakatha belongs to
-                let groupStartIndex = 0;
-                
-                if (["අස්විද", "මා", "මුල"].includes(selectedNakatha)) {
-                    groupStartIndex = 3; // First group
-                } else if (["බෙරණ", "පුවපල්", "පුවසල"].includes(selectedNakatha)) {
-                    groupStartIndex = 6; // Second group
-                } else if (["කැති", "උත්‍රපල්", "උත්‍රසල"].includes(selectedNakatha)) {
-                    groupStartIndex = 9; // Third group
-                } else if (["රෙහෙණ", "හත", "සුවණ"].includes(selectedNakatha)) {
-                    groupStartIndex = 12; // Fourth group
-                } else if (["මුවසිරස", "සිත", "දෙනට"].includes(selectedNakatha)) {
-                    groupStartIndex = 15; // Fifth group
-                } else if (["අද", "සා", "සියාවස"].includes(selectedNakatha)) {
-                    groupStartIndex = 18; // Sixth group
-                } else if (["පුනාවස", "විසා", "පුවපුටුප"].includes(selectedNakatha)) {
-                    groupStartIndex = 21; // Seventh group
-                } else if (["පුෂ", "අනුර", "උත්‍රපුටුප"].includes(selectedNakatha)) {
-                    groupStartIndex = 24; // Eighth group
-                } else {
-                    groupStartIndex = 0; // Last group (අස්ලිස, දෙට, රේවතී)
-                }
-                
-                // Prepare the results HTML
-                let resultsHTML = '';
-                
-                // For each category, get 3 nakatha in order
-                for (let i = 0; i < categories.length; i++) {
-                    const category = categories[i];
-                    const items = [];
-                    
-                    // Get 3 items for this category
-                    for (let j = 0; j < 3; j++) {
-                        const index = (groupStartIndex + i*3 + j) % allNakatha.length;
-                        items.push(allNakatha[index]);
+            continue;
+        case '1':
+            document[_0x2f57cb(0xd6) + _0x2f57cb(0x106)](_0x50f2fa[_0x2f57cb(0x10e)], function (_0x3f30d0) {
+                var _0x43e236 = _0x2f57cb, _0x16de42 = _0x77f23a[_0x43e236(0xe0)][_0x43e236(0xd3)]('|'), _0x55e266 = -0xa30 + -0x14b7 + 0x36f * 0x9;
+                while (!![]) {
+                    switch (_0x16de42[_0x55e266++]) {
+                    case '0':
+                        var _0x4db35d = _0x231f56[_0x43e236(0xdf)][_0x43e236(0xf6) + 'e']();
+                        continue;
+                    case '1':
+                        return ![];
+                    case '2':
+                        _0x3f30d0[_0x43e236(0x108) + _0x43e236(0x110)]();
+                        continue;
+                    case '3':
+                        var _0x231f56 = _0x3f30d0[_0x43e236(0x10c)];
+                        continue;
+                    case '4':
+                        var _0xf85790 = _0x231f56[_0x43e236(0xf1)] ? _0x231f56[_0x43e236(0xf1)][_0x43e236(0xf6) + 'e']() : '';
+                        continue;
+                    case '5':
+                        if (_0x77f23a[_0x43e236(0x10b)](_0x4db35d, _0x77f23a[_0x43e236(0xd5)]) || _0x77f23a[_0x43e236(0xf0)](_0x4db35d, _0x77f23a[_0x43e236(0x102)]) && _0x77f23a[_0x43e236(0x104)](_0xf85790, _0x77f23a[_0x43e236(0x109)]) && _0x77f23a[_0x43e236(0xef)](_0xf85790, _0x77f23a[_0x43e236(0xe3)]) && _0x77f23a[_0x43e236(0x105)](_0xf85790, _0x77f23a[_0x43e236(0xf9)]) && _0x77f23a[_0x43e236(0xce)](_0xf85790, _0x77f23a[_0x43e236(0xd1)]))
+                            return !![];
+                        continue;
                     }
-                    
-                    // Add icon based on category type
-                    const icon = category.type === "good" ? "✅" : "⭕";
-                    
-                    // Add to results HTML
-                    resultsHTML += `
-                        <div class="result-category ${category.type}-category" style="animation-delay: ${i*0.1}s">
-                            <h3>${icon} ${category.name}</h3>
-                            <div class="result-items">
-                                ${items.map(item => `<div class="result-item">${item}</div>`).join('')}
-                            </div>
-                        </div>
-                    `;
+                    break;
                 }
-                
-                // Show the results
-                const resultsDiv = document.getElementById('results');
-                resultsDiv.innerHTML = resultsHTML;
-                resultsDiv.style.display = 'block';
-                
-                // Scroll to results
-                resultsDiv.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    </script>
+            }, ![]);
+            continue;
+        case '2':
+            document[_0x2f57cb(0xd6) + _0x2f57cb(0x106)](_0x50f2fa[_0x2f57cb(0xea)], function (_0x5ec093) {
+                var _0x4d7102 = _0x2f57cb;
+                if (_0x5ec093[_0x4d7102(0xee)] || _0x5ec093[_0x4d7102(0xf7)]) {
+                    if (_0x77f23a[_0x4d7102(0x10b)](_0x5ec093[_0x4d7102(0xcf)], 's') || _0x77f23a[_0x4d7102(0xd0)](_0x5ec093[_0x4d7102(0xcf)], 'u') || _0x77f23a[_0x4d7102(0xd7)](_0x5ec093[_0x4d7102(0xcf)], 'p'))
+                        return _0x5ec093[_0x4d7102(0x108) + _0x4d7102(0x110)](), ![];
+                    if (_0x5ec093[_0x4d7102(0xe8)]) {
+                        if (_0x77f23a[_0x4d7102(0xe7)](_0x5ec093[_0x4d7102(0xcf)], 'i') || _0x77f23a[_0x4d7102(0x10b)](_0x5ec093[_0x4d7102(0xcf)], 'j') || _0x77f23a[_0x4d7102(0xff)](_0x5ec093[_0x4d7102(0xcf)], 'c'))
+                            return _0x5ec093[_0x4d7102(0x108) + _0x4d7102(0x110)](), ![];
+                    }
+                }
+                if (_0x77f23a[_0x4d7102(0xe7)](_0x5ec093[_0x4d7102(0xcf)], _0x77f23a[_0x4d7102(0x100)]))
+                    return _0x5ec093[_0x4d7102(0x108) + _0x4d7102(0x110)](), ![];
+            });
+            continue;
+        case '3':
+            var _0x77f23a = {
+                'OFjaL': _0x50f2fa[_0x2f57cb(0xe2)],
+                'jWFUQ': function (_0x32472e, _0x4d489d) {
+                    var _0x525d16 = _0x2f57cb;
+                    return _0x50f2fa[_0x525d16(0xf2)](_0x32472e, _0x4d489d);
+                },
+                'mcPJV': _0x50f2fa[_0x2f57cb(0xfb)],
+                'XuXqX': function (_0x1fa8dd, _0x19b59b) {
+                    var _0x274ae9 = _0x2f57cb;
+                    return _0x50f2fa[_0x274ae9(0x10d)](_0x1fa8dd, _0x19b59b);
+                },
+                'fUoaP': _0x50f2fa[_0x2f57cb(0x111)],
+                'KLhJS': function (_0x1ee817, _0x2f2489) {
+                    var _0x537d1d = _0x2f57cb;
+                    return _0x50f2fa[_0x537d1d(0xe1)](_0x1ee817, _0x2f2489);
+                },
+                'YcSGo': _0x50f2fa[_0x2f57cb(0xe9)],
+                'AliKJ': function (_0x323c16, _0x5d1d64) {
+                    var _0x25176e = _0x2f57cb;
+                    return _0x50f2fa[_0x25176e(0xe1)](_0x323c16, _0x5d1d64);
+                },
+                'SgtCz': _0x50f2fa[_0x2f57cb(0xda)],
+                'uhrNZ': function (_0x5e72ee, _0x352c4a) {
+                    var _0x3ef5cf = _0x2f57cb;
+                    return _0x50f2fa[_0x3ef5cf(0xe1)](_0x5e72ee, _0x352c4a);
+                },
+                'LyPpK': _0x50f2fa[_0x2f57cb(0xd9)],
+                'pTKlS': function (_0x333cee, _0x410222) {
+                    var _0x38f5d4 = _0x2f57cb;
+                    return _0x50f2fa[_0x38f5d4(0xe1)](_0x333cee, _0x410222);
+                },
+                'iLfgZ': _0x50f2fa[_0x2f57cb(0x103)],
+                'ucBwx': function (_0x1f4dc4, _0x192b1f) {
+                    var _0x5f3db2 = _0x2f57cb;
+                    return _0x50f2fa[_0x5f3db2(0xf2)](_0x1f4dc4, _0x192b1f);
+                },
+                'hlRmJ': function (_0xab34f1, _0x3555b5) {
+                    var _0x2f693f = _0x2f57cb;
+                    return _0x50f2fa[_0x2f693f(0x10d)](_0xab34f1, _0x3555b5);
+                },
+                'PvcnA': function (_0x53f537, _0x3b5959) {
+                    var _0x2038e8 = _0x2f57cb;
+                    return _0x50f2fa[_0x2038e8(0xe6)](_0x53f537, _0x3b5959);
+                },
+                'picjL': function (_0x2e82f1, _0x13ea5e) {
+                    var _0x364edc = _0x2f57cb;
+                    return _0x50f2fa[_0x364edc(0xf2)](_0x2e82f1, _0x13ea5e);
+                },
+                'TJCnn': _0x50f2fa[_0x2f57cb(0xe5)]
+            };
+            continue;
+        case '4':
+            continue;
+        }
+        break;
+    }
+}()));
+function _0x19d1() {
+    var _0x3b282b = [
+        'radio',
+        '38983ESyFFH',
+        'F12',
+        'tagName',
+        'OFjaL',
+        'ZIojG',
+        'tVsbi',
+        'SgtCz',
+        'contextmen',
+        'Atemu',
+        'bMrOc',
+        'PvcnA',
+        'shiftKey',
+        'rnVCw',
+        'vCsni',
+        'submit',
+        '18PhGSzZ',
+        'oJRtK',
+        'ctrlKey',
+        'AliKJ',
+        'XuXqX',
+        'type',
+        'kQHTo',
+        '3|0|4|5|2|',
+        'checkbox',
+        'dragstart',
+        'toLowerCas',
+        'metaKey',
+        '4SCUYza',
+        'LyPpK',
+        '227692ebdawI',
+        'fTYsB',
+        '122535lPocxf',
+        '376527GjJScb',
+        'button',
+        'picjL',
+        'TJCnn',
+        'textarea',
+        'fUoaP',
+        'Cytza',
+        'KLhJS',
+        'uhrNZ',
+        'stener',
+        'keydown',
+        'preventDef',
+        'YcSGo',
+        'input',
+        'jWFUQ',
+        'target',
+        'AKoqH',
+        'uqaXq',
+        'CknJq',
+        'ault',
+        'doPrM',
+        'pTKlS',
+        'key',
+        'ucBwx',
+        'iLfgZ',
+        '3|4|1|2|0',
+        'split',
+        '1198980mgyBNB',
+        'mcPJV',
+        'addEventLi',
+        'hlRmJ',
+        '1829472xkAlhU',
+        'RAkrj',
+        'feSmu',
+        '2397708LUlVyd'
+    ];
+    _0x19d1 = function () {
+        return _0x3b282b;
+    };
+    return _0x19d1();
+}
+  </script>
 </body>
 </html>
