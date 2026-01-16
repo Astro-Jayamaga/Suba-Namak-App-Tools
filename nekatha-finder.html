@@ -251,27 +251,44 @@
             font-family: 'Roboto', sans-serif;
         }
         
-        /* Spinner */
+        /* --- NEW LOADER STYLES --- */
+        #loader-container {
+            display: none; /* Hidden by default */
+            text-align: center;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #fbfbfb;
+            border-radius: 8px;
+            border: 1px dashed #b3b3b3;
+            animation: fadeIn 0.3s ease;
+        }
+
         .spinner {
-            display: none;
+            display: inline-block;
             width: 20px;
             height: 20px;
-            border: 3px solid #ffffff;
+            border: 3px solid #d8d8d8;
             border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s linear infinite;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            border-top-color: #FFA500;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+            vertical-align: middle;
         }
-        
-        .button-text {
-            transition: opacity 0.2s;
+
+        .loading-text {
+            color: #565656;
+            font-weight: 500;
+            vertical-align: middle;
+            font-size: 14px;
         }
 
         @keyframes spin {
-            to { transform: translate(-50%, -50%) rotate(360deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
     </style>
@@ -328,8 +345,12 @@
 
         <button id="searchButton" class="cta-button" onclick="calculateAstrology()">
             <span class="button-text">සොයන්න</span>
-            <div class="spinner" id="loadingSpinner"></div>
         </button>
+        
+        <div id="loader-container">
+            <div class="spinner"></div>
+            <span class="loading-text">ගණනය වෙමින් පවතී...</span>
+        </div>
 
         <div id="result-area">
             <div class="result-item">
@@ -759,15 +780,15 @@
             
             const errorDiv = document.getElementById('errorDisplay');
             const resultDiv = document.getElementById('result-area');
+            const loader = document.getElementById('loader-container'); // Ref to new loader
             const btn = document.getElementById('searchButton');
-            const spinner = document.getElementById('loadingSpinner');
-            const btnText = btn.querySelector('.button-text');
             
-            // Reset UI
+            // 1. Reset UI (Hide everything)
             errorDiv.style.display = 'none';
             resultDiv.style.display = 'none';
+            loader.style.display = 'none';
 
-            // Validation
+            // 2. Validation
             if(!dVal || !tVal) {
                 errorDiv.innerText = "කරුණාකර දිනය සහ වේලාව ඇතුලත් කරන්න.";
                 errorDiv.style.display = 'block';
@@ -784,10 +805,10 @@
                 return;
             }
             
-            // UI Loading State
+            // 3. SHOW NEW LOADER & Disable Button
             btn.disabled = true;
-            spinner.style.display = 'block';
-            btnText.style.opacity = '0';
+            loader.style.display = 'block'; // Show the box with spinner and text
+            btn.style.opacity = '0.7';      // Optional: Dim button slightly
 
             // Prepare Payload
             const city = JSON.parse(cityJson);
@@ -803,9 +824,9 @@
                 // Fetch from Google Apps Script
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'cors', // Important for cross-origin
+                    mode: 'cors',
                     headers: {
-                        'Content-Type': 'text/plain;charset=utf-8', // Plain text to avoid CORS preflight issues commonly found with GAS
+                        'Content-Type': 'text/plain;charset=utf-8',
                     },
                     body: JSON.stringify(payload)
                 });
@@ -817,7 +838,7 @@
                 if(jsonResponse.status === "success") {
                     const data = jsonResponse.data;
                     
-                    // Display Results
+                    // Update UI with Data
                     document.getElementById('nakathaResult').innerText = data.nekatha;
                     
                     document.getElementById('lagnaResult').innerText = data.lagna;
@@ -829,6 +850,7 @@
                     document.getElementById('pakshiyaResult').innerText = data.pakshiya;
                     document.getElementById('pakshiyaImg').src = data.pakshiyaImg;
                     
+                    // Show Results
                     resultDiv.style.display = 'block';
                 } else {
                     throw new Error(jsonResponse.message || "Unknown error occurred");
@@ -839,15 +861,12 @@
                 errorDiv.innerText = "දත්ත ලබා ගැනීමේ දෝෂයක්. කරුණාකර නැවත උත්සාහ කරන්න.";
                 errorDiv.style.display = 'block';
             } finally {
-                // Restore UI
+                // 4. HIDE LOADER & Enable Button (Always runs)
+                loader.style.display = 'none'; // Hide the box
                 btn.disabled = false;
-                spinner.style.display = 'none';
-                btnText.style.opacity = '1';
+                btn.style.opacity = '1';
             }
         }
     </script>
 </body>
 </html>
-
-
-
