@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 ජ්‍යෝතිෂ අනාවැකි</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700&family=Noto+Serif+Sinhala:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #FFA500; /* Orange */
+            --secondary-color: #7F0000; /* Maroon */
+            --bg-color: #fdfbf7;
+            --card-bg: #ffffff;
+            --text-color: #2c2c2c;
+            --error-color: #d32f2f;
+            --info-color: #0288d1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Serif Sinhala', serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            padding: 15px; 
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 480px; 
+            padding: 25px 20px; 
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(127, 0, 0, 0.08);
+            border-top: 5px solid var(--secondary-color);
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Gemunu Libre', sans-serif;
+            color: var(--secondary-color);
+            font-size: 28px; 
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .form-group {
+            margin-bottom: 15px; 
+            text-align: left;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        input[type="date"],
+        input[type="time"],
+        select {
+            width: 100%;
+            padding: 10px 12px; 
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: 'Roboto', Noto Serif Sinhala; 
+            font-size: 15px;
+            color: #333;
+            background-color: #fffdfa;
+            transition: all 0.3s ease;
+        }
+
+        input[type="date"]:focus,
+        input[type="time"]:focus,
+        select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.2);
+        }
+
+        .info-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 18px;
+            height: 18px;
+            background-color: #e0e0e0;
+            color: #555;
+            border-radius: 50%;
+            font-family: sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            font-style: italic;
+            margin-left: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .info-icon:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .info-text-box {
+            display: none; 
+            font-size: 13px;
+            color: #555;
+            background-color: #e3f2fd;
+            padding: 8px 10px;
+            border-radius: 6px;
+            margin-top: 5px;
+            border-left: 3px solid var(--info-color);
+            line-height: 1.4;
+        }
+
+        .cta-button {
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            font-family: 'Noto Serif Sinhala', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(127, 0, 0, 0.25);
+            /* Loading state style */
+            position: relative;
+        }
+
+        .cta-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .cta-button:hover:not(:disabled) {
+            background-color: #9c1414;
+            transform: translateY(-2px);
+        }
+
+        .error-msg {
+            color: var(--error-color);
+            font-size: 13px;
+            margin-top: 10px;
+            display: none;
+            font-weight: 600;
+            background: #ffebee;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        /* Result Area Styling */
+        #result-area {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: #fff8e6;
+            border: 2px dashed var(--primary-color);
+            display: none; 
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 165, 0, 0.2);
+            text-align: center;
+        }
+        
+        .result-item:last-of-type {
+            border-bottom: none;
+            margin-bottom: 10px;
+        }
+
+        .result-label {
+            font-family: 'Gemunu Libre', sans-serif;
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .result-text {
+            font-size: 22px;
+            color: var(--secondary-color);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .result-highlight {
+            font-size: 28px;
+            color: #d35400;
+            font-weight: 800;
+        }
+
+        .result-img {
+            max-width: 120px; 
+            height: auto;
+            margin-top: 10px;
+            border-radius: 8px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .pakshiya-gif {
+            max-width: 100px;
+        }
+
+        .blessing-text {
+            font-family: 'Noto Serif Sinhala', serif;
+            font-size: 18px;
+            color: #555;
+            margin-top: 70px;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .footer {
+            margin-top: auto;
+            padding-top: 20px;
+            padding-bottom: 3rem; 
+            font-size: 14px;
+            color: #999;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        /* Spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .button-text {
+            transition: opacity 0.2s;
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>උපන් නැකත හා අනෙකුත් තොරතුරු ලබා ගැනීම</h1>
+
+        <div class="form-group">
+            <label for="dateInput">දිනය</label>
+            <input type="date" id="dateInput" min="2026-01-01" max="2026-12-31">
+        </div>
+
+        <div class="form-group">
+            <label for="timeInput">වේලාව</label>
+            <input type="time" id="timeInput">
+        </div>
+
+        <div class="form-group">
+            <label for="districtSelect">උපන් දිස්ත්‍රික්කය</label>
+            <select id="districtSelect" onchange="populateCities()">
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="citySelect">
+                උපන් ස්ථානය 
+                <span class="info-icon" onclick="toggleInfo('cityInfo')">i</span>
+            </label>
+            <div id="cityInfo" class="info-text-box">
+                මෙහි ජන්මයා උපන් ස්ථානය නොමැති නම් ඊට ආසන්නතම නගරය තෝරා ගන්න.
+            </div>
+            <select id="citySelect">
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="genderInput">
+                ස්ත්‍රී / පුරුෂ භාවය
+                <span class="info-icon" onclick="toggleInfo('genderInfo')">i</span>
+            </label>
+            <div id="genderInfo" class="info-text-box">
+                මෙහිදී ස්ත්‍රී පුරුෂ භාවයට ගැළපෙන පරිදි නවාංශකය වෙනස් වේ.
+            </div>
+            <select id="genderInput">
+                <option value="" disabled selected>තෝරන්න</option>
+                <option value="male">පුරුෂ</option>
+                <option value="female">ස්ත්‍රී</option>
+            </select>
+        </div>
+
+        <div id="errorDisplay" class="error-msg"></div>
+
+        <button id="searchButton" class="cta-button" onclick="calculateAstrology()">
+            <span class="button-text">සොයන්න</span>
+            <div class="spinner" id="loadingSpinner"></div>
+        </button>
+
+        <div id="result-area">
+            <div class="result-item">
+                <div class="result-label">නැකත</div>
+                <div class="result-text result-highlight" id="nakathaResult">--</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">ලග්නය</div>
+                <img id="lagnaImg" class="result-img" src="" alt="">
+                <div class="result-text" id="lagnaResult" style="margin-top: 8px;">--</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">නවාංශකය</div>
+                <img id="navanshakaImg" class="result-img" src="" alt="">
+                <div class="result-text" id="navanshakaResult" style="margin-top: 8px;">--</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">පක්ෂියා</div>
+                <img id="pakshiyaImg" class="result-img pakshiya-gif" src="" alt="">
+                <div class="result-text" id="pakshiyaResult" style="margin-top: 8px;">--</div>
+            </div>
+
+            <div class="blessing-text">දීර්ඝායු වේවා!</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; <span id="yearSpan"></span> Suba Namak | Astro Jayamaga. All Rights Reserved.
+    </div>
+
+    <script>
+        // *** IMPORTANT: REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT DEPLOYMENT URL ***
+        const SCRIPT_URL = "PASTE_YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE";
+
+        document.getElementById('yearSpan').textContent = new Date().getFullYear();
+
+        // --- INFO TEXT TOGGLE FUNCTION ---
+        function toggleInfo(elementId) {
+            const el = document.getElementById(elementId);
+            if (el.style.display === "block") {
+                el.style.display = "none";
+            } else {
+                el.style.display = "block";
+            }
+        }
+
+        // --- 1. LOCATION DATA (Public Lat/Lon Data) ---
+        // This is safe to keep on client as it contains no logic, only standard geodata.
+        const LOCATIONS = {
+            "Colombo": [
+                {name: "Colombo", lat: 6.9172436, lng: 79.8671954},
+                {name: "Kollupitiya (Base)", lat: 6.88333, lng: 79.85000},
+                {name: "Athurugiriya", lat: 6.872319, lng: 80.000388},
+                {name: "Avissawella", lat: 6.957381, lng: 80.2076654},
+                {name: "Bambalapitiya", lat: 6.904361, lng: 79.85404},
+                {name: "Battaramulla", lat: 6.897994, lng: 79.922287},
+                {name: "Borella", lat: 6.914784, lng: 79.877595},
+                {name: "Boralesgamuwa", lat: 6.841, lng: 79.9017},
+                {name: "Dehiwala", lat: 6.855949, lng: 79.862968},
+                {name: "Homagama", lat: 6.8469074, lng: 79.9923651},
+                {name: "Hokandara", lat: 6.8804849, lng: 79.9599002},
+                {name: "Kaduwela", lat: 6.929061, lng: 79.982775},
+                {name: "Kalubowila", lat: 6.8676907, lng: 79.8762476},
+                {name: "Kesbewa", lat: 6.7787, lng: 79.9473},
+                {name: "Kolonnawa", lat: 6.9284, lng: 79.8952},
+                {name: "Maharagama", lat: 6.851095, lng: 79.921201},
+                {name: "Maligawatta", lat: 6.9352912, lng: 79.8721056},
+                {name: "Moratuwa", lat: 6.7879, lng: 79.8851},
+                {name: "Mount Lavinia", lat: 6.831716, lng: 79.862865},
+                {name: "Narahenpita", lat: 6.9057266, lng: 79.8821297},
+                {name: "Nugegoda", lat: 6.8649, lng: 79.8997},
+                {name: "Padukka", lat: 6.8431, lng: 80.0917},
+                {name: "Pannipitiya", lat: 6.8464, lng: 79.9484},
+                {name: "Piliyandala", lat: 6.799951, lng: 79.9231171},
+                {name: "Rathmalana", lat: 6.8195, lng: 79.8801},
+                {name: "Sri Jayawardenepura Kotte", lat: 6.8683337, lng: 79.9261518},
+                {name: "Wellawatte", lat: 6.8743844, lng: 79.8591176}
+            ],
+            "Kalutara": [
+                {name: "Kalutara", lat: 6.5630625, lng: 79.9852435},
+                {name: "Agalawatta", lat: 6.5423445, lng: 80.157362},
+                {name: "Aluthgama", lat: 6.4339065, lng: 80.0016286},
+                {name: "Baduraliya", lat: 6.517122, lng: 80.23118},
+                {name: "Bandaragama", lat: 6.716396, lng: 79.991651},
+                {name: "Beruwala", lat: 6.473838, lng: 79.991997},
+                {name: "Bulathsinhala", lat: 6.648747, lng: 80.179137},
+                {name: "Dodangoda", lat: 6.532057, lng: 79.986418},
+                {name: "Horana", lat: 6.7112399, lng: 80.0669863},
+                {name: "Ingiriya", lat: 6.741412, lng: 80.162144},
+                {name: "Matugama", lat: 6.521943, lng: 80.113685},
+                {name: "Neboda", lat: 6.5929145, lng: 80.0878027},
+                {name: "Panadura", lat: 6.7217149, lng: 79.9067953},
+                {name: "Payagala", lat: 6.5218775, lng: 79.9788422},
+                {name: "Wadduwa", lat: 6.6639728, lng: 79.9305102},
+                {name: "Walallavita", lat: 6.376967, lng: 80.195794}
+            ],
+            "Gampaha": [
+                {name: "Gampaha", lat: 7.0532237, lng: 80.3289831},
+                {name: "Biyagama", lat: 6.9469426, lng: 79.9939404},
+                {name: "Divulapitiya", lat: 7.224568, lng: 80.019462},
+                {name: "Ganemulla", lat: 7.062396, lng: 79.966831},
+                {name: "Ja-Ela", lat: 7.0750452, lng: 79.8940656},
+                {name: "Kadawatha", lat: 7.0005, lng: 79.9494},
+                {name: "Katana", lat: 7.249524, lng: 79.904294},
+                {name: "Katunayake", lat: 7.172485, lng: 79.885348},
+                {name: "Kelaniya", lat: 6.950415, lng: 79.917142},
+                {name: "Kiribathgoda", lat: 6.9835, lng: 79.9289},
+                {name: "Kirindiwela", lat: 7.0431455, lng: 80.1317271},
+                {name: "Mahara", lat: 6.991667, lng: 79.938326},
+                {name: "Marawila", lat: 7.4130318, lng: 79.8309525},
+                {name: "Minuwangoda", lat: 7.1725525, lng: 79.9563284},
+                {name: "Mirigama", lat: 7.2475144, lng: 80.1299215},
+                {name: "Negombo", lat: 7.2121161, lng: 79.849371},
+                {name: "Ragama", lat: 7.0263493, lng: 79.9236484},
+                {name: "Seeduwa", lat: 7.1311776, lng: 79.8762627},
+                {name: "Veyangoda", lat: 7.1534492, lng: 80.0602466},
+                {name: "Wattala", lat: 6.990668, lng: 79.893171},
+                {name: "Wathupitiwala", lat: 7.125555, lng: 80.110852},
+                {name: "Weliweriya", lat: 7.033592, lng: 80.027151},
+                {name: "Welisara", lat: 7.027756, lng: 79.898279}
+            ],
+            "Galle": [
+                {name: "Galle", lat: 6.036578, lng: 80.216479},
+                {name: "Ambalangoda", lat: 6.2491338, lng: 80.0625085},
+                {name: "Baddegama", lat: 6.1614238, lng: 80.1804779},
+                {name: "Balapitiya", lat: 6.2601723, lng: 80.0384209},
+                {name: "Bentota", lat: 6.4236093, lng: 79.9994893},
+                {name: "Elpitiya", lat: 6.2938317, lng: 80.1642436},
+                {name: "Hikkaduwa", lat: 6.140753, lng: 80.1028181},
+                {name: "Hiniduma", lat: 6.3313532, lng: 80.3223076},
+                {name: "Imaduwa", lat: 6.037848, lng: 80.391439},
+                {name: "Karandeniya", lat: 6.2692305, lng: 80.0992584},
+                {name: "Karapitiya", lat: 6.0665678, lng: 80.225809},
+                {name: "Mahamodara", lat: 6.038818, lng: 80.206995},
+                {name: "Meetiyagoda", lat: 6.189834, lng: 80.095394},
+                {name: "Nagoda", lat: 6.197985, lng: 80.274697},
+                {name: "Udugama", lat: 6.217905, lng: 80.338021},
+                {name: "Unawatuna", lat: 6.017447, lng: 80.24886},
+                {name: "Yakkalamulla", lat: 6.106426, lng: 80.348315}
+            ],
+            "Matara": [
+                {name: "Matara", lat: 5.9479065, lng: 80.5496589},
+                {name: "Akuressa", lat: 6.100501, lng: 80.477581},
+                {name: "Deiyandara", lat: 6.153956, lng: 80.601041},
+                {name: "Deniyaya", lat: 6.342485, lng: 80.559658},
+                {name: "Devinuwara", lat: 5.932041, lng: 80.591057},
+                {name: "Dikwella", lat: 5.962513, lng: 80.677591},
+                {name: "Hakmana", lat: 6.083926, lng: 80.6449735},
+                {name: "Kamburupitiya", lat: 6.0957342, lng: 80.5647207},
+                {name: "Morawaka", lat: 6.24315, lng: 80.492674},
+                {name: "Urubokka", lat: 6.283109, lng: 80.632868},
+                {name: "Weligama", lat: 5.97503, lng: 80.418828}
+            ],
+            "Hambantota": [
+                {name: "Hambantota", lat: 6.1271953, lng: 81.1224549},
+                {name: "Angunakolapelessa", lat: 6.16524, lng: 80.899793},
+                {name: "Ambalantota", lat: 6.1147035, lng: 81.0220545},
+                {name: "Beliatta", lat: 6.048163, lng: 80.733427},
+                {name: "Kataragama", lat: 6.4126218, lng: 81.3388947},
+                {name: "Ranna", lat: 6.097728, lng: 80.87579},
+                {name: "Sooriyawewa", lat: 6.304564, lng: 81.003978},
+                {name: "Tangalle", lat: 6.022708, lng: 80.796871},
+                {name: "Tissamaharama", lat: 6.284974, lng: 81.268557},
+                {name: "Walasmulla", lat: 6.149682, lng: 80.698166},
+                {name: "Weeraketiya", lat: 6.145085, lng: 80.765208}
+            ],
+            "Kandy": [
+                {name: "Kandy", lat: 7.2865161, lng: 80.631418},
+                {name: "Gampola", lat: 7.1557723, lng: 80.564403},
+                {name: "Peradeniya", lat: 7.266409, lng: 80.5981261}
+            ],
+            "Matale": [
+                {name: "Matale", lat: 7.4619973, lng: 80.6252308},
+                {name: "Dambulla", lat: 7.8728249, lng: 80.650505},
+                {name: "Galewela", lat: 7.7606317, lng: 80.5716613},
+                {name: "Rattota", lat: 7.5184272, lng: 80.6767853}
+            ],
+            "Nuwara Eliya": [
+                {name: "Nuwara Eliya", lat: 6.9741095, lng: 80.7803117},
+                {name: "Bogawantalawa", lat: 6.794878, lng: 80.6784721},
+                {name: "Kothmale", lat: 7.062514, lng: 80.6854689},
+                {name: "Maskeliya", lat: 6.8339695, lng: 80.5744472},
+                {name: "Walapane", lat: 7.102328, lng: 80.8584394}
+            ],
+            "Ratnapura": [
+                {name: "Ratnapura", lat: 6.6871447, lng: 80.3924992},
+                {name: "Ayagama", lat: 6.640133, lng: 80.309431},
+                {name: "Balangoda", lat: 6.6588306, lng: 80.7123628},
+                {name: "Eheliyagoda", lat: 6.848231, lng: 80.264407},
+                {name: "Embilipitiya", lat: 6.3261811, lng: 80.8419125},
+                {name: "Godakawela", lat: 6.504906, lng: 80.652114},
+                {name: "Kahawatta", lat: 6.578639, lng: 80.575125},
+                {name: "Kalawana", lat: 6.530609, lng: 80.397405},
+                {name: "Kolonna", lat: 6.401483, lng: 80.691844},
+                {name: "Kuruwita", lat: 6.7761011, lng: 80.3668957},
+                {name: "Pelmadulla", lat: 6.50193, lng: 80.656525},
+                {name: "Rakwana", lat: 6.4715878, lng: 80.614724}
+            ],
+            "Kegalle": [
+                {name: "Kegalle", lat: 7.2474986, lng: 80.345705},
+                {name: "Aranayake", lat: 7.148791, lng: 80.464859},
+                {name: "Deraniyagala", lat: 6.9321167, lng: 80.3366163},
+                {name: "Dehiowita", lat: 6.963895, lng: 80.264191},
+                {name: "Galigamuwa", lat: 7.235281, lng: 80.310177},
+                {name: "Mawanella", lat: 7.2536811, lng: 80.4458988},
+                {name: "Rambukkana", lat: 7.313524, lng: 80.388133},
+                {name: "Ruwanwella", lat: 7.045873, lng: 80.253706},
+                {name: "Warakapola", lat: 7.2252647, lng: 80.1960423},
+                {name: "Yatiyanthota", lat: 7.028882, lng: 80.295542}
+            ],
+            "Kurunegala": [
+                {name: "Kurunegala", lat: 7.4782607, lng: 80.36},
+                {name: "Alawwa", lat: 7.298117, lng: 80.25},
+                {name: "Ambanpola", lat: 7.916775, lng: 80.35},
+                {name: "Galgamuwa", lat: 8.001545, lng: 80.28},
+                {name: "Hettipola", lat: 7.540351, lng: 80.12},
+                {name: "Ibbagamuwa", lat: 7.554821, lng: 80.46},
+                {name: "Kuliyapitiya", lat: 7.484906, lng: 80.04},
+                {name: "Mahawa", lat: 7.823527, lng: 80.27},
+                {name: "Mawathagama", lat: 7.4403955, lng: 80.43},
+                {name: "Narammala", lat: 7.431245, lng: 80.22},
+                {name: "Nikaweratiya", lat: 7.7467077, lng: 80.11},
+                {name: "Pannala", lat: 7.329542, lng: 79.99},
+                {name: "Polgahawela", lat: 7.3371027, lng: 80.29},
+                {name: "Wariyapola", lat: 7.6165329, lng: 80.23}
+            ],
+            "Puttalam": [
+                {name: "Puttalam", lat: 8.0277811, lng: 79.83},
+                {name: "Anamaduwa", lat: 7.8777703, lng: 79.95},
+                {name: "Chilaw", lat: 7.561989, lng: 79.79},
+                {name: "Dankotuwa", lat: 7.296964, lng: 79.88},
+                {name: "Kalpitiya", lat: 8.233942, lng: 79.76},
+                {name: "Marawila", lat: 7.4094, lng: 79.84},
+                {name: "Madampe", lat: 7.497234, lng: 79.84},
+                {name: "Mundalama", lat: 7.788769, lng: 79.82},
+                {name: "Nattandiya", lat: 7.414396, lng: 79.86},
+                {name: "Wennappuwa", lat: 7.341385, lng: 79.84}
+            ],
+            "Anuradhapura": [
+                {name: "Anuradhapura", lat: 8.325781, lng: 80.40},
+                {name: "Horowpothana", lat: 8.552214, lng: 80.84},
+                {name: "Eppawala", lat: 8.146277, lng: 80.41},
+                {name: "Kahatagasdigiliya", lat: 8.422954, lng: 80.56},
+                {name: "Kebitigollewa", lat: 8.642305, lng: 80.64},
+                {name: "Kekirawa", lat: 8.044023, lng: 80.59},
+                {name: "Medawachchiya", lat: 8.537481, lng: 80.49},
+                {name: "Mihintale", lat: 8.3547478, lng: 80.51},
+                {name: "Nochchiyagama", lat: 8.267103, lng: 80.23},
+                {name: "Padaviya", lat: 8.8324065, lng: 80.76},
+                {name: "Tambuttegama", lat: 8.154056, lng: 80.30}
+            ],
+            "Polonnaruwa": [
+                {name: "Polonnaruwa", lat: 7.9433458, lng: 81.0093878},
+                {name: "Aralaganwila", lat: 7.787839, lng: 81.188074},
+                {name: "Bakamuna", lat: 7.774473, lng: 80.819512},
+                {name: "Dimbulagala", lat: 7.859341, lng: 81.103057},
+                {name: "Elahera", lat: 7.734387, lng: 80.79348},
+                {name: "Hingurakgoda", lat: 8.0459371, lng: 80.9648561},
+                {name: "Kaduruwela", lat: 7.931594, lng: 81.034083},
+                {name: "Medirigiriya", lat: 8.143092, lng: 80.967559},
+                {name: "Welikanda", lat: 7.948507, lng: 81.246498}
+            ],
+            "Badulla": [
+                {name: "Badulla", lat: 6.991575, lng: 81.052446},
+                {name: "Bandarawela", lat: 6.8400047, lng: 80.9846979},
+                {name: "Bibilegama", lat: 6.894609, lng: 81.141983},
+                {name: "Diyatalawa", lat: 6.8055733, lng: 80.9571343},
+                {name: "Hali-Ela", lat: 6.956585, lng: 81.03406},
+                {name: "Haputale", lat: 6.783205, lng: 80.964601},
+                {name: "Mahiyanganaya", lat: 7.3261607, lng: 80.9907893},
+                {name: "Passara", lat: 6.9335724, lng: 81.1524924},
+                {name: "Welimada", lat: 6.9090322, lng: 80.9087119}
+            ],
+            "Monaragala": [
+                {name: "Monaragala", lat: 6.891265, lng: 81.342216},
+                {name: "Badalkumbura", lat: 6.894371, lng: 81.232229},
+                {name: "Bibile", lat: 7.1632048, lng: 81.2254243},
+                {name: "Buttala", lat: 6.7581423, lng: 81.2398175},
+                {name: "Inginiyagala", lat: 7.2262613, lng: 81.5421294},
+                {name: "Kataragama", lat: 6.4126218, lng: 81.3388947},
+                {name: "Medagama", lat: 7.03911, lng: 81.274844},
+                {name: "Siyambalanduwa", lat: 6.906219, lng: 81.548426},
+                {name: "Thanamalwila", lat: 6.423918, lng: 81.130428},
+                {name: "Wellawaya", lat: 6.7304832, lng: 81.0984617}
+            ],
+            "Jaffna": [
+                {name: "Jaffna", lat: 9.6664323, lng: 80.0127075},
+                {name: "Analitivu", lat: 9.669823, lng: 79.780518},
+                {name: "Chavakachcheri", lat: 9.6616371, lng: 80.1669594},
+                {name: "Karainagar", lat: 9.7407444, lng: 79.8867057},
+                {name: "Kayts", lat: 9.6981156, lng: 79.8658366},
+                {name: "Kodikamam", lat: 9.6781097, lng: 80.2368417},
+                {name: "Kopay", lat: 9.7062897, lng: 80.0652012},
+                {name: "Mandaithivu", lat: 9.608656, lng: 79.986579},
+                {name: "Nainativu", lat: 9.6048881, lng: 79.7730665},
+                {name: "Nedunthivu", lat: 9.514489, lng: 79.683441},
+                {name: "Point Pedro", lat: 9.8051927, lng: 80.2241181},
+                {name: "Pungudutivu", lat: 9.5725062, lng: 79.8301305},
+                {name: "Tellippalai", lat: 9.7853845, lng: 80.0395793},
+                {name: "Valvettithurai", lat: 9.8257205, lng: 80.1787968},
+                {name: "Velanai", lat: 9.637066, lng: 79.903803}
+            ],
+            "Kilinochchi": [
+                {name: "Kilinochchi", lat: 9.372723, lng: 80.411427},
+                {name: "Akkarayankulam", lat: 9.3117868, lng: 80.3148952},
+                {name: "Dharmapuram", lat: 18.327889, lng: 83.812359},
+                {name: "Mankulam", lat: 9.1280175, lng: 80.4470247},
+                {name: "Pallai", lat: 9.6146574, lng: 80.3254895},
+                {name: "Paranthan", lat: 9.441415, lng: 80.404831},
+                {name: "Poonakary", lat: 9.5074244, lng: 80.2080776},
+                {name: "Vaddakkachchi", lat: 9.374513, lng: 80.454715},
+                {name: "Tharmapuram", lat: 9.410189, lng: 80.517439}
+            ],
+            "Mullaitivu": [
+                {name: "Mullaitivu", lat: 9.261705, lng: 80.813914},
+                {name: "Mallavi", lat: 9.1346083, lng: 80.3087492},
+                {name: "Mankulam", lat: 9.136988, lng: 80.445169},
+                {name: "Mulliyawalai", lat: 9.224977, lng: 80.778716},
+                {name: "Oddusuddan", lat: 9.1627819, lng: 80.6604767},
+                {name: "Puthukkudiyiruppu", lat: 9.3152509, lng: 80.7048246}
+            ],
+            "Vavuniya": [
+                {name: "Vavuniya", lat: 8.761509, lng: 80.4993482},
+                {name: "Cheddikulam", lat: 8.659063, lng: 80.312443},
+                {name: "Kanagarayankulam", lat: 9.046299, lng: 80.517275},
+                {name: "Nedunkerny", lat: 9.0537012, lng: 80.6528729},
+                {name: "Omanthai", lat: 8.865002, lng: 80.502566},
+                {name: "Puliyankulam", lat: 8.9646044, lng: 80.5258698}
+            ],
+            "Mannar": [
+                {name: "Mannar", lat: 8.981363, lng: 79.90288},
+                {name: "Adampan", lat: 8.943329, lng: 79.9966791},
+                {name: "Madhu", lat: 8.856361, lng: 80.204244},
+                {name: "Murunkan", lat: 8.8366766, lng: 80.0378205},
+                {name: "Nanaddan", lat: 8.837082, lng: 79.974729},
+                {name: "Pesalai", lat: 9.08283, lng: 79.810063},
+                {name: "Silavathurai", lat: 8.747651, lng: 79.951446},
+                {name: "Thalaimannar", lat: 9.103228, lng: 79.731174}
+            ],
+            "Ampara": [
+                {name: "Ampara", lat: 7.29895, lng: 81.6892025},
+                {name: "Akkaraipattu", lat: 7.2277333, lng: 81.8513046},
+                {name: "Dehiattakandiya", lat: 7.6735467, lng: 81.0435361},
+                {name: "Kalmunai", lat: 7.417396, lng: 81.807407},
+                {name: "Karaitivu", lat: 7.387521, lng: 81.836911},
+                {name: "Nintavur", lat: 7.353398, lng: 81.856628},
+                {name: "Pottuvil", lat: 6.8759779, lng: 81.8303521},
+                {name: "Sammanthurai", lat: 7.368246, lng: 81.812935},
+                {name: "Sainthamaruthu", lat: 7.387505, lng: 81.836898},
+                {name: "Uhana", lat: 7.363036, lng: 81.635277}
+            ],
+            "Batticaloa": [
+                {name: "Batticaloa", lat: 7.7074301, lng: 81.69035},
+                {name: "Chenkalady", lat: 7.783826, lng: 81.590317},
+                {name: "Eravur", lat: 7.7831262, lng: 81.6061526},
+                {name: "Kaluwanchikudy", lat: 7.516871, lng: 81.785147},
+                {name: "Kattankudy", lat: 7.673166, lng: 81.734489},
+                {name: "Mahaoya", lat: 7.530922, lng: 81.355586},
+                {name: "Vakarai", lat: 8.1341481, lng: 81.4346553},
+                {name: "Valaichchenai", lat: 7.911727, lng: 81.532247}
+            ],
+            "Trincomalee": [
+                {name: "Trincomalee", lat: 8.564149, lng: 81.239806},
+                {name: "Gomarankadawala", lat: 8.682222, lng: 80.953518},
+                {name: "Kantale", lat: 8.367006, lng: 81.004528},
+                {name: "Kinniya", lat: 8.5011915, lng: 81.1874876},
+                {name: "Kuchchaveli", lat: 8.819246, lng: 81.
