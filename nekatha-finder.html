@@ -699,4 +699,152 @@
                 {name: "Gomarankadawala", lat: 8.682222, lng: 80.953518},
                 {name: "Kantale", lat: 8.367006, lng: 81.004528},
                 {name: "Kinniya", lat: 8.5011915, lng: 81.1874876},
-                {name: "Kuchchaveli", lat: 8.819246, lng: 81.
+                {name: "Kuchchaveli", lat: 8.819246, lng: 81.099068},
+                {name: "Muttur", lat: 8.455204, lng: 81.263211},
+                {name: "Nilaveli", lat: 8.680971, lng: 81.193656},
+                {name: "Pulmoddai", lat: 8.9413653, lng: 80.9830161},
+                {name: "Serunuwara", lat: 8.3229365, lng: 81.2997025},
+                {name: "Thambalagamuwa", lat: 8.4774381, lng: 81.1093079}
+            ]
+        };
+
+        // --- 2. INITIALIZE DROPDOWNS ---
+        const districtSelect = document.getElementById('districtSelect');
+        const citySelect = document.getElementById('citySelect');
+        const defaultDistrict = "Colombo";
+
+        for (const dist in LOCATIONS) {
+            const option = document.createElement('option');
+            option.value = dist;
+            option.text = dist + " District";
+            districtSelect.appendChild(option);
+        }
+        districtSelect.value = defaultDistrict;
+
+        function populateCities() {
+            const selectedDist = districtSelect.value;
+            const cities = LOCATIONS[selectedDist];
+            citySelect.innerHTML = "";
+            
+            cities.forEach(city => {
+                const option = document.createElement('option');
+                option.value = JSON.stringify({lat: city.lat, lng: city.lng});
+                option.text = city.name;
+                citySelect.appendChild(option);
+            });
+        }
+        populateCities(); // Run on load
+
+        // --- 3. DATE/TIME DEFAULTS ---
+        const dateInput = document.getElementById('dateInput');
+        const timeInput = document.getElementById('timeInput');
+        
+        const today = new Date();
+        if(today.getFullYear() === 2026) {
+            dateInput.valueAsDate = today;
+        } else {
+            dateInput.value = "2026-01-01";
+        }
+        
+        const hours = String(today.getHours()).padStart(2, '0');
+        const minutes = String(today.getMinutes()).padStart(2, '0');
+        timeInput.value = `${hours}:${minutes}`;
+
+        // --- 4. MAIN CALCULATION VIA SERVER ---
+        async function calculateAstrology() {
+            const dVal = dateInput.value;
+            const tVal = timeInput.value;
+            const genderVal = document.getElementById('genderInput').value;
+            const cityJson = document.getElementById('citySelect').value;
+            
+            const errorDiv = document.getElementById('errorDisplay');
+            const resultDiv = document.getElementById('result-area');
+            const btn = document.getElementById('searchButton');
+            const spinner = document.getElementById('loadingSpinner');
+            const btnText = btn.querySelector('.button-text');
+            
+            // Reset UI
+            errorDiv.style.display = 'none';
+            resultDiv.style.display = 'none';
+
+            // Validation
+            if(!dVal || !tVal) {
+                errorDiv.innerText = "කරුණාකර දිනය සහ වේලාව ඇතුලත් කරන්න.";
+                errorDiv.style.display = 'block';
+                return;
+            }
+            if(!genderVal) {
+                errorDiv.innerText = "කරුණාකර ස්ත්‍රී / පුරුෂ භාවය තෝරන්න.";
+                errorDiv.style.display = 'block';
+                return;
+            }
+            if(!cityJson) {
+                errorDiv.innerText = "කරුණාකර නගරය තෝරන්න.";
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            // UI Loading State
+            btn.disabled = true;
+            spinner.style.display = 'block';
+            btnText.style.opacity = '0';
+
+            // Prepare Payload
+            const city = JSON.parse(cityJson);
+            const payload = {
+                date: dVal,
+                time: tVal,
+                gender: genderVal,
+                lat: city.lat,
+                lng: city.lng
+            };
+
+            try {
+                // Fetch from Google Apps Script
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'cors', // Important for cross-origin
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8', // Plain text to avoid CORS preflight issues commonly found with GAS
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) throw new Error("Network response was not ok");
+                
+                const jsonResponse = await response.json();
+
+                if(jsonResponse.status === "success") {
+                    const data = jsonResponse.data;
+                    
+                    // Display Results
+                    document.getElementById('nakathaResult').innerText = data.nekatha;
+                    
+                    document.getElementById('lagnaResult').innerText = data.lagna;
+                    document.getElementById('lagnaImg').src = data.lagnaImg;
+                    
+                    document.getElementById('navanshakaResult').innerText = data.navanshaka;
+                    document.getElementById('navanshakaImg').src = data.navanshakaImg;
+                    
+                    document.getElementById('pakshiyaResult').innerText = data.pakshiya;
+                    document.getElementById('pakshiyaImg').src = data.pakshiyaImg;
+                    
+                    resultDiv.style.display = 'block';
+                } else {
+                    throw new Error(jsonResponse.message || "Unknown error occurred");
+                }
+
+            } catch (error) {
+                console.error(error);
+                errorDiv.innerText = "දත්ත ලබා ගැනීමේ දෝෂයක්. කරුණාකර නැවත උත්සාහ කරන්න.";
+                errorDiv.style.display = 'block';
+            } finally {
+                // Restore UI
+                btn.disabled = false;
+                spinner.style.display = 'none';
+                btnText.style.opacity = '1';
+            }
+        }
+    </script>
+</body>
+</html>
