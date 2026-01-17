@@ -659,32 +659,47 @@
 }
 
         // --- RENDER FUNCTIONS ---
+        // --- RENDER FUNCTIONS (Updated with Safety Checks) ---
         function renderResults(data) {
             const resultDiv = document.getElementById('result-area');
             
+            // Safety Check: Ensure data exists before trying to use it
+            if (!data || !data.lagna || !data.chartHouses) {
+                console.error("Incomplete Data Received:", data);
+                alert("දෝෂයක්! Server එකෙන් ලැබුණු දත්ත අසම්පූර්ණයි. (Server data incomplete). Please redeploy the script.");
+                return;
+            }
+
             // 1. Render Center Lagna
             document.getElementById('center-lagna-text').innerText = data.lagna.name;
             document.getElementById('center-lagna-img').src = data.lagna.image;
             
-            // 2. Render Chart Houses
+            // 2. Render Chart Houses (With safety check for each house)
             for(let i=1; i<=12; i++) {
                 const el = document.getElementById(`preview-h${i}`);
-                const planets = data.chartHouses[i];
-                if(planets && planets.length > 0) {
-                    el.innerText = planets.join(' ');
+                // Check if chartHouses exists and has the specific key
+                if (data.chartHouses && data.chartHouses[i]) {
+                    const planets = data.chartHouses[i];
+                    if(planets.length > 0) {
+                        el.innerText = planets.join(' ');
+                    } else {
+                        el.innerText = i; 
+                    }
                 } else {
-                    el.innerText = i; 
+                    el.innerText = i; // Fallback
                 }
             }
             
             // 3. Render Summary Table
             const tbody = document.getElementById('graha-table-body');
             tbody.innerHTML = "";
-            data.summaryTable.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${row.name}</td><td>${row.sign} රාශිය</td>`;
-                tbody.appendChild(tr);
-            });
+            if (data.summaryTable) {
+                data.summaryTable.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${row.name}</td><td>${row.sign} රාශිය</td>`;
+                    tbody.appendChild(tr);
+                });
+            }
 
             // 4. Render Good/Bad Letters
             const lettersContainer = document.getElementById('good-bad-letters-area');
@@ -716,7 +731,6 @@
             const cardContainer = document.getElementById('graha-balaya-area');
             cardContainer.innerHTML = "";
             
-            // STATUS COLOR HELPER
             const STATUS_COLORS = {
                 "උච්ච": "text-blue", "ස්වක්ෂේත්‍ර": "text-blue", "මූල ත්‍රිකෝණ": "text-blue",
                 "මිත්‍ර": "text-green", "සම": "text-green",
@@ -725,41 +739,43 @@
                 "සුභ": "text-green", "අසුභ": "text-red"
             };
 
-            data.balayaCards.forEach(cardData => {
-                // Formatting Owned details
-                let ownedHtml = "";
-                cardData.ownedDetails.forEach(od => {
-                     const resClass = STATUS_COLORS[od.status] || "text-green";
-                     ownedHtml += `<div class="balaya-row">${cardData.planet} අයත් භාවය - ${od.house} භාවය: <span class="${resClass}">${od.status}</span></div>`;
+            if (data.balayaCards) {
+                data.balayaCards.forEach(cardData => {
+                    let ownedHtml = "";
+                    if (cardData.ownedDetails) {
+                        cardData.ownedDetails.forEach(od => {
+                            const resClass = STATUS_COLORS[od.status] || "text-green";
+                            ownedHtml += `<div class="balaya-row">${cardData.planet} අයත් භාවය - ${od.house} භාවය: <span class="${resClass}">${od.status}</span></div>`;
+                        });
+                    }
+
+                    const rashiClass = STATUS_COLORS[cardData.rashiRelation] || "";
+                    const posClass = STATUS_COLORS[cardData.posStatus] || "";
+                    const naiClass = (cardData.naiStatus === "සුභ") ? "text-green" : "text-red";
+
+                    const rashiHtml = `<span class="${rashiClass}">${cardData.rashiRelation} (${cardData.signName} රාශිය): ${cardData.rashiStatus}</span>`;
+                    const posHtml = `<span class="${posClass}">${cardData.posStatus}</span>`;
+                    const naiHtml = `<span class="${naiClass}">${cardData.naiRelation}: ${cardData.naiStatus}</span>`;
+
+                    const card = document.createElement('div');
+                    card.className = "balaya-card";
+                    card.innerHTML = `
+                        <div class="balaya-header">${cardData.planet} ග්‍රහයාගේ බලය</div>
+                        <div class="balaya-row">${cardData.planet}ගේ රාශි බලය - ${rashiHtml}</div>
+                        <div class="balaya-row">${cardData.planet} සිටින භාවය - ${cardData.posName}: ${posHtml}</div>
+                        ${ownedHtml}
+                        <div class="balaya-row">නෛසර්ගික ග්‍රහ බලපෑම - ${naiHtml}</div>
+                        <div class="letters-row">හිමි අක්ෂර - ${cardData.letters}</div>
+                    `;
+                    cardContainer.appendChild(card);
                 });
-
-                // Formatting Main Classes
-                const rashiClass = STATUS_COLORS[cardData.rashiRelation] || "";
-                const posClass = STATUS_COLORS[cardData.posStatus] || "";
-                const naiClass = (cardData.naiStatus === "සුභ") ? "text-green" : "text-red";
-
-                const rashiHtml = `<span class="${rashiClass}">${cardData.rashiRelation} (${cardData.signName} රාශිය): ${cardData.rashiStatus}</span>`;
-                const posHtml = `<span class="${posClass}">${cardData.posStatus}</span>`;
-                const naiHtml = `<span class="${naiClass}">${cardData.naiRelation}: ${cardData.naiStatus}</span>`;
-
-                const card = document.createElement('div');
-                card.className = "balaya-card";
-                card.innerHTML = `
-                    <div class="balaya-header">${cardData.planet} ග්‍රහයාගේ බලය</div>
-                    <div class="balaya-row">${cardData.planet}ගේ රාශි බලය - ${rashiHtml}</div>
-                    <div class="balaya-row">${cardData.planet} සිටින භාවය - ${cardData.posName}: ${posHtml}</div>
-                    ${ownedHtml}
-                    <div class="balaya-row">නෛසර්ගික ග්‍රහ බලපෑම - ${naiHtml}</div>
-                    <div class="letters-row">හිමි අක්ෂර - ${cardData.letters}</div>
-                `;
-                cardContainer.appendChild(card);
-            });
+            }
 
             // Show results
             resultDiv.style.display = 'block';
         }
-
     </script>
 </body>
 
 </html>
+
