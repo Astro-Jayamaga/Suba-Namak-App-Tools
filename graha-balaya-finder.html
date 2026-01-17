@@ -376,8 +376,6 @@
     <div class="container">
         <h1>ග්‍රහ බලය අනුව සුබ අක්ෂර සෙවීම</h1>
 
-        <div id="initial-loader" style="color: #666; margin-bottom:10px;">දත්ත ලබා ගනිමින් පවතී...</div>
-
         <div class="form-group">
             <label for="dateInput">උපන් දිනය තෝරන්න (2026)</label>
             <input type="date" id="dateInput" min="2026-01-01" max="2026-12-31">
@@ -390,15 +388,14 @@
 
         <div class="form-group">
             <label for="districtSelect">උපන් දිස්ත්‍රික්කය තෝරන්න</label>
-            <select id="districtSelect" onchange="populateCities()" disabled>
-                <option>පූරණය වෙමින්...</option>
+            <select id="districtSelect" onchange="populateCities()">
             </select>
         </div>
 
         <div class="form-group">
             <label for="citySelect">උපන් ස්ථානය තෝරන්න</label>
-            <select id="citySelect" disabled>
-                <option>දිස්ත්‍රික්කය තෝරන්න</option>
+            <select id="citySelect">
+                <option value="" disabled selected>දිස්ත්‍රික්කය තෝරන්න</option>
             </select>
         </div>
 
@@ -413,8 +410,8 @@
 
         <div id="errorDisplay" class="error-msg"></div>
 
-        <button id="searchBtn" class="cta-button" onclick="calculateChart()" disabled>සොයන්න</button>
-        <div id="loading-indicator">ගණනය වෙමින් පවතී...</div>
+        <button id="searchBtn" class="cta-button" onclick="calculateChart()">සොයන්න</button>
+        <div id="loading-indicator">ගණනය කරමින් පවතී. රැඳී සිටින්න...</div>
 
         <div id="result-area">
             
@@ -479,13 +476,60 @@
 
         // ==========================================
         //  CONFIGURATION: PASTE YOUR GAS WEB APP URL HERE
+        //  NOTE: We added the ?tool parameter for routing
         // ==========================================
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBQEAzmFPaRDnMi4Iuwr1hRAgxLg8Cp7mVEheAB81-6AlbvYNM7pTh1bkT32eUlfah/exec?tool=graha_balaya_2026"; 
-        // Example: "https://script.google.com/macros/s/AKfycbx.../exec"
+        
+        // ==========================================
+        //  CLIENT SIDE LOCATION DATA
+        // ==========================================
+        const LOCATIONS = {
+          "Colombo": [
+            {name: "Colombo", lat: 6.9172436, lng: 79.8671954},
+            {name: "Kollupitiya", lat: 6.88333, lng: 79.85000},
+            {name: "Nugegoda", lat: 6.8649, lng: 79.8997},
+            {name: "Maharagama", lat: 6.851095, lng: 79.921201},
+            {name: "Homagama", lat: 6.8469074, lng: 79.9923651}
+          ],
+          "Kalutara": [
+            {name: "Kalutara", lat: 6.5630625, lng: 79.9852435},
+            {name: "Panadura", lat: 6.7217149, lng: 79.9067953},
+            {name: "Horana", lat: 6.7112399, lng: 80.0669863}
+          ],
+          "Gampaha": [
+            {name: "Gampaha", lat: 7.0532237, lng: 80.3289831},
+            {name: "Negombo", lat: 7.2121161, lng: 79.849371},
+            {name: "Kelaniya", lat: 6.950415, lng: 79.917142}
+          ],
+          "Galle": [
+            {name: "Galle", lat: 6.036578, lng: 80.216479},
+            {name: "Hikkaduwa", lat: 6.140753, lng: 80.1028181}
+          ],
+          "Matara": [
+            {name: "Matara", lat: 5.9479065, lng: 80.5496589},
+            {name: "Weligama", lat: 5.97503, lng: 80.418828}
+          ],
+          "Kandy": [
+            {name: "Kandy", lat: 7.2865161, lng: 80.631418},
+            {name: "Peradeniya", lat: 7.266409, lng: 80.5981261}
+          ],
+           "Kurunegala": [
+            {name: "Kurunegala", lat: 7.4782607, lng: 80.36},
+            {name: "Kuliyapitiya", lat: 7.484906, lng: 80.04}
+          ],
+           "Ratnapura": [
+            {name: "Ratnapura", lat: 6.6871447, lng: 80.3924992},
+            {name: "Embilipitiya", lat: 6.3261811, lng: 80.8419125}
+          ],
+           "Anuradhapura": [
+            {name: "Anuradhapura", lat: 8.325781, lng: 80.40}
+          ],
+           "Jaffna": [
+            {name: "Jaffna", lat: 9.6664323, lng: 80.0127075}
+          ]
+        };
 
-        let cachedLocations = {};
-
-        // 1. Initialize Page - Fetch Locations from Server
+        // 1. Initialize Page
         window.addEventListener('load', () => {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('dateInput').value = today;
@@ -494,46 +538,23 @@
             const timeStr = now.toTimeString().split(' ')[0].substring(0,5);
             document.getElementById('timeInput').value = timeStr;
 
-            fetchLocations();
+            initLocations();
         });
 
-        async function fetchLocations() {
-            try {
-                // We use POST to avoid potential URL length issues or caching aggressively
-                // Note: GAS Web App needs doPOST to handle this.
-                const response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({ action: "getLocations" })
-                });
-                
-                const data = await response.json();
-                cachedLocations = data;
-                
-                // Populate District Dropdown
-                const distSelect = document.getElementById('districtSelect');
-                distSelect.innerHTML = "";
-                
-                for (const dist in cachedLocations) {
-                    const option = document.createElement('option');
-                    option.value = dist;
-                    option.text = dist; // Or map to Sinhala name if needed
-                    distSelect.appendChild(option);
-                }
-
-                // Enable UI
-                distSelect.disabled = false;
-                document.getElementById('citySelect').disabled = false;
-                document.getElementById('searchBtn').disabled = false;
-                document.getElementById('initial-loader').style.display = 'none';
-                
-                // Trigger City Population for first item
-                populateCities();
-
-            } catch (error) {
-                console.error("Error fetching locations:", error);
-                document.getElementById('initial-loader').innerText = "දත්ත ලබා ගැනීමේ දෝෂයක්. කරුණාකර නැවත උත්සාහ කරන්න.";
-                document.getElementById('initial-loader').style.color = "red";
+        function initLocations() {
+            // Populate District Dropdown immediately from local constant
+            const distSelect = document.getElementById('districtSelect');
+            distSelect.innerHTML = "";
+            
+            for (const dist in LOCATIONS) {
+                const option = document.createElement('option');
+                option.value = dist;
+                option.text = dist; 
+                distSelect.appendChild(option);
             }
+            
+            // Trigger City Population for first item (Default behavior)
+            populateCities();
         }
 
         function populateCities() {
@@ -541,9 +562,9 @@
             const citySelect = document.getElementById('citySelect');
             const selectedDist = distSelect.value;
             
-            if(!cachedLocations[selectedDist]) return;
+            if(!LOCATIONS[selectedDist]) return;
 
-            const cities = cachedLocations[selectedDist];
+            const cities = LOCATIONS[selectedDist];
             citySelect.innerHTML = "";
             
             cities.forEach(city => {
@@ -585,7 +606,7 @@
                 time: tVal,
                 lat: cityObj.lat,
                 lng: cityObj.lng,
-                gender: genderVal // Passed if server needs logic for it later
+                gender: genderVal 
             };
 
             // Loading State
@@ -593,6 +614,7 @@
             loadingInd.style.display = 'block';
 
             try {
+                // Using POST for calculations
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
                     body: JSON.stringify(payload)
@@ -651,26 +673,7 @@
                 // Owned houses logic
                 let ownedRowsHtml = "";
                 p.ownedHtml.forEach(o => {
-                    ownedRowsHtml += `<div class="balaya-row">${o.text}</div>`; // Simplify coloring or apply class via JS replacement if needed, but text contains logic
-                    // If you want exact colors from server classes:
-                    // We need to parse or just trust the text. 
-                    // Better approach: Server sends raw data, Client formats. 
-                    // However, to keep it simple with the provided server code structure:
-                    // We will reconstruct using the CSS class provided in JSON.
-                });
-
-                // Helper to build span with class
-                const span = (obj) => `<span class="${obj.css}">${obj.text}: ${obj.status || ''}</span>`;
-                const simpleSpan = (obj) => `<span class="${obj.css}">${obj.text}</span>`;
-                
-                // Re-build owned rows with classes
-                let ownedHtml = "";
-                p.ownedHtml.forEach(item => {
-                   // item.text is like "Ravi owned - 5 : Subha"
-                   // Use a regex or simple split if we want to apply color to the last part.
-                   // Or, purely assume the item.text is plain and we wrap the result part.
-                   // Simpler: Just display the text and apply class to the whole line or span.
-                   ownedHtml += `<div class="balaya-row"><span class="${item.resClass}">${item.text}</span></div>`; 
+                    ownedRowsHtml += `<div class="balaya-row"><span class="${o.resClass}">${o.text}</span></div>`;
                 });
 
                 const card = document.createElement('div');
@@ -679,7 +682,7 @@
                     <div class="balaya-header">${p.planetName} ග්‍රහයාගේ බලය</div>
                     <div class="balaya-row">${p.planetName}ගේ රාශි බලය - <span class="${p.rashiHtml.css}">${p.rashiHtml.text} (${p.rashiHtml.sign}): ${p.rashiHtml.status}</span></div>
                     <div class="balaya-row">${p.planetName} සිටින භාවය - ${p.posHtml.name}: <span class="${p.posHtml.css}">${p.posHtml.text}</span></div>
-                    ${ownedHtml}
+                    ${ownedRowsHtml}
                     <div class="balaya-row">නෛසර්ගික ග්‍රහ බලපෑම - <span class="${p.naiHtml.css}">${p.naiHtml.text}: ${p.naiHtml.status}</span></div>
                     <div class="letters-row">හිමි අක්ෂර - ${p.letters}</div>
                 `;
