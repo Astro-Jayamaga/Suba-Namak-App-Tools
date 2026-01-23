@@ -3,294 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 ජ්‍යෝතිෂ අනාවැකි</title>
+    <title>2026 නැකැත් තොරතුරු සෙවීම</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700&family=Noto+Serif+Sinhala:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --primary-color: #FFA500; /* Orange */
-            --secondary-color: #7F0000; /* Maroon */
-            --bg-color: #fdfbf7;
-            --card-bg: #ffffff;
-            --text-color: #2c2c2c;
-            --error-color: #d32f2f;
-            --info-color: #0288d1;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Noto Serif Sinhala', serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            align-items: center;
-            padding: 15px; 
-        }
-
-        .container {
-            background-color: var(--card-bg);
-            width: 100%;
-            max-width: 480px; 
-            padding: 25px 20px; 
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(127, 0, 0, 0.08);
-            border-top: 5px solid var(--secondary-color);
-            text-align: center;
-        }
-
-        h1 {
-            font-family: 'Gemunu Libre', sans-serif;
-            color: var(--secondary-color);
-            font-size: 28px; 
-            margin-bottom: 25px;
-            font-weight: 700;
-            text-transform: uppercase;
-            line-height: 1.2;
-        }
-
-        .form-group {
-            margin-bottom: 15px; 
-            text-align: left;
-        }
-
-        label {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin-bottom: 5px;
-        }
-
-        input[type="date"],
-        input[type="time"],
-        select {
-            width: 100%;
-            padding: 10px 12px; 
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-family: 'Roboto', Noto Serif Sinhala; 
-            font-size: 15px;
-            color: #333;
-            background-color: #fffdfa;
-            transition: all 0.3s ease;
-        }
-
-        input[type="date"]:focus,
-        input[type="time"]:focus,
-        select:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.2);
-        }
-
-        .info-icon {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 18px;
-            height: 18px;
-            background-color: #e0e0e0;
-            color: #555;
-            border-radius: 50%;
-            font-family: sans-serif;
-            font-size: 12px;
-            font-weight: bold;
-            font-style: italic;
-            margin-left: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .info-icon:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .info-text-box {
-            display: none; 
-            font-size: 13px;
-            color: #555;
-            background-color: #e3f2fd;
-            padding: 8px 10px;
-            border-radius: 6px;
-            margin-top: 5px;
-            border-left: 3px solid var(--info-color);
-            line-height: 1.4;
-        }
-
-        .cta-button {
-            background-color: var(--secondary-color);
-            color: #ffffff;
-            font-family: 'Noto Serif Sinhala', sans-serif;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
-            padding: 12px 20px;
-            width: 100%;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-top: 10px;
-            box-shadow: 0 4px 10px rgba(127, 0, 0, 0.25);
-            /* Loading state style */
-            position: relative;
-        }
-
-        .cta-button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
-        .cta-button:hover:not(:disabled) {
-            background-color: #9c1414;
-            transform: translateY(-2px);
-        }
-
-        .error-msg {
-            color: var(--error-color);
-            font-size: 13px;
-            margin-top: 10px;
-            display: none;
-            font-weight: 600;
-            background: #ffebee;
-            padding: 8px;
-            border-radius: 6px;
-        }
-
-        /* Result Area Styling */
-        #result-area {
-            margin-top: 25px;
-            padding: 20px;
-            border-radius: 15px;
-            background-color: #fff8e6;
-            border: 2px dashed var(--primary-color);
-            display: none; 
-            animation: slideUp 0.4s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-item {
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 165, 0, 0.2);
-            text-align: center;
-        }
-        
-        .result-item:last-of-type {
-            border-bottom: none;
-            margin-bottom: 10px;
-        }
-
-        .result-label {
-            font-family: 'Gemunu Libre', sans-serif;
-            font-size: 14px;
-            color: #888;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
-
-        .result-text {
-            font-size: 22px;
-            color: var(--secondary-color);
-            font-weight: 700;
-            line-height: 1.2;
-        }
-        
-        .result-highlight {
-            font-size: 28px;
-            color: #d35400;
-            font-weight: 800;
-        }
-
-        .result-img {
-            max-width: 120px; 
-            height: auto;
-            margin-top: 10px;
-            border-radius: 8px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .pakshiya-gif {
-            max-width: 100px;
-        }
-
-        .blessing-text {
-            font-family: 'Noto Serif Sinhala', serif;
-            font-size: 18px;
-            color: #555;
-            margin-top: 70px;
-            font-weight: 600;
-            font-style: italic;
-        }
-
-        .footer {
-            margin-top: auto;
-            padding-top: 20px;
-            padding-bottom: 3rem; 
-            font-size: 14px;
-            color: #999;
-            font-family: 'Roboto', sans-serif;
-        }
-        
-        /* --- NEW LOADER STYLES --- */
-        #loader-container {
-            display: none; /* Hidden by default */
-            text-align: center;
-            margin-top: 25px;
-            padding: 20px;
-            background-color: #fbfbfb;
-            border-radius: 8px;
-            border: 1px dashed #b3b3b3;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #d8d8d8;
-            border-radius: 50%;
-            border-top-color: #FFA500;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-
-        .loading-text {
-            color: #565656;
-            font-weight: 500;
-            vertical-align: middle;
-            font-size: 14px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
+        :root{--primary-color: #FFA500;--secondary-color: #7F0000;--bg-color: #fdfbf7;--card-bg: #ffffff;--text-color: #2c2c2c;--error-color: #d32f2f;--info-color: #0288d1}*{box-sizing: border-box;margin: 0;padding: 0}body{font-family: 'Noto Serif Sinhala', serif;background-color: var(--bg-color);color: var(--text-color);display: flex;flex-direction: column;min-height: 100vh;align-items: center;padding: 15px}.container{background-color: var(--card-bg);width: 100%;max-width: 480px;padding: 25px 20px;border-radius: 20px;box-shadow: 0 10px 30px rgba(127, 0, 0, 0.08);border-top: 5px solid var(--secondary-color);text-align: center}h1{font-family: 'Gemunu Libre', sans-serif;color: var(--secondary-color);font-size: 28px;margin-bottom: 25px;font-weight: 700;text-transform: uppercase;line-height: 1.2}.form-group{margin-bottom: 15px;text-align: left}label{display: flex;align-items: center;font-size: 14px;font-weight: 600;color: var(--secondary-color);margin-bottom: 5px}input[type="date"],input[type="time"],select{width: 100%;padding: 10px 12px;border: 1px solid #ccc;border-radius: 8px;font-family: 'Roboto', Noto Serif Sinhala;font-size: 15px;color: #333;background-color: #fffdfa;transition: all 0.3s ease}input[type="date"]:focus,input[type="time"]:focus,select:focus{border-color: var(--primary-color);outline: none;box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.2)}.info-icon{display: inline-flex;justify-content: center;align-items: center;width: 18px;height: 18px;background-color: #e0e0e0;color: #555;border-radius: 50%;font-family: sans-serif;font-size: 12px;font-weight: bold;font-style: italic;margin-left: 8px;cursor: pointer;transition: background 0.2s}.info-icon:hover{background-color: var(--primary-color);color: white}.info-text-box{display: none;font-size: 13px;color: #555;background-color: #e3f2fd;padding: 8px 10px;border-radius: 6px;margin-top: 5px;border-left: 3px solid var(--info-color);line-height: 1.4}.cta-button{background-color: var(--secondary-color);color: #ffffff;font-family: 'Noto Serif Sinhala', sans-serif;font-size: 16px;font-weight: bold;border: none;border-radius: 10px;padding: 12px 20px;width: 100%;cursor: pointer;transition: all 0.2s ease;margin-top: 10px;box-shadow: 0 4px 10px rgba(127, 0, 0, 0.25);position: relative}.cta-button:disabled{background-color: #ccc;cursor: not-allowed;box-shadow: none}.cta-button:hover:not(:disabled){background-color: #9c1414;transform: translateY(-2px)}.error-msg{color: var(--error-color);font-size: 13px;margin-top: 10px;display: none;font-weight: 600;background: #ffebee;padding: 8px;border-radius: 6px}#result-area{margin-top: 25px;padding: 20px;border-radius: 15px;background-color: #fff8e6;border: 2px dashed var(--primary-color);display: none;animation: slideUp 0.4s ease-out}@keyframes slideUp{from{opacity: 0;transform: translateY(10px)}to{opacity: 1;transform: translateY(0)}}.result-item{margin-bottom: 25px;padding-bottom: 15px;border-bottom: 1px solid rgba(255, 165, 0, 0.2);text-align: center}.result-item:last-of-type{border-bottom: none;margin-bottom: 10px}.result-label{font-family: 'Gemunu Libre', sans-serif;font-size: 14px;color: #888;text-transform: uppercase;margin-bottom: 8px;letter-spacing: 1px}.result-text{font-size: 22px;color: var(--secondary-color);font-weight: 700;line-height: 1.2}.result-highlight{font-size: 28px;color: #d35400;font-weight: 800}.result-img{max-width: 120px;height: auto;margin-top: 10px;border-radius: 8px;display: block;margin-left: auto;margin-right: auto}.pakshiya-gif{max-width: 100px}.blessing-text{font-family: 'Noto Serif Sinhala', serif;font-size: 18px;color: #555;margin-top: 70px;font-weight: 600;font-style: italic}.footer{margin-top: auto;padding-top: 20px;padding-bottom: 3rem;font-size: 14px;color: #999;font-family: 'Roboto', sans-serif}body{-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none}input, textarea{-webkit-user-select: text !important;-moz-user-select: text !important;-ms-user-select: text !important;user-select: text !important}#loader-container{display: none;text-align: center;margin-top: 25px;padding: 20px;background-color: #fbfbfb;border-radius: 8px;border: 1px dashed #b3b3b3;animation: fadeIn 0.3s ease}.spinner{display: inline-block;width: 20px;height: 20px;border: 3px solid #d8d8d8;border-radius: 50%;border-top-color: #FFA500;animation: spin 1s ease-in-out infinite;margin-right: 10px;vertical-align: middle}.loading-text{color: #565656;font-weight: 500;vertical-align: middle;font-size: 14px}@keyframes spin{to{transform: rotate(360deg)}}@keyframes fadeIn{from{opacity: 0}to{opacity: 1}}
     </style>
 </head>
 <body>
@@ -385,529 +105,2518 @@
     </div>
 
     <script>
-        // *** IMPORTANT: REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT DEPLOYMENT URL ***
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxf6o9l13pZLAzHK9PrMqNaYRq7b-m5UsvHKsbpX9_5LdxSeEDKKk17mVM11BUee3bQ/exec?tool=nekatha_2026";
+    (function(){
+    var _0x1a2b = ["\x61\x73\x74\x72\x6f\x2d\x6a\x61\x79\x61\x6d\x61\x67\x61\x2e\x67\x69\x74\x68\x75\x62\x2e\x69\x6f", "\x6c\x6f\x63\x61\x6c\x68\x6f\x73\x74", "\x31\x32\x37\x2e\x30\x2e\x30\x2e\x31", "\x68\x6f\x73\x74\x6e\x61\x6d\x65", "\x69\x6e\x64\x65\x78\x4f\x66", "\x62\x6f\x64\x79", "\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c", "\x3c\x68\x31\x3e\x55\x6e\x61\x75\x74\x68\x6f\x72\x69\x7a\x65\x64\x3c\x2f\x68\x31\x3e\x3c\x70\x3e\x50\x6c\x65\x61\x73\x65\x20\x76\x69\x73\x69\x74\x20\x61\x73\x74\x72\x6f\x2d\x6a\x61\x79\x61\x6d\x61\x67\x61\x2e\x67\x69\x74\x68\x75\x62\x2e\x69\x6f\x3c\x2f\x70\x3e"];
+    var _0x9c4d = window['\x6c\x6f\x63\x61\x74\x69\x6f\x6e'][_0x1a2b[3]];
 
-        document.getElementById('yearSpan').textContent = new Date().getFullYear();
+    if (_0x9c4d[_0x1a2b[4]](_0x1a2b[0]) === -1 && _0x9c4d !== _0x1a2b[1] && _0x9c4d !== _0x1a2b[2]) {
 
-        // --- INFO TEXT TOGGLE FUNCTION ---
-        function toggleInfo(elementId) {
-            const el = document.getElementById(elementId);
-            if (el.style.display === "block") {
-                el.style.display = "none";
-            } else {
-                el.style.display = "block";
-            }
+        document[_0x1a2b[5]][_0x1a2b[6]] = _0x1a2b[7]; 
+
+        throw new Error("\x41\x63\x63\x65\x73\x73\x20\x44\x65\x6e\x69\x65\x64");
+    }
+})();
+        function _0x25d5(_0x103a3d, _0x51ca5b) {
+    _0x103a3d = _0x103a3d - (0x874 + -0x2356 + -0x2 * -0xe02);
+    const _0x59ce45 = _0x64e0();
+    let _0x20aa00 = _0x59ce45[_0x103a3d];
+    return _0x20aa00;
+}
+const _0x4bd447 = _0x25d5;
+(function (_0x59af47, _0x3ad506) {
+    const _0x3a4af6 = _0x25d5, _0x18a401 = _0x59af47();
+    while (!![]) {
+        try {
+            const _0x29c23c = -parseInt(_0x3a4af6(0x136)) / (-0x13b1 * -0x1 + 0x2029 + 0x1 * -0x33d9) * (-parseInt(_0x3a4af6(0x12a)) / (0x255 * 0x5 + -0xd97 * -0x2 + -0x26d5 * 0x1)) + parseInt(_0x3a4af6(0x129)) / (0x6f3 * -0x3 + -0xb67 + -0x1 * -0x2043) * (parseInt(_0x3a4af6(0x138)) / (-0x3 * 0xb2f + -0x1f39 * 0x1 + -0x2 * -0x2065)) + parseInt(_0x3a4af6(0x130)) / (-0x2 * -0xf7e + -0x19e5 + 0x512 * -0x1) + parseInt(_0x3a4af6(0x135)) / (0x84a + -0x17a9 + 0xf65) * (-parseInt(_0x3a4af6(0x132)) / (-0xf71 * 0x1 + -0x3 * -0x169 + 0xb3d)) + parseInt(_0x3a4af6(0x12e)) / (0xec1 * 0x2 + 0x15a5 * 0x1 + 0x331f * -0x1) + parseInt(_0x3a4af6(0x128)) / (0x241e + -0x15c5 * -0x1 + -0x39da * 0x1) * (parseInt(_0x3a4af6(0x124)) / (0x46b * 0x7 + 0x36e * 0x5 + -0x3009)) + -parseInt(_0x3a4af6(0x133)) / (0x5d * -0x4 + 0x21ee + 0x169 * -0x17);
+            if (_0x29c23c === _0x3ad506)
+                break;
+            else
+                _0x18a401['push'](_0x18a401['shift']());
+        } catch (_0x3f25b1) {
+            _0x18a401['push'](_0x18a401['shift']());
         }
+    }
+}(_0x64e0, -0x246 * 0x539 + -0x72393 * -0x1 + 0xb7ab8));
+const SCRIPT_URL = _0x4bd447(0x137) + _0x4bd447(0x131) + _0x4bd447(0x12d) + _0x4bd447(0x126) + _0x4bd447(0x134) + _0x4bd447(0x139) + _0x4bd447(0x12b) + _0x4bd447(0x12c) + _0x4bd447(0x123) + _0x4bd447(0x125) + _0x4bd447(0x122) + _0x4bd447(0x127) + _0x4bd447(0x12f);
+function _0x64e0() {
+    const _0x5a425d = [
+        '2899875MJJpkC',
+        'ript.googl',
+        '18004IEjXRh',
+        '20447306woTrcr',
+        'bxf6o9l13p',
+        '582lktCOE',
+        '1oohyrD',
+        'https://sc',
+        '892gXUqYg',
+        'ZLAzHK9PrM',
+        'BUee3bQ/ex',
+        '9_5LdxSeED',
+        '129380hqOWWC',
+        'KKk17mVM11',
+        'os/s/AKfyc',
+        'ec?tool=ne',
+        '342UHqwFS',
+        '3972ghNYmC',
+        '1161196WrXShc',
+        'qNaYRq7b-m',
+        '5UsvHKsbpX',
+        'e.com/macr',
+        '4823184HRgNlN',
+        'katha_2026'
+    ];
+    _0x64e0 = function () {
+        return _0x5a425d;
+    };
+    return _0x64e0();
+}
 
-        // --- 1. LOCATION DATA (Public Lat/Lon Data) ---
-        // This is safe to keep on client as it contains no logic, only standard geodata.
-        const LOCATIONS = {
-            "Ampara": [
-                {name: "Ampara", lat: 7.29895, lng: 81.6892025},
-                {name: "Akkaraipattu", lat: 7.2277333, lng: 81.8513046},
-                {name: "Dehiattakandiya", lat: 7.6735467, lng: 81.0435361},
-                {name: "Kalmunai", lat: 7.417396, lng: 81.807407},
-                {name: "Karaitivu", lat: 7.387521, lng: 81.836911},
-                {name: "Nintavur", lat: 7.353398, lng: 81.856628},
-                {name: "Pottuvil", lat: 6.8759779, lng: 81.8303521},
-                {name: "Sammanthurai", lat: 7.368246, lng: 81.812935},
-                {name: "Sainthamaruthu", lat: 7.387505, lng: 81.836898},
-                {name: "Uhana", lat: 7.363036, lng: 81.635277}
-            ],
-            "Anuradhapura": [
-                {name: "Anuradhapura", lat: 8.325781, lng: 80.40},
-                {name: "Horowpothana", lat: 8.552214, lng: 80.84},
-                {name: "Eppawala", lat: 8.146277, lng: 80.41},
-                {name: "Kahatagasdigiliya", lat: 8.422954, lng: 80.56},
-                {name: "Kebitigollewa", lat: 8.642305, lng: 80.64},
-                {name: "Kekirawa", lat: 8.044023, lng: 80.59},
-                {name: "Medawachchiya", lat: 8.537481, lng: 80.49},
-                {name: "Mihintale", lat: 8.3547478, lng: 80.51},
-                {name: "Nochchiyagama", lat: 8.267103, lng: 80.23},
-                {name: "Padaviya", lat: 8.8324065, lng: 80.76},
-                {name: "Tambuttegama", lat: 8.154056, lng: 80.30}
-            ],
-            "Badulla": [
-                {name: "Badulla", lat: 6.991575, lng: 81.052446},
-                {name: "Bandarawela", lat: 6.8400047, lng: 80.9846979},
-                {name: "Bibilegama", lat: 6.894609, lng: 81.141983},
-                {name: "Diyatalawa", lat: 6.8055733, lng: 80.9571343},
-                {name: "Hali-Ela", lat: 6.956585, lng: 81.03406},
-                {name: "Haputale", lat: 6.783205, lng: 80.964601},
-                {name: "Mahiyanganaya", lat: 7.3261607, lng: 80.9907893},
-                {name: "Passara", lat: 6.9335724, lng: 81.1524924},
-                {name: "Welimada", lat: 6.9090322, lng: 80.9087119}
-            ],
-            "Batticaloa": [
-                {name: "Batticaloa", lat: 7.7074301, lng: 81.69035},
-                {name: "Chenkalady", lat: 7.783826, lng: 81.590317},
-                {name: "Eravur", lat: 7.7831262, lng: 81.6061526},
-                {name: "Kaluwanchikudy", lat: 7.516871, lng: 81.785147},
-                {name: "Kattankudy", lat: 7.673166, lng: 81.734489},
-                {name: "Mahaoya", lat: 7.530922, lng: 81.355586},
-                {name: "Vakarai", lat: 8.1341481, lng: 81.4346553},
-                {name: "Valaichchenai", lat: 7.911727, lng: 81.532247}
-            ],
-            "Colombo": [
-                {name: "Colombo", lat: 6.9172436, lng: 79.8671954},
-                {name: "Athurugiriya", lat: 6.872319, lng: 80.000388},
-                {name: "Avissawella", lat: 6.957381, lng: 80.2076654},
-                {name: "Bambalapitiya", lat: 6.904361, lng: 79.85404},
-                {name: "Battaramulla", lat: 6.897994, lng: 79.922287},
-                {name: "Borella", lat: 6.914784, lng: 79.877595},
-                {name: "Boralesgamuwa", lat: 6.841, lng: 79.9017},
-                {name: "Dehiwala", lat: 6.855949, lng: 79.862968},
-                {name: "Homagama", lat: 6.8469074, lng: 79.9923651},
-                {name: "Hokandara", lat: 6.8804849, lng: 79.9599002},
-                {name: "Kaduwela", lat: 6.929061, lng: 79.982775},
-                {name: "Kalubowila", lat: 6.8676907, lng: 79.8762476},
-                {name: "Kesbewa", lat: 6.7787, lng: 79.9473},
-                {name: "Kollupitiya", lat: 6.88333, lng: 79.85000},
-                {name: "Kolonnawa", lat: 6.9284, lng: 79.8952},
-                {name: "Maharagama", lat: 6.851095, lng: 79.921201},
-                {name: "Maligawatta", lat: 6.9352912, lng: 79.8721056},
-                {name: "Moratuwa", lat: 6.7879, lng: 79.8851},
-                {name: "Mount Lavinia", lat: 6.831716, lng: 79.862865},
-                {name: "Narahenpita", lat: 6.9057266, lng: 79.8821297},
-                {name: "Nugegoda", lat: 6.8649, lng: 79.8997},
-                {name: "Padukka", lat: 6.8431, lng: 80.0917},
-                {name: "Pannipitiya", lat: 6.8464, lng: 79.9484},
-                {name: "Piliyandala", lat: 6.799951, lng: 79.9231171},
-                {name: "Rathmalana", lat: 6.8195, lng: 79.8801},
-                {name: "Sri Jayawardenepura Kotte", lat: 6.8683337, lng: 79.9261518},
-                {name: "Wellawatte", lat: 6.8743844, lng: 79.8591176}
-            ],
-            "Galle": [
-                {name: "Galle", lat: 6.036578, lng: 80.216479},
-                {name: "Ambalangoda", lat: 6.2491338, lng: 80.0625085},
-                {name: "Baddegama", lat: 6.1614238, lng: 80.1804779},
-                {name: "Balapitiya", lat: 6.2601723, lng: 80.0384209},
-                {name: "Bentota", lat: 6.4236093, lng: 79.9994893},
-                {name: "Elpitiya", lat: 6.2938317, lng: 80.1642436},
-                {name: "Hikkaduwa", lat: 6.140753, lng: 80.1028181},
-                {name: "Hiniduma", lat: 6.3313532, lng: 80.3223076},
-                {name: "Imaduwa", lat: 6.037848, lng: 80.391439},
-                {name: "Karandeniya", lat: 6.2692305, lng: 80.0992584},
-                {name: "Karapitiya", lat: 6.0665678, lng: 80.225809},
-                {name: "Mahamodara", lat: 6.038818, lng: 80.206995},
-                {name: "Meetiyagoda", lat: 6.189834, lng: 80.095394},
-                {name: "Nagoda", lat: 6.197985, lng: 80.274697},
-                {name: "Udugama", lat: 6.217905, lng: 80.338021},
-                {name: "Unawatuna", lat: 6.017447, lng: 80.24886},
-                {name: "Yakkalamulla", lat: 6.106426, lng: 80.348315}
-            ],
-            "Gampaha": [
-                {name: "Gampaha", lat: 7.0532237, lng: 80.3289831},
-                {name: "Biyagama", lat: 6.9469426, lng: 79.9939404},
-                {name: "Divulapitiya", lat: 7.224568, lng: 80.019462},
-                {name: "Ganemulla", lat: 7.062396, lng: 79.966831},
-                {name: "Ja-Ela", lat: 7.0750452, lng: 79.8940656},
-                {name: "Kadawatha", lat: 7.0005, lng: 79.9494},
-                {name: "Katana", lat: 7.249524, lng: 79.904294},
-                {name: "Katunayake", lat: 7.172485, lng: 79.885348},
-                {name: "Kelaniya", lat: 6.950415, lng: 79.917142},
-                {name: "Kiribathgoda", lat: 6.9835, lng: 79.9289},
-                {name: "Kirindiwela", lat: 7.0431455, lng: 80.1317271},
-                {name: "Mahara", lat: 6.991667, lng: 79.938326},
-                {name: "Marawila", lat: 7.4130318, lng: 79.8309525},
-                {name: "Minuwangoda", lat: 7.1725525, lng: 79.9563284},
-                {name: "Mirigama", lat: 7.2475144, lng: 80.1299215},
-                {name: "Negombo", lat: 7.2121161, lng: 79.849371},
-                {name: "Ragama", lat: 7.0263493, lng: 79.9236484},
-                {name: "Seeduwa", lat: 7.1311776, lng: 79.8762627},
-                {name: "Veyangoda", lat: 7.1534492, lng: 80.0602466},
-                {name: "Wattala", lat: 6.990668, lng: 79.893171},
-                {name: "Wathupitiwala", lat: 7.125555, lng: 80.110852},
-                {name: "Weliweriya", lat: 7.033592, lng: 80.027151},
-                {name: "Welisara", lat: 7.027756, lng: 79.898279}
-            ],
-            "Hambantota": [
-                {name: "Hambantota", lat: 6.1271953, lng: 81.1224549},
-                {name: "Angunakolapelessa", lat: 6.16524, lng: 80.899793},
-                {name: "Ambalantota", lat: 6.1147035, lng: 81.0220545},
-                {name: "Beliatta", lat: 6.048163, lng: 80.733427},
-                {name: "Kataragama", lat: 6.4126218, lng: 81.3388947},
-                {name: "Ranna", lat: 6.097728, lng: 80.87579},
-                {name: "Sooriyawewa", lat: 6.304564, lng: 81.003978},
-                {name: "Tangalle", lat: 6.022708, lng: 80.796871},
-                {name: "Tissamaharama", lat: 6.284974, lng: 81.268557},
-                {name: "Walasmulla", lat: 6.149682, lng: 80.698166},
-                {name: "Weeraketiya", lat: 6.145085, lng: 80.765208}
-            ],
-            "Jaffna": [
-                {name: "Jaffna", lat: 9.6664323, lng: 80.0127075},
-                {name: "Analitivu", lat: 9.669823, lng: 79.780518},
-                {name: "Chavakachcheri", lat: 9.6616371, lng: 80.1669594},
-                {name: "Karainagar", lat: 9.7407444, lng: 79.8867057},
-                {name: "Kayts", lat: 9.6981156, lng: 79.8658366},
-                {name: "Kodikamam", lat: 9.6781097, lng: 80.2368417},
-                {name: "Kopay", lat: 9.7062897, lng: 80.0652012},
-                {name: "Mandaithivu", lat: 9.608656, lng: 79.986579},
-                {name: "Nainativu", lat: 9.6048881, lng: 79.7730665},
-                {name: "Nedunthivu", lat: 9.514489, lng: 79.683441},
-                {name: "Point Pedro", lat: 9.8051927, lng: 80.2241181},
-                {name: "Pungudutivu", lat: 9.5725062, lng: 79.8301305},
-                {name: "Tellippalai", lat: 9.7853845, lng: 80.0395793},
-                {name: "Valvettithurai", lat: 9.8257205, lng: 80.1787968},
-                {name: "Velanai", lat: 9.637066, lng: 79.903803}
-            ],
-            "Kalutara": [
-                {name: "Kalutara", lat: 6.5630625, lng: 79.9852435},
-                {name: "Agalawatta", lat: 6.5423445, lng: 80.157362},
-                {name: "Aluthgama", lat: 6.4339065, lng: 80.0016286},
-                {name: "Baduraliya", lat: 6.517122, lng: 80.23118},
-                {name: "Bandaragama", lat: 6.716396, lng: 79.991651},
-                {name: "Beruwala", lat: 6.473838, lng: 79.991997},
-                {name: "Bulathsinhala", lat: 6.648747, lng: 80.179137},
-                {name: "Dodangoda", lat: 6.532057, lng: 79.986418},
-                {name: "Horana", lat: 6.7112399, lng: 80.0669863},
-                {name: "Ingiriya", lat: 6.741412, lng: 80.162144},
-                {name: "Matugama", lat: 6.521943, lng: 80.113685},
-                {name: "Neboda", lat: 6.5929145, lng: 80.0878027},
-                {name: "Panadura", lat: 6.7217149, lng: 79.9067953},
-                {name: "Payagala", lat: 6.5218775, lng: 79.9788422},
-                {name: "Wadduwa", lat: 6.6639728, lng: 79.9305102},
-                {name: "Walallavita", lat: 6.376967, lng: 80.195794}
-            ],
-            "Kandy": [
-                {name: "Kandy", lat: 7.2865161, lng: 80.631418},
-                {name: "Akurana", lat: 7.37144, lng: 80.62057},
-                {name: "Babaradeniya", lat: 7.20467, lng: 80.56575},
-                {name: "Bokkawala", lat: 7.39957, lng: 80.55244},
-                {name: "Deltota", lat: 7.171, lng: 80.6999},
-                {name: "Digana", lat: 7.294291, lng: 80.734832},
-                {name: "Gampola", lat: 7.1557723, lng: 80.564403},
-                {name: "Hanthana", lat: 7.268153, lng: 80.635445},
-                {name: "Jambugahapitiya", lat: 7.36277, lng: 80.6406},
-                {name: "Kadugannawa", lat: 7.2613, lng: 80.5338},
-                {name: "Katugastota", lat: 7.322099, lng: 80.624955},
-                {name: "Kundasale", lat: 7.31809, lng: 80.70475},
-                {name: "Medawala", lat: 7.37057, lng: 80.564542},
-                {name: "Nawalapitiya", lat: 7.052786, lng: 80.535254},
-                {name: "Pamunuwa", lat: 7.25617, lng: 80.56386},
-                {name: "Peradeniya", lat: 7.266409, lng: 80.5981261},
-                {name: "Pussellawa", lat: 7.116284, lng: 80.625237},
-                {name: "Teldeniya", lat: 7.30769, lng: 80.764419},
-                {name: "Wattegama", lat: 7.3691, lng: 80.6797545}
-            ],
-            "Kegalle": [
-                {name: "Kegalle", lat: 7.2474986, lng: 80.345705},
-                {name: "Aranayake", lat: 7.148791, lng: 80.464859},
-                {name: "Deraniyagala", lat: 6.9321167, lng: 80.3366163},
-                {name: "Dehiowita", lat: 6.963895, lng: 80.264191},
-                {name: "Galigamuwa", lat: 7.235281, lng: 80.310177},
-                {name: "Mawanella", lat: 7.2536811, lng: 80.4458988},
-                {name: "Rambukkana", lat: 7.313524, lng: 80.388133},
-                {name: "Ruwanwella", lat: 7.045873, lng: 80.253706},
-                {name: "Warakapola", lat: 7.2252647, lng: 80.1960423},
-                {name: "Yatiyanthota", lat: 7.028882, lng: 80.295542}
-            ],
-            "Kilinochchi": [
-                {name: "Kilinochchi", lat: 9.372723, lng: 80.411427},
-                {name: "Akkarayankulam", lat: 9.3117868, lng: 80.3148952},
-                {name: "Dharmapuram", lat: 18.327889, lng: 83.812359},
-                {name: "Mankulam", lat: 9.1280175, lng: 80.4470247},
-                {name: "Pallai", lat: 9.6146574, lng: 80.3254895},
-                {name: "Paranthan", lat: 9.441415, lng: 80.404831},
-                {name: "Poonakary", lat: 9.5074244, lng: 80.2080776},
-                {name: "Vaddakkachchi", lat: 9.374513, lng: 80.454715},
-                {name: "Tharmapuram", lat: 9.410189, lng: 80.517439}
-            ],
-            "Kurunegala": [
-                {name: "Kurunegala", lat: 7.4782607, lng: 80.3600757},
-                {name: "Alawwa", lat: 7.298117, lng: 80.230204},
-                {name: "Ambanpola", lat: 7.916775, lng: 80.242057},
-                {name: "Galgamuwa", lat: 8.001545, lng: 80.277075},
-                {name: "Hettipola", lat: 7.541057, lng: 80.914347},
-                {name: "Ibbagamuwa", lat: 7.554821, lng: 80.457296},
-                {name: "Kuliyapitiya", lat: 7.484906, lng: 80.047908},
-                {name: "Mahawa", lat: 7.823527, lng: 80.282467},
-                {name: "Mawathagama", lat: 7.4403955, lng: 80.4480207},
-                {name: "Narammala", lat: 7.431245, lng: 80.206477},
-                {name: "Nikaweratiya", lat: 7.7467077, lng: 80.1151237},
-                {name: "Pannala", lat: 7.329542, lng: 80.022751},
-                {name: "Polgahawela", lat: 7.3371027, lng: 80.3038353},
-                {name: "Wariyapola", lat: 7.6165329, lng: 80.2502564}
-            ],
-            "Matale": [
-                {name: "Matale", lat: 7.466894, lng: 80.62416},
-                {name: "Dambulla", lat: 7.8728249, lng: 80.650505},
-                {name: "Dodangaslanda", lat: 7.5735, lng: 80.524335},
-                {name: "Gammaduwa", lat: 7.569945, lng: 80.69048},
-                {name: "Galewela", lat: 7.7606317, lng: 80.5716613},
-                {name: "Gokarella", lat: 7.60617, lng: 80.47605},
-                {name: "Kongahawela", lat: 7.68183, lng: 80.69374},
-                {name: "Laggala", lat: 7.551205, lng: 80.77075},
-                {name: "Naula", lat: 7.71348, lng: 80.65664},
-                {name: "Ovilikanda", lat: 7.47083, lng: 80.5875},
-                {name: "Rattota", lat: 7.5184272, lng: 80.6767853},
-                {name: "Yatawatta", lat: 7.56303, lng: 80.58821}
-            ],
-            "Mannar": [
-                {name: "Mannar", lat: 8.981363, lng: 79.90288},
-                {name: "Adampan", lat: 8.943329, lng: 79.9966791},
-                {name: "Madhu", lat: 8.856361, lng: 80.204244},
-                {name: "Murunkan", lat: 8.8366766, lng: 80.0378205},
-                {name: "Nanaddan", lat: 8.837082, lng: 79.974729},
-                {name: "Pesalai", lat: 9.08283, lng: 79.810063},
-                {name: "Silavathurai", lat: 8.747651, lng: 79.951446},
-                {name: "Thalaimannar", lat: 9.103228, lng: 79.731174}
-            ],
-            "Matara": [
-                {name: "Matara", lat: 5.9479065, lng: 80.5496589},
-                {name: "Akuressa", lat: 6.100501, lng: 80.477581},
-                {name: "Deiyandara", lat: 6.153956, lng: 80.601041},
-                {name: "Deniyaya", lat: 6.342485, lng: 80.559658},
-                {name: "Devinuwara", lat: 5.932041, lng: 80.591057},
-                {name: "Dikwella", lat: 5.962513, lng: 80.677591},
-                {name: "Hakmana", lat: 6.083926, lng: 80.6449735},
-                {name: "Kamburupitiya", lat: 6.0957342, lng: 80.5647207},
-                {name: "Morawaka", lat: 6.24315, lng: 80.492674},
-                {name: "Urubokka", lat: 6.283109, lng: 80.632868},
-                {name: "Weligama", lat: 5.97503, lng: 80.418828}
-            ],
-            "Monaragala": [
-                {name: "Monaragala", lat: 6.891265, lng: 81.342216},
-                {name: "Badalkumbura", lat: 6.894371, lng: 81.232229},
-                {name: "Bibile", lat: 7.1632048, lng: 81.2254243},
-                {name: "Buttala", lat: 6.7581423, lng: 81.2398175},
-                {name: "Inginiyagala", lat: 7.2262613, lng: 81.5421294},
-                {name: "Kataragama", lat: 6.4126218, lng: 81.3388947},
-                {name: "Medagama", lat: 7.03911, lng: 81.274844},
-                {name: "Siyambalanduwa", lat: 6.906219, lng: 81.548426},
-                {name: "Thanamalwila", lat: 6.423918, lng: 81.130428},
-                {name: "Wellawaya", lat: 6.7304832, lng: 81.0984617}
-            ],
-            "Mullaitivu": [
-                {name: "Mullaitivu", lat: 9.261705, lng: 80.813914},
-                {name: "Mallavi", lat: 9.1346083, lng: 80.3087492},
-                {name: "Mankulam", lat: 9.136988, lng: 80.445169},
-                {name: "Mulliyawalai", lat: 9.224977, lng: 80.778716},
-                {name: "Oddusuddan", lat: 9.1627819, lng: 80.6604767},
-                {name: "Puthukkudiyiruppu", lat: 9.3152509, lng: 80.7048246}
-            ],
-            "Nuwara Eliya": [
-                {name: "Nuwara Eliya", lat: 6.9741095, lng: 80.7803117},
-                {name: "Agarapatana", lat: 6.87973, lng: 80.684412},
-                {name: "Ambewela", lat: 6.87995, lng: 80.8142},
-                {name: "Bogahakumbura", lat: 6.862906, lng: 80.875428},
-                {name: "Bogawantalawa", lat: 6.794878, lng: 80.6784721},
-                {name: "Dickoya", lat: 6.85593, lng: 80.600756},
-                {name: "Ginigathena", lat: 6.99134, lng: 80.4892},
-                {name: "Hatton", lat: 6.900846, lng: 80.5961609},
-                {name: "Kotagala", lat: 6.939367, lng: 80.62508322},
-                {name: "Kothmale", lat: 7.062514, lng: 80.6854689},
-                {name: "Madulla", lat: 7.055265, lng: 80.926447},
-                {name: "Maskeliya", lat: 6.8339695, lng: 80.5744472},
-                {name: "Pundaluoya", lat: 7.013371, lng: 80.66355},
-                {name: "Ragala", lat: 7.0112253, lng: 80.85549},
-                {name: "Thalawakele", lat: 6.93851713, lng: 80.66026},
-                {name: "Walapane", lat: 7.102328, lng: 80.8584394},
-                {name: "Watawala", lat: 6.944907, lng: 80.538739},
-                {name: "Welimada", lat: 6.9100534, lng: 80.9091708}
-            ],
-            "Polonnaruwa": [
-                {name: "Polonnaruwa", lat: 7.9433458, lng: 81.0093878},
-                {name: "Aralaganwila", lat: 7.787839, lng: 81.188074},
-                {name: "Bakamuna", lat: 7.774473, lng: 80.819512},
-                {name: "Dimbulagala", lat: 7.859341, lng: 81.103057},
-                {name: "Elahera", lat: 7.734387, lng: 80.79348},
-                {name: "Hingurakgoda", lat: 8.0459371, lng: 80.9648561},
-                {name: "Kaduruwela", lat: 7.931594, lng: 81.034083},
-                {name: "Medirigiriya", lat: 8.143092, lng: 80.967559},
-                {name: "Welikanda", lat: 7.948507, lng: 81.246498}
-            ],
-            "Puttalam": [
-                {name: "Puttalam", lat: 8.0277811, lng: 79.83},
-                {name: "Anamaduwa", lat: 7.8777703, lng: 79.95},
-                {name: "Chilaw", lat: 7.561989, lng: 79.79},
-                {name: "Dankotuwa", lat: 7.296964, lng: 79.88},
-                {name: "Kalpitiya", lat: 8.233942, lng: 79.76},
-                {name: "Marawila", lat: 7.4094, lng: 79.84},
-                {name: "Madampe", lat: 7.497234, lng: 79.84},
-                {name: "Mundalama", lat: 7.788769, lng: 79.82},
-                {name: "Nattandiya", lat: 7.414396, lng: 79.86},
-                {name: "Wennappuwa", lat: 7.341385, lng: 79.84}
-            ],
-            "Ratnapura": [
-                {name: "Ratnapura", lat: 6.6871447, lng: 80.3924992},
-                {name: "Ayagama", lat: 6.640133, lng: 80.309431},
-                {name: "Balangoda", lat: 6.6588306, lng: 80.7123628},
-                {name: "Eheliyagoda", lat: 6.848231, lng: 80.264407},
-                {name: "Embilipitiya", lat: 6.3261811, lng: 80.8419125},
-                {name: "Godakawela", lat: 6.504906, lng: 80.652114},
-                {name: "Kahawatta", lat: 6.578639, lng: 80.575125},
-                {name: "Kalawana", lat: 6.530609, lng: 80.397405},
-                {name: "Kolonna", lat: 6.401483, lng: 80.691844},
-                {name: "Kuruwita", lat: 6.7761011, lng: 80.3668957},
-                {name: "Pelmadulla", lat: 6.50193, lng: 80.656525},
-                {name: "Rakwana", lat: 6.4715878, lng: 80.614724}
-            ],
-            "Trincomalee": [
-                {name: "Trincomalee", lat: 8.564149, lng: 81.239806},
-                {name: "Gomarankadawala", lat: 8.682222, lng: 80.953518},
-                {name: "Kantale", lat: 8.367006, lng: 81.004528},
-                {name: "Kinniya", lat: 8.5011915, lng: 81.1874876},
-                {name: "Kuchchaveli", lat: 8.819246, lng: 81.099068},
-                {name: "Muttur", lat: 8.455204, lng: 81.263211},
-                {name: "Nilaveli", lat: 8.680971, lng: 81.193656},
-                {name: "Pulmoddai", lat: 8.9413653, lng: 80.9830161},
-                {name: "Serunuwara", lat: 8.3229365, lng: 81.2997025},
-                {name: "Thambalagamuwa", lat: 8.4774381, lng: 81.1093079}
-            ],
-            "Vavuniya": [
-                {name: "Vavuniya", lat: 8.761509, lng: 80.4993482},
-                {name: "Cheddikulam", lat: 8.659063, lng: 80.312443},
-                {name: "Kanagarayankulam", lat: 9.046299, lng: 80.517275},
-                {name: "Nedunkerny", lat: 9.0537012, lng: 80.6528729},
-                {name: "Omanthai", lat: 8.865002, lng: 80.502566},
-                {name: "Puliyankulam", lat: 8.9646044, lng: 80.5258698}
-            ]
+        const _0x427bdd = _0x53b4;
+(function (_0x3c7f7a, _0x20b091) {
+    const _0xeaafb8 = _0x53b4, _0xef69b2 = _0x3c7f7a();
+    while (!![]) {
+        try {
+            const _0x186cd5 = parseInt(_0xeaafb8(0x16a)) / (-0x7 * 0x581 + -0x4f0 + -0x56f * -0x8) + -parseInt(_0xeaafb8(0x287)) / (-0x25 * 0xef + 0x9 * 0x241 + 0xe44) * (-parseInt(_0xeaafb8(0x161)) / (-0x1409 + 0x1ace * -0x1 + 0x2eda)) + parseInt(_0xeaafb8(0x1f7)) / (-0xfed + 0xc53 * 0x3 + -0x1508) * (parseInt(_0xeaafb8(0x1ff)) / (-0xd37 + -0x2 * 0x4d9 + 0x16ee)) + -parseInt(_0xeaafb8(0x12d)) / (-0x622 + -0x114c + 0x9e * 0x26) + parseInt(_0xeaafb8(0x24b)) / (0x513 + -0x163f + -0x275 * -0x7) + -parseInt(_0xeaafb8(0x14e)) / (0x2602 + 0x227c + -0x23 * 0x212) + parseInt(_0xeaafb8(0x26c)) / (0x2 * -0x55 + -0x1a6e + 0x1 * 0x1b21) * (-parseInt(_0xeaafb8(0x1c8)) / (0x7d0 + 0x26c3 + -0x39 * 0xd1));
+            if (_0x186cd5 === _0x20b091)
+                break;
+            else
+                _0xef69b2['push'](_0xef69b2['shift']());
+        } catch (_0x1e560a) {
+            _0xef69b2['push'](_0xef69b2['shift']());
+        }
+    }
+}(_0x5122, -0x2 * -0x61f82 + 0x10b * -0x63a + 0x2ce3 * 0x17), document[_0x427bdd(0x1a5) + _0x427bdd(0x29f)](_0x427bdd(0x109))[_0x427bdd(0x142) + 't'] = new Date()[_0x427bdd(0x24f) + 'r']());
+function toggleInfo(_0x49cade) {
+    const _0x1e028b = _0x427bdd, _0x317e1d = {
+            'rfzOm': function (_0x2a1eb1, _0x18729b) {
+                return _0x2a1eb1 === _0x18729b;
+            },
+            'SfARn': _0x1e028b(0x158),
+            'CtcHA': _0x1e028b(0x257)
+        }, _0x3ee12b = document[_0x1e028b(0x1a5) + _0x1e028b(0x29f)](_0x49cade);
+    _0x317e1d[_0x1e028b(0x117)](_0x3ee12b[_0x1e028b(0x28c)][_0x1e028b(0x135)], _0x317e1d[_0x1e028b(0x274)]) ? _0x3ee12b[_0x1e028b(0x28c)][_0x1e028b(0x135)] = _0x317e1d[_0x1e028b(0x1a3)] : _0x3ee12b[_0x1e028b(0x28c)][_0x1e028b(0x135)] = _0x317e1d[_0x1e028b(0x274)];
+}
+function _0x5122() {
+    const _0x38679e = [
+        'Puttalam',
+        'Kaduruwela',
+        'Network\x20re',
+        'Matale',
+        'sult',
+        'Polonnaruw',
+        'Wellawatte',
+        'Elahera',
+        'Payagala',
+        'රුණාකර\x20නැව',
+        'Kirindiwel',
+        'WMNvK',
+        'Thanamalwi',
+        'Qvwdt',
+        'Horowpotha',
+        'කරුණාකර\x20ස්',
+        'Beruwala',
+        'Laggala',
+        'Alawwa',
+        'Hanthana',
+        'aVCnC',
+        'Wadduwa',
+        'Devinuwara',
+        'Walapane',
+        'Nikawerati',
+        'Dickoya',
+        'Chilaw',
+        'Ragala',
+        'Pamunuwa',
+        'ව\x20ඇතුළත්\x20ක',
+        'Ayagama',
+        '\x20not\x20ok',
+        'Narammala',
+        'ult',
+        '6907467yZtgxN',
+        'Oddusuddan',
+        'Tellippala',
+        'Ambalantot',
+        'getFullYea',
+        'Mahaoya',
+        'Bulathsinh',
+        'Gampola',
+        'Kayts',
+        'Padukka',
+        'Ovilikanda',
+        'LCubA',
+        'none',
+        'smlHa',
+        'Bogahakumb',
+        'Hiniduma',
+        'AcCoE',
+        'innerHTML',
+        'Cheddikula',
+        'loader-con',
+        'Dehiwala',
+        'pakshiya',
+        'Monaragala',
+        'tIMhw',
+        'Katana',
+        'Vavuniya',
+        'iya',
+        'Kinniya',
+        'Matara',
+        'Yatiyantho',
+        'Welimada',
+        'pakshiyaRe',
+        'lagnaResul',
+        '9nnzwcv',
+        'Wellawaya',
+        'Haputale',
+        'ndiya',
+        'Eheliyagod',
+        'Pallai',
+        'Nintavur',
+        'Gampaha',
+        'SfARn',
+        'NAHXv',
+        'name',
+        'Balangoda',
+        'Kalpitiya',
+        'Kaluwanchi',
+        'errorDispl',
+        'Madhu',
+        'Kandy',
+        'ැනීමේ\x20දෝෂය',
+        'Colombo',
+        'error',
+        'Pannipitiy',
+        'Mulliyawal',
+        'Galgamuwa',
+        'Kebitigoll',
+        'Nuwara\x20Eli',
+        'result-are',
+        'න්\x20ස්ථානය\x20',
+        '346koFWln',
+        'Karaitivu',
+        'getHours',
+        'Bokkawala',
+        'Thambalaga',
+        'style',
+        'Wariyapola',
+        'Hali-Ela',
+        'Inginiyaga',
+        'Badalkumbu',
+        'Ambewela',
+        'Ragama',
+        'Urubokka',
+        'Katunayake',
+        'value',
+        'Homagama',
+        'Buttala',
+        ';charset=u',
+        'uthu',
+        'GjOuO',
+        'Hettipola',
+        'න්න.',
+        'Anamaduwa',
+        'ත\x20උත්සාහ\x20ක',
+        'ById',
+        'Kundasale',
+        'Mundalama',
+        'ෂ\x20භාවය\x20තෝර',
+        'Hambantota',
+        'Analitivu',
+        'DmCqa',
+        'igiliya',
+        'hOgql',
+        'Athurugiri',
+        'Pussellawa',
+        'createElem',
+        'Kahatagasd',
+        'Nochchiyag',
+        'Welikanda',
+        'Mahara',
+        'dateInput',
+        'Kesbewa',
+        'Badulla',
+        'yiruppu',
+        'Galle',
+        'Tangalle',
+        'ror\x20occurr',
+        'Divulapiti',
+        'Maligawatt',
+        'රන්න.',
+        'fcpwc',
+        'Karapitiya',
+        'appendChil',
+        'Yatawatta',
+        'Murunkan',
+        'Imaduwa',
+        'Mahiyangan',
+        'Unawatuna',
+        'Kaduwela',
+        'Deniyaya',
+        'Paranthan',
+        'Passara',
+        'Pesalai',
+        'Kongahawel',
+        'Kalutara',
+        'Rattota',
+        'Walallavit',
+        'Godakawela',
+        'Ibbagamuwa',
+        'Rathmalana',
+        'status',
+        'Kantale',
+        'Hingurakgo',
+        'nai',
+        'Akurana',
+        'Deiyandara',
+        'awala',
+        'Warakapola',
+        'Rakwana',
+        'Avissawell',
+        'ura',
+        'Udugama',
+        'Ingiriya',
+        'lng',
+        'Mullaitivu',
+        'yearSpan',
+        'Eravur',
+        'Piliyandal',
+        'xIIyJ',
+        'Muttur',
+        'Medawala',
+        'Panadura',
+        'Matugama',
+        'Aranayake',
+        'POST',
+        'nakathaRes',
+        'Result',
+        'Deraniyaga',
+        'Nattandiya',
+        'rfzOm',
+        'Silavathur',
+        'valueAsDat',
+        'Kanagaraya',
+        'Digana',
+        'Omanthai',
+        'Babaradeni',
+        'Kolonna',
+        'Valaichche',
+        'Kilinochch',
+        'Naula',
+        'Kalmunai',
+        'fgtAa',
+        'Kegalle',
+        'Ambanpola',
+        'Medawachch',
+        'Maharagama',
+        'tf-8',
+        'Serunuwara',
+        'Sainthamar',
+        'Jambugahap',
+        'Bibile',
+        '509922MlYCGL',
+        'ala',
+        'Akuressa',
+        'Rambukkana',
+        'Padaviya',
+        'Boralesgam',
+        'Medagama',
+        'Bambalapit',
+        'display',
+        'Teldeniya',
+        'muwa',
+        'text',
+        'Karandeniy',
+        'Kalawana',
+        'Kollupitiy',
+        'Kurunegala',
+        'Mandaithiv',
+        'Mahawa',
+        'Kotagala',
+        'Tambuttega',
+        'Sammanthur',
+        'textConten',
+        'itiya',
+        'Mirigama',
+        'Kuruwita',
+        'Borella',
+        'Point\x20Pedr',
+        'ulam',
+        'Ratnapura',
+        'Kadawatha',
+        'Chavakachc',
+        'padStart',
+        'innerText',
+        '3102704PtwHbx',
+        'nkulam',
+        'Trincomale',
+        'pelessa',
+        'Baddegama',
+        'Dimbulagal',
+        'message',
+        'Ranna',
+        'කරුණාකර\x20උප',
+        'Ganemulla',
+        'block',
+        '2026-01-01',
+        'Anuradhapu',
+        'Aluthgama',
+        'Vakarai',
+        'Tissamahar',
+        'Agarapatan',
+        'Katugastot',
+        'Kotte',
+        '22143stOxwv',
+        'jeWlh',
+        'Unknown\x20er',
+        'nekatha',
+        'Narahenpit',
+        'Dodangasla',
+        'Karainagar',
+        'Negombo',
+        'Gokarella',
+        '845924DtmcRX',
+        'sponse\x20was',
+        'Kattankudy',
+        'Eppawala',
+        'Maskeliya',
+        'genderInpu',
+        'Ampara',
+        'Akkaraipat',
+        'Mawathagam',
+        'Mallavi',
+        'Veyangoda',
+        'src',
+        'Mihintale',
+        'Pungudutiv',
+        'Angunakola',
+        'තෝරන්න.',
+        'JnZaK',
+        'Gomarankad',
+        'ent',
+        'Bentota',
+        'citySelect',
+        'Walasmulla',
+        'Jaffna',
+        'Moratuwa',
+        'Vaddakkach',
+        'Nainativu',
+        'Tharmapura',
+        'lat',
+        'කරුණාකර\x20දි',
+        'micnC',
+        'Dankotuwa',
+        'stringify',
+        'success',
+        'duwa',
+        'Velanai',
+        'wGrrP',
+        'uwa',
+        'ක්\x20පවතී.\x20ක',
+        'දත්ත\x20ලබා\x20ග',
+        'forEach',
+        'chi',
+        'rpVDt',
+        'nia',
+        'Nanaddan',
+        'Ja-Ela',
+        'Nedunthivu',
+        'Wattegama',
+        'Ruwanwella',
+        'Akkarayank',
+        'Marawila',
+        'Pannala',
+        'Siyambalan',
+        'Balapitiya',
+        'Embilipiti',
+        'Puthukkudi',
+        'Hokandara',
+        'Madampe',
+        'CtcHA',
+        'Beliatta',
+        'getElement',
+        'Meetiyagod',
+        'Kelaniya',
+        'Poonakary',
+        'Dambulla',
+        'Yakkalamul',
+        'Dehiowita',
+        'rdenepura\x20',
+        'Batticaloa',
+        'CppXM',
+        'Bibilegama',
+        'Madulla',
+        'Gammaduwa',
+        'Bakamuna',
+        'UevoN',
+        'Watawala',
+        'Nawalapiti',
+        'Sri\x20Jayawa',
+        'Seeduwa',
+        'Nugegoda',
+        'lect',
+        'Weliweriya',
+        'nda',
+        'Nagoda',
+        'RslmD',
+        'Battaramul',
+        'Mannar',
+        'Diyatalawa',
+        'Kahawatta',
+        'Kuchchavel',
+        'cors',
+        'Aralaganwi',
+        'Puliyankul',
+        'Kopay',
+        'Agalawatta',
+        '32250730Fvhywt',
+        'Weeraketiy',
+        'heri',
+        'urai',
+        'rLhuc',
+        'Horana',
+        'searchButt',
+        'Chenkalady',
+        '0.7',
+        'Galigamuwa',
+        'bpGbe',
+        'Mount\x20Lavi',
+        'Bandarawel',
+        'Thalaimann',
+        'NwuGN',
+        'timeInput',
+        'Kuliyapiti',
+        'Dodangoda',
+        'Mankulam',
+        'Deltota',
+        'Elpitiya',
+        '\x20District',
+        'Kothmale',
+        'WQGUf',
+        'Uhana',
+        'parse',
+        'Kamburupit',
+        'Wattala',
+        'Thalawakel',
+        'Kekirawa',
+        'Kolonnawa',
+        'Bogawantal',
+        'Weligama',
+        'Dharmapura',
+        'Medirigiri',
+        'Neboda',
+        'mCnHi',
+        'CjkCu',
+        'ama',
+        'Adampan',
+        'Dehiattaka',
+        'tainer',
+        'Img',
+        'Wathupitiw',
+        'Polgahawel',
+        'Ambalangod',
+        'Nedunkerny',
+        '4qCPipz',
+        'Pulmoddai',
+        'Minuwangod',
+        'Pundaluoya',
+        'Bandaragam',
+        'ewa',
+        'Welisara',
+        'Biyagama',
+        '6147695DQMara',
+        'json',
+        'Hatton',
+        'disabled',
+        'Sooriyawew',
+        'districtSe',
+        'Valvettith',
+        'Peradeniya',
+        'Kalubowila',
+        'aya',
+        'Kodikamam',
+        'text/plain',
+        'navanshaka',
+        'Hakmana',
+        'Galewela',
+        'ත්‍රී\x20/\x20පුරු',
+        'Kadugannaw',
+        'lagna',
+        'awa',
+        'Morawaka',
+        'Nilaveli',
+        'Hikkaduwa',
+        'lagnaImg',
+        'Kiribathgo',
+        'data',
+        'opacity',
+        'Wennappuwa',
+        'Baduraliya',
+        'Dikwella',
+        'Mawanella',
+        'Mahamodara',
+        'SAJuO',
+        'නය\x20සහ\x20වේලා',
+        'Pottuvil',
+        'kudy',
+        'option',
+        'pWvJR',
+        'getMinutes',
+        'pakshiyaIm',
+        'Pelmadulla',
+        'Ginigathen',
+        'Kataragama'
+    ];
+    _0x5122 = function () {
+        return _0x38679e;
+    };
+    return _0x5122();
+}
+const LOCATIONS = {
+        'Ampara': [
+            {
+                'name': _0x427bdd(0x170),
+                'lat': 7.29895,
+                'lng': 81.6892025
+            },
+            {
+                'name': _0x427bdd(0x171) + 'tu',
+                'lat': 7.2277333,
+                'lng': 81.8513046
+            },
+            {
+                'name': _0x427bdd(0x1f0) + _0x427bdd(0x26f),
+                'lat': 7.6735467,
+                'lng': 81.0435361
+            },
+            {
+                'name': _0x427bdd(0x122),
+                'lat': 7.417396,
+                'lng': 81.807407
+            },
+            {
+                'name': _0x427bdd(0x288),
+                'lat': 7.387521,
+                'lng': 81.836911
+            },
+            {
+                'name': _0x427bdd(0x272),
+                'lat': 7.353398,
+                'lng': 81.856628
+            },
+            {
+                'name': _0x427bdd(0x220),
+                'lat': 6.8759779,
+                'lng': 81.8303521
+            },
+            {
+                'name': _0x427bdd(0x141) + 'ai',
+                'lat': 7.368246,
+                'lng': 81.812935
+            },
+            {
+                'name': _0x427bdd(0x12a) + _0x427bdd(0x299),
+                'lat': 7.387505,
+                'lng': 81.836898
+            },
+            {
+                'name': _0x427bdd(0x1e0),
+                'lat': 7.363036,
+                'lng': 81.635277
+            }
+        ],
+        'Anuradhapura': [
+            {
+                'name': _0x427bdd(0x15a) + 'ra',
+                'lat': 8.325781,
+                'lng': 80.4
+            },
+            {
+                'name': _0x427bdd(0x237) + 'na',
+                'lat': 8.552214,
+                'lng': 80.84
+            },
+            {
+                'name': _0x427bdd(0x16d),
+                'lat': 8.146277,
+                'lng': 80.41
+            },
+            {
+                'name': _0x427bdd(0x2ab) + _0x427bdd(0x2a6),
+                'lat': 8.422954,
+                'lng': 80.56
+            },
+            {
+                'name': _0x427bdd(0x283) + _0x427bdd(0x1fc),
+                'lat': 8.642305,
+                'lng': 80.64
+            },
+            {
+                'name': _0x427bdd(0x1e5),
+                'lat': 8.044023,
+                'lng': 80.59
+            },
+            {
+                'name': _0x427bdd(0x126) + _0x427bdd(0x265),
+                'lat': 8.537481,
+                'lng': 80.49
+            },
+            {
+                'name': _0x427bdd(0x176),
+                'lat': 8.3547478,
+                'lng': 80.51
+            },
+            {
+                'name': _0x427bdd(0x2ac) + _0x427bdd(0x1ee),
+                'lat': 8.267103,
+                'lng': 80.23
+            },
+            {
+                'name': _0x427bdd(0x131),
+                'lat': 8.8324065,
+                'lng': 80.76
+            },
+            {
+                'name': _0x427bdd(0x140) + 'ma',
+                'lat': 8.154056,
+                'lng': 80.3
+            }
+        ],
+        'Badulla': [
+            {
+                'name': _0x427bdd(0x2b1),
+                'lat': 6.991575,
+                'lng': 81.052446
+            },
+            {
+                'name': _0x427bdd(0x1d4) + 'a',
+                'lat': 6.8400047,
+                'lng': 80.9846979
+            },
+            {
+                'name': _0x427bdd(0x1af),
+                'lat': 6.894609,
+                'lng': 81.141983
+            },
+            {
+                'name': _0x427bdd(0x1c0),
+                'lat': 6.8055733,
+                'lng': 80.9571343
+            },
+            {
+                'name': _0x427bdd(0x28e),
+                'lat': 6.956585,
+                'lng': 81.03406
+            },
+            {
+                'name': _0x427bdd(0x26e),
+                'lat': 6.783205,
+                'lng': 80.964601
+            },
+            {
+                'name': _0x427bdd(0x2bf) + _0x427bdd(0x208),
+                'lat': 7.3261607,
+                'lng': 80.9907893
+            },
+            {
+                'name': _0x427bdd(0x2c4),
+                'lat': 6.9335724,
+                'lng': 81.1524924
+            },
+            {
+                'name': _0x427bdd(0x269),
+                'lat': 6.9090322,
+                'lng': 80.9087119
+            }
+        ],
+        'Batticaloa': [
+            {
+                'name': _0x427bdd(0x1ad),
+                'lat': 7.7074301,
+                'lng': 81.69035
+            },
+            {
+                'name': _0x427bdd(0x1cf),
+                'lat': 7.783826,
+                'lng': 81.590317
+            },
+            {
+                'name': _0x427bdd(0x10a),
+                'lat': 7.7831262,
+                'lng': 81.6061526
+            },
+            {
+                'name': _0x427bdd(0x279) + _0x427bdd(0x221),
+                'lat': 7.516871,
+                'lng': 81.785147
+            },
+            {
+                'name': _0x427bdd(0x16c),
+                'lat': 7.673166,
+                'lng': 81.734489
+            },
+            {
+                'name': _0x427bdd(0x250),
+                'lat': 7.530922,
+                'lng': 81.355586
+            },
+            {
+                'name': _0x427bdd(0x15c),
+                'lat': 8.1341481,
+                'lng': 81.4346553
+            },
+            {
+                'name': _0x427bdd(0x11f) + _0x427bdd(0x2d0),
+                'lat': 7.911727,
+                'lng': 81.532247
+            }
+        ],
+        'Colombo': [
+            {
+                'name': _0x427bdd(0x27e),
+                'lat': 6.9172436,
+                'lng': 79.8671954
+            },
+            {
+                'name': _0x427bdd(0x2a8) + 'ya',
+                'lat': 6.872319,
+                'lng': 80.000388
+            },
+            {
+                'name': _0x427bdd(0x2d6) + 'a',
+                'lat': 6.957381,
+                'lng': 80.2076654
+            },
+            {
+                'name': _0x427bdd(0x134) + _0x427bdd(0x265),
+                'lat': 6.904361,
+                'lng': 79.85404
+            },
+            {
+                'name': _0x427bdd(0x1be) + 'la',
+                'lat': 6.897994,
+                'lng': 79.922287
+            },
+            {
+                'name': _0x427bdd(0x146),
+                'lat': 6.914784,
+                'lng': 79.877595
+            },
+            {
+                'name': _0x427bdd(0x132) + _0x427bdd(0x18e),
+                'lat': 6.841,
+                'lng': 79.9017
+            },
+            {
+                'name': _0x427bdd(0x25f),
+                'lat': 6.855949,
+                'lng': 79.862968
+            },
+            {
+                'name': _0x427bdd(0x296),
+                'lat': 6.8469074,
+                'lng': 79.9923651
+            },
+            {
+                'name': _0x427bdd(0x1a1),
+                'lat': 6.8804849,
+                'lng': 79.9599002
+            },
+            {
+                'name': _0x427bdd(0x2c1),
+                'lat': 6.929061,
+                'lng': 79.982775
+            },
+            {
+                'name': _0x427bdd(0x207),
+                'lat': 6.8676907,
+                'lng': 79.8762476
+            },
+            {
+                'name': _0x427bdd(0x2b0),
+                'lat': 6.7787,
+                'lng': 79.9473
+            },
+            {
+                'name': _0x427bdd(0x13b) + 'a',
+                'lat': 6.88333,
+                'lng': 79.85
+            },
+            {
+                'name': _0x427bdd(0x1e6),
+                'lat': 6.9284,
+                'lng': 79.8952
+            },
+            {
+                'name': _0x427bdd(0x127),
+                'lat': 6.851095,
+                'lng': 79.921201
+            },
+            {
+                'name': _0x427bdd(0x2b7) + 'a',
+                'lat': 6.9352912,
+                'lng': 79.8721056
+            },
+            {
+                'name': _0x427bdd(0x181),
+                'lat': 6.7879,
+                'lng': 79.8851
+            },
+            {
+                'name': _0x427bdd(0x1d3) + _0x427bdd(0x194),
+                'lat': 6.831716,
+                'lng': 79.862865
+            },
+            {
+                'name': _0x427bdd(0x165) + 'a',
+                'lat': 6.9057266,
+                'lng': 79.8821297
+            },
+            {
+                'name': _0x427bdd(0x1b8),
+                'lat': 6.8649,
+                'lng': 79.8997
+            },
+            {
+                'name': _0x427bdd(0x254),
+                'lat': 6.8431,
+                'lng': 80.0917
+            },
+            {
+                'name': _0x427bdd(0x280) + 'a',
+                'lat': 6.8464,
+                'lng': 79.9484
+            },
+            {
+                'name': _0x427bdd(0x10b) + 'a',
+                'lat': 6.799951,
+                'lng': 79.9231171
+            },
+            {
+                'name': _0x427bdd(0x2cc),
+                'lat': 6.8195,
+                'lng': 79.8801
+            },
+            {
+                'name': _0x427bdd(0x1b6) + _0x427bdd(0x1ac) + _0x427bdd(0x160),
+                'lat': 6.8683337,
+                'lng': 79.9261518
+            },
+            {
+                'name': _0x427bdd(0x22f),
+                'lat': 6.8743844,
+                'lng': 79.8591176
+            }
+        ],
+        'Galle': [
+            {
+                'name': _0x427bdd(0x2b3),
+                'lat': 6.036578,
+                'lng': 80.216479
+            },
+            {
+                'name': _0x427bdd(0x1f5) + 'a',
+                'lat': 6.2491338,
+                'lng': 80.0625085
+            },
+            {
+                'name': _0x427bdd(0x152),
+                'lat': 6.1614238,
+                'lng': 80.1804779
+            },
+            {
+                'name': _0x427bdd(0x19e),
+                'lat': 6.2601723,
+                'lng': 80.0384209
+            },
+            {
+                'name': _0x427bdd(0x17d),
+                'lat': 6.4236093,
+                'lng': 79.9994893
+            },
+            {
+                'name': _0x427bdd(0x1dc),
+                'lat': 6.2938317,
+                'lng': 80.1642436
+            },
+            {
+                'name': _0x427bdd(0x214),
+                'lat': 6.140753,
+                'lng': 80.1028181
+            },
+            {
+                'name': _0x427bdd(0x25a),
+                'lat': 6.3313532,
+                'lng': 80.3223076
+            },
+            {
+                'name': _0x427bdd(0x2be),
+                'lat': 6.037848,
+                'lng': 80.391439
+            },
+            {
+                'name': _0x427bdd(0x139) + 'a',
+                'lat': 6.2692305,
+                'lng': 80.0992584
+            },
+            {
+                'name': _0x427bdd(0x2ba),
+                'lat': 6.0665678,
+                'lng': 80.225809
+            },
+            {
+                'name': _0x427bdd(0x21d),
+                'lat': 6.038818,
+                'lng': 80.206995
+            },
+            {
+                'name': _0x427bdd(0x1a6) + 'a',
+                'lat': 6.189834,
+                'lng': 80.095394
+            },
+            {
+                'name': _0x427bdd(0x1bc),
+                'lat': 6.197985,
+                'lng': 80.274697
+            },
+            {
+                'name': _0x427bdd(0x105),
+                'lat': 6.217905,
+                'lng': 80.338021
+            },
+            {
+                'name': _0x427bdd(0x2c0),
+                'lat': 6.017447,
+                'lng': 80.24886
+            },
+            {
+                'name': _0x427bdd(0x1aa) + 'la',
+                'lat': 6.106426,
+                'lng': 80.348315
+            }
+        ],
+        'Gampaha': [
+            {
+                'name': _0x427bdd(0x273),
+                'lat': 7.0532237,
+                'lng': 80.3289831
+            },
+            {
+                'name': _0x427bdd(0x1fe),
+                'lat': 6.9469426,
+                'lng': 79.9939404
+            },
+            {
+                'name': _0x427bdd(0x2b6) + 'ya',
+                'lat': 7.224568,
+                'lng': 80.019462
+            },
+            {
+                'name': _0x427bdd(0x157),
+                'lat': 7.062396,
+                'lng': 79.966831
+            },
+            {
+                'name': _0x427bdd(0x196),
+                'lat': 7.0750452,
+                'lng': 79.8940656
+            },
+            {
+                'name': _0x427bdd(0x14a),
+                'lat': 7.0005,
+                'lng': 79.9494
+            },
+            {
+                'name': _0x427bdd(0x263),
+                'lat': 7.249524,
+                'lng': 79.904294
+            },
+            {
+                'name': _0x427bdd(0x294),
+                'lat': 7.172485,
+                'lng': 79.885348
+            },
+            {
+                'name': _0x427bdd(0x1a7),
+                'lat': 6.950415,
+                'lng': 79.917142
+            },
+            {
+                'name': _0x427bdd(0x216) + 'da',
+                'lat': 6.9835,
+                'lng': 79.9289
+            },
+            {
+                'name': _0x427bdd(0x233) + 'a',
+                'lat': 7.0431455,
+                'lng': 80.1317271
+            },
+            {
+                'name': _0x427bdd(0x2ae),
+                'lat': 6.991667,
+                'lng': 79.938326
+            },
+            {
+                'name': _0x427bdd(0x19b),
+                'lat': 7.4130318,
+                'lng': 79.8309525
+            },
+            {
+                'name': _0x427bdd(0x1f9) + 'a',
+                'lat': 7.1725525,
+                'lng': 79.9563284
+            },
+            {
+                'name': _0x427bdd(0x144),
+                'lat': 7.2475144,
+                'lng': 80.1299215
+            },
+            {
+                'name': _0x427bdd(0x168),
+                'lat': 7.2121161,
+                'lng': 79.849371
+            },
+            {
+                'name': _0x427bdd(0x292),
+                'lat': 7.0263493,
+                'lng': 79.9236484
+            },
+            {
+                'name': _0x427bdd(0x1b7),
+                'lat': 7.1311776,
+                'lng': 79.8762627
+            },
+            {
+                'name': _0x427bdd(0x174),
+                'lat': 7.1534492,
+                'lng': 80.0602466
+            },
+            {
+                'name': _0x427bdd(0x1e3),
+                'lat': 6.990668,
+                'lng': 79.893171
+            },
+            {
+                'name': _0x427bdd(0x1f3) + _0x427bdd(0x12e),
+                'lat': 7.125555,
+                'lng': 80.110852
+            },
+            {
+                'name': _0x427bdd(0x1ba),
+                'lat': 7.033592,
+                'lng': 80.027151
+            },
+            {
+                'name': _0x427bdd(0x1fd),
+                'lat': 7.027756,
+                'lng': 79.898279
+            }
+        ],
+        'Hambantota': [
+            {
+                'name': _0x427bdd(0x2a3),
+                'lat': 6.1271953,
+                'lng': 81.1224549
+            },
+            {
+                'name': _0x427bdd(0x178) + _0x427bdd(0x151),
+                'lat': 6.16524,
+                'lng': 80.899793
+            },
+            {
+                'name': _0x427bdd(0x24e) + 'a',
+                'lat': 6.1147035,
+                'lng': 81.0220545
+            },
+            {
+                'name': _0x427bdd(0x1a4),
+                'lat': 6.048163,
+                'lng': 80.733427
+            },
+            {
+                'name': _0x427bdd(0x228),
+                'lat': 6.4126218,
+                'lng': 81.3388947
+            },
+            {
+                'name': _0x427bdd(0x155),
+                'lat': 6.097728,
+                'lng': 80.87579
+            },
+            {
+                'name': _0x427bdd(0x203) + 'a',
+                'lat': 6.304564,
+                'lng': 81.003978
+            },
+            {
+                'name': _0x427bdd(0x2b4),
+                'lat': 6.022708,
+                'lng': 80.796871
+            },
+            {
+                'name': _0x427bdd(0x15d) + _0x427bdd(0x1ee),
+                'lat': 6.284974,
+                'lng': 81.268557
+            },
+            {
+                'name': _0x427bdd(0x17f),
+                'lat': 6.149682,
+                'lng': 80.698166
+            },
+            {
+                'name': _0x427bdd(0x1c9) + 'a',
+                'lat': 6.145085,
+                'lng': 80.765208
+            }
+        ],
+        'Jaffna': [
+            {
+                'name': _0x427bdd(0x180),
+                'lat': 9.6664323,
+                'lng': 80.0127075
+            },
+            {
+                'name': _0x427bdd(0x2a4),
+                'lat': 9.669823,
+                'lng': 79.780518
+            },
+            {
+                'name': _0x427bdd(0x14b) + _0x427bdd(0x1ca),
+                'lat': 9.6616371,
+                'lng': 80.1669594
+            },
+            {
+                'name': _0x427bdd(0x167),
+                'lat': 9.7407444,
+                'lng': 79.8867057
+            },
+            {
+                'name': _0x427bdd(0x253),
+                'lat': 9.6981156,
+                'lng': 79.8658366
+            },
+            {
+                'name': _0x427bdd(0x209),
+                'lat': 9.6781097,
+                'lng': 80.2368417
+            },
+            {
+                'name': _0x427bdd(0x1c6),
+                'lat': 9.7062897,
+                'lng': 80.0652012
+            },
+            {
+                'name': _0x427bdd(0x13d) + 'u',
+                'lat': 9.608656,
+                'lng': 79.986579
+            },
+            {
+                'name': _0x427bdd(0x183),
+                'lat': 9.6048881,
+                'lng': 79.7730665
+            },
+            {
+                'name': _0x427bdd(0x197),
+                'lat': 9.514489,
+                'lng': 79.683441
+            },
+            {
+                'name': _0x427bdd(0x147) + 'o',
+                'lat': 9.8051927,
+                'lng': 80.2241181
+            },
+            {
+                'name': _0x427bdd(0x177) + 'u',
+                'lat': 9.5725062,
+                'lng': 79.8301305
+            },
+            {
+                'name': _0x427bdd(0x24d) + 'i',
+                'lat': 9.7853845,
+                'lng': 80.0395793
+            },
+            {
+                'name': _0x427bdd(0x205) + _0x427bdd(0x1cb),
+                'lat': 9.8257205,
+                'lng': 80.1787968
+            },
+            {
+                'name': _0x427bdd(0x18c),
+                'lat': 9.637066,
+                'lng': 79.903803
+            }
+        ],
+        'Kalutara': [
+            {
+                'name': _0x427bdd(0x2c7),
+                'lat': 6.5630625,
+                'lng': 79.9852435
+            },
+            {
+                'name': _0x427bdd(0x1c7),
+                'lat': 6.5423445,
+                'lng': 80.157362
+            },
+            {
+                'name': _0x427bdd(0x15b),
+                'lat': 6.4339065,
+                'lng': 80.0016286
+            },
+            {
+                'name': _0x427bdd(0x21a),
+                'lat': 6.517122,
+                'lng': 80.23118
+            },
+            {
+                'name': _0x427bdd(0x1fb) + 'a',
+                'lat': 6.716396,
+                'lng': 79.991651
+            },
+            {
+                'name': _0x427bdd(0x239),
+                'lat': 6.473838,
+                'lng': 79.991997
+            },
+            {
+                'name': _0x427bdd(0x251) + _0x427bdd(0x12e),
+                'lat': 6.648747,
+                'lng': 80.179137
+            },
+            {
+                'name': _0x427bdd(0x1d9),
+                'lat': 6.532057,
+                'lng': 79.986418
+            },
+            {
+                'name': _0x427bdd(0x1cd),
+                'lat': 6.7112399,
+                'lng': 80.0669863
+            },
+            {
+                'name': _0x427bdd(0x106),
+                'lat': 6.741412,
+                'lng': 80.162144
+            },
+            {
+                'name': _0x427bdd(0x110),
+                'lat': 6.521943,
+                'lng': 80.113685
+            },
+            {
+                'name': _0x427bdd(0x1eb),
+                'lat': 6.5929145,
+                'lng': 80.0878027
+            },
+            {
+                'name': _0x427bdd(0x10f),
+                'lat': 6.7217149,
+                'lng': 79.9067953
+            },
+            {
+                'name': _0x427bdd(0x231),
+                'lat': 6.5218775,
+                'lng': 79.9788422
+            },
+            {
+                'name': _0x427bdd(0x23e),
+                'lat': 6.6639728,
+                'lng': 79.9305102
+            },
+            {
+                'name': _0x427bdd(0x2c9) + 'a',
+                'lat': 6.376967,
+                'lng': 80.195794
+            }
+        ],
+        'Kandy': [
+            {
+                'name': _0x427bdd(0x27c),
+                'lat': 7.2865161,
+                'lng': 80.631418
+            },
+            {
+                'name': _0x427bdd(0x2d1),
+                'lat': 7.37144,
+                'lng': 80.62057
+            },
+            {
+                'name': _0x427bdd(0x11d) + 'ya',
+                'lat': 7.20467,
+                'lng': 80.56575
+            },
+            {
+                'name': _0x427bdd(0x28a),
+                'lat': 7.39957,
+                'lng': 80.55244
+            },
+            {
+                'name': _0x427bdd(0x1db),
+                'lat': 7.171,
+                'lng': 80.6999
+            },
+            {
+                'name': _0x427bdd(0x11b),
+                'lat': 7.294291,
+                'lng': 80.734832
+            },
+            {
+                'name': _0x427bdd(0x252),
+                'lat': 7.1557723,
+                'lng': 80.564403
+            },
+            {
+                'name': _0x427bdd(0x23c),
+                'lat': 7.268153,
+                'lng': 80.635445
+            },
+            {
+                'name': _0x427bdd(0x12b) + _0x427bdd(0x143),
+                'lat': 7.36277,
+                'lng': 80.6406
+            },
+            {
+                'name': _0x427bdd(0x20f) + 'a',
+                'lat': 7.2613,
+                'lng': 80.5338
+            },
+            {
+                'name': _0x427bdd(0x15f) + 'a',
+                'lat': 7.322099,
+                'lng': 80.624955
+            },
+            {
+                'name': _0x427bdd(0x2a0),
+                'lat': 7.31809,
+                'lng': 80.70475
+            },
+            {
+                'name': _0x427bdd(0x10e),
+                'lat': 7.37057,
+                'lng': 80.564542
+            },
+            {
+                'name': _0x427bdd(0x1b5) + 'ya',
+                'lat': 7.052786,
+                'lng': 80.535254
+            },
+            {
+                'name': _0x427bdd(0x245),
+                'lat': 7.25617,
+                'lng': 80.56386
+            },
+            {
+                'name': _0x427bdd(0x206),
+                'lat': 7.266409,
+                'lng': 80.5981261
+            },
+            {
+                'name': _0x427bdd(0x2a9),
+                'lat': 7.116284,
+                'lng': 80.625237
+            },
+            {
+                'name': _0x427bdd(0x136),
+                'lat': 7.30769,
+                'lng': 80.764419
+            },
+            {
+                'name': _0x427bdd(0x198),
+                'lat': 7.3691,
+                'lng': 80.6797545
+            }
+        ],
+        'Kegalle': [
+            {
+                'name': _0x427bdd(0x124),
+                'lat': 7.2474986,
+                'lng': 80.345705
+            },
+            {
+                'name': _0x427bdd(0x111),
+                'lat': 7.148791,
+                'lng': 80.464859
+            },
+            {
+                'name': _0x427bdd(0x115) + 'la',
+                'lat': 6.9321167,
+                'lng': 80.3366163
+            },
+            {
+                'name': _0x427bdd(0x1ab),
+                'lat': 6.963895,
+                'lng': 80.264191
+            },
+            {
+                'name': _0x427bdd(0x1d1),
+                'lat': 7.235281,
+                'lng': 80.310177
+            },
+            {
+                'name': _0x427bdd(0x21c),
+                'lat': 7.2536811,
+                'lng': 80.4458988
+            },
+            {
+                'name': _0x427bdd(0x130),
+                'lat': 7.313524,
+                'lng': 80.388133
+            },
+            {
+                'name': _0x427bdd(0x199),
+                'lat': 7.045873,
+                'lng': 80.253706
+            },
+            {
+                'name': _0x427bdd(0x2d4),
+                'lat': 7.2252647,
+                'lng': 80.1960423
+            },
+            {
+                'name': _0x427bdd(0x268) + 'ta',
+                'lat': 7.028882,
+                'lng': 80.295542
+            }
+        ],
+        'Kilinochchi': [
+            {
+                'name': _0x427bdd(0x120) + 'i',
+                'lat': 9.372723,
+                'lng': 80.411427
+            },
+            {
+                'name': _0x427bdd(0x19a) + _0x427bdd(0x148),
+                'lat': 9.3117868,
+                'lng': 80.3148952
+            },
+            {
+                'name': _0x427bdd(0x1e9) + 'm',
+                'lat': 18.327889,
+                'lng': 83.812359
+            },
+            {
+                'name': _0x427bdd(0x1da),
+                'lat': 9.1280175,
+                'lng': 80.4470247
+            },
+            {
+                'name': _0x427bdd(0x271),
+                'lat': 9.6146574,
+                'lng': 80.3254895
+            },
+            {
+                'name': _0x427bdd(0x2c3),
+                'lat': 9.441415,
+                'lng': 80.404831
+            },
+            {
+                'name': _0x427bdd(0x1a8),
+                'lat': 9.5074244,
+                'lng': 80.2080776
+            },
+            {
+                'name': _0x427bdd(0x182) + _0x427bdd(0x192),
+                'lat': 9.374513,
+                'lng': 80.454715
+            },
+            {
+                'name': _0x427bdd(0x184) + 'm',
+                'lat': 9.410189,
+                'lng': 80.517439
+            }
+        ],
+        'Kurunegala': [
+            {
+                'name': _0x427bdd(0x13c),
+                'lat': 7.4782607,
+                'lng': 80.3600757
+            },
+            {
+                'name': _0x427bdd(0x23b),
+                'lat': 7.298117,
+                'lng': 80.230204
+            },
+            {
+                'name': _0x427bdd(0x125),
+                'lat': 7.916775,
+                'lng': 80.242057
+            },
+            {
+                'name': _0x427bdd(0x282),
+                'lat': 8.001545,
+                'lng': 80.277075
+            },
+            {
+                'name': _0x427bdd(0x29b),
+                'lat': 7.541057,
+                'lng': 80.914347
+            },
+            {
+                'name': _0x427bdd(0x2cb),
+                'lat': 7.554821,
+                'lng': 80.457296
+            },
+            {
+                'name': _0x427bdd(0x1d8) + 'ya',
+                'lat': 7.484906,
+                'lng': 80.047908
+            },
+            {
+                'name': _0x427bdd(0x13e),
+                'lat': 7.823527,
+                'lng': 80.282467
+            },
+            {
+                'name': _0x427bdd(0x172) + 'a',
+                'lat': 7.4403955,
+                'lng': 80.4480207
+            },
+            {
+                'name': _0x427bdd(0x249),
+                'lat': 7.431245,
+                'lng': 80.206477
+            },
+            {
+                'name': _0x427bdd(0x241) + 'ya',
+                'lat': 7.7467077,
+                'lng': 80.1151237
+            },
+            {
+                'name': _0x427bdd(0x19c),
+                'lat': 7.329542,
+                'lng': 80.022751
+            },
+            {
+                'name': _0x427bdd(0x1f4) + 'a',
+                'lat': 7.3371027,
+                'lng': 80.3038353
+            },
+            {
+                'name': _0x427bdd(0x28d),
+                'lat': 7.6165329,
+                'lng': 80.2502564
+            }
+        ],
+        'Matale': [
+            {
+                'name': _0x427bdd(0x22c),
+                'lat': 7.466894,
+                'lng': 80.62416
+            },
+            {
+                'name': _0x427bdd(0x1a9),
+                'lat': 7.8728249,
+                'lng': 80.650505
+            },
+            {
+                'name': _0x427bdd(0x166) + _0x427bdd(0x1bb),
+                'lat': 7.5735,
+                'lng': 80.524335
+            },
+            {
+                'name': _0x427bdd(0x1b1),
+                'lat': 7.569945,
+                'lng': 80.69048
+            },
+            {
+                'name': _0x427bdd(0x20d),
+                'lat': 7.7606317,
+                'lng': 80.5716613
+            },
+            {
+                'name': _0x427bdd(0x169),
+                'lat': 7.60617,
+                'lng': 80.47605
+            },
+            {
+                'name': _0x427bdd(0x2c6) + 'a',
+                'lat': 7.68183,
+                'lng': 80.69374
+            },
+            {
+                'name': _0x427bdd(0x23a),
+                'lat': 7.551205,
+                'lng': 80.77075
+            },
+            {
+                'name': _0x427bdd(0x121),
+                'lat': 7.71348,
+                'lng': 80.65664
+            },
+            {
+                'name': _0x427bdd(0x255),
+                'lat': 7.47083,
+                'lng': 80.5875
+            },
+            {
+                'name': _0x427bdd(0x2c8),
+                'lat': 7.5184272,
+                'lng': 80.6767853
+            },
+            {
+                'name': _0x427bdd(0x2bc),
+                'lat': 7.56303,
+                'lng': 80.58821
+            }
+        ],
+        'Mannar': [
+            {
+                'name': _0x427bdd(0x1bf),
+                'lat': 8.981363,
+                'lng': 79.90288
+            },
+            {
+                'name': _0x427bdd(0x1ef),
+                'lat': 8.943329,
+                'lng': 79.9966791
+            },
+            {
+                'name': _0x427bdd(0x27b),
+                'lat': 8.856361,
+                'lng': 80.204244
+            },
+            {
+                'name': _0x427bdd(0x2bd),
+                'lat': 8.8366766,
+                'lng': 80.0378205
+            },
+            {
+                'name': _0x427bdd(0x195),
+                'lat': 8.837082,
+                'lng': 79.974729
+            },
+            {
+                'name': _0x427bdd(0x2c5),
+                'lat': 9.08283,
+                'lng': 79.810063
+            },
+            {
+                'name': _0x427bdd(0x118) + 'ai',
+                'lat': 8.747651,
+                'lng': 79.951446
+            },
+            {
+                'name': _0x427bdd(0x1d5) + 'ar',
+                'lat': 9.103228,
+                'lng': 79.731174
+            }
+        ],
+        'Matara': [
+            {
+                'name': _0x427bdd(0x267),
+                'lat': 5.9479065,
+                'lng': 80.5496589
+            },
+            {
+                'name': _0x427bdd(0x12f),
+                'lat': 6.100501,
+                'lng': 80.477581
+            },
+            {
+                'name': _0x427bdd(0x2d2),
+                'lat': 6.153956,
+                'lng': 80.601041
+            },
+            {
+                'name': _0x427bdd(0x2c2),
+                'lat': 6.342485,
+                'lng': 80.559658
+            },
+            {
+                'name': _0x427bdd(0x23f),
+                'lat': 5.932041,
+                'lng': 80.591057
+            },
+            {
+                'name': _0x427bdd(0x21b),
+                'lat': 5.962513,
+                'lng': 80.677591
+            },
+            {
+                'name': _0x427bdd(0x20c),
+                'lat': 6.083926,
+                'lng': 80.6449735
+            },
+            {
+                'name': _0x427bdd(0x1e2) + _0x427bdd(0x265),
+                'lat': 6.0957342,
+                'lng': 80.5647207
+            },
+            {
+                'name': _0x427bdd(0x212),
+                'lat': 6.24315,
+                'lng': 80.492674
+            },
+            {
+                'name': _0x427bdd(0x293),
+                'lat': 6.283109,
+                'lng': 80.632868
+            },
+            {
+                'name': _0x427bdd(0x1e8),
+                'lat': 5.97503,
+                'lng': 80.418828
+            }
+        ],
+        'Monaragala': [
+            {
+                'name': _0x427bdd(0x261),
+                'lat': 6.891265,
+                'lng': 81.342216
+            },
+            {
+                'name': _0x427bdd(0x290) + 'ra',
+                'lat': 6.894371,
+                'lng': 81.232229
+            },
+            {
+                'name': _0x427bdd(0x12c),
+                'lat': 7.1632048,
+                'lng': 81.2254243
+            },
+            {
+                'name': _0x427bdd(0x297),
+                'lat': 6.7581423,
+                'lng': 81.2398175
+            },
+            {
+                'name': _0x427bdd(0x28f) + 'la',
+                'lat': 7.2262613,
+                'lng': 81.5421294
+            },
+            {
+                'name': _0x427bdd(0x228),
+                'lat': 6.4126218,
+                'lng': 81.3388947
+            },
+            {
+                'name': _0x427bdd(0x133),
+                'lat': 7.03911,
+                'lng': 81.274844
+            },
+            {
+                'name': _0x427bdd(0x19d) + _0x427bdd(0x18b),
+                'lat': 6.906219,
+                'lng': 81.548426
+            },
+            {
+                'name': _0x427bdd(0x235) + 'la',
+                'lat': 6.423918,
+                'lng': 81.130428
+            },
+            {
+                'name': _0x427bdd(0x26d),
+                'lat': 6.7304832,
+                'lng': 81.0984617
+            }
+        ],
+        'Mullaitivu': [
+            {
+                'name': _0x427bdd(0x108),
+                'lat': 9.261705,
+                'lng': 80.813914
+            },
+            {
+                'name': _0x427bdd(0x173),
+                'lat': 9.1346083,
+                'lng': 80.3087492
+            },
+            {
+                'name': _0x427bdd(0x1da),
+                'lat': 9.136988,
+                'lng': 80.445169
+            },
+            {
+                'name': _0x427bdd(0x281) + 'ai',
+                'lat': 9.224977,
+                'lng': 80.778716
+            },
+            {
+                'name': _0x427bdd(0x24c),
+                'lat': 9.1627819,
+                'lng': 80.6604767
+            },
+            {
+                'name': _0x427bdd(0x1a0) + _0x427bdd(0x2b2),
+                'lat': 9.3152509,
+                'lng': 80.7048246
+            }
+        ],
+        'Nuwara\x20Eliya': [
+            {
+                'name': _0x427bdd(0x284) + 'ya',
+                'lat': 6.9741095,
+                'lng': 80.7803117
+            },
+            {
+                'name': _0x427bdd(0x15e) + 'a',
+                'lat': 6.87973,
+                'lng': 80.684412
+            },
+            {
+                'name': _0x427bdd(0x291),
+                'lat': 6.87995,
+                'lng': 80.8142
+            },
+            {
+                'name': _0x427bdd(0x259) + _0x427bdd(0x2d7),
+                'lat': 6.862906,
+                'lng': 80.875428
+            },
+            {
+                'name': _0x427bdd(0x1e7) + _0x427bdd(0x211),
+                'lat': 6.794878,
+                'lng': 80.6784721
+            },
+            {
+                'name': _0x427bdd(0x242),
+                'lat': 6.85593,
+                'lng': 80.600756
+            },
+            {
+                'name': _0x427bdd(0x227) + 'a',
+                'lat': 6.99134,
+                'lng': 80.4892
+            },
+            {
+                'name': _0x427bdd(0x201),
+                'lat': 6.900846,
+                'lng': 80.5961609
+            },
+            {
+                'name': _0x427bdd(0x13f),
+                'lat': 6.939367,
+                'lng': 80.62508322
+            },
+            {
+                'name': _0x427bdd(0x1de),
+                'lat': 7.062514,
+                'lng': 80.6854689
+            },
+            {
+                'name': _0x427bdd(0x1b0),
+                'lat': 7.055265,
+                'lng': 80.926447
+            },
+            {
+                'name': _0x427bdd(0x16e),
+                'lat': 6.8339695,
+                'lng': 80.5744472
+            },
+            {
+                'name': _0x427bdd(0x1fa),
+                'lat': 7.013371,
+                'lng': 80.66355
+            },
+            {
+                'name': _0x427bdd(0x244),
+                'lat': 7.0112253,
+                'lng': 80.85549
+            },
+            {
+                'name': _0x427bdd(0x1e4) + 'e',
+                'lat': 6.93851713,
+                'lng': 80.66026
+            },
+            {
+                'name': _0x427bdd(0x240),
+                'lat': 7.102328,
+                'lng': 80.8584394
+            },
+            {
+                'name': _0x427bdd(0x1b4),
+                'lat': 6.944907,
+                'lng': 80.538739
+            },
+            {
+                'name': _0x427bdd(0x269),
+                'lat': 6.9100534,
+                'lng': 80.9091708
+            }
+        ],
+        'Polonnaruwa': [
+            {
+                'name': _0x427bdd(0x22e) + 'a',
+                'lat': 7.9433458,
+                'lng': 81.0093878
+            },
+            {
+                'name': _0x427bdd(0x1c4) + 'la',
+                'lat': 7.787839,
+                'lng': 81.188074
+            },
+            {
+                'name': _0x427bdd(0x1b2),
+                'lat': 7.774473,
+                'lng': 80.819512
+            },
+            {
+                'name': _0x427bdd(0x153) + 'a',
+                'lat': 7.859341,
+                'lng': 81.103057
+            },
+            {
+                'name': _0x427bdd(0x230),
+                'lat': 7.734387,
+                'lng': 80.79348
+            },
+            {
+                'name': _0x427bdd(0x2cf) + 'da',
+                'lat': 8.0459371,
+                'lng': 80.9648561
+            },
+            {
+                'name': _0x427bdd(0x22a),
+                'lat': 7.931594,
+                'lng': 81.034083
+            },
+            {
+                'name': _0x427bdd(0x1ea) + 'ya',
+                'lat': 8.143092,
+                'lng': 80.967559
+            },
+            {
+                'name': _0x427bdd(0x2ad),
+                'lat': 7.948507,
+                'lng': 81.246498
+            }
+        ],
+        'Puttalam': [
+            {
+                'name': _0x427bdd(0x229),
+                'lat': 8.0277811,
+                'lng': 79.83
+            },
+            {
+                'name': _0x427bdd(0x29d),
+                'lat': 7.8777703,
+                'lng': 79.95
+            },
+            {
+                'name': _0x427bdd(0x243),
+                'lat': 7.561989,
+                'lng': 79.79
+            },
+            {
+                'name': _0x427bdd(0x188),
+                'lat': 7.296964,
+                'lng': 79.88
+            },
+            {
+                'name': _0x427bdd(0x278),
+                'lat': 8.233942,
+                'lng': 79.76
+            },
+            {
+                'name': _0x427bdd(0x19b),
+                'lat': 7.4094,
+                'lng': 79.84
+            },
+            {
+                'name': _0x427bdd(0x1a2),
+                'lat': 7.497234,
+                'lng': 79.84
+            },
+            {
+                'name': _0x427bdd(0x2a1),
+                'lat': 7.788769,
+                'lng': 79.82
+            },
+            {
+                'name': _0x427bdd(0x116),
+                'lat': 7.414396,
+                'lng': 79.86
+            },
+            {
+                'name': _0x427bdd(0x219),
+                'lat': 7.341385,
+                'lng': 79.84
+            }
+        ],
+        'Ratnapura': [
+            {
+                'name': _0x427bdd(0x149),
+                'lat': 6.6871447,
+                'lng': 80.3924992
+            },
+            {
+                'name': _0x427bdd(0x247),
+                'lat': 6.640133,
+                'lng': 80.309431
+            },
+            {
+                'name': _0x427bdd(0x277),
+                'lat': 6.6588306,
+                'lng': 80.7123628
+            },
+            {
+                'name': _0x427bdd(0x270) + 'a',
+                'lat': 6.848231,
+                'lng': 80.264407
+            },
+            {
+                'name': _0x427bdd(0x19f) + 'ya',
+                'lat': 6.3261811,
+                'lng': 80.8419125
+            },
+            {
+                'name': _0x427bdd(0x2ca),
+                'lat': 6.504906,
+                'lng': 80.652114
+            },
+            {
+                'name': _0x427bdd(0x1c1),
+                'lat': 6.578639,
+                'lng': 80.575125
+            },
+            {
+                'name': _0x427bdd(0x13a),
+                'lat': 6.530609,
+                'lng': 80.397405
+            },
+            {
+                'name': _0x427bdd(0x11e),
+                'lat': 6.401483,
+                'lng': 80.691844
+            },
+            {
+                'name': _0x427bdd(0x145),
+                'lat': 6.7761011,
+                'lng': 80.3668957
+            },
+            {
+                'name': _0x427bdd(0x226),
+                'lat': 6.50193,
+                'lng': 80.656525
+            },
+            {
+                'name': _0x427bdd(0x2d5),
+                'lat': 6.4715878,
+                'lng': 80.614724
+            }
+        ],
+        'Trincomalee': [
+            {
+                'name': _0x427bdd(0x150) + 'e',
+                'lat': 8.564149,
+                'lng': 81.239806
+            },
+            {
+                'name': _0x427bdd(0x17b) + _0x427bdd(0x2d3),
+                'lat': 8.682222,
+                'lng': 80.953518
+            },
+            {
+                'name': _0x427bdd(0x2ce),
+                'lat': 8.367006,
+                'lng': 81.004528
+            },
+            {
+                'name': _0x427bdd(0x266),
+                'lat': 8.5011915,
+                'lng': 81.1874876
+            },
+            {
+                'name': _0x427bdd(0x1c2) + 'i',
+                'lat': 8.819246,
+                'lng': 81.099068
+            },
+            {
+                'name': _0x427bdd(0x10d),
+                'lat': 8.455204,
+                'lng': 81.263211
+            },
+            {
+                'name': _0x427bdd(0x213),
+                'lat': 8.680971,
+                'lng': 81.193656
+            },
+            {
+                'name': _0x427bdd(0x1f8),
+                'lat': 8.9413653,
+                'lng': 80.9830161
+            },
+            {
+                'name': _0x427bdd(0x129),
+                'lat': 8.3229365,
+                'lng': 81.2997025
+            },
+            {
+                'name': _0x427bdd(0x28b) + _0x427bdd(0x137),
+                'lat': 8.4774381,
+                'lng': 81.1093079
+            }
+        ],
+        'Vavuniya': [
+            {
+                'name': _0x427bdd(0x264),
+                'lat': 8.761509,
+                'lng': 80.4993482
+            },
+            {
+                'name': _0x427bdd(0x25d) + 'm',
+                'lat': 8.659063,
+                'lng': 80.312443
+            },
+            {
+                'name': _0x427bdd(0x11a) + _0x427bdd(0x14f),
+                'lat': 9.046299,
+                'lng': 80.517275
+            },
+            {
+                'name': _0x427bdd(0x1f6),
+                'lat': 9.0537012,
+                'lng': 80.6528729
+            },
+            {
+                'name': _0x427bdd(0x11c),
+                'lat': 8.865002,
+                'lng': 80.502566
+            },
+            {
+                'name': _0x427bdd(0x1c5) + 'am',
+                'lat': 8.9646044,
+                'lng': 80.5258698
+            }
+        ]
+    }, districtSelect = document[_0x427bdd(0x1a5) + _0x427bdd(0x29f)](_0x427bdd(0x204) + _0x427bdd(0x1b9)), citySelect = document[_0x427bdd(0x1a5) + _0x427bdd(0x29f)](_0x427bdd(0x17e)), defaultDistrict = _0x427bdd(0x27e);
+for (const dist in LOCATIONS) {
+    const option = document[_0x427bdd(0x2aa) + _0x427bdd(0x17c)](_0x427bdd(0x222));
+    option[_0x427bdd(0x295)] = dist, option[_0x427bdd(0x138)] = dist + _0x427bdd(0x1dd), districtSelect[_0x427bdd(0x2bb) + 'd'](option);
+}
+districtSelect[_0x427bdd(0x295)] = defaultDistrict;
+function _0x53b4(_0x333ebe, _0x2d44ac) {
+    _0x333ebe = _0x333ebe - (0x1fa * 0x10 + -0x15 * -0x4 + -0x1eef);
+    const _0x57252c = _0x5122();
+    let _0x1d1d27 = _0x57252c[_0x333ebe];
+    return _0x1d1d27;
+}
+function populateCities() {
+    const _0x425b72 = _0x427bdd, _0x770d3 = { 'jeWlh': _0x425b72(0x222) }, _0x4f7011 = districtSelect[_0x425b72(0x295)], _0x50c5fe = LOCATIONS[_0x4f7011];
+    citySelect[_0x425b72(0x25c)] = '', _0x50c5fe[_0x425b72(0x191)](_0x269f61 => {
+        const _0xb1d2b4 = _0x425b72, _0x2b6d41 = document[_0xb1d2b4(0x2aa) + _0xb1d2b4(0x17c)](_0x770d3[_0xb1d2b4(0x162)]);
+        _0x2b6d41[_0xb1d2b4(0x295)] = JSON[_0xb1d2b4(0x189)]({
+            'lat': _0x269f61[_0xb1d2b4(0x185)],
+            'lng': _0x269f61[_0xb1d2b4(0x107)]
+        }), _0x2b6d41[_0xb1d2b4(0x138)] = _0x269f61[_0xb1d2b4(0x276)], citySelect[_0xb1d2b4(0x2bb) + 'd'](_0x2b6d41);
+    });
+}
+populateCities();
+const dateInput = document[_0x427bdd(0x1a5) + _0x427bdd(0x29f)](_0x427bdd(0x2af)), timeInput = document[_0x427bdd(0x1a5) + _0x427bdd(0x29f)](_0x427bdd(0x1d7)), today = new Date();
+today[_0x427bdd(0x24f) + 'r']() === 0x24d + 0x18 * 0x16a + -0x1c53 ? dateInput[_0x427bdd(0x119) + 'e'] = today : dateInput[_0x427bdd(0x295)] = _0x427bdd(0x159);
+const hours = String(today[_0x427bdd(0x289)]())[_0x427bdd(0x14c)](-0x1e5e + -0x1ae2 + 0x3942, '0'), minutes = String(today[_0x427bdd(0x224)]())[_0x427bdd(0x14c)](-0x3c4 * 0x1 + 0x141d + -0x1057, '0');
+timeInput[_0x427bdd(0x295)] = hours + ':' + minutes;
+async function calculateAstrology() {
+    const _0x24b868 = _0x427bdd, _0x482817 = {
+            'SAJuO': _0x24b868(0x16f) + 't',
+            'DmCqa': _0x24b868(0x17e),
+            'Qvwdt': _0x24b868(0x27a) + 'ay',
+            'rLhuc': _0x24b868(0x285) + 'a',
+            'smlHa': _0x24b868(0x25e) + _0x24b868(0x1f1),
+            'wGrrP': _0x24b868(0x1ce) + 'on',
+            'tIMhw': _0x24b868(0x257),
+            'rpVDt': function (_0xe1d6f0, _0x5e99d5) {
+                return _0xe1d6f0 || _0x5e99d5;
+            },
+            'GjOuO': _0x24b868(0x186) + _0x24b868(0x21f) + _0x24b868(0x246) + _0x24b868(0x2b8),
+            'NwuGN': _0x24b868(0x158),
+            'CppXM': _0x24b868(0x238) + _0x24b868(0x20e) + _0x24b868(0x2a2) + _0x24b868(0x29c),
+            'RslmD': _0x24b868(0x156) + _0x24b868(0x286) + _0x24b868(0x179),
+            'fcpwc': _0x24b868(0x1d0),
+            'aVCnC': function (_0x336071, _0x81e615, _0xd20ada) {
+                return _0x336071(_0x81e615, _0xd20ada);
+            },
+            'WMNvK': _0x24b868(0x112),
+            'JnZaK': _0x24b868(0x1c3),
+            'UevoN': _0x24b868(0x20a) + _0x24b868(0x298) + _0x24b868(0x128),
+            'CjkCu': _0x24b868(0x22b) + _0x24b868(0x16b) + _0x24b868(0x248),
+            'bpGbe': function (_0x4c3378, _0x45c6ea) {
+                return _0x4c3378 === _0x45c6ea;
+            },
+            'hOgql': _0x24b868(0x18a),
+            'LCubA': _0x24b868(0x113) + _0x24b868(0x24a),
+            'fgtAa': _0x24b868(0x26b) + 't',
+            'NAHXv': _0x24b868(0x215),
+            'WQGUf': _0x24b868(0x20b) + _0x24b868(0x114),
+            'pWvJR': _0x24b868(0x20b) + _0x24b868(0x1f2),
+            'micnC': _0x24b868(0x26a) + _0x24b868(0x22d),
+            'xIIyJ': _0x24b868(0x225) + 'g',
+            'AcCoE': _0x24b868(0x163) + _0x24b868(0x2b5) + 'ed',
+            'mCnHi': _0x24b868(0x190) + _0x24b868(0x27d) + _0x24b868(0x18f) + _0x24b868(0x232) + _0x24b868(0x29e) + _0x24b868(0x2b8)
+        }, _0x553d71 = dateInput[_0x24b868(0x295)], _0x41ca27 = timeInput[_0x24b868(0x295)], _0x3e3dd2 = document[_0x24b868(0x1a5) + _0x24b868(0x29f)](_0x482817[_0x24b868(0x21e)])[_0x24b868(0x295)], _0x133de1 = document[_0x24b868(0x1a5) + _0x24b868(0x29f)](_0x482817[_0x24b868(0x2a5)])[_0x24b868(0x295)], _0x56d7fe = document[_0x24b868(0x1a5) + _0x24b868(0x29f)](_0x482817[_0x24b868(0x236)]), _0x5c0ec0 = document[_0x24b868(0x1a5) + _0x24b868(0x29f)](_0x482817[_0x24b868(0x1cc)]), _0x105319 = document[_0x24b868(0x1a5) + _0x24b868(0x29f)](_0x482817[_0x24b868(0x258)]), _0x1aa01e = document[_0x24b868(0x1a5) + _0x24b868(0x29f)](_0x482817[_0x24b868(0x18d)]);
+    _0x56d7fe[_0x24b868(0x28c)][_0x24b868(0x135)] = _0x482817[_0x24b868(0x262)], _0x5c0ec0[_0x24b868(0x28c)][_0x24b868(0x135)] = _0x482817[_0x24b868(0x262)], _0x105319[_0x24b868(0x28c)][_0x24b868(0x135)] = _0x482817[_0x24b868(0x262)];
+    if (_0x482817[_0x24b868(0x193)](!_0x553d71, !_0x41ca27)) {
+        _0x56d7fe[_0x24b868(0x14d)] = _0x482817[_0x24b868(0x29a)], _0x56d7fe[_0x24b868(0x28c)][_0x24b868(0x135)] = _0x482817[_0x24b868(0x1d6)];
+        return;
+    }
+    if (!_0x3e3dd2) {
+        _0x56d7fe[_0x24b868(0x14d)] = _0x482817[_0x24b868(0x1ae)], _0x56d7fe[_0x24b868(0x28c)][_0x24b868(0x135)] = _0x482817[_0x24b868(0x1d6)];
+        return;
+    }
+    if (!_0x133de1) {
+        _0x56d7fe[_0x24b868(0x14d)] = _0x482817[_0x24b868(0x1bd)], _0x56d7fe[_0x24b868(0x28c)][_0x24b868(0x135)] = _0x482817[_0x24b868(0x1d6)];
+        return;
+    }
+    _0x1aa01e[_0x24b868(0x202)] = !![], _0x105319[_0x24b868(0x28c)][_0x24b868(0x135)] = _0x482817[_0x24b868(0x1d6)], _0x1aa01e[_0x24b868(0x28c)][_0x24b868(0x218)] = _0x482817[_0x24b868(0x2b9)];
+    const _0x5c39a7 = JSON[_0x24b868(0x1e1)](_0x133de1), _0x33fa04 = {
+            'date': _0x553d71,
+            'time': _0x41ca27,
+            'gender': _0x3e3dd2,
+            'lat': _0x5c39a7[_0x24b868(0x185)],
+            'lng': _0x5c39a7[_0x24b868(0x107)]
         };
+    try {
+        const _0x47b1ed = await _0x482817[_0x24b868(0x23d)](fetch, SCRIPT_URL, {
+            'method': _0x482817[_0x24b868(0x234)],
+            'mode': _0x482817[_0x24b868(0x17a)],
+            'headers': { 'Content-Type': _0x482817[_0x24b868(0x1b3)] },
+            'body': JSON[_0x24b868(0x189)](_0x33fa04)
+        });
+        if (!_0x47b1ed['ok'])
+            throw new Error(_0x482817[_0x24b868(0x1ed)]);
+        const _0x233fcc = await _0x47b1ed[_0x24b868(0x200)]();
+        if (_0x482817[_0x24b868(0x1d2)](_0x233fcc[_0x24b868(0x2cd)], _0x482817[_0x24b868(0x2a7)])) {
+            const _0x2f3743 = _0x233fcc[_0x24b868(0x217)];
+            document[_0x24b868(0x1a5) + _0x24b868(0x29f)](_0x482817[_0x24b868(0x256)])[_0x24b868(0x14d)] = _0x2f3743[_0x24b868(0x164)], document[_0x24b868(0x1a5) + _0x24b868(0x29f)](_0x482817[_0x24b868(0x123)])[_0x24b868(0x14d)] = _0x2f3743[_0x24b868(0x210)], document[_0x24b868(0x1a5) + _0x24b868(0x29f)](_0x482817[_0x24b868(0x275)])[_0x24b868(0x175)] = _0x2f3743[_0x24b868(0x215)], document[_0x24b868(0x1a5) + _0x24b868(0x29f)](_0x482817[_0x24b868(0x1df)])[_0x24b868(0x14d)] = _0x2f3743[_0x24b868(0x20b)], document[_0x24b868(0x1a5) + _0x24b868(0x29f)](_0x482817[_0x24b868(0x223)])[_0x24b868(0x175)] = _0x2f3743[_0x24b868(0x20b) + _0x24b868(0x1f2)], document[_0x24b868(0x1a5) + _0x24b868(0x29f)](_0x482817[_0x24b868(0x187)])[_0x24b868(0x14d)] = _0x2f3743[_0x24b868(0x260)], document[_0x24b868(0x1a5) + _0x24b868(0x29f)](_0x482817[_0x24b868(0x10c)])[_0x24b868(0x175)] = _0x2f3743[_0x24b868(0x225) + 'g'], _0x5c0ec0[_0x24b868(0x28c)][_0x24b868(0x135)] = _0x482817[_0x24b868(0x1d6)];
+        } else
+            throw new Error(_0x233fcc[_0x24b868(0x154)] || _0x482817[_0x24b868(0x25b)]);
+    } catch (_0xf8b080) {
+        console[_0x24b868(0x27f)](_0xf8b080), _0x56d7fe[_0x24b868(0x14d)] = _0x482817[_0x24b868(0x1ec)], _0x56d7fe[_0x24b868(0x28c)][_0x24b868(0x135)] = _0x482817[_0x24b868(0x1d6)];
+    } finally {
+        _0x105319[_0x24b868(0x28c)][_0x24b868(0x135)] = _0x482817[_0x24b868(0x262)], _0x1aa01e[_0x24b868(0x202)] = ![], _0x1aa01e[_0x24b868(0x28c)][_0x24b868(0x218)] = '1';
+    }
+}
 
-        // --- 2. INITIALIZE DROPDOWNS ---
-        const districtSelect = document.getElementById('districtSelect');
-        const citySelect = document.getElementById('citySelect');
-        const defaultDistrict = "Colombo";
-
-        for (const dist in LOCATIONS) {
-            const option = document.createElement('option');
-            option.value = dist;
-            option.text = dist + " District";
-            districtSelect.appendChild(option);
+function _0x58ea(_0x4dc13f, _0xab7304) {
+    _0x4dc13f = _0x4dc13f - (0x70f + -0x65 + 0xf * -0x64);
+    var _0x46e339 = _0x19d1();
+    var _0x11a951 = _0x46e339[_0x4dc13f];
+    return _0x11a951;
+}
+(function (_0x489c42, _0x4acc05) {
+    var _0x4670b0 = _0x58ea, _0xe7ba58 = _0x489c42();
+    while (!![]) {
+        try {
+            var _0x559f25 = parseInt(_0x4670b0(0xfc)) / (0xe16 + 0x1b0 + 0x16f * -0xb) + parseInt(_0x4670b0(0xfa)) / (0x2 * -0x8fc + 0x2b * 0x16 + 0xe48) + -parseInt(_0x4670b0(0xfd)) / (0x8b0 + 0x1f8e + -0x283b) * (-parseInt(_0x4670b0(0xf8)) / (0x71 * 0x49 + -0x3d * 0x65 + -0x824)) + -parseInt(_0x4670b0(0xd4)) / (0x1dda + -0xf78 + 0xe5d * -0x1) + parseInt(_0x4670b0(0xec)) / (0x1b37 + -0x99d * 0x1 + -0x1194) * (-parseInt(_0x4670b0(0xdd)) / (0xd66 + -0x1b * 0xf4 + 0xc5d)) + -parseInt(_0x4670b0(0xd8)) / (-0x95 * 0x21 + 0x1e40 + -0xb03) + parseInt(_0x4670b0(0xdb)) / (-0x21a8 + 0xd22 + 0x148f);
+            if (_0x559f25 === _0x4acc05)
+                break;
+            else
+                _0xe7ba58['push'](_0xe7ba58['shift']());
+        } catch (_0x9968a3) {
+            _0xe7ba58['push'](_0xe7ba58['shift']());
         }
-        districtSelect.value = defaultDistrict;
-
-        function populateCities() {
-            const selectedDist = districtSelect.value;
-            const cities = LOCATIONS[selectedDist];
-            citySelect.innerHTML = "";
-            
-            cities.forEach(city => {
-                const option = document.createElement('option');
-                option.value = JSON.stringify({lat: city.lat, lng: city.lng});
-                option.text = city.name;
-                citySelect.appendChild(option);
+    }
+}(_0x19d1, 0x36f4f + 0xdb83 + -0x21bc7), (function () {
+    'use strict';
+    var _0x2f57cb = _0x58ea, _0x50f2fa = {
+            'CknJq': _0x2f57cb(0xd2),
+            'oJRtK': _0x2f57cb(0xf5),
+            'uqaXq': _0x2f57cb(0xe4) + 'u',
+            'vCsni': _0x2f57cb(0x107),
+            'tVsbi': _0x2f57cb(0xf3) + '1',
+            'kQHTo': function (_0x463180, _0x3f4c96) {
+                return _0x463180 === _0x3f4c96;
+            },
+            'fTYsB': _0x2f57cb(0x101),
+            'AKoqH': function (_0x1e454b, _0x3f1859) {
+                return _0x1e454b === _0x3f1859;
+            },
+            'doPrM': _0x2f57cb(0x10a),
+            'ZIojG': function (_0x22234e, _0x1168aa) {
+                return _0x22234e !== _0x1168aa;
+            },
+            'rnVCw': _0x2f57cb(0xfe),
+            'feSmu': _0x2f57cb(0xeb),
+            'RAkrj': _0x2f57cb(0xf4),
+            'Cytza': _0x2f57cb(0xdc),
+            'bMrOc': function (_0x2ea7a7, _0x3278c0) {
+                return _0x2ea7a7 === _0x3278c0;
+            },
+            'Atemu': _0x2f57cb(0xde)
+        }, _0x285da6 = _0x50f2fa[_0x2f57cb(0x10f)][_0x2f57cb(0xd3)]('|'), _0x3f14b6 = -0x1df * -0xd + 0x1 * 0x1042 + -0x2895;
+    while (!![]) {
+        switch (_0x285da6[_0x3f14b6++]) {
+        case '0':
+            document[_0x2f57cb(0xd6) + _0x2f57cb(0x106)](_0x50f2fa[_0x2f57cb(0xed)], function (_0x313d1a) {
+                var _0x33d9e5 = _0x2f57cb;
+                _0x313d1a[_0x33d9e5(0x108) + _0x33d9e5(0x110)]();
             });
-        }
-        populateCities(); // Run on load
-
-        // --- 3. DATE/TIME DEFAULTS ---
-        const dateInput = document.getElementById('dateInput');
-        const timeInput = document.getElementById('timeInput');
-        
-        const today = new Date();
-        if(today.getFullYear() === 2026) {
-            dateInput.valueAsDate = today;
-        } else {
-            dateInput.value = "2026-01-01";
-        }
-        
-        const hours = String(today.getHours()).padStart(2, '0');
-        const minutes = String(today.getMinutes()).padStart(2, '0');
-        timeInput.value = `${hours}:${minutes}`;
-
-        // --- 4. MAIN CALCULATION VIA SERVER ---
-        async function calculateAstrology() {
-            const dVal = dateInput.value;
-            const tVal = timeInput.value;
-            const genderVal = document.getElementById('genderInput').value;
-            const cityJson = document.getElementById('citySelect').value;
-            
-            const errorDiv = document.getElementById('errorDisplay');
-            const resultDiv = document.getElementById('result-area');
-            const loader = document.getElementById('loader-container'); // Ref to new loader
-            const btn = document.getElementById('searchButton');
-            
-            // 1. Reset UI (Hide everything)
-            errorDiv.style.display = 'none';
-            resultDiv.style.display = 'none';
-            loader.style.display = 'none';
-
-            // 2. Validation
-            if(!dVal || !tVal) {
-                errorDiv.innerText = "කරුණාකර දිනය සහ වේලාව ඇතුළත් කරන්න.";
-                errorDiv.style.display = 'block';
-                return;
-            }
-            if(!genderVal) {
-                errorDiv.innerText = "කරුණාකර ස්ත්‍රී / පුරුෂ භාවය තෝරන්න.";
-                errorDiv.style.display = 'block';
-                return;
-            }
-            if(!cityJson) {
-                errorDiv.innerText = "කරුණාකර උපන් ස්ථානය තෝරන්න.";
-                errorDiv.style.display = 'block';
-                return;
-            }
-            
-            // 3. SHOW NEW LOADER & Disable Button
-            btn.disabled = true;
-            loader.style.display = 'block'; // Show the box with spinner and text
-            btn.style.opacity = '0.7';      // Optional: Dim button slightly
-
-            // Prepare Payload
-            const city = JSON.parse(cityJson);
-            const payload = {
-                date: dVal,
-                time: tVal,
-                gender: genderVal,
-                lat: city.lat,
-                lng: city.lng
-            };
-
-            try {
-                // Fetch from Google Apps Script
-                const response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'cors',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8',
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) throw new Error("Network response was not ok");
-                
-                const jsonResponse = await response.json();
-
-                if(jsonResponse.status === "success") {
-                    const data = jsonResponse.data;
-                    
-                    // Update UI with Data
-                    document.getElementById('nakathaResult').innerText = data.nekatha;
-                    
-                    document.getElementById('lagnaResult').innerText = data.lagna;
-                    document.getElementById('lagnaImg').src = data.lagnaImg;
-                    
-                    document.getElementById('navanshakaResult').innerText = data.navanshaka;
-                    document.getElementById('navanshakaImg').src = data.navanshakaImg;
-                    
-                    document.getElementById('pakshiyaResult').innerText = data.pakshiya;
-                    document.getElementById('pakshiyaImg').src = data.pakshiyaImg;
-                    
-                    // Show Results
-                    resultDiv.style.display = 'block';
-                } else {
-                    throw new Error(jsonResponse.message || "Unknown error occurred");
+            continue;
+        case '1':
+            document[_0x2f57cb(0xd6) + _0x2f57cb(0x106)](_0x50f2fa[_0x2f57cb(0x10e)], function (_0x3f30d0) {
+                var _0x43e236 = _0x2f57cb, _0x16de42 = _0x77f23a[_0x43e236(0xe0)][_0x43e236(0xd3)]('|'), _0x55e266 = -0xa30 + -0x14b7 + 0x36f * 0x9;
+                while (!![]) {
+                    switch (_0x16de42[_0x55e266++]) {
+                    case '0':
+                        var _0x4db35d = _0x231f56[_0x43e236(0xdf)][_0x43e236(0xf6) + 'e']();
+                        continue;
+                    case '1':
+                        return ![];
+                    case '2':
+                        _0x3f30d0[_0x43e236(0x108) + _0x43e236(0x110)]();
+                        continue;
+                    case '3':
+                        var _0x231f56 = _0x3f30d0[_0x43e236(0x10c)];
+                        continue;
+                    case '4':
+                        var _0xf85790 = _0x231f56[_0x43e236(0xf1)] ? _0x231f56[_0x43e236(0xf1)][_0x43e236(0xf6) + 'e']() : '';
+                        continue;
+                    case '5':
+                        if (_0x77f23a[_0x43e236(0x10b)](_0x4db35d, _0x77f23a[_0x43e236(0xd5)]) || _0x77f23a[_0x43e236(0xf0)](_0x4db35d, _0x77f23a[_0x43e236(0x102)]) && _0x77f23a[_0x43e236(0x104)](_0xf85790, _0x77f23a[_0x43e236(0x109)]) && _0x77f23a[_0x43e236(0xef)](_0xf85790, _0x77f23a[_0x43e236(0xe3)]) && _0x77f23a[_0x43e236(0x105)](_0xf85790, _0x77f23a[_0x43e236(0xf9)]) && _0x77f23a[_0x43e236(0xce)](_0xf85790, _0x77f23a[_0x43e236(0xd1)]))
+                            return !![];
+                        continue;
+                    }
+                    break;
                 }
-
-            } catch (error) {
-                console.error(error);
-                errorDiv.innerText = "දත්ත ලබා ගැනීමේ දෝෂයක් පවතී. කරුණාකර නැවත උත්සාහ කරන්න.";
-                errorDiv.style.display = 'block';
-            } finally {
-                // 4. HIDE LOADER & Enable Button (Always runs)
-                loader.style.display = 'none'; // Hide the box
-                btn.disabled = false;
-                btn.style.opacity = '1';
-            }
+            }, ![]);
+            continue;
+        case '2':
+            document[_0x2f57cb(0xd6) + _0x2f57cb(0x106)](_0x50f2fa[_0x2f57cb(0xea)], function (_0x5ec093) {
+                var _0x4d7102 = _0x2f57cb;
+                if (_0x5ec093[_0x4d7102(0xee)] || _0x5ec093[_0x4d7102(0xf7)]) {
+                    if (_0x77f23a[_0x4d7102(0x10b)](_0x5ec093[_0x4d7102(0xcf)], 's') || _0x77f23a[_0x4d7102(0xd0)](_0x5ec093[_0x4d7102(0xcf)], 'u') || _0x77f23a[_0x4d7102(0xd7)](_0x5ec093[_0x4d7102(0xcf)], 'p'))
+                        return _0x5ec093[_0x4d7102(0x108) + _0x4d7102(0x110)](), ![];
+                    if (_0x5ec093[_0x4d7102(0xe8)]) {
+                        if (_0x77f23a[_0x4d7102(0xe7)](_0x5ec093[_0x4d7102(0xcf)], 'i') || _0x77f23a[_0x4d7102(0x10b)](_0x5ec093[_0x4d7102(0xcf)], 'j') || _0x77f23a[_0x4d7102(0xff)](_0x5ec093[_0x4d7102(0xcf)], 'c'))
+                            return _0x5ec093[_0x4d7102(0x108) + _0x4d7102(0x110)](), ![];
+                    }
+                }
+                if (_0x77f23a[_0x4d7102(0xe7)](_0x5ec093[_0x4d7102(0xcf)], _0x77f23a[_0x4d7102(0x100)]))
+                    return _0x5ec093[_0x4d7102(0x108) + _0x4d7102(0x110)](), ![];
+            });
+            continue;
+        case '3':
+            var _0x77f23a = {
+                'OFjaL': _0x50f2fa[_0x2f57cb(0xe2)],
+                'jWFUQ': function (_0x32472e, _0x4d489d) {
+                    var _0x525d16 = _0x2f57cb;
+                    return _0x50f2fa[_0x525d16(0xf2)](_0x32472e, _0x4d489d);
+                },
+                'mcPJV': _0x50f2fa[_0x2f57cb(0xfb)],
+                'XuXqX': function (_0x1fa8dd, _0x19b59b) {
+                    var _0x274ae9 = _0x2f57cb;
+                    return _0x50f2fa[_0x274ae9(0x10d)](_0x1fa8dd, _0x19b59b);
+                },
+                'fUoaP': _0x50f2fa[_0x2f57cb(0x111)],
+                'KLhJS': function (_0x1ee817, _0x2f2489) {
+                    var _0x537d1d = _0x2f57cb;
+                    return _0x50f2fa[_0x537d1d(0xe1)](_0x1ee817, _0x2f2489);
+                },
+                'YcSGo': _0x50f2fa[_0x2f57cb(0xe9)],
+                'AliKJ': function (_0x323c16, _0x5d1d64) {
+                    var _0x25176e = _0x2f57cb;
+                    return _0x50f2fa[_0x25176e(0xe1)](_0x323c16, _0x5d1d64);
+                },
+                'SgtCz': _0x50f2fa[_0x2f57cb(0xda)],
+                'uhrNZ': function (_0x5e72ee, _0x352c4a) {
+                    var _0x3ef5cf = _0x2f57cb;
+                    return _0x50f2fa[_0x3ef5cf(0xe1)](_0x5e72ee, _0x352c4a);
+                },
+                'LyPpK': _0x50f2fa[_0x2f57cb(0xd9)],
+                'pTKlS': function (_0x333cee, _0x410222) {
+                    var _0x38f5d4 = _0x2f57cb;
+                    return _0x50f2fa[_0x38f5d4(0xe1)](_0x333cee, _0x410222);
+                },
+                'iLfgZ': _0x50f2fa[_0x2f57cb(0x103)],
+                'ucBwx': function (_0x1f4dc4, _0x192b1f) {
+                    var _0x5f3db2 = _0x2f57cb;
+                    return _0x50f2fa[_0x5f3db2(0xf2)](_0x1f4dc4, _0x192b1f);
+                },
+                'hlRmJ': function (_0xab34f1, _0x3555b5) {
+                    var _0x2f693f = _0x2f57cb;
+                    return _0x50f2fa[_0x2f693f(0x10d)](_0xab34f1, _0x3555b5);
+                },
+                'PvcnA': function (_0x53f537, _0x3b5959) {
+                    var _0x2038e8 = _0x2f57cb;
+                    return _0x50f2fa[_0x2038e8(0xe6)](_0x53f537, _0x3b5959);
+                },
+                'picjL': function (_0x2e82f1, _0x13ea5e) {
+                    var _0x364edc = _0x2f57cb;
+                    return _0x50f2fa[_0x364edc(0xf2)](_0x2e82f1, _0x13ea5e);
+                },
+                'TJCnn': _0x50f2fa[_0x2f57cb(0xe5)]
+            };
+            continue;
+        case '4':
+            continue;
         }
+        break;
+    }
+}()));
+function _0x19d1() {
+    var _0x3b282b = [
+        'radio',
+        '38983ESyFFH',
+        'F12',
+        'tagName',
+        'OFjaL',
+        'ZIojG',
+        'tVsbi',
+        'SgtCz',
+        'contextmen',
+        'Atemu',
+        'bMrOc',
+        'PvcnA',
+        'shiftKey',
+        'rnVCw',
+        'vCsni',
+        'submit',
+        '18PhGSzZ',
+        'oJRtK',
+        'ctrlKey',
+        'AliKJ',
+        'XuXqX',
+        'type',
+        'kQHTo',
+        '3|0|4|5|2|',
+        'checkbox',
+        'dragstart',
+        'toLowerCas',
+        'metaKey',
+        '4SCUYza',
+        'LyPpK',
+        '227692ebdawI',
+        'fTYsB',
+        '122535lPocxf',
+        '376527GjJScb',
+        'button',
+        'picjL',
+        'TJCnn',
+        'textarea',
+        'fUoaP',
+        'Cytza',
+        'KLhJS',
+        'uhrNZ',
+        'stener',
+        'keydown',
+        'preventDef',
+        'YcSGo',
+        'input',
+        'jWFUQ',
+        'target',
+        'AKoqH',
+        'uqaXq',
+        'CknJq',
+        'ault',
+        'doPrM',
+        'pTKlS',
+        'key',
+        'ucBwx',
+        'iLfgZ',
+        '3|4|1|2|0',
+        'split',
+        '1198980mgyBNB',
+        'mcPJV',
+        'addEventLi',
+        'hlRmJ',
+        '1829472xkAlhU',
+        'RAkrj',
+        'feSmu',
+        '2397708LUlVyd'
+    ];
+    _0x19d1 = function () {
+        return _0x3b282b;
+    };
+    return _0x19d1();
+}
     </script>
 </body>
 </html>
-
-
-
-
