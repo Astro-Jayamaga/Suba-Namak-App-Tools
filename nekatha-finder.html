@@ -1,54 +1,6 @@
 <!DOCTYPE html>
 <html lang="si">
 <head>
-    (function(){
-    // CONFIGURATION
-    var whitelist = ["myappmaker.io/Suba_Namak", "appmaker.lk"];
-    var secretKey = "access=SNA_Astro"; // Your NEW Key
-    
-    var ref = document.referrer;
-    var isIframe = (window.self !== window.top);
-    var isSafe = false;
-
-    // 1. DIRECT VIEW (Not in Iframe) -> Always Safe
-    if (!isIframe) {
-        isSafe = true; 
-    }
-    else {
-        // 2. CHECK REFERRER (If it exists)
-        if (ref && ref !== "") {
-            // If Referrer exists, it MUST be in our whitelist.
-            // The Secret Key does NOT help you here.
-            if (ref.indexOf(whitelist[0]) > -1 || ref.indexOf(whitelist[1]) > -1) {
-                isSafe = true;
-            } else {
-                isSafe = false; // Blocked (Thief with Referrer)
-            }
-        }
-        // 3. CHECK MOBILE APP (Empty Referrer)
-        else {
-            // Only check the key if Referrer is empty
-            if (window.location.search.indexOf(secretKey) > -1) {
-                isSafe = true;
-            } else {
-                isSafe = false; // Empty referrer but Wrong Key -> Blocked
-            }
-        }
-    }
-
-    // EXECUTION
-    if (isSafe) {
-        var curtain = document.getElementById('security-curtain');
-        if (curtain) curtain.parentNode.removeChild(curtain);
-    } else {
-        window.onload = function() {
-            document.body.innerHTML = "<div style='text-align:center;margin-top:20%;font-family:sans-serif;color:red'><h1>ACCESS DENIED</h1><p>Unauthorized Source.</p></div>";
-            var curtain = document.getElementById('security-curtain');
-            if (curtain) curtain.parentNode.removeChild(curtain);
-        };
-        try { window.top.location = window.self.location; } catch(e){}
-    }
-})();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026 නැකැත් තොරතුරු සෙවීම</title>
@@ -2668,4 +2620,5 @@ function _0x19d1() {
     </script>
 </body>
 </html>
+
 
