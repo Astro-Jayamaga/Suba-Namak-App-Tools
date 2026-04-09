@@ -1,0 +1,737 @@
+
+<!DOCTYPE html>
+<html lang="si" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>අලුත් අවුරුදු නැකැත් චාරිත්‍ර</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@400;600;700;800&family=Noto+Serif+Sinhala:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+  --maroon-deep: #5c0000;
+  --maroon: #7f0000;
+  --maroon-mid: #9b1818;
+  --gold: #d4900a;
+  --gold-light: #f0b429;
+  --gold-bright: #ffd166;
+  --amber: #ffa500;
+  --cream: #fbf5e8;
+  --cream-light: #fffdf7;
+  --white: #ffffff;
+  --font-title: "Gemunu Libre", "Noto Serif Sinhala", serif;
+  --font-si: "Noto Serif Sinhala", serif;
+  --font-en: "Roboto", sans-serif;
+  --r-card: 14px;
+  --r-btn: 30px;
+  --sh-card: 0 4px 18px rgba(127, 0, 0, 0.1), 0 1px 4px rgba(127, 0, 0, 0.07);
+  --sh-hover: 0 8px 28px rgba(212, 144, 10, 0.22),
+    0 2px 8px rgba(127, 0, 0, 0.1);
+  --ease: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  min-height: 100dvh;
+  font-family: var(--font-si);
+  color: var(--maroon-deep);
+  background: var(--cream);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ── PREMIUM BG ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+      ellipse 80% 60% at 15% 10%,
+      rgba(255, 200, 80, 0.28) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 70% 50% at 85% 5%,
+      rgba(212, 144, 10, 0.18) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 60% 70% at 5% 85%,
+      rgba(127, 0, 0, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 80% 60% at 90% 90%,
+      rgba(240, 180, 41, 0.2) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 100% 100% at 50% 50%,
+      rgba(251, 245, 232, 1) 30%,
+      rgba(242, 232, 213, 1) 100%
+    );
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.042;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%237F0000' stroke-width='0.8'%3E%3Ccircle cx='60' cy='60' r='50'/%3E%3Ccircle cx='60' cy='60' r='35'/%3E%3Ccircle cx='60' cy='60' r='18'/%3E%3Cline x1='60' y1='10' x2='60' y2='110'/%3E%3Cline x1='10' y1='60' x2='110' y2='60'/%3E%3Cline x1='24.6' y1='24.6' x2='95.4' y2='95.4'/%3E%3Cline x1='95.4' y1='24.6' x2='24.6' y2='95.4'/%3E%3Cpolygon points='60,10 110,85 10,85' stroke-width='0.7'/%3E%3Cpolygon points='60,110 110,35 10,35' stroke-width='0.7'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 120px 120px;
+}
+
+.shimmer-dot {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  animation: shimmerPulse ease-in-out infinite alternate;
+}
+@keyframes shimmerPulse {
+  from {
+    opacity: 0.06;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0.16;
+    transform: scale(1.15);
+  }
+}
+
+.petals-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.petal {
+  position: absolute;
+  opacity: 0;
+  animation: petalFall linear infinite;
+}
+@keyframes petalFall {
+  0% {
+    transform: translateY(-30px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.55;
+  }
+  90% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ── LAYOUT ── */
+#menu-view {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 1rem 6rem;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+header {
+  text-align: center;
+  padding: 1.5rem 1rem 1rem;
+}
+.header-ornament {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 0.7rem;
+}
+.ornament-line {
+  height: 2px;
+  width: 60px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: 2px;
+}
+.ornament-diamond {
+  width: 10px;
+  height: 10px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(212, 144, 10, 0.55);
+}
+h1 {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 7vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  color: var(--maroon-deep);
+}
+h1 .line2 {
+  display: block;
+  background: linear-gradient(
+    135deg,
+    var(--maroon-deep) 0%,
+    var(--maroon-mid) 40%,
+    var(--gold) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.subtitle-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0.8rem;
+  background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-mid) 100%);
+  color: var(--gold-bright);
+  padding: 0.32rem 1.1rem;
+  border-radius: var(--r-btn);
+  font-family: var(--font-en);
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 10px rgba(127, 0, 0, 0.28);
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0.4rem 0 1.2rem;
+}
+.section-label span {
+  font-family: var(--font-en);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--maroon-mid);
+  opacity: 0.65;
+  white-space: nowrap;
+}
+.section-label::before,
+.section-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(127, 0, 0, 0.22),
+    transparent
+  );
+}
+
+/* ── CARDS ── */
+.tool-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.tool-card {
+  position: relative;
+  padding: 1.1rem 1rem 1.1rem 0.85rem;
+  border-radius: var(--r-card);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1.5px solid rgba(212, 144, 10, 0.18);
+  box-shadow: var(--sh-card);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: var(--ease);
+  overflow: hidden;
+  animation: fadeInUp 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.tool-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(
+    180deg,
+    var(--gold-light) 0%,
+    var(--maroon-mid) 100%
+  );
+  border-radius: 4px 0 0 4px;
+  opacity: 0.55;
+  transition: var(--ease);
+}
+.tool-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 209, 102, 0.12) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.28s;
+  pointer-events: none;
+}
+.tool-card:hover,
+.tool-card:active {
+  transform: translateY(-3px);
+  border-color: rgba(212, 144, 10, 0.45);
+  box-shadow: var(--sh-hover);
+  background: rgba(255, 255, 255, 0.92);
+}
+.tool-card:hover::before {
+  opacity: 1;
+}
+.tool-card:hover::after {
+  opacity: 1;
+}
+.tier-icon {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 10px;
+  padding: 5px;
+  background: linear-gradient(
+    135deg,
+    var(--cream) 0%,
+    rgba(255, 209, 102, 0.2) 100%
+  );
+  border: 1px solid rgba(212, 144, 10, 0.2);
+  box-shadow: 0 2px 6px rgba(127, 0, 0, 0.08);
+}
+.card-body {
+  flex: 1;
+  min-width: 0;
+}
+.card-index {
+  font-family: var(--font-en);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.tool-title {
+  font-family: var(--font-si);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--maroon-deep);
+}
+.card-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--amber) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(127, 0, 0, 0.3);
+  transition: var(--ease);
+}
+.card-arrow svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--white);
+  transition: transform 0.2s;
+}
+.tool-card:hover .card-arrow {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--amber) 100%);
+  box-shadow: 0 3px 12px rgba(212, 144, 10, 0.4);
+}
+.tool-card:hover .card-arrow svg {
+  transform: translateX(2px);
+  stroke: var(--white);
+}
+
+/* ── FOOTER ── */
+.main-footer {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  font-family: var(--font-en);
+  font-size: 0.78rem;
+  color: var(--maroon-mid);
+  opacity: 0.65;
+  margin-top: auto;
+}
+.footer-ornament {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.6rem;
+}
+.footer-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.footer-line {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ── TOOL VIEW ── */
+#tool-view {
+  position: fixed;
+  inset: 0;
+  background: var(--cream-light);
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+}
+#tool-view.active {
+  display: flex;
+  animation: slideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.tool-header {
+  height: 58px;
+  background: linear-gradient(
+    135deg,
+    var(--maroon-deep) 0%,
+    var(--maroon) 55%,
+    var(--maroon-mid) 100%
+  );
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.22);
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.tool-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 209, 102, 0.09) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+.back-btn {
+  background: transparent;
+  border: 1.5px solid var(--gold-light);
+  color: var(--gold-bright);
+  padding: 0.38rem 0.9rem;
+  border-radius: var(--r-btn);
+  font-family: var(--font-en);
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: var(--ease);
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 2;
+}
+.back-btn:hover {
+  background: var(--gold-light);
+  color: var(--white);
+  border-color: var(--gold-light);
+}
+.tool-title-display {
+  flex: 1;
+  text-align: center;
+  color: transparent;
+  font-family: var(--font-si);
+  font-size: 1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 10px;
+  position: relative;
+  z-index: 2;
+}
+.iframe-wrapper {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  background: #fff;
+}
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: #fff;
+}
+#loader {
+  position: absolute;
+  inset: 0;
+  background: var(--cream);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9990;
+}
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(127, 0, 0, 0.12);
+  border-radius: 50%;
+  border-top-color: var(--amber);
+  animation: spin 0.9s ease-in-out infinite;
+}
+.loading-text {
+  color: var(--maroon-mid);
+  font-family: var(--font-en);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.tool-nav {
+  position: absolute;
+  bottom: 3.2rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  z-index: 10;
+  pointer-events: none;
+}
+.nav-btn {
+  background: linear-gradient(
+    135deg,
+    var(--maroon-deep) 0%,
+    var(--maroon) 100%
+  );
+  color: var(--gold-bright);
+  border: 1.5px solid rgba(212, 144, 10, 0.35);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--r-btn);
+  font-family: var(--font-si);
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  transition: var(--ease);
+  pointer-events: auto;
+}
+.nav-btn:hover {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--amber) 100%);
+  color: var(--white);
+  border-color: var(--gold);
+  box-shadow: 0 4px 16px rgba(212, 144, 10, 0.4);
+}
+.nav-btn:active {
+  transform: scale(0.96);
+}
+.nav-btn:disabled {
+  background: rgba(200, 190, 180, 0.45);
+  color: rgba(127, 80, 80, 0.35);
+  border-color: rgba(127, 80, 80, 0.12);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="petals-container" id="petalsContainer"></div>
+    <div class="shimmer-dot" style="width:260px;height:260px;top:-60px;right:-60px;background:radial-gradient(circle,rgba(212,144,10,.18) 0%,transparent 70%);animation-duration:4s;"></div>
+    <div class="shimmer-dot" style="width:200px;height:200px;bottom:80px;left:-50px;background:radial-gradient(circle,rgba(127,0,0,.10) 0%,transparent 70%);animation-duration:5.5s;animation-delay:1s;"></div>
+    <div class="shimmer-dot" style="width:160px;height:160px;top:42%;right:4%;background:radial-gradient(circle,rgba(240,180,41,.14) 0%,transparent 70%);animation-duration:3.8s;animation-delay:2s;"></div>
+
+    <main id="menu-view">
+        <header>
+            <div class="header-ornament">
+                <div class="ornament-line"></div>
+                <div class="ornament-diamond"></div>
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M11 2 L13.5 8 L20 8.5 L15 13 L16.5 20 L11 16.5 L5.5 20 L7 13 L2 8.5 L8.5 8 Z" fill="#D4900A" opacity="0.9"/>
+                </svg>
+                <div class="ornament-diamond"></div>
+                <div class="ornament-line"></div>
+            </div>
+            <h1>
+                <span class="line2">අලුත් අවුරුදු <br> නැකැත් චාරිත්‍ර</span>
+                2026
+            </h1>
+            <div style="display:flex;justify-content:center;">
+                <div class="subtitle-badge">
+                    <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor" aria-hidden="true"><circle cx="4" cy="4" r="3.5"/></svg>
+                    Sinhala &amp; Tamil New Year
+                </div>
+            </div>
+        </header>
+
+        <div id="nekethList" class="tool-list"></div>
+
+        <footer class="main-footer">
+            <div class="footer-ornament">
+                <div class="footer-line"></div>
+                <div class="footer-dot"></div>
+                <div class="footer-line"></div>
+            </div>
+            &copy; <span id="year"></span> &nbsp;&bull;&nbsp; Suba Namak | Astro Jayamaga
+        </footer>
+    </main>
+
+    <div id="tool-view">
+        <div class="tool-header">
+            <button class="back-btn" onclick="closeTool()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                BACK
+            </button>
+            <div class="tool-title-display" id="currentToolTitle">Neketh</div>
+            <div style="width:72px;"></div>
+        </div>
+        <div class="iframe-wrapper">
+            <div id="loader">
+                <div class="loader-inner">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Loading…</div>
+                </div>
+            </div>
+            <iframe id="appFrame" src="" title="Neketh Tool"></iframe>
+        </div>
+        <div class="tool-nav">
+            <button class="nav-btn" id="prevBtn" onclick="navigateTool(-1)">පෙර නැකැත</button>
+            <button class="nav-btn" id="nextBtn" onclick="navigateTool(1)">ඊළඟ නැකැත</button>
+        </div>
+    </div>
+
+    <script>
+        const nekethData=[
+            {name:"නව සඳ බැලීම",icon:"https://i.postimg.cc/DwqJL3FS/1.png",url:"https://astro-jayamaga.github.io/Suba-Namak-App-Tools/aurudu-neketh-one"},
+            {name:"පරණ අවුරුද්ද සඳහා ස්නානය",icon:"https://i.postimg.cc/g2vX8bdr/2.png",url:"https://astro-jayamaga.github.io/Suba-Namak-App-Tools/aurudu-neketh-two"},
+            {name:"පුණ්‍ය කාලය (නොනගතය)",icon:"https://i.postimg.cc/0ypMD1xJ/3.png",url:"https://astro-jayamaga.github.io/Suba-Namak-App-Tools/aurudu-neketh-three"},
+            {name:"අලුත් අවුරුදු උදාව",icon:"https://i.postimg.cc/P5mpYnhY/4.png",url:"https://astro-jayamaga.github.io/Suba-Namak-App-Tools/aurudu-neketh-four"},
+            {name:"ආහාර පිසීම",icon:"https://i.postimg.cc/pLDhzMx8/5.png",url:"https://astro-jayamaga.github.io/Suba-Namak-App-Tools/aurudu-neketh-five"},
+            {name:"වැඩ ඇල්ලීම, ගනුදෙනු කිරීම හා ආහාර අනුභවය",icon:"https://i.postimg.cc/Z5rBpzZ6/6.png",url:"https://astro-jayamaga.github.io/Suba-Namak-App-Tools/aurudu-neketh-six"},
+            {name:"හිස තෙල් ගෑම",icon:"https://i.postimg.cc/wjhyLYHh/7.png",url:"https://astro-jayamaga.github.io/Suba-Namak-App-Tools/aurudu-neketh-seven"},
+            {name:"රැකීරක්ෂා සඳහා පිටත්ව යාම",icon:"https://i.postimg.cc/W1MFgcj7/8.png",url:"https://astro-jayamaga.github.io/Suba-Namak-App-Tools/aurudu-neketh-eight"},
+            {name:"පැළ සිටුවීම",icon:"https://i.postimg.cc/P5mpYnhp/9.png",url:"https://astro-jayamaga.github.io/Suba-Namak-App-Tools/aurudu-neketh-nine"}
+        ];
+        let currentIndex=0;
+
+        (function(){
+            const c=document.getElementById('petalsContainer');
+            const colors=['rgba(212,144,10,.55)','rgba(255,165,0,.45)','rgba(127,0,0,.35)','rgba(240,180,41,.50)','rgba(200,50,50,.30)'];
+            for(let i=0;i<18;i++){
+                const p=document.createElement('div');p.className='petal';
+                const s=8+Math.random()*10;
+                p.style.cssText=`left:${Math.random()*100}%;width:${s}px;height:${s*1.5}px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*14}s;border-radius:${Math.random()>.5?'50% 0 50% 0':'0 50% 0 50%'};transform:rotate(${Math.random()*180}deg);`;
+                c.appendChild(p);
+            }
+        })();
+
+        document.addEventListener('DOMContentLoaded',()=>{
+            document.getElementById('year').textContent=new Date().getFullYear();
+            renderList();
+        });
+
+        function renderList(){
+            const c=document.getElementById('nekethList');c.innerHTML='';
+            nekethData.forEach((item,i)=>{
+                const card=document.createElement('div');
+                card.className='tool-card';card.style.animationDelay=`${i*.06}s`;
+                card.setAttribute('role','button');card.setAttribute('tabindex','0');card.setAttribute('aria-label',item.name);
+                card.innerHTML=`<img src="${item.icon}" class="tier-icon" alt="${item.name}" width="52" height="52" loading="lazy">
+                <div class="card-body"><div class="tool-title">${item.name}</div></div>
+                <div class="card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>`;
+                card.onclick=()=>openTool(i);
+                card.onkeydown=(e)=>{if(e.key==='Enter'||e.key===' ')openTool(i);};
+                c.appendChild(card);
+            });
+        }
+
+        function openTool(i){currentIndex=i;document.getElementById('menu-view').style.display='none';document.getElementById('tool-view').classList.add('active');loadIframe();updateNav();}
+        function closeTool(){const f=document.getElementById('appFrame');f.src='';f.style.opacity='0';document.getElementById('tool-view').classList.remove('active');document.getElementById('menu-view').style.display='flex';}
+        function navigateTool(d){currentIndex+=d;loadIframe();updateNav();}
+        function loadIframe(){
+            const tool=nekethData[currentIndex];
+            const f=document.getElementById('appFrame');
+            const l=document.getElementById('loader');
+            document.getElementById('currentToolTitle').textContent=tool.name;
+            l.style.display='flex';f.style.opacity='0';
+            f.onload=()=>{l.style.display='none';f.style.opacity='1';};
+            f.src=tool.url;
+        }
+        function updateNav(){
+            document.getElementById('prevBtn').disabled=(currentIndex<=0);
+            document.getElementById('nextBtn').disabled=(currentIndex>=nekethData.length-1);
+        }
+    </script>
+</body>
+</html>
