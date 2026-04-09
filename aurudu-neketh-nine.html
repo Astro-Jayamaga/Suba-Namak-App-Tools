@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>අවුරුදු නැකැත් 2026</title>
+    
+    <!-- Google Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700&family=Noto+Serif+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ------------------------- */
+        /* --- Global Variables ---- */
+        /* ------------------------- */
+        :root {
+            --maroon: #7F0000;
+            --orange: #FFA500;
+            --white: #ffffff;
+            --black: #000000;
+            --gray: #909090;
+            --off-white: #FDF5E6;
+            --light-gray: #FDF5E6;
+            --text-dark: #7F0000;
+            
+            /* Fonts from user request */
+            --font-main-title: 'Gemunu Libre', sans-serif;
+            --font-body: 'Noto Serif Sinhala', serif;
+            --font-countdown: 'Gemunu Libre', monospace;
+        }
+
+        /* ------------------------- */
+        /* ------ Base Styles ------ */
+        /* ------------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--off-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* ------------------------- */
+        /* -------- Header --------- */
+        /* ------------------------- */
+        .main-title {
+            font-family: var(--font-main-title);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--maroon);
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* ------------------------- */
+        /* ----- Banner & Card ----- */
+        /* ------------------------- */
+        .banner {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .content-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ------------------------- */
+        /* ------ Typography ------- */
+        /* ------------------------- */
+        .secondary-title {
+            font-family: var(--font-body);
+            color: var(--maroon);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .description {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--black);
+        }
+
+        /* ------------------------- */
+        /* --- Countdown Section --- */
+        /* ------------------------- */
+        #countdown-section {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+
+        /* State 1 & 2: Days Countdown */
+        .days-countdown {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--black);
+        }
+        
+        /* State 1: Highlighted Days */
+        .days-countdown .highlight {
+            font-size: 1.8rem;
+            color: var(--maroon);
+            display: inline-block;
+            margin: 0 0.3rem;
+            transform: scale(1.1);
+        }
+
+        /* State 2: Special H:M:S Countdown */
+        .special-countdown {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .time-box {
+            background-color: var(--maroon);
+            color: var(--white);
+            border-radius: 8px;
+            padding: 0.8rem;
+            min-width: 70px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .time-box span {
+            display: block;
+        }
+
+        .time-box .number {
+            font-family: var(--font-countdown);
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .time-box .label {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+            color: var(--light-gray);
+        }
+
+        /* State 3 & 4: Status Messages */
+        .status-message {
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* State 3: Active */
+        .status-message.highlight-active {
+            background-color: var(--orange);
+            color: var(--white);
+        }
+
+        /* State 4: Passed */
+        .status-message.highlight-passed {
+            background-color: var(--gray);
+            color: var(--white);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* ------------------------- */
+        /* --- Info Bullet List ---- */
+        /* ------------------------- */
+        .info-list {
+            list-style: none;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .info-list li {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--maroon);
+        }
+
+        .info-list .icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--orange);
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        /* ------------------------- */
+        /* --- Note & Footer ------- */
+        /* ------------------------- */
+        .note {
+            border: 1px solid var(--orange);
+            border-radius: 6px;
+            padding: 0.8rem;
+            margin-top: 1.5rem;
+            text-align: center;
+            color: var(--orange);
+            background-color: var(--white);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+        
+        /* Requested 6rem space at the bottom */
+        footer {
+            height: 6rem;
+        }
+
+        /* ------------------------- */
+        /* --- Responsive Design --- */
+        /* ------------------------- */
+        @media (max-width: 600px) {
+            html {
+                font-size: 15px;
+            }
+            
+            .container {
+                padding: 0.8rem;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .secondary-title {
+                font-size: 1.3rem;
+            }
+            
+            .content-card {
+                padding: 1rem;
+            }
+            
+            .time-box {
+                min-width: 60px;
+                padding: 0.6rem;
+            }
+            
+            .time-box .number {
+                font-size: 2rem;
+            }
+            
+            .special-countdown {
+                gap: 0.5rem;
+            }
+            
+            .info-list li {
+                font-size: 1rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1 class="main-title"></h1>
+        </header>
+
+        <main>
+            <!-- Banner Image -->
+            <div class="banner">
+                <img src="https://imgur.com/CPDLYQ5.jpeg" alt="Sinhala New Year Nakath 2026">
+            </div>
+
+            <!-- Main Content Card -->
+            <div class="content-card">
+                
+                <!-- Secondary Title -->
+                <h2 class="secondary-title">පැළ සිටුවීම</h2>
+
+                <!-- Countdown Section -->
+                <section id="countdown-section">
+                    <!-- State 1 & 2: Days Countdown -->
+                    <div id="days-countdown" class="days-countdown"></div>
+                    
+                    <!-- State 2: Special H:M:S Countdown -->
+                    <div id="special-countdown" class="special-countdown" style="display:none;">
+                        <div class="time-box">
+                            <span id="hours" class="number">00</span>
+                            <span class="label">පැය</span>
+                        </div>
+                        <div class="time-box">
+                            <span id="minutes" class="number">00</span>
+                            <span class="label">මිනි</span>
+                        </div>
+                        <div class="time-box">
+                            <span id="seconds" class="number">00</span>
+                            <span class="label">තත්</span>
+                        </div>
+                    </div>
+                    
+                    <!-- State 3 & 4: Status Message -->
+                    <div id="status-message" class="status-message"></div>
+                </section>
+
+                <!-- Paragraph -->
+                <p class="description">
+                    අප්‍රේල් මස 23 වෙනි  බ්‍රහස්පතින්දා රන්වන් පැහැති වස්ත්‍රාභරණයෙන් සැරසී පූර්ව භාග 11.36 ට උතුරු දිශාව බලා පැළ සිටුවීම මැනවි.
+                </p>
+
+                <!-- Bullet Points Section -->
+                <ul class="info-list">
+                    <li>
+                        <span class="icon">📅</span>
+                        අප්‍රේල් මස 23 වන බ්‍රහස්පතින්දා
+                    </li>
+                    <li>
+                        <span class="icon">⏰</span>
+                        පෙ.ව. 11.36
+                    </li>
+                    <li>
+                        <span class="icon">🧭</span>
+                        උතුරු දිශාව
+                    </li>
+                    <li>
+                        <span class="icon">👕</span>
+                        රන්වන් පැහැය
+                    </li>
+                </ul>
+                
+                <!-- Note with simple border -->
+                <p class="note">
+                    මෙම නැකැත් වේලාවන් සකස් කොට ඇත්තේ සංස්කෘතික දෙපාර්තමේන්තුවේ අනුග්‍රහය ඇතුව සිංහල අලුත් අවුරුදු චාරිත්‍ර සම්බන්ධයෙන් ඇති කරගත් පොදු එකඟතාවයෙන් සකස් කළ නැකැත් සීට්ටුව ඇසුරෙනි.
+                </p>
+
+            </div>
+        </main>
+        
+        <!-- Footer for 3rem bottom space -->
+        <footer></footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Countdown Targets (As requested) ---
+            // Note: JavaScript months are 0-indexed (0=Jan, 3=April)
+            
+            // -----------------------------------------------------------------
+            // ----- ⬇️ ⬇️ ⬇️ CUSTOMIZE YOUR DATES HERE ⬇️ ⬇️ ⬇️ -----
+            // -----------------------------------------------------------------
+            
+            // Format: (Year, MonthIndex, Day, Hour_24, Minute, Second)
+            // Example: 14th April 2026, 12:05 PM (Month is 3 for April)
+            const nakathTime = new Date(2026, 3, 23, 11, 36, 0).getTime();
+            
+            // Example: 14th April 2026, 1:05 PM (1 hour duration)
+            const nakathEndTime = new Date(2026, 3, 23, 11, 59, 0).getTime();
+            
+            // Example: 1st April 2026 (When H:M:S timer appears)
+            const transitionDate = new Date(2026, 3, 1, 0, 0, 0).getTime();
+
+            // -----------------------------------------------------------------
+            // ----- ⬆️ ⬆️ ⬆️ CUSTOMIZE YOUR DATES HERE ⬆️ ⬆️ ⬆️ -----
+            // -----------------------------------------------------------------
+
+
+            // --- DOM Elements ---
+            const daysCountdownEl = document.getElementById('days-countdown');
+            const specialCountdownEl = document.getElementById('special-countdown');
+            const statusMessageEl = document.getElementById('status-message');
+            
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+
+            // --- Utility Function ---
+            function pad(num) {
+                return String(num).padStart(2, '0');
+            }
+
+            // --- Main Update Function ---
+            function updateCountdown() {
+                const now = new Date().getTime();
+
+                // Calculate distances
+                const distanceToNakath = nakathTime - now;
+                const distanceToNakathEnd = nakathEndTime - now;
+
+                // -----------------------------------------------------------------
+                // STATE 4: Nakath time has passed (After 1:05 PM)
+                // -----------------------------------------------------------------
+                if (distanceToNakathEnd <= 0) {
+                    daysCountdownEl.style.display = 'none';
+                    specialCountdownEl.style.display = 'none';
+                    
+                    statusMessageEl.style.display = 'block';
+                    statusMessageEl.innerHTML = 'නැකත පසුවී ඇත.';
+                    statusMessageEl.className = 'status-message highlight-passed';
+                    
+                    clearInterval(countdownInterval); // Stop the timer
+                    return;
+                }
+
+                // -----------------------------------------------------------------
+                // STATE 3: Nakath is active (Between 12:05 PM and 1:05 PM)
+                // -----------------------------------------------------------------
+                if (distanceToNakath <= 0) {
+                    daysCountdownEl.style.display = 'none';
+                    specialCountdownEl.style.display = 'none';
+
+                    statusMessageEl.style.display = 'block';
+                    statusMessageEl.innerHTML = 'නැකත ආරම්භ වී ඇත.';
+                    statusMessageEl.className = 'status-message highlight-active';
+                    return; // Keep timer running to check for end time
+                }
+
+                // -----------------------------------------------------------------
+                // STATES 1 & 2: Before Nakath time (Before 12:05 PM)
+                // -----------------------------------------------------------------
+                
+                // Hide status message
+                statusMessageEl.style.display = 'none';
+                
+                // --- Time parts calculation ---
+                
+                // This is for STATE 1 (before transition)
+                // Use Math.ceil for "days until" (e.g., 10.2 days = 11 days)
+                const totalDays = Math.ceil(distanceToNakath / (1000 * 60 * 60 * 24));
+                
+                // This is for STATE 2 (H:M:S breakdown)
+                // Use Math.floor for full days (e.g., 1.8 days = 1 day)
+                const days = Math.floor(distanceToNakath / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distanceToNakath % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distanceToNakath % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distanceToNakath % (1000 * 60)) / 1000);
+
+                // Check if we are past the transition date
+                if (now >= transitionDate) {
+                    // -------------------------------------------------------------
+                    // STATE 2: From transitionDate to Nakath Time
+                    // Show days (if > 0) AND H:M:S countdown
+                    // -------------------------------------------------------------
+                    daysCountdownEl.style.display = 'block';
+
+                    // ----- ✨ LOGIC FIX v3 ✨ -----
+                    if (days > 0) {
+                        // More than 1 full day left
+                        // Use 'days' (Math.floor) to show full days
+                        daysCountdownEl.innerHTML = `නැකත උදා වීමට තව දින <span class="highlight">${days}</span> යි.`;
+                    } else {
+                        // Less than 1 day left, only show H:M:S
+                        daysCountdownEl.innerHTML = `නැකත උදා වීමට තව`;
+                    }
+                    // ----- ✨ END OF FIX ✨ -----
+                    
+                    specialCountdownEl.style.display = 'flex';
+                    hoursEl.textContent = pad(hours);
+                    minutesEl.textContent = pad(minutes);
+                    secondsEl.textContent = pad(seconds);
+
+                } else {
+                    // -------------------------------------------------------------
+                    // STATE 1: Before transitionDate
+                    // Show ONLY days, with highlight (Traditional way)
+                    // -------------------------------------------------------------
+                    daysCountdownEl.style.display = 'block';
+                    // Use 'totalDays' (Math.ceil) here
+                    daysCountdownEl.innerHTML = `නැකත උදා වීමට තව දින <span class="highlight">${totalDays}</span> යි.`;
+                    
+                    specialCountdownEl.style.display = 'none';
+                }
+            }
+
+            // --- Run the Clock ---
+            const countdownInterval = setInterval(updateCountdown, 1000);
+            updateCountdown(); // Initial call to load the correct state immediately
+        });
+    </script>
+
+</body>
+</html>

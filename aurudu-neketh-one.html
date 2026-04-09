@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>අවුරුදු නැකැත් 2026</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700&family=Noto+Serif+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --maroon: #7F0000;
+            --orange: #FFA500;
+            --white: #ffffff;
+            --black: #000000;
+            --gray: #909090;
+            --off-white: #FDF5E6;
+            --light-gray: #FDF5E6;
+            --text-dark: #7F0000;
+            
+            --font-main-title: 'Gemunu Libre', sans-serif;
+            --font-body: 'Noto Serif Sinhala', serif;
+            --font-countdown: 'Gemunu Libre', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--off-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .main-title {
+            font-family: var(--font-main-title);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--maroon);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .banner {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .content-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* --- Countdown UI --- */
+        #countdown-section {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+
+        .days-countdown {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--black);
+        }
+        
+        .days-countdown .highlight {
+            font-size: 1.8rem;
+            color: var(--maroon);
+            display: inline-block;
+            margin: 0 0.3rem;
+        }
+
+        .special-countdown {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .time-box {
+            background-color: var(--maroon);
+            color: var(--white);
+            border-radius: 8px;
+            padding: 0.8rem;
+            min-width: 70px;
+        }
+
+        .time-box .number {
+            font-family: var(--font-countdown);
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .time-box .label {
+            font-size: 0.8rem;
+        }
+
+        /* --- Status Messages --- */
+        .status-message {
+            font-size: 1.3rem;
+            font-weight: 700;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        .status-message.highlight-active {
+            background-color: var(--orange);
+            color: var(--white);
+            display: block;
+        }
+
+        .status-message.highlight-passed {
+            background-color: var(--gray);
+            color: var(--white);
+            display: block;
+        }
+
+        .passed-subtle {
+            font-size: 0.85rem;
+            color: var(--gray);
+            border: 1px solid #e0dbd1;
+            padding: 5px 12px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-weight: normal;
+        }
+
+        .description {
+            font-size: 1rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: var(--black);
+        }
+
+        .note {
+            border: 1px solid var(--orange);
+            border-radius: 6px;
+            padding: 0.8rem;
+            margin-top: 1.5rem;
+            text-align: center;
+            color: var(--orange);
+            background-color: var(--white);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        footer { height: 6rem; }
+
+        @media (max-width: 600px) {
+            .main-title { font-size: 2rem; }
+            .time-box { min-width: 60px; padding: 0.6rem; }
+            .time-box .number { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1 class="main-title"></h1>
+        </header>
+
+        <main>
+            <div class="banner">
+                <img src="https://imgur.com/eSWyV9z.jpeg" alt="Sinhala New Year 2026">
+            </div>
+
+            <div class="content-card">
+                
+                <div id="countdown-section">
+                    <div id="chandra-status-small" class="passed-subtle" style="display:none;">
+                        චන්ද්‍ර වර්ෂය සඳහා නැකත පසුවී ඇත.
+                    </div>
+
+                    <div id="main-status-msg" class="status-message"></div>
+
+                    <div id="surya-days-area" class="days-countdown"></div>
+                    
+                    <div id="surya-timer-area" class="special-countdown" style="display:none;">
+                        <div class="time-box">
+                            <span id="hours" class="number">00</span>
+                            <span class="label">පැය</span>
+                        </div>
+                        <div class="time-box">
+                            <span id="minutes" class="number">00</span>
+                            <span class="label">මිනි</span>
+                        </div>
+                        <div class="time-box">
+                            <span id="seconds" class="number">00</span>
+                            <span class="label">තත්</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="description">
+                    අභිනව චන්ද්‍ර වර්ෂය සඳහා මාර්තු මස 20 වන සිකුරාදා දින ද, අභිනව සූර්ය වර්ෂය සඳහා අප්‍රේල් මස 19 වන ඉරිදා දින ද නව සඳ බැලීම මැනවි.
+                </p>
+
+                <p class="note">
+                    මෙම නැකැත් වේලාවන් සකස් කොට ඇත්තේ සංස්කෘතික දෙපාර්තමේන්තුවේ අනුග්‍රහය ඇතුව සිංහල අලුත් අවුරුදු චාරිත්‍ර සම්බන්ධයෙන් ඇති කරගත් පොදු එකඟතාවයෙන් සකස් කළ නැකැත් සීට්ටුව ඇසුරෙනි.
+                </p>
+            </div>
+        </main>
+        
+        <footer></footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- CONFIGURATION ---
+            const chandraEnd = new Date(2026, 2, 20, 23, 59, 0).getTime();
+            
+            // Surya Settings
+            const suryaStart = new Date(2026, 3, 19, 19, 0, 0).getTime(); 
+            const suryaEnd   = new Date(2026, 3, 19, 23, 59, 0).getTime(); 
+            const transition = new Date(2026, 3, 14, 0, 0, 0).getTime();
+
+            const chandraSmallEl = document.getElementById('chandra-status-small');
+            const mainStatusEl   = document.getElementById('main-status-msg');
+            const suryaDaysEl    = document.getElementById('surya-days-area');
+            const suryaTimerEl   = document.getElementById('surya-timer-area');
+            
+            const hEl = document.getElementById('hours');
+            const mEl = document.getElementById('minutes');
+            const sEl = document.getElementById('seconds');
+
+            function update() {
+                const now = new Date().getTime();
+
+                // 1. STATE: BOTH PASSED (After April 19 Midnight)
+                if (now > suryaEnd) {
+                    chandraSmallEl.style.display = 'none';
+                    suryaDaysEl.style.display = 'none';
+                    suryaTimerEl.style.display = 'none';
+                    
+                    mainStatusEl.innerHTML = "චන්ද්‍ර වර්ෂය හා සූර්ය වර්ෂය සඳහා නැකැත් පසුවී ඇත.";
+                    mainStatusEl.className = "status-message highlight-passed";
+                    mainStatusEl.style.display = "block";
+                    return;
+                }
+
+                // 2. STATE: SURYA ACTIVE (April 19, 7 PM - 12 AM)
+                if (now >= suryaStart && now <= suryaEnd) {
+                    chandraSmallEl.style.display = 'none'; // Specifically hidden as requested
+                    suryaDaysEl.style.display = 'none';
+                    suryaTimerEl.style.display = 'none';
+
+                    mainStatusEl.innerHTML = "සූර්ය වර්ෂය සඳහා නැකත ආරම්භ වී ඇත.";
+                    mainStatusEl.className = "status-message highlight-active";
+                    mainStatusEl.style.display = "block";
+                    return;
+                }
+
+                // 3. STATE: WAITING FOR SURYA
+                mainStatusEl.style.display = "none";
+                
+                // Show subtle Chandra passed status since it's already April 10
+                if (now > chandraEnd) {
+                    chandraSmallEl.style.display = 'inline-block';
+                }
+
+                const dist = suryaStart - now;
+                const days = Math.floor(dist / (1000 * 60 * 60 * 24));
+                const totalDaysCeil = Math.ceil(dist / (1000 * 60 * 60 * 24));
+                const hrs = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const min = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+                const sec = Math.floor((dist % (1000 * 60)) / 1000);
+
+                if (now >= transition) {
+                    suryaTimerEl.style.display = 'flex';
+                    if (days > 0) {
+                        suryaDaysEl.innerHTML = `සූර්ය වර්ෂය සඳහා නැකත උදා වීමට තව දින <span class="highlight">${days}</span> යි.`;
+                    } else {
+                        suryaDaysEl.innerHTML = `සූර්ය වර්ෂය සඳහා නැකත උදා වීමට තව`;
+                    }
+                    hEl.textContent = String(hrs).padStart(2, '0');
+                    mEl.textContent = String(min).padStart(2, '0');
+                    sEl.textContent = String(sec).padStart(2, '0');
+                } else {
+                    suryaDaysEl.innerHTML = `සූර්ය වර්ෂය සඳහා නැකත උදා වීමට තව දින <span class="highlight">${totalDaysCeil}</span> යි.`;
+                    suryaTimerEl.style.display = 'none';
+                }
+            }
+
+            setInterval(update, 1000);
+            update();
+        });
+    </script>
+</body>
+</html>
